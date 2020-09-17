@@ -3,14 +3,14 @@ import Expenses from '../../components/Expenses';
 import Income from '../../components/Income';
 import styles from './MainPage.module.css';
 
-function MainPage() {
+const MainPage = () => {
   return (
     <div className={styles.container}>
       <Income />
       <hr />
       <Expenses />
-    </div >
+    </div>
   );
-}
+};
 
 export default MainPage;
