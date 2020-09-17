@@ -50,7 +50,7 @@ userSchema.methods.createNewStore = function (name) {
   this.categories.push({
     value: "store",
     name: name,
-    currentValue: 0,
+    currentNumber: 0,
     id: uuidv4(),
   });
   return this.save();
@@ -60,9 +60,29 @@ userSchema.methods.createNewExpenditure = function (name) {
   this.categories.push({
     value: "expenditure",
     name: name,
-    currentValue: 0,
+    currentNumber: 0,
     id: uuidv4(),
   });
+  return this.save();
+};
+
+userSchema.methods.deleteCategory = async function (id) {
+  await this.model("User").update(
+    {},
+    {
+      $pull: { categories: { id: id } },
+    }
+  );
+  return this.save();
+};
+
+userSchema.methods.updateCategory = async function (id, newName) {
+  await this.model("User").update(
+    { "categories.id": id },
+    {
+      $set: { "categories.$.name": newName },
+    }
+  );
   return this.save();
 };
 
