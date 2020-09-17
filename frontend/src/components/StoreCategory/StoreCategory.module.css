@@ -1,0 +1,22 @@
+p {
+    /* авто перенос текста */
+  -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+}
+
+.item {
+  margin: 1em;
+}
+.income {
+  background-color: #F9C131;
+}
+.expenses {
+  background-color: #6DC4C4;
+}
+
+.coin {
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
