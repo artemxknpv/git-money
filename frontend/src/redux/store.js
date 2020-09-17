@@ -15,4 +15,8 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
+store.subscribe(() => {
+  window.localStorage.setItem('redux', JSON.stringify(store.getState()));
+});
+
 export default store;

@@ -1,19 +1,19 @@
 import React from 'react';
-import StoreCategory from '../StoreCategory';
+import Category from '../Category';
 import AddCategory from '../AddCategory';
 import styles from './Income.module.css';
 
-function Income() {
+const Income = () => {
   return (
     <div className={styles.income}>
       <h4>Доходы</h4>
       <div className={styles.items_container}>
-        <StoreCategory type='income' name='Наличка' />
-        <StoreCategory type='income' name='Банковский счет' />
+        <Category type="income" name="Наличка" />
+        <Category type="income" name="Банковский счет" />
         <AddCategory />
       </div>
     </div>
   );
-}
+};
 
 export default Income;
