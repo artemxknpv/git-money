@@ -12,7 +12,7 @@ const user1 = {
   categories: [
     {
       value: "store",
-      name: "Bank",
+      name: "bank",
       currentNumber: 1000,
       id: uuidv4(),
     },
@@ -81,7 +81,7 @@ const user2 = {
   categories: [
     {
       value: "store",
-      name: "Bank",
+      name: "bank",
       currentNumber: 1000,
       id: uuidv4(),
     },
@@ -134,6 +134,7 @@ const user2 = {
       to: "some id od the store category",
       amount: 600,
       id: uuidv4(),
+      time: Date.now(),
     },
     {
       value: "loss",
@@ -141,12 +142,13 @@ const user2 = {
       to: "some id of the expenditure category",
       amount: 800,
       id: uuidv4(),
+      time: Date.now(),
     },
   ],
 };
 
 db.then(async ({ connection }) => {
   await connection.db.dropDatabase();
-  await modelUser.create(user1);
+  await modelUser.createDefaultUser();
   await connection.close();
 });
