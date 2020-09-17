@@ -1,0 +1,14 @@
+.add_item {
+  margin: 1em;
+  
+}
+
+.coin {
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.add_item .coin{
+  background-color: #F2F2F2;
+}
