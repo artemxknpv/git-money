@@ -23,7 +23,7 @@ const Income = () => {
       <div className={styles.container}>
         {incomes &&
           incomes.map(income => {
-//             return <Category value="store" id={income.id} key={income.id} />;
+            //             return <Category value="store" id={income.id} key={income.id} />;
             return (
               <Category value={income.value} id={income.id} key={income.id} />
             );

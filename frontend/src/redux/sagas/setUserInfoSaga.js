@@ -6,7 +6,8 @@ import setTransactions from '../actions/setUserInfo/setUserTransacrions';
 import axios from 'axios';
 
 const setUserInfofetch = async userId => {
-  const response = await axios.get(`/${userId}`);
+  // const response = await axios.get(`/${userId}`);
+  const response = await axios.get(`/5f6461f130b5b80a09c09c6c`);
   return response.data;
 };
 

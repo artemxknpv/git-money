@@ -1,11 +1,11 @@
 import * as actionTypes from '../action-types.js';
 
-export default (state = false, action) => {
-  switch (action.type) {
+export default (state = { isOpened: false, id: '' }, { type, payload }) => {
+  switch (type) {
     case actionTypes.MODAL_OPENED:
-      return true;
+      return { isOpened: true, id: payload.id };
     case actionTypes.MODAL_CLOSED:
-      return false;
+      return { isOpened: false, id: '' };
     default:
       return state;
   }

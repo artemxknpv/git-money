@@ -5,7 +5,6 @@ import Category from '../Category';
 
 import styles from './Expenses.module.scss';
 
-
 const Expenses = () => {
   const expenditures = useSelector(state =>
     state.categories.filter(category => category.value === 'expenditure')
@@ -26,8 +25,7 @@ const Expenses = () => {
         {expenditures &&
           expenditures.map(expense => {
             return (
-
-//               <Category value="expenses" key={expense.id} id={expense.id} />
+              //               <Category value="expenses" key={expense.id} id={expense.id} />
               <Category
                 value={expense.value}
                 key={expense.id}

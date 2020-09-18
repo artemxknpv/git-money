@@ -8,7 +8,7 @@ import ModalWindowAddMoney from '../../components/ModalWindowAddMoney';
 import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStarted';
 
 const MainPage = () => {
-  const isModal = useSelector(state => state.isModal);
+  const isModal = useSelector(state => state.isModal.isOpened);
   const dispatch = useDispatch();
   const userId = useSelector(state => state.user._id);
   useEffect(() => {
