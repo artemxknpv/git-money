@@ -8,6 +8,15 @@ export default (state = [], action) => {
       return state.filter(category => category.id !== action.payload.id);
     case actionTypes.ADD_CATEGORY_SUCCESS:
       return [...state, action.payload.category];
+    case actionTypes.ADD_MONEY_STORE_SUCCESS:
+      return state.map(category =>
+        category.id === action.payload.id
+          ? {
+              ...category,
+              currentNumber: category.currentNumber + action.payload.amount,
+            }
+          : category
+      );
     default:
       return state;
     // TODO
