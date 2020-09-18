@@ -17,6 +17,20 @@ export default (state = [], action) => {
             }
           : category
       );
+    case actionTypes.TRANSFER_MONEY_STORE_SUCCESS:
+      return state.map(category =>
+        category.id === action.payload.idFrom
+          ? {
+              ...category,
+              currentNumber: category.currentNumber - action.payload.amount,
+            }
+          : category.id === action.payload.idTo
+          ? {
+              ...category,
+              currentNumber: category.currentNumber + action.payload.amount,
+            }
+          : category
+      );
     default:
       return state;
     // TODO
