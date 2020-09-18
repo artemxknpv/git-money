@@ -13,8 +13,10 @@ import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 
 const AddCategory = ({ type }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
   const [open, setOpen] = React.useState(false);
+  const [name, setName] = useState('');
   const style = styles.coin + ' ' + styles[type];
   const useStyles = makeStyles(theme => ({
     large: {
@@ -30,6 +32,15 @@ const AddCategory = ({ type }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleChange = event => {
+    setName(event.target.value);
+  };
+
+  const handleCreateCategory = () => {
+    console.log(1);
+    setName('');
   };
 
   return (
@@ -55,13 +66,15 @@ const AddCategory = ({ type }) => {
             id="name"
             label="Название"
             fullWidth
+            onChange={handleChange}
+            value={name}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Отменить
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleCreateCategory} color="primary">
             Создать
           </Button>
         </DialogActions>

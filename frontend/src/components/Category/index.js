@@ -2,9 +2,15 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import { green, amber } from '@material-ui/core/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import deleteCategoryStarted from '../../redux/actions/deleteCategory/deleteCategoryStarted';
 import styles from './Category.module.css';
 
-const Category = ({ type, name }) => {
+const Category = ({ type, id }) => {
+  const dispatch = useDispatch();
+  const category = useSelector(state =>
+    state.categories.filter(category => category.id === id)
+  )[0];
   const useStyles = makeStyles(theme => ({
     green: {
       color: theme.palette.getContrastText(green['A200']),
@@ -22,18 +28,18 @@ const Category = ({ type, name }) => {
   const classes = useStyles();
   const bgcolor = type === 'expenses' ? classes.green : classes.amber;
   const style = classes.large + ' ' + bgcolor;
-
-  const handleDeleteClick = event => {
-    console.log(event.target);
-    // dispatch(deleteCategory(type, id))
-  };
-
   return (
     <div className={styles.item}>
-      <span onClick={event => handleDeleteClick(event)}>X</span>
-      <Avatar className={style}>11</Avatar>
-      {/*<div className={style}>0</div>*/}
-      <p>{name}</p>
+      <Avatar className={style}>{category.currentNumber}</Avatar>
+      <p>{category.name}</p>
+      <button
+        type="button"
+        onClick={() => {
+          dispatch(deleteCategoryStarted(category.id));
+        }}
+      >
+        Delete
+      </button>
     </div>
   );
 };
