@@ -2,13 +2,8 @@ import { takeEvery, put, call } from 'redux-saga/effects';
 import { DELETE_CATEGORY_STARTED } from '../action-types';
 import deleteCategorySuccess from '../actions/deleteCategory/deleteCategorySuccess';
 
-import axios from 'axios';
-
-const deleteCategoryFecth = async id => {
-  // await axios.delete('/5f6461f130b5b80a09c09c6c', {
-  //   data: { id },
-  // });
-  await fetch('/5f6461f130b5b80a09c09c6c', {
+const deleteCategoryFetch = async ({ userId, id }) => {
+  await fetch(`/${userId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -18,10 +13,10 @@ const deleteCategoryFecth = async id => {
 };
 
 function* deleteCategoryWorker(action) {
-  console.log('!');
+  const { userId, id } = action.payload;
   try {
-    yield call(deleteCategoryFecth, action.payload.id);
-    yield put(deleteCategorySuccess(action.payload.id));
+    yield call(deleteCategoryFetch, { userId, id });
+    yield put(deleteCategorySuccess(id));
   } catch (err) {
     console.log('delete error', err);
   }
