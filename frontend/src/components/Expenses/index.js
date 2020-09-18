@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import AddCategory from '../AddCategory';
 import Category from '../Category';
 import styles from './Expenses.module.css';
-import Income from '../Income';
 
 const Expenses = () => {
   const expenditures = useSelector(state =>
@@ -16,10 +15,14 @@ const Expenses = () => {
         {expenditures &&
           expenditures.map(expense => {
             return (
-              <Category type="expenses" key={expense.id} id={expense.id} />
+              <Category
+                value={expense.value}
+                key={expense.id}
+                id={expense.id}
+              />
             );
           })}
-        <AddCategory type="expenses" />
+        <AddCategory value="expenditure" />
       </div>
     </div>
   );

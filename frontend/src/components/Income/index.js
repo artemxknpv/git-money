@@ -14,9 +14,11 @@ const Income = () => {
       <div className={styles.items_container}>
         {incomes &&
           incomes.map(income => {
-            return <Category type="income" id={income.id} key={income.id} />;
+            return (
+              <Category value={income.value} id={income.id} key={income.id} />
+            );
           })}
-        <AddCategory type="income" />
+        <AddCategory value="store" />
       </div>
     </div>
   );
