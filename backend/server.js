@@ -1,15 +1,23 @@
 import express from "express";
+import session from "express-session";
+import fileStore from "session-file-store";
 import mongoose from "mongoose";
-
 import { modelUser } from "./models/user.js";
 
-// I am using the body parser simply for the purpose of testing with POSTMAN
-import bodyParser from "body-parser";
+import categoryRouter from "./routes/categories.js";
 
 const app = express();
 app.use(express.json());
 
+const FileStore = fileStore(session);
 const port = 3001;
+
+app.use(
+  session({
+    store: new FileStore(),
+    secret: process.env.SECRET ?? "muda muda muda",
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello");
@@ -26,64 +34,7 @@ app.put("/", async (req, res) => {
   res.end();
 });
 
-// create a new store or expenditure
-app.put("/:id", async (req, res) => {
-  const id = req.params.id;
-  const user = await modelUser.findById(id);
-  const { type, name } = req.body;
-  if (type === "expenditure") {
-    const userUpdate = await user.createNewExpenditure(name);
-    const addition = userUpdate.categories[userUpdate.categories.length - 1];
-    return res.json(addition);
-  } else if (type === "store") {
-    const userUpdate = await user.createNewStore(name);
-    const addition = userUpdate.categories[userUpdate.categories.length - 1];
-    return res.json(addition);
-  } else {
-    return res.status(404);
-  }
-});
-
-// delete a certain store based on the id
-app.delete("/:id", async (req, res) => {
-  const { id } = req.body;
-  const userId = req.params.id;
-  const user = await modelUser.findById(userId);
-  await user.deleteCategory(id);
-  res.end();
-});
-
-// update the name of the category
-app.patch("/:id", bodyParser.json(), async (req, res) => {
-  const { id, name } = req.body;
-  const userId = req.params.id;
-  const user = await modelUser.findById(userId);
-  await user.updateCategory(id, name);
-  res.end();
-});
-
-// send the full info about the user
-app.get("/:id", bodyParser.json(), async (req, res) => {
-  const userId = req.params.id;
-  const user = await modelUser.findById(userId);
-  res.json(user);
-});
-
-// add money to store or transfer money from store to expenditure cat
-app.put("/:id/:cat", bodyParser.json(), async (req, res) => {
-  const { amount } = req.body;
-  const userId = req.params.id;
-  const putId = req.params.cat;
-  const user = await modelUser.findById(userId);
-  if (!!req.body.from) {
-    const from = req.body.from;
-    await user.spendMoney(putId, from, amount);
-    return res.end();
-  } else {
-    await user.gainMoney(putId, amount);
-    return res.end();
-  }
-});
+app.use(categoryRouter);
 
 app.listen(port, () => {
   console.log(`The server is app and listening on port ${port}`);
