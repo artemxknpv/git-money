@@ -14,7 +14,11 @@ const addMoneyStoreFetch = async ({ userId, id, amount }) => {
 
 function* addMoneyStoreWorker(action) {
   const { userId, id, amount } = action.payload;
-  yield call(addMoneyStoreFetch, { userId, id, amount });
+  try {
+    yield call(addMoneyStoreFetch, { userId, id, amount });
+  } catch (err) {
+    console.log('add money error', err);
+  }
   yield put(addMoneyStoreSuccess(id, amount));
 }
 

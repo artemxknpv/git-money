@@ -4,13 +4,13 @@ import Expenses from '../../components/Expenses';
 import Income from '../../components/Income';
 import styles from './MainPage.module.css';
 
-import getUserInfoStarted from '../../redux/actions/getUserInfo/getUserInfoStarted';
+import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStarted';
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.user._id);
   useEffect(() => {
-    dispatch(getUserInfoStarted(userId));
+    dispatch(setUserInfoStarted(userId));
   }, [dispatch, userId]);
   return (
     <div className={styles.container}>
