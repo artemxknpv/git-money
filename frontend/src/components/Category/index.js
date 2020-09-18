@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import { green, amber } from '@material-ui/core/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import deleteCategoryStarted from '../../redux/actions/deleteCategory/deleteCategoryStarted';
+import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
 import styles from './Category.module.css';
 
 const Category = ({ value, id }) => {
+  const [add, setAdd] = useState('');
   const dispatch = useDispatch();
   const category = useSelector(state =>
     state.categories.filter(category => category.id === id)
@@ -28,6 +30,7 @@ const Category = ({ value, id }) => {
   const classes = useStyles();
   const bgcolor = value === 'expenditure' ? classes.green : classes.amber;
   const style = classes.large + ' ' + bgcolor;
+
   return (
     <div className={styles.item}>
       <Avatar className={style}>{category.currentNumber}</Avatar>
@@ -40,6 +43,28 @@ const Category = ({ value, id }) => {
       >
         Delete
       </button>
+      {value === 'store' ? (
+        <>
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(addMoneyStarted(category.id, add));
+            }}
+          >
+            add
+          </button>
+          <input
+            type="text"
+            onChange={event => setAdd(Number(event.target.value))}
+            value={add}
+          ></input>
+        </>
+      ) : (
+        <>
+          <button type="button">trans</button>
+          <input type="text"></input>
+        </>
+      )}
     </div>
   );
 };
