@@ -1,6 +1,6 @@
 import * as actionTypes from '../action-types.js';
 
-export default (state = {}, action) => {
+export default (state = [], action) => {
   switch (action.type) {
     case actionTypes.SET_CATEGORIES:
       return action.payload.categories;
