@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { green, amber } from '@material-ui/core/colors';
 import styles from './Category.module.css';
 
-const Category = ({ type, name }) => {
+const Category = ({ type, name, count }) => {
   const useStyles = makeStyles(theme => ({
     green: {
       color: theme.palette.getContrastText(green['A200']),
@@ -25,7 +25,7 @@ const Category = ({ type, name }) => {
 
   return (
     <div className={styles.item}>
-      <Avatar className={style}>11</Avatar>
+      <Avatar className={style}>{count}</Avatar>
       {/*<div className={style}>0</div>*/}
       <p>{name}</p>
     </div>
