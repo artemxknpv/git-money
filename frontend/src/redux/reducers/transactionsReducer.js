@@ -1,6 +1,6 @@
 import * as actionTypes from '../action-types.js';
 
-export default (store, action) => {
+export default (store = {}, action) => {
   switch (action.type) {
     default:
       return store;

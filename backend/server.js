@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 mongoose.connect(
-  "mongodb+srv://vnikonov_63:faggot28A@cluster0.pnson.mongodb.net/finance?retryWrites=true&w=majority",
+  "mongodb+srv://user_me:123ER123@cluster0.opbgv.mongodb.net/final?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
@@ -60,7 +60,7 @@ app.patch("/:id", bodyParser.json(), async (req, res) => {
 });
 
 // send the full info about the user
-app.post("/:id", bodyParser.json(), async (req, res) => {
+app.get("/:id", bodyParser.json(), async (req, res) => {
   const userId = req.params.id;
   const user = await modelUser.findById(userId);
   res.json(user);

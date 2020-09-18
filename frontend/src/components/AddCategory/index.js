@@ -13,7 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 
 const AddCategory = ({ type }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const style = styles.coin + ' ' + styles[type];
   const useStyles = makeStyles(theme => ({
