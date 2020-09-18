@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import styles from './AddCategory.module.css';
 import { useDispatch } from 'react-redux';
+import addCategoryStarted from '../../redux/actions/addCategory/addCategoryStarted';
 //Material UI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 
-const AddCategory = ({ type }) => {
-  // const dispatch = useDispatch();
+const AddCategory = ({ value }) => {
+  const dispatch = useDispatch();
 
   const [open, setOpen] = React.useState(false);
   const [name, setName] = useState('');
-  const style = styles.coin + ' ' + styles[type];
+  // const style = styles.coin + ' ' + styles[value];
   const useStyles = makeStyles(theme => ({
     large: {
       width: theme.spacing(7),
@@ -39,7 +39,7 @@ const AddCategory = ({ type }) => {
   };
 
   const handleCreateCategory = () => {
-    console.log(1);
+    dispatch(addCategoryStarted(name, value));
     setName('');
   };
 

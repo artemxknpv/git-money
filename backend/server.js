@@ -27,16 +27,18 @@ app.put("/", async (req, res) => {
 });
 
 // create a new store or expenditure
-app.put("/:id", bodyParser.json(), async (req, res) => {
+app.put("/:id", async (req, res) => {
   const id = req.params.id;
   const user = await modelUser.findById(id);
   const { type, name } = req.body;
   if (type === "expenditure") {
-    await user.createNewExpenditure(name);
-    return res.end();
+    const userUpdate = await user.createNewExpenditure(name);
+    const addition = userUpdate.categories[userUpdate.categories.length - 1];
+    return res.json(addition);
   } else if (type === "store") {
-    await user.createNewStore(name);
-    return res.end();
+    const userUpdate = await user.createNewStore(name);
+    const addition = userUpdate.categories[userUpdate.categories.length - 1];
+    return res.json(addition);
   } else {
     return res.status(404);
   }
@@ -45,7 +47,6 @@ app.put("/:id", bodyParser.json(), async (req, res) => {
 // delete a certain store based on the id
 app.delete("/:id", async (req, res) => {
   const { id } = req.body;
-  console.log(req.body);
   const userId = req.params.id;
   const user = await modelUser.findById(userId);
   await user.deleteCategory(id);

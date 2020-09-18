@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import deleteCategoryStarted from '../../redux/actions/deleteCategory/deleteCategoryStarted';
 import styles from './Category.module.css';
 
-const Category = ({ type, id }) => {
+const Category = ({ value, id }) => {
   const dispatch = useDispatch();
   const category = useSelector(state =>
     state.categories.filter(category => category.id === id)
@@ -26,7 +26,7 @@ const Category = ({ type, id }) => {
     },
   }));
   const classes = useStyles();
-  const bgcolor = type === 'expenses' ? classes.green : classes.amber;
+  const bgcolor = value === 'expenditure' ? classes.green : classes.amber;
   const style = classes.large + ' ' + bgcolor;
   return (
     <div className={styles.item}>

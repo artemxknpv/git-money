@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const getUserInfofetch = async () => {
   const response = await axios.get('/5f6461f130b5b80a09c09c6c');
-  console.log(response);
   return response.data;
 };
 

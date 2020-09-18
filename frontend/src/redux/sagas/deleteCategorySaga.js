@@ -5,6 +5,9 @@ import deleteCategorySuccess from '../actions/deleteCategory/deleteCategorySucce
 import axios from 'axios';
 
 const deleteCategoryFecth = async id => {
+  // await axios.delete('/5f6461f130b5b80a09c09c6c', {
+  //   data: { id },
+  // });
   await fetch('/5f6461f130b5b80a09c09c6c', {
     method: 'DELETE',
     headers: {
