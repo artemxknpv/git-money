@@ -7,6 +7,7 @@ import { modelUser } from "./models/user.js";
 import bodyParser from "body-parser";
 
 const app = express();
+app.use(express.json());
 
 const port = 3001;
 
@@ -42,8 +43,9 @@ app.put("/:id", bodyParser.json(), async (req, res) => {
 });
 
 // delete a certain store based on the id
-app.delete("/:id", bodyParser.json(), async (req, res) => {
+app.delete("/:id", async (req, res) => {
   const { id } = req.body;
+  console.log(req.body);
   const userId = req.params.id;
   const user = await modelUser.findById(userId);
   await user.deleteCategory(id);

@@ -6,7 +6,7 @@ import styles from './Income.module.css';
 
 const Income = () => {
   const incomes = useSelector(state =>
-    state.user.categories.filter(category => category.value === 'store')
+    state.categories.filter(category => category.value === 'store')
   );
   return (
     <div className={styles.income}>
@@ -14,14 +14,7 @@ const Income = () => {
       <div className={styles.items_container}>
         {incomes &&
           incomes.map(income => {
-            return (
-              <Category
-                type="income"
-                name={income.name}
-                key={income.id}
-                count={income.currentNumber}
-              />
-            );
+            return <Category type="income" id={income.id} key={income.id} />;
           })}
         <AddCategory type="income" />
       </div>
