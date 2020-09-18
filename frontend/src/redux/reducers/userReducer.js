@@ -2,7 +2,7 @@ import * as actionTypes from '../action-types.js';
 
 export default (store = {}, action) => {
   switch (action.type) {
-    case actionTypes.GET_USER_INFO_SUCCESS:
+    case actionTypes.SET_USER_INFO_SUCCESS:
       return action.payload.user;
     default:
       return store;

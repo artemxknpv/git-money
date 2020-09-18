@@ -1,8 +1,10 @@
 import { ADD_CATEGORY_STARTED } from '../../action-types.js';
 
-export default title => ({
+export default (userId, name, value) => ({
   type: ADD_CATEGORY_STARTED,
   payload: {
-    title,
+    userId,
+    name,
+    value,
   },
 });

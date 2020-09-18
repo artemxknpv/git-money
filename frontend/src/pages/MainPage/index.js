@@ -5,14 +5,15 @@ import Header from '../../components/Header';
 import Income from '../../components/Income';
 import ModalWindowAddMoney from '../../components/ModalWindowAddMoney';
 
-import getUserInfoStarted from '../../redux/actions/getUserInfo/getUserInfoStarted';
+import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStarted';
 
 const MainPage = () => {
   const isModal = useSelector(state => state.isModal);
   const dispatch = useDispatch();
+  const userId = useSelector(state => state.user._id);
   useEffect(() => {
-    dispatch(getUserInfoStarted());
-  }, []);
+    dispatch(setUserInfoStarted(userId));
+  }, [dispatch, userId]);
   return (
     <div>
       <ModalWindowAddMoney show={isModal} />

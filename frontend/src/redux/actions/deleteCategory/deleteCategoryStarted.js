@@ -1,8 +1,9 @@
 import { DELETE_CATEGORY_STARTED } from '../../action-types';
 
-export default id => ({
+export default (userId, id) => ({
   type: DELETE_CATEGORY_STARTED,
   payload: {
+    userId,
     id,
   },
 });
