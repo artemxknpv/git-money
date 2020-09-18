@@ -23,8 +23,14 @@ const Category = ({ type, name }) => {
   const bgcolor = type === 'expenses' ? classes.green : classes.amber;
   const style = classes.large + ' ' + bgcolor;
 
+  const handleDeleteClick = event => {
+    console.log(event.target);
+    // dispatch(deleteCategory(type, id))
+  };
+
   return (
     <div className={styles.item}>
+      <span onClick={event => handleDeleteClick(event)}>X</span>
       <Avatar className={style}>11</Avatar>
       {/*<div className={style}>0</div>*/}
       <p>{name}</p>
