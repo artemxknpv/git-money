@@ -30,6 +30,7 @@ const Category = ({ value, id }) => {
   const classes = useStyles();
   const bgcolor = value === 'expenditure' ? classes.green : classes.amber;
   const style = classes.large + ' ' + bgcolor;
+
   return (
     <div className={styles.item}>
       <Avatar className={style}>{category.currentNumber}</Avatar>
