@@ -1,7 +1,7 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { ADD_CATEGORY_STARTED } from '../action-types.js';
 import axios from 'axios';
-import addCategoryFailure from '../actions/addCategory/addCategoryFailure.js';
+// import addCategoryFailure from '../actions/addCategory/addCategoryFailure.js';
 import addCategorySuccess from '../actions/addCategory/addCategorySuccess.js';
 
 const addCategoryFetch = async ({ name, value }) => {
@@ -17,7 +17,6 @@ const addCategoryFetch = async ({ name, value }) => {
 function* addCategoryWorker(action) {
   const { name, value } = action.payload;
   const response = yield call(addCategoryFetch, { name, value });
-  console.log(response);
   yield put(addCategorySuccess(response));
 }
 
