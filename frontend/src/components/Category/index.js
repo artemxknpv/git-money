@@ -13,6 +13,7 @@ const Category = ({ value, id }) => {
   const category = useSelector(state =>
     state.categories.filter(category => category.id === id)
   )[0];
+  const userId = useSelector(state => state.user._id);
   const useStyles = makeStyles(theme => ({
     green: {
       color: theme.palette.getContrastText(green['A200']),
@@ -38,7 +39,7 @@ const Category = ({ value, id }) => {
       <button
         type="button"
         onClick={() => {
-          dispatch(deleteCategoryStarted(category.id));
+          dispatch(deleteCategoryStarted(userId, category.id));
         }}
       >
         Delete
@@ -48,7 +49,8 @@ const Category = ({ value, id }) => {
           <button
             type="button"
             onClick={() => {
-              dispatch(addMoneyStarted(category.id, add));
+              dispatch(addMoneyStarted(userId, category.id, add));
+              setAdd('');
             }}
           >
             add

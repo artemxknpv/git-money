@@ -5,13 +5,14 @@ import setCategories from '../actions/getUserInfo/setUserCategories';
 import setTransactions from '../actions/getUserInfo/setUserTransacrions';
 import axios from 'axios';
 
-const getUserInfofetch = async () => {
-  const response = await axios.get('/5f6461f130b5b80a09c09c6c');
+const getUserInfofetch = async userId => {
+  const response = await axios.get(`/${userId}`);
   return response.data;
 };
 
-function* getUserInfoWorker() {
-  const userInfo = yield call(getUserInfofetch);
+function* getUserInfoWorker(action) {
+  const { userId } = action.payload;
+  const userInfo = yield call(getUserInfofetch, userId);
   const user = { _id: userInfo._id, totalMoney: userInfo.totalMoney };
   const categories = userInfo.categories;
   const transactions = userInfo.transactions;

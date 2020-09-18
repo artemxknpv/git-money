@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './AddCategory.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import addCategoryStarted from '../../redux/actions/addCategory/addCategoryStarted';
 //Material UI
 import Button from '@material-ui/core/Button';
@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const AddCategory = ({ value }) => {
   const dispatch = useDispatch();
-
+  const userId = useSelector(state => state.user._id);
   const [open, setOpen] = React.useState(false);
   const [name, setName] = useState('');
   // const style = styles.coin + ' ' + styles[value];
@@ -39,7 +39,7 @@ const AddCategory = ({ value }) => {
   };
 
   const handleCreateCategory = () => {
-    dispatch(addCategoryStarted(name, value));
+    dispatch(addCategoryStarted(userId, name, value));
     setName('');
   };
 

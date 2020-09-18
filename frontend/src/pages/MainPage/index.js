@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Expenses from '../../components/Expenses';
 import Income from '../../components/Income';
 import styles from './MainPage.module.css';
@@ -8,9 +8,10 @@ import getUserInfoStarted from '../../redux/actions/getUserInfo/getUserInfoStart
 
 const MainPage = () => {
   const dispatch = useDispatch();
+  const userId = useSelector(state => state.user._id);
   useEffect(() => {
-    dispatch(getUserInfoStarted());
-  }, [dispatch]);
+    dispatch(getUserInfoStarted(userId));
+  }, [dispatch, userId]);
   return (
     <div className={styles.container}>
       <Income />

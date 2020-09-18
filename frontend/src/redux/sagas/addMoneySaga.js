@@ -2,8 +2,8 @@ import { takeEvery, put, call } from 'redux-saga/effects';
 import { ADD_MONEY_STORE_STARTED } from '../action-types.js';
 import addMoneyStoreSuccess from '../actions/addMoney/addMoneySuccess';
 
-const addMoneyStoreFetch = async ({ id, amount }) => {
-  await fetch(`/5f6461f130b5b80a09c09c6c/${id}`, {
+const addMoneyStoreFetch = async ({ userId, id, amount }) => {
+  await fetch(`/${userId}/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -13,8 +13,8 @@ const addMoneyStoreFetch = async ({ id, amount }) => {
 };
 
 function* addMoneyStoreWorker(action) {
-  const { id, amount } = action.payload;
-  yield call(addMoneyStoreFetch, { id, amount });
+  const { userId, id, amount } = action.payload;
+  yield call(addMoneyStoreFetch, { userId, id, amount });
   yield put(addMoneyStoreSuccess(id, amount));
 }
 
