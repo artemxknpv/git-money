@@ -10,7 +10,7 @@ const Expenses = () => {
       <div className={styles.items_container}>
         <Category type="expenses" name="Продукты" />
         <Category type="expenses" name="Кафе и рестораны" />
-        <AddCategory />
+        <AddCategory type="expenses" />
       </div>
     </div>
   );
