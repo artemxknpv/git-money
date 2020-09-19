@@ -42,6 +42,7 @@ const ModalWindowAddMoney = ({ show }) => {
           className={styles.addButton}
           onClick={() => {
             dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
+            setSum('');
             dispatch(closeModalWindow());
           }}
         >
