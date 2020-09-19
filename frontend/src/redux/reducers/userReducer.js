@@ -1,22 +1,22 @@
 import * as actionTypes from '../action-types.js';
-
-export default (store = {}, action) => {
-  switch (action.type) {
+const initState = { isAuthenticated: false };
+export default (store = initState, action) => {
+  const { type, payload } = action;
+  switch (type) {
     case actionTypes.SET_USER_INFO_SUCCESS:
-      return action.payload.user;
+      const { user } = payload;
+      return {
+        ...store,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        mail: user.mail,
+        login: user.log,
+        totalMoney: user.totalMoney,
+        isAuthenticated: true,
+      };
+    case actionTypes.LOGOUT_SUCCESS:
+      return initState;
     default:
       return store;
-    // case actionTypes.ADD_CATEGORY_SUCCESS:
-    // // TODO
-    // case actionTypes.ADD_CATEGORY_FAILURE:
-    // // TODO
-    // case actionTypes.DELETE_CATEGORY_SUCCESS:
-    // // TODO
-    // case actionTypes.DELETE_CATEGORY_FAILURE:
-    // // TODO
-    // case actionTypes.RENAME_CATEGORY_SUCCESS:
-    // // TODO
-    // case actionTypes.RENAME_CATEGORY_FAILURE:
-    // TODO
   }
 };

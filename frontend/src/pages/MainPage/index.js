@@ -11,11 +11,11 @@ import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStart
 const MainPage = () => {
   const isModal = useSelector(state => state.isModal.isOpened);
   const isModalCategory = useSelector(state => state.isCategoryModal.isOpened);
-  const dispatch = useDispatch();
-  const userId = useSelector(state => state.user._id);
-  useEffect(() => {
-    dispatch(setUserInfoStarted(userId));
-  }, [dispatch, userId]);
+  // const dispatch = useDispatch();
+  // const userId = useSelector(state => state.user._id);
+  // useEffect(() => {
+  //   dispatch(setUserInfoStarted(userId));
+  // }, [dispatch, userId]);
   return (
     <div>
       <ModalWindowAddMoney show={isModal} />
