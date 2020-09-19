@@ -6,8 +6,8 @@ import setTransactions from '../actions/setUserInfo/setUserTransacrions';
 import axios from 'axios';
 
 const setUserInfofetch = async userId => {
-  // const response = await axios.get(`/${userId}`);
-  const response = await axios.get(`/5f6461f130b5b80a09c09c6c`);
+  const response = await axios.get(`/${userId}`);
+  // const response = await axios.get(`/5f6461f130b5b80a09c09c6c`);
   return response.data;
 };
 
@@ -16,7 +16,13 @@ function* setUserInfoWorker(action) {
   try {
     const { userId } = action.payload;
     const userInfo = yield call(setUserInfofetch, userId);
-    user = { _id: userInfo._id, totalMoney: userInfo.totalMoney };
+    user = {
+      firstName: userInfo.firstName,
+      lastName: userInfo.lastName,
+      mail: userInfo.mail,
+      login: userInfo.login,
+      totalMoney: userInfo.totalMoney,
+    };
     categories = userInfo.categories;
     transactions = userInfo.transactions;
   } catch (e) {
