@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  overflow-x: auto;
+  margin: 20px 0 32px ;
+  font-family: 'Inter', sans-serif;
+}
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper {
+  margin-top: 21px;
+}
