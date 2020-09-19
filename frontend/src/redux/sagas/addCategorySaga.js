@@ -8,7 +8,6 @@ const addCategoryFetch = async ({ userId, name, value }) => {
     type: value,
     name: name,
   });
-  console.log(response.data);
   return response.data;
 };
 
