@@ -2,6 +2,26 @@ import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
 const userSchema = mongoose.Schema({
+  firstName: String,
+  lastName: String,
+  mail: {
+    type: String,
+    required: true,
+    minlength: 3,
+    match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+  },
+  login: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 4,
+    match: /^[A-Z]\w+$/i,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 8,
+  },
   totalMoney: Number,
   categories: [
     {

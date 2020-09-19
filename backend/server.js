@@ -5,17 +5,25 @@ import mongoose from "mongoose";
 import { modelUser } from "./models/user.js";
 
 import categoryRouter from "./routes/categories.js";
+import authenticateRouter from "./routes/authenticate.js";
 
 const app = express();
-app.use(express.json());
-
 const FileStore = fileStore(session);
-const port = 3001;
+
+app.use(express.json());
 
 app.use(
   session({
-    store: new FileStore(),
+    name: "sid",
     secret: process.env.SECRET ?? "muda muda muda",
+    store: new FileStore({
+      secret: process.env.SECRET ?? "muda muda muda",
+    }),
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+    },
   })
 );
 
@@ -34,7 +42,15 @@ app.put("/", async (req, res) => {
   res.end();
 });
 
+app.use((req, res, next) => {
+  res.locals.username = req.session.user?.username;
+  next();
+});
+
 app.use(categoryRouter);
+app.use(authenticateRouter);
+
+const port = 3001;
 
 app.listen(port, () => {
   console.log(`The server is app and listening on port ${port}`);
