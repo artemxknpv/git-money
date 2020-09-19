@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import loginStarted from '../../redux/actions/authentication/loginStarted.js';
-import styles from './AuthenticationForm.module.scss'
+import styles from './AuthenticationForm.module.scss';
 const AuthenticationForm = ({ mode }) => {
   const dispatch = useDispatch();
   const [input, setInput] = useState({
@@ -15,32 +15,36 @@ const AuthenticationForm = ({ mode }) => {
   const { login, password, email, repPassword } = input;
 
   const changeHandler = ({ target: { name, value } }) => {
-    console.log(name, value)
+    console.log(name, value);
     setInput({
       ...input,
       [name]: value,
     });
-    console.log(input)
+    console.log(input);
   };
 
   const loginHandler = event => {
-    event.target.preventDefault();
+    event.preventDefault();
+    console.log(login, password);
     dispatch(loginStarted(login, password));
   };
 
   const registerHandler = event => {
-    event.target.preventDefault();
+    event.preventDefault();
     // dispatch(registerStarted(login, password, email));
     console.log('Я тебя не уважаю.');
   };
 
   return mode === 'login' ? (
     <div>
-      <form onSubmit={loginHandler} className={styles.inputField}>
+      <form
+        onSubmit={event => loginHandler(event)}
+        className={styles.inputField}
+      >
         <input
           type="text"
           placeholder="Логин"
-          name='login'
+          name="login"
           value={login}
           onChange={changeHandler}
           className={styles.inp}
@@ -49,15 +53,19 @@ const AuthenticationForm = ({ mode }) => {
           type={showPassword ? 'text' : 'password'}
           onChange={changeHandler}
           value={password}
-          name='password'
+          name="password"
           placeholder="Пароль"
           className={styles.inp}
         />
-        <button className={styles.btn}>Войти</button>
+        <button type="submit" className={styles.btn}>
+          Войти
+        </button>
       </form>
       <div className={styles.afterbutton}>
-      <Link to={'/register'} className={styles.registrationLink}>У меня ещё нет аккаунта</Link>
-      <p className={styles.forget}>Забыли пароль?</p>
+        <Link to={'/register'} className={styles.registrationLink}>
+          У меня ещё нет аккаунта
+        </Link>
+        <p className={styles.forget}>Забыли пароль?</p>
       </div>
     </div>
   ) : mode === 'register' ? (
@@ -67,13 +75,13 @@ const AuthenticationForm = ({ mode }) => {
           type="text"
           placeholder="Логин"
           value={login}
-          name='login'
+          name="login"
           onChange={changeHandler}
           className={styles.inp}
         />
         <input
           type="email"
-          name='email'
+          name="email"
           placeholder="Адрес эл. почты"
           value={email}
           onChange={changeHandler}
@@ -83,7 +91,7 @@ const AuthenticationForm = ({ mode }) => {
           type={showPassword ? 'text' : 'password'}
           onChange={changeHandler}
           value={password}
-          name='password'
+          name="password"
           placeholder="Пароль"
           className={styles.inp}
         />
@@ -91,15 +99,17 @@ const AuthenticationForm = ({ mode }) => {
           type={showPassword ? 'text' : 'password'}
           onChange={changeHandler}
           value={repPassword}
-          name='repPassword'
+          name="repPassword"
           placeholder="Повторите пароль"
           className={styles.inp}
         />
         <button className={styles.btn}>Зарегистрироваться</button>
       </form>
       <div className={styles.afterbutton}>
-      <Link to={'/login'} className={styles.registrationLink}>У уже есть аккаунт</Link>
-      <p className={styles.forget}>Забыли пароль?</p>
+        <Link to={'/login'} className={styles.registrationLink}>
+          У уже есть аккаунт
+        </Link>
+        <p className={styles.forget}>Забыли пароль?</p>
       </div>
     </div>
   ) : (

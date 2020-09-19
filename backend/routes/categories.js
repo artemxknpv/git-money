@@ -43,10 +43,11 @@ route.patch("/:id", bodyParser.json(), async (req, res) => {
 });
 
 // send the full info about the user
-route.get("/:id", bodyParser.json(), async (req, res) => {
+route.get("/:id", async (req, res) => {
+  console.log("Work");
   const userId = req.params.id;
   let user = await modelUser.findById(userId);
-  user = {
+  let userUpd = {
     firstName: user.firstName,
     lastName: user.lastName,
     mail: user.mail,
@@ -55,7 +56,8 @@ route.get("/:id", bodyParser.json(), async (req, res) => {
     categories: user.categories,
     transactions: user.transactions,
   };
-  res.json(user);
+  console.log(userUpd);
+  res.json(userUpd);
 });
 
 // add money to store or transfer money from store to expenditure cat
