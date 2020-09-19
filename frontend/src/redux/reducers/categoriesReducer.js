@@ -31,6 +31,8 @@ export default (state = [], action) => {
             }
           : category
       );
+    case actionTypes.LOGOUT_SUCCESS:
+      return [];
     default:
       return state;
     // TODO

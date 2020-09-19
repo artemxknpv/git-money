@@ -45,7 +45,16 @@ route.patch("/:id", bodyParser.json(), async (req, res) => {
 // send the full info about the user
 route.get("/:id", bodyParser.json(), async (req, res) => {
   const userId = req.params.id;
-  const user = await modelUser.findById(userId);
+  let user = await modelUser.findById(userId);
+  user = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    mail: user.mail,
+    login: user.login,
+    totalMoney: user.totalMoney,
+    categories: user.categories,
+    transactions: user.transactions,
+  };
   res.json(user);
 });
 

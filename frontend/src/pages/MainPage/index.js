@@ -15,6 +15,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 const MainPage = () => {
   const isModal = useSelector(state => state.isModal.isOpened);
   const isModalCategory = useSelector(state => state.isCategoryModal.isOpened);
+
   const isModalTransfer = useSelector(
     state => state.isTransferMoneyModal.isOpened
   );
@@ -24,6 +25,13 @@ const MainPage = () => {
   useEffect(() => {
     dispatch(setUserInfoStarted(userId));
   }, [dispatch, userId]);
+
+
+  // const dispatch = useDispatch();
+  // const userId = useSelector(state => state.user._id);
+  // useEffect(() => {
+  //   dispatch(setUserInfoStarted(userId));
+  // }, [dispatch, userId]);
 
   return (
     <div>
