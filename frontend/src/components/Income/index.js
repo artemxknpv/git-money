@@ -3,13 +3,16 @@ import { useSelector } from 'react-redux';
 import Category from '../Category';
 import AddCategory from '../AddCategory';
 import styles from './Income.module.scss';
+import { Droppable, Draggable, DragDropContext } from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid';
 
 const Income = () => {
   const incomes = useSelector(state =>
     state.categories.filter(category => category.value === 'store')
   );
   return (
-    <div className={styles.wrapper}>
+    <>
+      {/* <div className={styles.wrapper}> */}
       <h4
         style={{
           marginLeft: '16px',
@@ -20,17 +23,50 @@ const Income = () => {
       >
         Доходы
       </h4>
-      <div className={styles.container}>
-        {incomes &&
-          incomes.map(income => {
-            //             return <Category value="store" id={income.id} key={income.id} />;
-            return (
-              <Category value={income.value} id={income.id} key={income.id} />
-            );
-          })}
-        <AddCategory value="store" />
-      </div>
-    </div>
+      <Droppable droppableId={uuidv4()} direction="horizontal">
+        {(provided, snapshot) => {
+          return (
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className={styles.container}
+            >
+              {incomes &&
+                incomes.map((income, index) => {
+                  return (
+                    <div>
+                      <Draggable
+                        key={income.id}
+                        draggableId={income.id}
+                        index={index}
+                      >
+                        {(provided, spanshot) => {
+                          return (
+                            <div
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                            >
+                              <Category
+                                value={income.value}
+                                id={income.id}
+                                key={income.id}
+                              />
+                            </div>
+                          );
+                        }}
+                      </Draggable>
+                    </div>
+                  );
+                })}
+              {provided.placeholder}
+              <AddCategory value="store" />
+            </div>
+          );
+        }}
+      </Droppable>
+      {/* </div> */}
+    </>
   );
 };
 
