@@ -49,8 +49,19 @@ const userSchema = mongoose.Schema({
   ],
 });
 
-userSchema.static("createDefaultUser", async function () {
+userSchema.static("createDefaultUser", async function (
+  firstName,
+  lastName,
+  mail,
+  login,
+  password
+) {
   let newUser = new this({
+    firstName,
+    lastName,
+    mail,
+    login,
+    password,
     totalMoney: 0,
     categories: [],
     transactions: [],
@@ -63,7 +74,8 @@ userSchema.static("createDefaultUser", async function () {
   await newUser.createNewExpenditure("food");
   await newUser.createNewExpenditure("online subscription");
   await newUser.createNewExpenditure("free time");
-  return newUser.save();
+  await newUser.save();
+  return newUser;
 });
 
 userSchema.methods.createNewStore = function (name) {

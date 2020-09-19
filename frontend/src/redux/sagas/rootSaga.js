@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+import loginWatcher from './loginSaga.js';
 import addCategorySaga from './addCategorySaga.js';
 import addMoneySaga from './addMoneySaga.js';
 import setUserInfoSaga from './setUserInfoSaga';
@@ -7,6 +8,7 @@ import transferMoneySaga from './transferMoneySaga';
 
 export default function* () {
   yield all([
+    loginWatcher(),
     setUserInfoSaga(),
     addCategorySaga(),
     addMoneySaga(),

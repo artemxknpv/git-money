@@ -22,10 +22,9 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categories);
   const userId = useSelector(state => state.user._id);
-  useEffect(() => {
-    dispatch(setUserInfoStarted(userId));
-  }, [dispatch, userId]);
-
+  // useEffect(() => {
+  //   dispatch(setUserInfoStarted(userId));
+  // }, [dispatch, userId]);
 
   // const dispatch = useDispatch();
   // const userId = useSelector(state => state.user._id);

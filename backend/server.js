@@ -15,14 +15,14 @@ app.use(express.json());
 app.use(
   session({
     name: "sid",
-    secret: process.env.SECRET ?? "muda muda muda",
+    secret: "muda muda muda" ?? process.env.SECRET,
     store: new FileStore({
-      secret: process.env.SECRET ?? "muda muda muda",
+      secret: "muda muda muda" ?? process.env.SECRET,
     }),
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
     },
   })
 );
@@ -33,18 +33,13 @@ app.get("/", (req, res) => {
 
 mongoose.connect(
   "mongodb+srv://user_me:123ER123@cluster0.opbgv.mongodb.net/final?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true }
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 
 // create a new user
 app.put("/", async (req, res) => {
   await modelUser.createDefaultUser();
   res.end();
-});
-
-app.use((req, res, next) => {
-  res.locals.username = req.session.user?.username;
-  next();
 });
 
 app.use(categoryRouter);

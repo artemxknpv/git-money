@@ -1,8 +1,13 @@
 import * as actionTypes from '../action-types.js';
 const initState = { isAuthenticated: false };
-export default (store = initState, action) => {
-  const { type, payload } = action;
+export default (store = initState, { type, payload }) => {
   switch (type) {
+    case actionTypes.LOGIN_SUCCESS:
+      return {
+        ...store,
+        _id: payload.id,
+        isAuthenticated: true,
+      };
     case actionTypes.SET_USER_INFO_SUCCESS:
       const { user } = payload;
       return {
@@ -12,7 +17,6 @@ export default (store = initState, action) => {
         mail: user.mail,
         login: user.log,
         totalMoney: user.totalMoney,
-        isAuthenticated: true,
       };
     case actionTypes.LOGOUT_SUCCESS:
       return initState;

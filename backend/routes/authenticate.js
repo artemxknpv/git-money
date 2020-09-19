@@ -2,6 +2,8 @@ import express from "express";
 import bcrypt from "bcrypt";
 import { modelUser } from "../models/user.js";
 
+import bodyParser from "body-parser";
+
 const router = express.Router();
 
 function serializeUser(user) {
@@ -10,17 +12,17 @@ function serializeUser(user) {
   };
 }
 
-router.post("/registration", async (req, res) => {
+router.post("/registration", bodyParser.json(), async (req, res) => {
   const { firstName, lastName, mail, login, password } = req.body;
   let user;
   try {
     const saltRounds = Number(process.env.SALT_ROUNDS ?? 3);
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    user = modelUser.createDefaultUser(
+    user = await modelUser.createDefaultUser(
       firstName,
       lastName,
-      login,
       mail,
+      login,
       hashedPassword
     );
     req.session.user = { userId: user.id, login: user.login };
@@ -50,7 +52,7 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     console.log("Ошибка регистрации:", err);
   }
-  res.status(200).json(serializeUser(user));
+  res.status(200).json({ id: user.id });
 });
 
 router.get("/logout", (req, res, next) => {
