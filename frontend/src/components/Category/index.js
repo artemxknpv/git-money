@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import { makeStyles } from '@material-ui/core/styles';
-import { green, amber } from '@material-ui/core/colors';
+import ItemType from '../../';
 import { useDispatch, useSelector } from 'react-redux';
 import FoodIcon from '../../img/Food.jsx';
 import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
@@ -13,7 +11,6 @@ import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
 
 const Category = ({ value, id }) => {
   const [add, setAdd] = useState('');
-
   const userId = useSelector(state => state.user._id);
   const dispatch = useDispatch();
   const category = useSelector(state =>

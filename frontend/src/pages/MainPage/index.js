@@ -8,22 +8,52 @@ import ModalWindowAddCategory from '../../components/ModalWindowAddCategory';
 
 import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStarted';
 
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 const MainPage = () => {
   const isModal = useSelector(state => state.isModal.isOpened);
   const isModalCategory = useSelector(state => state.isCategoryModal.isOpened);
   const dispatch = useDispatch();
+  const categories = useSelector(state => state.categories);
   const userId = useSelector(state => state.user._id);
   useEffect(() => {
     dispatch(setUserInfoStarted(userId));
   }, [dispatch, userId]);
+
   return (
     <div>
+      {/* <DragDropContext onDropEnd={result => console.log(result)}> */}
       <ModalWindowAddMoney show={isModal} />
       <ModalWindowAddCategory show={isModalCategory} />
+      {/* <ModalWindowTransferMOney show={isModalTransfer}> */}
       <Header title={'Управление'} />
-      <Income />
-      <hr style={{ marginRight: '16px', marginLeft: '16px', opacity: '20%' }} />
-      <Expenses />
+      <DragDropContext
+        onDragEnd={result => {
+          const storeId = result.draggableId;
+          const expenseId = result.destination.droppableId;
+          // console.log(result);
+          // console.log('draggableId', storeId);
+          // console.log('droppableId', expenseId);
+          let catStore = categories.filter(
+            element => element.id === storeId
+          )[0];
+          let catExp = categories.filter(
+            element => element.id === expenseId
+          )[0];
+          if (catExp && catStore) {
+            console.log('SUCC');
+          } else {
+            console.log('FAIL');
+          }
+        }}
+      >
+        <Income />
+        <hr
+          style={{ marginRight: '16px', marginLeft: '16px', opacity: '20%' }}
+        />
+        <Expenses />
+      </DragDropContext>
+      {/* </DragDropContext> */}
     </div>
   );
 };
