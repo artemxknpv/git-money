@@ -5,14 +5,19 @@ import Header from '../../components/Header';
 import Income from '../../components/Income';
 import ModalWindowAddMoney from '../../components/ModalWindowAddMoney';
 import ModalWindowAddCategory from '../../components/ModalWindowAddCategory';
+import ModalWindowTransferMoney from '../../components/modalWindowTransferMoney';
 
 import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStarted';
+import openModalTransferMoney from '../../redux/actions/modalWindow/openModalWindowTransferMoney';
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const MainPage = () => {
   const isModal = useSelector(state => state.isModal.isOpened);
   const isModalCategory = useSelector(state => state.isCategoryModal.isOpened);
+  const isModalTransfer = useSelector(
+    state => state.isTransferMoneyModal.isOpened
+  );
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categories);
   const userId = useSelector(state => state.user._id);
@@ -25,7 +30,7 @@ const MainPage = () => {
       {/* <DragDropContext onDropEnd={result => console.log(result)}> */}
       <ModalWindowAddMoney show={isModal} />
       <ModalWindowAddCategory show={isModalCategory} />
-      {/* <ModalWindowTransferMOney show={isModalTransfer}> */}
+      <ModalWindowTransferMoney show={isModalTransfer} />
       <Header title={'Управление'} />
       <DragDropContext
         onDragEnd={result => {
@@ -41,7 +46,7 @@ const MainPage = () => {
             element => element.id === expenseId
           )[0];
           if (catExp && catStore) {
-            console.log('SUCC');
+            dispatch(openModalTransferMoney(expenseId, storeId));
           } else {
             console.log('FAIL');
           }

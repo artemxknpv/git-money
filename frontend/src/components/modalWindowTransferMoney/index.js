@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney.js';
-import styles from './ModalWindowAddMoney.module.scss';
-import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
+import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowTransferMoney';
+import styles from './ModalWindowTransferMoney.module.scss';
+import transferMoneyStarted from '../../redux/actions/transferMoney/transferMoneyStarted';
 
 const ModalWindowAddMoney = ({ show }) => {
   const [sum, setSum] = useState('');
   const userId = useSelector(state => state.user._id);
-  const id = useSelector(state => state.isModal.id);
+  let nameFrom = '';
+  let nameTo = '';
+  const categories = useSelector(state => state.categories);
+  const idTo = useSelector(state => state.isTransferMoneyModal.idTo);
+  const idFrom = useSelector(state => state.isTransferMoneyModal.idFrom);
+
+  if (idTo && idFrom) {
+    nameFrom = categories.filter(category => category.id === idFrom)[0].name;
+    nameTo = categories.filter(category => category.id === idTo)[0].name || '';
+  }
   const dispatch = useDispatch();
   const showHideClassName = show
     ? `${styles.modal} ${styles.displayBlock}`
     : `${styles.modal} ${styles.displayNone}`;
   return (
-    <div
-      className={`${showHideClassName}`}
-      // onClick={() => dispatch(closeModalWindow())}
-    >
+    <div className={`${showHideClassName}`}>
       <button onClick={() => dispatch(closeModalWindow())}>x</button>
       <section className={styles.modalMain}>
-        <h3 className={styles.modalHeader}>Добавить сумму</h3>
+        <h3 className={styles.modalHeader}>Перевести сумму</h3>
         <p className={styles.modalSubheader}>
-          Указанная сумма будет вычтена их хранилища 1 в раздел расходов 2
+          Указанная сумма будет вычтена их хранилища <h3>{nameFrom}</h3> в
+          раздел расходов <h3>{nameTo}</h3>
         </p>
         <input
           type="text"
@@ -34,7 +41,7 @@ const ModalWindowAddMoney = ({ show }) => {
         <button
           className={styles.addButton}
           onClick={() => {
-            dispatch(addMoneyStarted(userId, id, Number(sum)));
+            dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
             dispatch(closeModalWindow());
           }}
         >
