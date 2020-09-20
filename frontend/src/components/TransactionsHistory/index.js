@@ -29,10 +29,13 @@ const ModalWindowTransactionHistory = ({ show }) => {
           отредактировать их там, мне как бы похуй, если честно. Долбоёб блять
           СДОХНИ
         </p>
-        {transactionsToThisExpense &&
+        {transactionsToThisExpense.length ? (
           transactionsToThisExpense.map(element => {
             return <TransactionHistoryExpenses id={element._id} />;
-          })}
+          })
+        ) : (
+          <h2>История ваших покупок в данной категории пуста</h2>
+        )}
       </section>
     </div>
   );

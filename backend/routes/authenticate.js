@@ -19,11 +19,12 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
       login,
       hashedPassword
     );
+    console.log(user);
     req.session.user = { userId: user.id, login: user.login };
   } catch (err) {
     console.log("Ошибка регистрации:", err);
   }
-  res.status(200).json(serializeUser(user));
+  res.status(200).json(user);
 });
 
 router.post("/login", async (req, res) => {
