@@ -75,10 +75,12 @@ route.put("/:id/:cat", bodyParser.json(), async (req, res) => {
   if (!!req.body.from) {
     const from = req.body.from;
     await user.spendMoney(putId, from, amount);
-    return res.end();
+    const lastTransaction = user.transactions[user.transactions.length - 1];
+    return res.json(lastTransaction);
   } else {
     await user.gainMoney(putId, amount);
-    return res.end();
+    const lastTransaction = user.transactions[user.transactions.length - 1];
+    return res.json(lastTransaction);
   }
 });
 
