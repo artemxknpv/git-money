@@ -8,15 +8,15 @@ function TransactionsHistory({ id }) {
     return transaction._id === id;
   })[0];
   const [prettyTime, setPrettyTime] = useState('');
-  const [nameTo, setNameTo] = useState(null);
+  // const [nameTo, setNameTo] = useState(null);
   const [nameFrom, setNameFrom] = useState(null);
   useEffect(() => {
     setPrettyTime(new Date(transaction.time).toLocaleString());
-    setNameTo(
-      store.filter(category => {
-        return category.id === transaction.to;
-      })[0]
-    );
+    // setNameTo(
+    //   store.filter(category => {
+    //     return category.id === transaction.to;
+    //   })[0]
+    // );
     setNameFrom(
       store.filter(category => {
         return category.id === transaction.from;
@@ -26,10 +26,14 @@ function TransactionsHistory({ id }) {
 
   return (
     <span>
-      <h3>To {nameTo && nameTo.name}</h3>
-      <h2>{transaction && transaction.amount}</h2>
-      <h3>From {nameFrom && nameFrom.name}</h3>
-      <h3>At time: {prettyTime && prettyTime}</h3>
+      {/* <h3>To {nameTo && nameTo.name}</h3> */}
+      <div style={{ display: 'flex' }}>
+        <h2 style={{ margin: '20px' }}>
+          ${transaction && transaction.amount}{' '}
+        </h2>
+        <h2 style={{ margin: '20px' }}> From {nameFrom && nameFrom.name} </h2>
+        <h2 style={{ margin: '20px' }}>At time: {prettyTime && prettyTime}</h2>
+      </div>
     </span>
   );
 }
