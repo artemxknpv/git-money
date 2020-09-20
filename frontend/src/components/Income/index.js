@@ -14,12 +14,7 @@ const Income = () => {
     <>
       {/* <div className={styles.wrapper}> */}
       <h4
-        style={{
-          marginLeft: '16px',
-          fontWeight: '900',
-          fontSize: '1.5rem',
-          color: '#333',
-        }}
+        className={styles.categoryHeader}
       >
         Доходы
       </h4>
