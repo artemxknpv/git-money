@@ -3,14 +3,14 @@ import { LOGIN_STARTED } from '../action-types.js';
 import axios from 'axios';
 import setUserInfoStarted from '../actions/setUserInfo/setUserInfoStarted.js';
 import loginSuccess from '../actions/authentication/loginSuccess.js';
+import loginFailure from '../actions/authentication/loginFailure.js';
+
 
 const loginFetch = async ({ login, password }) => {
   const response = await axios.post('/login', {
     login,
     password,
   });
-  console.log(response);
-
   return response.data;
 };
 
@@ -18,13 +18,11 @@ function* loginWorker(action) {
   const { login, password } = action.payload;
   try {
     const data = yield call(loginFetch, { login, password });
-    console.log(data);
     const id = data.id;
-    yield put(loginSuccess(id));
     yield put(setUserInfoStarted(id));
+    yield put(loginSuccess(id));
   } catch (err) {
-    console.log('ошибка логинизации', err);
-    // yield put(loginFailure(e));
+    yield put(loginFailure(err))
   }
 }
 

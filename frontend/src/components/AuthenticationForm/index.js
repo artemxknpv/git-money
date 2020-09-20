@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import loginStarted from '../../redux/actions/authentication/loginStarted.js';
-import styles from './AuthenticationForm.module.scss';
+import styles from './AuthenticationForm.module.scss'
+
 const AuthenticationForm = ({ mode }) => {
   const dispatch = useDispatch();
   const [input, setInput] = useState({
@@ -11,28 +12,25 @@ const AuthenticationForm = ({ mode }) => {
     repPassword: '',
     email: '',
   });
-  const [showPassword, setShowPassword] = useState(false); // TODO
+  const [showPassword] = useState(false); // TODO
   const { login, password, email, repPassword } = input;
-
   const changeHandler = ({ target: { name, value } }) => {
     console.log(name, value);
     setInput({
       ...input,
       [name]: value,
     });
-    console.log(input);
   };
 
   const loginHandler = event => {
     event.preventDefault();
-    console.log(login, password);
     dispatch(loginStarted(login, password));
   };
 
   const registerHandler = event => {
     event.preventDefault();
     // dispatch(registerStarted(login, password, email));
-    console.log('Я тебя не уважаю.');
+    console.log('Я тебя не уважаю.'); // TODO убрать нахер
   };
 
   return mode === 'login' ? (
