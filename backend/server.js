@@ -3,21 +3,21 @@ import session from "express-session";
 import fileStore from "session-file-store";
 import mongoose from "mongoose";
 import { modelUser } from "./models/user.js";
-import passport from "passport";
+// import passport from "passport";
 import categoryRouter from "./routes/categories.js";
 import authenticateRouter from "./routes/authenticate.js";
-import flash from "express-flash";
+// import flash from "express-flash";
 // Passport Config
-import {
-  googleAuthentication,
-  localAuthentication,
-} from "./config/passport.config.js";
-localAuthentication(
-  passport,
-  login => modelUser.findOne({ login }),
-  id => modelUser.findById(id)
-);
-googleAuthentication(passport);
+// import {
+//   // googleAuthentication,
+//   localAuthentication,
+// } from "./config/passport.config.js";
+// localAuthentication(
+//   passport,
+//   login => modelUser.findOne({ login }),
+//   id => modelUser.findById(id)
+// );
+// googleAuthentication(passport);
 
 mongoose.connect(
   "mongodb+srv://user_me:123ER123@cluster0.opbgv.mongodb.net/final?retryWrites=true&w=majority",
@@ -26,7 +26,7 @@ mongoose.connect(
 
 const app = express();
 const FileStore = fileStore(session);
-app.use(flash());
+// app.use(flash());
 app.use(express.json());
 
 app.use(
@@ -44,9 +44,9 @@ app.use(
   })
 );
 
-// Passport middleware
-app.use(passport.initialize()); //TODO
-app.use(passport.session());
+// // Passport middleware
+// app.use(passport.initialize()); //TODO
+// app.use(passport.session());
 
 app.get("/", (req, res) => {
   res.send("Hello");
@@ -58,8 +58,8 @@ app.put("/", async (req, res) => {
   res.end();
 });
 
+app.use("/auth", authenticateRouter);
 app.use(categoryRouter);
-app.use(authenticateRouter);
 
 const port = 3001;
 

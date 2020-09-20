@@ -46,6 +46,7 @@ route.patch("/:id", bodyParser.json(), async (req, res) => {
 route.get("/:id", async (req, res) => {
   console.log("Work");
   const userId = req.params.id;
+  console.log(userId);
   let user = await modelUser.findById(userId);
   let userUpd = {
     firstName: user.firstName,

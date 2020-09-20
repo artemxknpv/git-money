@@ -5,9 +5,8 @@ import setUserInfoStarted from '../actions/setUserInfo/setUserInfoStarted.js';
 import loginSuccess from '../actions/authentication/loginSuccess.js';
 import loginFailure from '../actions/authentication/loginFailure.js';
 
-
 const loginFetch = async ({ login, password }) => {
-  const response = await axios.post('/login', {
+  const response = await axios.post('/auth/login', {
     login,
     password,
   });
@@ -19,10 +18,10 @@ function* loginWorker(action) {
   try {
     const data = yield call(loginFetch, { login, password });
     const id = data.id;
-    yield put(setUserInfoStarted(id));
     yield put(loginSuccess(id));
+    yield put(setUserInfoStarted(id));
   } catch (err) {
-    yield put(loginFailure(err))
+    yield put(loginFailure(err));
   }
 }
 
