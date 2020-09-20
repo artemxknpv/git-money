@@ -18,10 +18,10 @@ function* loginWorker(action) {
   try {
     const data = yield call(loginFetch, { login, password });
     const id = data.id;
-    yield put(loginSuccess(id));
     yield put(setUserInfoStarted(id));
+    yield put(loginSuccess(id));
   } catch (err) {
-    yield put(loginFailure(err));
+    // yield put(loginFailure(err));
   }
 }
 

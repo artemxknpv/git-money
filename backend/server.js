@@ -48,9 +48,9 @@ app.use(
 // app.use(passport.initialize()); //TODO
 // app.use(passport.session());
 
-app.get("/", (req, res) => {
-  res.send("Hello");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello");
+// });
 
 // create a new user
 app.put("/", async (req, res) => {
@@ -58,8 +58,12 @@ app.put("/", async (req, res) => {
   res.end();
 });
 
-app.use("/auth", authenticateRouter);
 app.use(categoryRouter);
+app.use("/auth", authenticateRouter);
+
+app.use((err, req, res, next) => {
+  console.log(">>>>", err);
+});
 
 const port = 3001;
 
