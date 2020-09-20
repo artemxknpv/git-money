@@ -1,6 +1,4 @@
-
 import React, { useState } from 'react';
-import ItemType from '../../';
 
 import { useDispatch, useSelector } from 'react-redux';
 import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';

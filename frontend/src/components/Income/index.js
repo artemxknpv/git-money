@@ -39,6 +39,7 @@ const Income = () => {
                         key={income.id}
                         draggableId={income.id}
                         index={index}
+                        style={{ overflow: 'visible' }}
                       >
                         {(provided, spanshot) => {
                           return (
@@ -46,6 +47,7 @@ const Income = () => {
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                               ref={provided.innerRef}
+                              // className={styles.container}
                             >
                               <Category
                                 value={income.value}

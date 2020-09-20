@@ -2,12 +2,23 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  overflow: visible;
 }
+
 .card {
-  margin-left: 16px;
+  margin: 0 8px 0;
   min-width: 90px;
   min-height: 117px;
   text-align: center;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card:nth-of-type(1) {
+  margin-left: 16px;
 }
 
 .image {
@@ -19,6 +30,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 13px rgba(51, 51, 51, .08);
+  overflow: visible;
 }
 
 //.expImg {
