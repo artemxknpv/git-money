@@ -5,6 +5,11 @@
   "repository": "git@github.com:artemxknpv/expense_tracker.git",
   "author": "ArtemK <brtoaster@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "frontend": "cd frontend && yarn start",
+    "server": "cd backend && npm run dev",
+    "fullstack": "concurrently \"yarn frontend\" \"yarn server\""
+  },
   "dependencies": {
     "concurrently": "^5.3.0"
   },
