@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js",
+    "dev": "nodemon server.js --ignore sessions",
     "seed": "node seed.js"
   },
   "devDependencies": {
