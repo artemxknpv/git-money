@@ -10,6 +10,7 @@ const Expenses = () => {
   const expenditures = useSelector(state =>
     state.categories.filter(category => category.value === 'expenditure')
   );
+
   return (
     <div className={styles.wrapper}>
       <h4
