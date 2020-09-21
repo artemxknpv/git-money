@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ItemType from '../../';
 
 import { useDispatch, useSelector } from 'react-redux';
 import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
@@ -29,7 +28,7 @@ const Category = ({ value, id }) => {
       >
         <WalletFilledIcon />
       </div>
-      <p className={styles.categorySubheader} style={{ fontWeight: '500' }}>
+      <p className={styles.categorySubheader} style={{ fontWeight: '700' }}>
         {category.name}
       </p>
       <p className={styles.categorySubheader}>{category.currentNumber} $</p>

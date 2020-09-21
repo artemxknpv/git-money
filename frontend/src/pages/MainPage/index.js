@@ -53,9 +53,9 @@ const MainPage = () => {
         }}
       >
         <Income />
-        <hr
-          style={{ marginRight: '16px', marginLeft: '16px', opacity: '20%' }}
-        />
+        {/*<hr*/}
+        {/*  style={{ marginRight: '16px', marginLeft: '16px', opacity: '20%' }}*/}
+        {/*/>*/}
         <Expenses />
       </DragDropContext>
       {/* </DragDropContext> */}

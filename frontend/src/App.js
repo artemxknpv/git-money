@@ -1,6 +1,8 @@
 import React from 'react';
+import ExpenseList from './pages/ExpenseList';
 import PrivateRoute from './components/PrivateRoute';
 import Authentication from './pages/Authentication';
+import IncomeList from './pages/IncomeList.js';
 import MainPage from './pages/MainPage/index';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -11,11 +13,17 @@ function App() {
         <PrivateRoute exact path="/">
           <MainPage />
         </PrivateRoute>
+        <Route exact path="/income/:cat">
+          <IncomeList />
+        </Route>
+        <Route exact path="/expense/:cat">
+          <ExpenseList />
+        </Route>
         <Route exact path="/login">
           <Authentication mode={'login'} />
         </Route>
-        <Route exact path="/register">
-          <Authentication mode={'register'} />
+        <Route exact path="/registration">
+          <Authentication mode={'registration'} />
         </Route>
         <div>
           <MainPage />

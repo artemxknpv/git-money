@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowTransactionHistory';
 import TransactionHistoryExpenses from '../TransactionHistoryExpenses';
 import styles from './TransactionsHistory.module.scss';
@@ -17,7 +18,6 @@ const ModalWindowTransactionHistory = ({ show }) => {
       return category.id === currentIdExpense;
     })[0];
   });
-  console.log(currentCategory);
   const transactionsToThisExpense = transactions.filter(transaction => {
     return transaction.to === currentIdExpense;
   });
@@ -29,17 +29,24 @@ const ModalWindowTransactionHistory = ({ show }) => {
     <div className={`${showHideClassName}`}>
       <button onClick={() => dispatch(closeModalWindow())}>x</button>
       <section className={styles.modalMain}>
-        <h3 className={styles.modalHeader}>
-          История ваших расходов в категории{' '}
+        <h5 className={styles.modalHeader}>
+          История ваших расходов в категории: <br />
           {currentCategory && currentCategory.name}
-        </h3>
-        {transactionsToThisExpense.length ? (
+        </h5>
+        <button
+          onClick={() => {
+            dispatch(closeModalWindow());
+          }}
+        >
+          <Link to={`expense/${currentIdExpense}`}>Что тебе надо?</Link>
+        </button>
+        {/* {transactionsToThisExpense.length ? (
           transactionsToThisExpense.map(element => {
             return <TransactionHistoryExpenses id={element._id} />;
           })
         ) : (
           <h2>История ваших покупок в данной категории пуста</h2>
-        )}
+        )} */}
       </section>
     </div>
   );

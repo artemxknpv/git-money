@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import errorReset from '../../redux/actions/authentication/errorReset.js';
 import loginStarted from '../../redux/actions/authentication/loginStarted.js';
-import styles from './AuthenticationForm.module.scss'
+import registrationStarted from '../../redux/actions/authentication/registrationStarted.js';
+
+import styles from './AuthenticationForm.module.scss';
 
 const AuthenticationForm = ({ mode }) => {
+  const isError = useSelector(state => state.user.error);
+  const errorText = useSelector(state => state.user.errorText);
   const dispatch = useDispatch();
+
   const [input, setInput] = useState({
+    firstName: '',
+    lastName: '',
     login: '',
     password: '',
     repPassword: '',
     email: '',
   });
   const [showPassword] = useState(false); // TODO
-  const { login, password, email, repPassword } = input;
+  const { firstName, lastName, login, password, email, repPassword } = input;
+
+  useEffect(() => {
+    dispatch(errorReset());
+  }, []);
+
   const changeHandler = ({ target: { name, value } }) => {
     console.log(name, value);
     setInput({
@@ -29,89 +42,111 @@ const AuthenticationForm = ({ mode }) => {
 
   const registerHandler = event => {
     event.preventDefault();
-    // dispatch(registerStarted(login, password, email));
-    console.log('Я тебя не уважаю.'); // TODO убрать нахер
+    console.log(email, login, password);
+    dispatch(registrationStarted(firstName, lastName, email, login, password));
   };
 
   return mode === 'login' ? (
     <div>
+      {isError && <p>{errorText}</p>}
       <form
         onSubmit={event => loginHandler(event)}
         className={styles.inputField}
       >
         <div>
-        <input
-          type="text"
-          name="login"
-          value={login}
-          onChange={changeHandler}
-          className={styles.inp}
-        />
-        <span className={styles.label}>Логин</span>
+          <input
+            type="text"
+            name="login"
+            value={login}
+            onChange={changeHandler}
+            className={styles.inp}
+          />
+          <span className={styles.label}>Логин</span>
         </div>
         <div>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          onChange={changeHandler}
-          value={password}
-          name="password"
-          className={styles.inp}
-        />
-        <span className={styles.label}>Пароль</span>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            onChange={changeHandler}
+            value={password}
+            name="password"
+            className={styles.inp}
+          />
+          <span className={styles.label}>Пароль</span>
         </div>
         <button type="submit" className={styles.btn}>
           Войти
         </button>
       </form>
       <div className={styles.afterbutton}>
-        <Link to={'/register'} className={styles.registrationLink}>
+        <Link to={'/registration'} className={styles.registrationLink}>
           У меня ещё нет аккаунта
         </Link>
         <p className={styles.forget}>Забыли пароль?</p>
       </div>
     </div>
-  ) : mode === 'register' ? (
+  ) : mode === 'registration' ? (
     <div>
       <form onSubmit={registerHandler} className={styles.inputField}>
+        {isError && errorText}
         <div>
-        <input
-          type="text"
-          value={login}
-          name="login"
-          onChange={changeHandler}
-          className={styles.inp}
-        />
-        <span className={styles.label}>Логин</span>
+          <input
+            type="text"
+            value={firstName}
+            name="firstName"
+            onChange={changeHandler}
+            className={styles.inp}
+          />
+          <span className={styles.label}>Имя</span>
         </div>
         <div>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={changeHandler}
-          className={styles.inp}
-        />
-        <span className={styles.label}>Адрес эл. почты</span>
+          <input
+            type="text"
+            value={lastName}
+            name="lastName"
+            onChange={changeHandler}
+            className={styles.inp}
+          />
+          <span className={styles.label}>Фамилия</span>
         </div>
         <div>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          onChange={changeHandler}
-          value={password}
-          name="password"
-          className={styles.inp}
-        />
-        <span className={styles.label}>Пароль</span>
+          <input
+            type="text"
+            value={login}
+            name="login"
+            onChange={changeHandler}
+            className={styles.inp}
+          />
+          <span className={styles.label}>Логин</span>
         </div>
         <div>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          onChange={changeHandler}
-          value={repPassword}
-          name="repPassword"
-          className={styles.inp}
-        />
-        <span className={styles.label}>Повторите пароль</span>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={changeHandler}
+            className={styles.inp}
+          />
+          <span className={styles.label}>Адрес эл. почты</span>
+        </div>
+        <div>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            onChange={changeHandler}
+            value={password}
+            name="password"
+            className={styles.inp}
+          />
+          <span className={styles.label}>Пароль</span>
+        </div>
+        <div>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            onChange={changeHandler}
+            value={repPassword}
+            name="repPassword"
+            className={styles.inp}
+          />
+          <span className={styles.label}>Повторите пароль</span>
         </div>
         <button className={styles.btn}>Зарегистрироваться</button>
       </form>

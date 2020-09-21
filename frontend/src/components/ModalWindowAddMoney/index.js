@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney.js';
 import styles from './ModalWindowAddMoney.module.scss';
 import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
@@ -76,6 +77,13 @@ const ModalWindowAddMoney = ({ show }) => {
               className={styles.input}
             />
             <button
+              onClick={() => {
+              dispatch(closeModalWindow());
+              }}
+             >
+            <Link to={`/income/${id}`}>Открой блять</Link>
+            </button>
+            <button
               className={styles.addButton}
               onClick={() => {
                 dispatch(addMoneyStarted(userId, id, Number(sum)));
@@ -97,34 +105,3 @@ const ModalWindowAddMoney = ({ show }) => {
 
 export default ModalWindowAddMoney;
 
-// <div className={showHideClassName}>
-//   <button onClick={() => dispatch(closeModalWindow())}>x</button>
-//   <section className={styles.modalMain}>
-//     <h3 className={styles.modalHeader}>Добавить сумму</h3>
-//     <p className={styles.modalSubheader}>
-//       Указанная сумма будет добавлена к этой категории
-//     </p>
-//     {thisCategoryList &&
-//     thisCategoryList.map(transaction => {
-//       return <TransactionHistoryIncome id={transaction._id} />;
-//     })}
-//     <input
-//       type="text"
-//       id="sum"
-//       placeholder={'1000'}
-//       value={sum}
-//       onChange={event => setSum(event.target.value)}
-//       className={styles.input}
-//     />
-//     <button
-//       className={styles.addButton}
-//       onClick={() => {
-//         dispatch(addMoneyStarted(userId, id, Number(sum)));
-//         dispatch(closeModalWindow());
-//       }}
-//     >
-//       Добавить
-//     </button>
-//   </section>
-// </div>
-// )
