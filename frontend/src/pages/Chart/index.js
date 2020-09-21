@@ -8,12 +8,14 @@ const Chart = () => {
     state.categories.filter(category => category.value === 'expenditure')
   );
   const chart = () => {
+    const names = expenditures.map(expenditure => expenditure.name);
+    const values = expenditures.map(expenditure => expenditure.currentNumber);
     setChartData({
-      labels: expenditures.map(expenditure => expenditure.name),
+      labels: names,
       datasets: [
         {
           label: 'expenditures',
-          data: expenditures.map(expenditure => expenditure.currentNumber),
+          data: values,
           backgroundColor: [
             `rgba(255, 99, 132, 1)`,
             `rgba(54, 162, 235, 1)`,
@@ -29,7 +31,7 @@ const Chart = () => {
 
   useEffect(() => {
     chart();
-  }, []);
+  }, [expenditures]);
   console.log(expenditures);
   return (
     <div>
