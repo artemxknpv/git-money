@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney.js';
 import styles from './ModalWindowAddMoney.module.scss';
 import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
@@ -26,10 +27,14 @@ const ModalWindowAddMoney = ({ show }) => {
         <p className={styles.modalSubheader}>
           Указанная сумма будет добавлена к этой категории
         </p>
-        {thisCategoryList &&
-          thisCategoryList.map(transaction => {
-            return <TransactionHistoryIncome id={transaction._id} />;
-          })}
+        <button>
+          <Link to={`/income/${id}`}>Открой блять</Link>
+        </button>
+        {/*// TODO КНОПКА*/}
+        {/*{thisCategoryList &&*/}
+        {/*  thisCategoryList.map(transaction => {*/}
+        {/*    return <TransactionHistoryIncome id={transaction._id} />;*/}
+        {/*  })}*/}
         <input
           type="text"
           id="sum"

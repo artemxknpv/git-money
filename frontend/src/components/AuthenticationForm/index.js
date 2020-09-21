@@ -54,24 +54,24 @@ const AuthenticationForm = ({ mode }) => {
         className={styles.inputField}
       >
         <div>
-        <input
-          type="text"
-          name="login"
-          value={login}
-          onChange={changeHandler}
-          className={styles.inp}
-        />
-        <span className={styles.label}>Логин</span>
+          <input
+            type="text"
+            name="login"
+            value={login}
+            onChange={changeHandler}
+            className={styles.inp}
+          />
+          <span className={styles.label}>Логин</span>
         </div>
         <div>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          onChange={changeHandler}
-          value={password}
-          name="password"
-          className={styles.inp}
-        />
-        <span className={styles.label}>Пароль</span>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            onChange={changeHandler}
+            value={password}
+            name="password"
+            className={styles.inp}
+          />
+          <span className={styles.label}>Пароль</span>
         </div>
         <button type="submit" className={styles.btn}>
           Войти
@@ -88,60 +88,65 @@ const AuthenticationForm = ({ mode }) => {
     <div>
       <form onSubmit={registerHandler} className={styles.inputField}>
         {isError && errorText}
-        <input
-          type="text"
-          placeholder="Василий"
-          value={firstName}
-          name="firstName"
-          onChange={changeHandler}
-          className={styles.inp}
-        />
-        <input
-          type="text"
-          placeholder="Васильев"
-          value={lastName}
-          name="lastName"
-          onChange={changeHandler}
-          className={styles.inp}
-        />
-        <input
-          type="text"
-          value={login}
-          name="login"
-          onChange={changeHandler}
-          className={styles.inp}
-        />
-        <span className={styles.label}>Логин</span>
+        <div>
+          <input
+            type="text"
+            value={firstName}
+            name="firstName"
+            onChange={changeHandler}
+            className={styles.inp}
+          />
+          <span className={styles.label}>Имя</span>
         </div>
         <div>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={changeHandler}
-          className={styles.inp}
-        />
-        <span className={styles.label}>Адрес эл. почты</span>
+          <input
+            type="text"
+            value={lastName}
+            name="lastName"
+            onChange={changeHandler}
+            className={styles.inp}
+          />
+          <span className={styles.label}>Фамилия</span>
         </div>
         <div>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          onChange={changeHandler}
-          value={password}
-          name="password"
-          className={styles.inp}
-        />
-        <span className={styles.label}>Пароль</span>
+          <input
+            type="text"
+            value={login}
+            name="login"
+            onChange={changeHandler}
+            className={styles.inp}
+          />
+          <span className={styles.label}>Логин</span>
         </div>
         <div>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          onChange={changeHandler}
-          value={repPassword}
-          name="repPassword"
-          className={styles.inp}
-        />
-        <span className={styles.label}>Повторите пароль</span>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={changeHandler}
+            className={styles.inp}
+          />
+          <span className={styles.label}>Адрес эл. почты</span>
+        </div>
+        <div>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            onChange={changeHandler}
+            value={password}
+            name="password"
+            className={styles.inp}
+          />
+          <span className={styles.label}>Пароль</span>
+        </div>
+        <div>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            onChange={changeHandler}
+            value={repPassword}
+            name="repPassword"
+            className={styles.inp}
+          />
+          <span className={styles.label}>Повторите пароль</span>
         </div>
         <button className={styles.btn}>Зарегистрироваться</button>
       </form>
