@@ -27,14 +27,6 @@ const ModalWindowAddMoney = ({ show }) => {
         <p className={styles.modalSubheader}>
           Указанная сумма будет добавлена к этой категории
         </p>
-        <button>
-          <Link to={`/income/${id}`}>Открой блять</Link>
-        </button>
-        {/*// TODO КНОПКА*/}
-        {/*{thisCategoryList &&*/}
-        {/*  thisCategoryList.map(transaction => {*/}
-        {/*    return <TransactionHistoryIncome id={transaction._id} />;*/}
-        {/*  })}*/}
         <input
           type="text"
           id="sum"
@@ -53,6 +45,9 @@ const ModalWindowAddMoney = ({ show }) => {
           Добавить
         </button>
       </section>
+      <Link to={`/income/${id}`}>
+        <button className={styles.historyButton}>История транзакций</button>
+      </Link>
     </div>
   );
 };
