@@ -2,7 +2,7 @@ import React from 'react';
 import ExpenseList from './pages/ExpenseList';
 import PrivateRoute from './components/PrivateRoute';
 import Authentication from './pages/Authentication';
-import IncomeList from './pages/IncomeList.js';
+import Index from './pages/IncomeList';
 import MainPage from './pages/MainPage/index';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ function App() {
           <MainPage />
         </PrivateRoute>
         <Route exact path="/income/:cat">
-          <IncomeList />
+          <Index />
         </Route>
         <Route exact path="/expense/:cat">
           <ExpenseList />

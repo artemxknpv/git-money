@@ -5,27 +5,28 @@ import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAd
 import styles from './ModalWindowAddMoney.module.scss';
 import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
 import TransactionHistoryIncome from '../../components/TransactionHistoryIncome/index';
-import {motion, AnimatePresence} from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion';
 
 const backdrop = {
-  visible: {opacity: 1},
-  hidden: {opacity: 0},
-}
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+};
 const modal = {
   hidden: {
-    x: "-50%",
-    y: "-50%",
+    x: '-50%',
+    y: '-50%',
     scale: 0.1,
-    opacity: 0
+    opacity: 0,
   },
   visible: {
     x: '-50%',
-    y: "-50%",
+    y: '-50%',
     scale: 1,
     opacity: 1,
-    transition: { delay: 0.2, duration: 0.3 }
+    transition: { delay: 0.2, duration: 0.3 },
+
   },
-}
+};
 
 const ModalWindowAddMoney = ({ show }) => {
   const [sum, setSum] = useState('');
@@ -39,30 +40,35 @@ const ModalWindowAddMoney = ({ show }) => {
   const dispatch = useDispatch();
   return (
     <AnimatePresence exitBeforeEnter>
-      {show ?
+      {show ? (
         <>
-        <motion.div className={styles.backdrop}
-                    onClick={() => dispatch(closeModalWindow())}
-        variants={backdrop}
-                    initial='hidden'
-                    animate='visible'
-        >
-        </motion.div>
-          <motion.div className={styles.modalMain}
-          variants={modal}
-                      initial='hidden'
-                      animate='visible'
+          <motion.div
+            className={styles.backdrop}
+            onClick={() => dispatch(closeModalWindow())}
+            variants={backdrop}
+            initial="hidden"
+            animate="visible"
+          />
+          <motion.div
+            className={styles.modalMain}
+            variants={modal}
+            initial="hidden"
+            animate="visible"
           >
-           <h3 className={styles.modalHeader}>Добавить сумму</h3>
-               <p className={styles.modalSubheader}>
-                Указанная сумма будет добавлена к этой категории
-                 </p>
-                {thisCategoryList &&
-                thisCategoryList.map(transaction => {
-                  return <TransactionHistoryIncome id={transaction._id
-                  }
-                  />;
-              })}
+            <Link to={`/income/${id}`}>
+              <button
+                onClick={() => {
+                  dispatch(closeModalWindow());
+                }}
+                className={styles.historyButton}
+              >
+                История транзакций
+              </button>
+            </Link>
+            <h3 className={styles.modalHeader}>Добавить сумму</h3>
+            <p className={styles.modalSubheader}>
+              Указанная сумма будет добавлена к этой категории
+            </p>
             <input
               type="text"
               id="sum"
@@ -71,13 +77,6 @@ const ModalWindowAddMoney = ({ show }) => {
               onChange={event => setSum(event.target.value)}
               className={styles.input}
             />
-            <button
-              onClick={() => {
-              dispatch(closeModalWindow());
-              }}
-             >
-            <Link to={`/income/${id}`}>Открой блять</Link>
-            </button>
             <button
               className={styles.addButton}
               onClick={() => {
@@ -89,11 +88,11 @@ const ModalWindowAddMoney = ({ show }) => {
             </button>
           </motion.div>
         </>
-        : <></>
-      }
+      ) : (
+        <></>
+      )}
     </AnimatePresence>
-);
+  );
 };
 
 export default ModalWindowAddMoney;
-
