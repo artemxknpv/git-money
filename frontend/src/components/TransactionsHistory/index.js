@@ -18,7 +18,6 @@ const ModalWindowTransactionHistory = ({ show }) => {
       return category.id === currentIdExpense;
     })[0];
   });
-  console.log(currentCategory);
   const transactionsToThisExpense = transactions.filter(transaction => {
     return transaction.to === currentIdExpense;
   });
