@@ -28,7 +28,7 @@ const Category = ({ value, id }) => {
       >
         <WalletFilledIcon />
       </div>
-      <p className={styles.categorySubheader} style={{ fontWeight: '500' }}>
+      <p className={styles.categorySubheader} style={{ fontWeight: '700' }}>
         {category.name}
       </p>
       <p className={styles.categorySubheader}>{category.currentNumber} $</p>

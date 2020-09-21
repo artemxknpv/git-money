@@ -13,16 +13,7 @@ const Expenses = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h4
-        style={{
-          fontWeight: '900',
-          fontSize: '1.5rem',
-          marginLeft: '16px',
-          color: '#333',
-        }}
-      >
-        Расходы
-      </h4>
+      <h4 className={styles.categoryHeader}>Расходы</h4>
       <div className={styles.container}>
         {expenditures &&
           expenditures.map(expense => {
