@@ -85,14 +85,14 @@ route.put("/:id/:cat", async (req, res) => {
 });
 
 // delete the transaction, and add money to the proper parts of the programm
-route.delete("/:id/:cat", bodyParser.json(), async (req, res) => {
+route.delete("/:id/:cat", async (req, res) => {
+  console.log("HELLO");
   const userId = req.params.id;
   const idTransaction = req.params.cat;
   const user = await modelUser.findById(userId);
   const transactionArray = await user.findTheTransaction(idTransaction);
   const transaction = transactionArray[0];
   const typeTransaction = transaction.value;
-  console.log(transaction.id);
   if (typeTransaction === "loss") {
     await user.deleteTheTransaction(transaction.id);
     await user.addMoneyStore(transaction.from, transaction.amount);

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import deleteTransactionStarted from '../../redux/actions/deleteTransaction/deleteTransactionStarted';
 
 function TransactionsHistoryExpense({ id }) {
+  const dispatch = useDispatch();
+  const userId = useSelector(state => state.user._id);
   const transactions = useSelector(state => state.transactions);
   const store = useSelector(state => state.categories);
   const transaction = transactions.filter(transaction => {
@@ -18,7 +21,7 @@ function TransactionsHistoryExpense({ id }) {
     );
   }, [transaction]);
   function handleClick() {
-    console.log('>>>>>');
+    dispatch(deleteTransactionStarted(userId, transaction._id));
   }
 
   return (

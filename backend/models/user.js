@@ -88,21 +88,20 @@ userSchema.methods.createNewStore = function (name) {
   return this.save();
 };
 
-userSchema.methods.findTheTransaction = async function (idTransaction) {
-  const transaction = await this.transactions.filter(transaction => {
+userSchema.methods.findTheTransaction = function (idTransaction) {
+  const transaction = this.transactions.filter(transaction => {
     return String(transaction._id) === idTransaction;
   });
   return transaction;
 };
 
 userSchema.methods.deleteTheTransaction = async function (id) {
+  console.log("id", id);
+  // const a = await this.model("User").find({ "transactions.id": id });
   await this.model("User").updateOne(
-    { transactions: { id: id } },
-    {
-      $pull: { transactions: { id: id } },
-    }
+    { "transactions.id": id },
+    { $pull: { transactions: { id: id } } }
   );
-  return this.save();
 };
 
 userSchema.methods.deleteCategory = async function (id) {
@@ -116,7 +115,7 @@ userSchema.methods.deleteCategory = async function (id) {
 };
 
 userSchema.methods.addMoneyStore = async function (idStore, amount) {
-  await this.model("User").update(
+  await this.model("User").updateOne(
     {
       "categories.id": idStore,
     },
@@ -133,7 +132,7 @@ userSchema.methods.subtractMoneyExpenditure = async function (
   idTransaction,
   amount
 ) {
-  await this.model("User").update(
+  await this.model("User").updateOne(
     {
       "categories.id": idTransaction,
     },

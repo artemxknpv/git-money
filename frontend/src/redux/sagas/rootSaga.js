@@ -5,6 +5,7 @@ import addMoneySaga from './addMoneySaga.js';
 import setUserInfoSaga from './setUserInfoSaga';
 import deleteCategorySaga from './deleteCategorySaga';
 import transferMoneySaga from './transferMoneySaga';
+import deleteTransactionSaga from './deleteTransactionSaga';
 
 export default function* () {
   yield all([
@@ -14,5 +15,6 @@ export default function* () {
     addMoneySaga(),
     deleteCategorySaga(),
     transferMoneySaga(),
+    deleteTransactionSaga(),
   ]);
 }
