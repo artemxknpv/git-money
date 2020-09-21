@@ -19,15 +19,19 @@ function TransactionsHistoryExpense({ id }) {
   }, [transaction]);
 
   return (
-    <span>
-      <div style={{ display: 'flex' }}>
-        <h2 style={{ margin: '20px' }}>
-          ${transaction && transaction.amount}{' '}
-        </h2>
-        <h2 style={{ margin: '20px' }}> From {nameFrom && nameFrom.name} </h2>
-        <h2 style={{ margin: '20px' }}>At time: {prettyTime && prettyTime}</h2>
-      </div>
-    </span>
+    <div style={{ backgroundColor: 'white' }}>
+      <span>
+        <div style={{ display: 'flex' }}>
+          <h2 style={{ margin: '20px' }}>
+            ${transaction && transaction.amount}
+          </h2>
+          <h2 style={{ margin: '20px' }}> From {nameFrom && nameFrom.name} </h2>
+          <h2 style={{ margin: '20px' }}>
+            At time: {prettyTime && prettyTime}
+          </h2>
+        </div>
+      </span>
+    </div>
   );
 }
 

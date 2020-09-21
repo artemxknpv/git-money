@@ -29,10 +29,10 @@ const ModalWindowTransactionHistory = ({ show }) => {
     <div className={`${showHideClassName}`}>
       <button onClick={() => dispatch(closeModalWindow())}>x</button>
       <section className={styles.modalMain}>
-        <h3 className={styles.modalHeader}>
-          История ваших расходов в категории{' '}
+        <h5 className={styles.modalHeader}>
+          История ваших расходов в категории: <br />
           {currentCategory && currentCategory.name}
-        </h3>
+        </h5>
         {transactionsToThisExpense.length ? (
           transactionsToThisExpense.map(element => {
             return <TransactionHistoryExpenses id={element._id} />;
