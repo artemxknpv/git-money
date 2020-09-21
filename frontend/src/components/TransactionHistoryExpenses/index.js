@@ -21,7 +21,15 @@ function TransactionsHistoryExpense({ id }) {
     );
   }, [transaction]);
   function handleClick() {
-    dispatch(deleteTransactionStarted(userId, transaction._id));
+    dispatch(
+      deleteTransactionStarted(
+        userId,
+        transaction._id,
+        transaction.from,
+        transaction.to,
+        transaction.amount
+      )
+    );
   }
 
   return (
