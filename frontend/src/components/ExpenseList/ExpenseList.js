@@ -1,11 +1,11 @@
-import React from 'react';
+// import React from 'react';
 
-const ExpenseList = () => {
-  return (
-    <div>
-      <h1>Здарова ебать</h1>
-    </div>
-  );
-};
+// const ExpenseList = () => {
+//   return (
+//     <div>
+//       <h1>Здарова ебать</h1>
+//     </div>
+//   );
+// };
 
-export default ExpenseList;
+// export default ExpenseList;

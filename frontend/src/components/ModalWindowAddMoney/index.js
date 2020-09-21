@@ -27,7 +27,11 @@ const ModalWindowAddMoney = ({ show }) => {
         <p className={styles.modalSubheader}>
           Указанная сумма будет добавлена к этой категории
         </p>
-        <button>
+        <button
+          onClick={() => {
+            dispatch(closeModalWindow());
+          }}
+        >
           <Link to={`/income/${id}`}>Открой блять</Link>
         </button>
         {/*// TODO КНОПКА*/}

@@ -34,14 +34,20 @@ const ModalWindowTransactionHistory = ({ show }) => {
           История ваших расходов в категории: <br />
           {currentCategory && currentCategory.name}
         </h5>
-        {/*<Link to={`expense/${id}`}>хуй</Link>*/}
-        {transactionsToThisExpense.length ? (
+        <button
+          onClick={() => {
+            dispatch(closeModalWindow());
+          }}
+        >
+          <Link to={`expense/${currentIdExpense}`}>Что тебе надо?</Link>
+        </button>
+        {/* {transactionsToThisExpense.length ? (
           transactionsToThisExpense.map(element => {
             return <TransactionHistoryExpenses id={element._id} />;
           })
         ) : (
           <h2>История ваших покупок в данной категории пуста</h2>
-        )}
+        )} */}
       </section>
     </div>
   );
