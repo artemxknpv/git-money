@@ -14,8 +14,8 @@ function App() {
         <Route exact path="/login">
           <Authentication mode={'login'} />
         </Route>
-        <Route exact path="/register">
-          <Authentication mode={'register'} />
+        <Route exact path="/registration">
+          <Authentication mode={'registration'} />
         </Route>
         <div>
           <MainPage />

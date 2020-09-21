@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post("/registration", bodyParser.json(), async (req, res) => {
   const { firstName, lastName, mail, login, password } = req.body;
+  console.log(firstName, lastName, mail, login, password);
   let errors = [];
   // Check that al filds required
   if (!firstName || !lastName || !mail || !login || !password) {
@@ -36,6 +37,7 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
         return res.status(401).json(errors);
       }
     } else {
+      console.log(1);
       const saltRounds = Number(process.env.SALT_ROUNDS ?? 3);
       const hashedPassword = await bcrypt.hash(password, saltRounds);
       const user = await modelUser.createDefaultUser(
@@ -46,7 +48,7 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
         hashedPassword
       );
       req.session.user = { userId: user.id, login: user.login };
-      return res.status(200).json(user);
+      return res.status(200).json({ id: user.id });
     }
   }
 });
@@ -83,11 +85,11 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res
         .status(401)
-        .json([{ error: "Пользователя с таким логином не существует" }]);
+        .json([{ message: "Пользователя с таким логином не существует" }]);
     }
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
-      return res.status(401).json([{ error: "Неправильно введен пароль" }]);
+      return res.status(401).json([{ message: "Неправильно введен пароль" }]);
     }
     req.session.user = { userId: user.id, login: user.login };
   } catch (err) {
