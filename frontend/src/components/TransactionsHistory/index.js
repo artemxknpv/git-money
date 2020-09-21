@@ -6,6 +6,7 @@ import TransactionHistoryExpenses from '../TransactionHistoryExpenses';
 import styles from './TransactionsHistory.module.scss';
 
 const ModalWindowTransactionHistory = ({ show }) => {
+  const dispatch = useDispatch();
   const [sum, setSum] = useState('');
   const [currentName, setCurrentname] = useState(null);
   const userId = useSelector(state => state.user._id);
@@ -21,7 +22,6 @@ const ModalWindowTransactionHistory = ({ show }) => {
   const transactionsToThisExpense = transactions.filter(transaction => {
     return transaction.to === currentIdExpense;
   });
-  const dispatch = useDispatch();
   const showHideClassName = show
     ? `${styles.modal} ${styles.displayBlock}`
     : `${styles.modal} ${styles.displayNone}`;

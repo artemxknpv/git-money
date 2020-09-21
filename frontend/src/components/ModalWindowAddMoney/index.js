@@ -24,6 +24,7 @@ const modal = {
     scale: 1,
     opacity: 1,
     transition: { delay: 0.2, duration: 0.3 },
+
   },
 };
 
@@ -35,7 +36,7 @@ const ModalWindowAddMoney = ({ show }) => {
   const thisCategoryList = listTransactions.filter(
     transaction => transaction.to === id
   );
-  console.log(thisCategoryList);
+  // console.log(thisCategoryList);
   const dispatch = useDispatch();
   return (
     <AnimatePresence exitBeforeEnter>
