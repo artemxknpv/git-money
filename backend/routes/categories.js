@@ -67,7 +67,7 @@ route.get("/:id", async (req, res) => {
 });
 
 // add money to store or transfer money from store to expenditure cat
-route.put("/:id/:cat", bodyParser.json(), async (req, res) => {
+route.put("/:id/:cat", async (req, res) => {
   const { amount } = req.body;
   const userId = req.params.id;
   const putId = req.params.cat;
@@ -81,6 +81,25 @@ route.put("/:id/:cat", bodyParser.json(), async (req, res) => {
     await user.gainMoney(putId, amount);
     const lastTransaction = user.transactions[user.transactions.length - 1];
     return res.json(lastTransaction);
+  }
+});
+
+// delete the transaction, and add money to the proper parts of the programm
+route.delete("/:id/:cat", async (req, res) => {
+  console.log("HELLO");
+  const userId = req.params.id;
+  const idTransaction = req.params.cat;
+  const user = await modelUser.findById(userId);
+  const transactionArray = await user.findTheTransaction(idTransaction);
+  const transaction = transactionArray[0];
+  const typeTransaction = transaction.value;
+  if (typeTransaction === "loss") {
+    await user.deleteTheTransaction(transaction.id);
+    await user.addMoneyStore(transaction.from, transaction.amount);
+    await user.subtractMoneyExpenditure(transaction.to, transaction.amount);
+    res.end();
+  } else {
+    res.status(401).end();
   }
 });
 
