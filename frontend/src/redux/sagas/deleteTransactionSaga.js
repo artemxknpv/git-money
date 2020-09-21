@@ -1,5 +1,6 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { DELETE_TRANSACTION_STARTED } from '../action-types';
+import deleteTransactionSuccess from '../actions/deleteTransaction/deleteTransactionSuccess';
 
 const deleteTransactionFetch = async ({ userId, idTransaction }) => {
   console.log(userId, idTransaction);
@@ -9,8 +10,7 @@ const deleteTransactionFetch = async ({ userId, idTransaction }) => {
       'Content-Type': 'application/json',
     },
   });
-  const responseJSON = response.json();
-  return responseJSON;
+  return;
 };
 
 function* transferMoneyStoreWorker(action) {
@@ -20,9 +20,9 @@ function* transferMoneyStoreWorker(action) {
       userId,
       idTransaction,
     });
-    // yield put(addTransaction(response));
+    yield put(deleteTransactionSuccess(userId, idTransaction));
   } catch (err) {
-    // console.log('transfer error', err);
+    console.log('transfer error', err);
   }
   // yield put(transferMoneyStoreSuccess(userId, idTo, idFrom, amount));
 }

@@ -6,6 +6,10 @@ export default (store = [], action) => {
       return action.payload.transactions;
     case actionTypes.ADD_TRANSACTION:
       return [...store, action.payload.transaction];
+    case actionTypes.DELETE_TRANSACTION_SUCCESS:
+      return store.filter(
+        transaction => transaction._id !== action.payload.idTransaction
+      );
     default:
       return store;
   }
