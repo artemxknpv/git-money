@@ -134,6 +134,7 @@ userSchema.methods.gainMoney = async function (idStore, amount) {
     to: idStore,
     amount: amount,
     id: uuidv4(),
+    time: Date.now(),
   });
   return this.save();
 };
@@ -162,9 +163,10 @@ userSchema.methods.spendMoney = async function (toId, fromId, amount) {
   await this.transactions.push({
     value: "loss",
     to: toId,
-    from: toId,
+    from: fromId,
     amount: amount,
     id: uuidv4(),
+    time: Date.now(),
   });
   return this.save();
 };

@@ -5,6 +5,7 @@ import userReducer from './userReducer';
 import transactionsReducer from './transactionsReducer';
 import modalWindowCategoryReducer from './modalWindowCategoryReducer';
 import modalWindowTransferMoneyReducer from './modalWindowTransferMoneyReducer';
+import modalWindowTransactionHistoryReducer from './transactionHistoryModalReducer';
 
 export default combineReducers({
   user: userReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   isModal: modalWindowReducer,
   isCategoryModal: modalWindowCategoryReducer,
   isTransferMoneyModal: modalWindowTransferMoneyReducer,
+  isTransactionHistoryModal: modalWindowTransactionHistoryReducer,
 });
