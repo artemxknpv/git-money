@@ -11,9 +11,6 @@ const ExpenseList = () => {
   const { cat } = useParams();
   const dispatch = useDispatch();
   const transactions = useSelector(state => state.transactions);
-  // const currentIdExpense = useSelector(
-  //   state => state.isTransactionHistoryModal.idExpense
-  // );
   const currentCategory = useSelector(state => {
     return state.categories.filter(category => {
       return category.id === cat;
@@ -38,7 +35,7 @@ const ExpenseList = () => {
       stringTime:
         differenceInHours(Date.now(), new Date(transaction.time)) === 0
           ? 'this hour'
-          : formatDistance(Date.now(), new Date(transaction.time)),
+          : formatDistance(Date.now(), new Date(transaction.time)) + ' ago',
     };
   });
   const objectTime = {};
@@ -51,9 +48,6 @@ const ExpenseList = () => {
     }
   });
   console.log(objectTime);
-  // Object.keys(objectTime).forEach(key => {
-  //   console.log(key, objectTime[key]);
-  // });
   return (
     <div>
       <h3>
@@ -78,13 +72,6 @@ const ExpenseList = () => {
         ) : (
           <h2>История ваших покупок в данной категории пуста</h2>
         )}
-        {/* {transactionsToThisExpense.length ? (
-          transactionsToThisExpense.map(element => {
-            return <TransactionHistoryExpenses id={element._id} />;
-          })
-        ) : (
-          <h2>История ваших покупок в данной категории пуста</h2>
-        )} */}
       </section>
     </div>
   );
