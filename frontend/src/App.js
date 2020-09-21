@@ -1,5 +1,5 @@
 import React from 'react';
-import ExpenseList from './components/ExpenseList/ExpenseList.js';
+import ExpenseList from './pages/ExpenseList';
 import PrivateRoute from './components/PrivateRoute';
 import Authentication from './pages/Authentication';
 import IncomeList from './pages/IncomeList.js';
