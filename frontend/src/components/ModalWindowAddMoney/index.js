@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney.js';
 import styles from './ModalWindowAddMoney.module.scss';
 import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
-import TransactionHistoryIncome from '../../components/TransactionHistoryIncome/index';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const backdrop = {
@@ -24,7 +23,6 @@ const modal = {
     scale: 1,
     opacity: 1,
     transition: { delay: 0.2, duration: 0.3 },
-
   },
 };
 

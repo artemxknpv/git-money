@@ -13,12 +13,12 @@ function App() {
         <PrivateRoute exact path="/">
           <MainPage />
         </PrivateRoute>
-        <Route exact path="/income/:cat">
+        <PrivateRoute exact path="/income/:cat">
           <Index />
-        </Route>
-        <Route exact path="/expense/:cat">
+        </PrivateRoute>
+        <PrivateRoute exact path="/expense/:cat">
           <ExpenseList />
-        </Route>
+        </PrivateRoute>
         <Route exact path="/login">
           <Authentication mode={'login'} />
         </Route>

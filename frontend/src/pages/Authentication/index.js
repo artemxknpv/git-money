@@ -11,7 +11,7 @@ const Authentication = ({ mode }) => {
   return isAuthenticated ? (
     <Redirect to={'/'} />
   ) : (
-    <>
+    <div className={styles.container}>
       <Header
         title={mode === 'registration' ? 'Регистрация' : 'Войти в систему'}
       />
@@ -20,7 +20,7 @@ const Authentication = ({ mode }) => {
         зарегистрируйтесь.
       </p>
       <AuthenticationForm mode={mode} />
-    </>
+    </div>
   );
 };
 

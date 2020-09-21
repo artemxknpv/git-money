@@ -1,3 +1,5 @@
+@import './src/styles/variables';
+
 //@media (max-width: 400px) {
   .image {
     width: 110px;
@@ -15,6 +17,7 @@
     max-width: 110px;
     text-overflow: ellipsis;
     color: #333333;
+    font-family: $regular-font;
   }
 
 ::-webkit-scrollbar {
@@ -29,5 +32,6 @@
   align-items: center;
   text-align: center;
   margin-bottom: 20px;
+
 }
 //}

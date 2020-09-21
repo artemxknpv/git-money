@@ -1,19 +1,23 @@
-.headerReg{
-  font-family: Inter;
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.headerReg {
   font-style: normal;
   font-weight: 900;
   font-size: 30px;
   line-height: 36px;
-
   color: #333333;
   margin: 64px 4% 0
 }
+
 .headerDesc{
-  font-family: Inter;
+  margin-left: 1rem;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 26px;
-  color: #BDBDBD;
-  margin: 16px 4% 0;
+  //color: #BDBDBD;
+  margin-top: 16px;
 }

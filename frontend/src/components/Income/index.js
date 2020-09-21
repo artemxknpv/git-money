@@ -16,16 +16,9 @@ const Income = () => {
     const totalMoney = incomes.reduce((acc, store) => {
       return acc + store.currentNumber;
     }, 0);
-    console.log(totalMoney);
     dispatch(setTotalMoney(totalMoney));
   }, []);
-  // useEffect(() => {
-  //   const totalMoney = incomes.reduce((acc, store) => {
-  //     return acc + store.currentNumber;
-  //   }, 0);
-  //   console.log(totalMoney);
-  //   dispatch(setTotalMoney(totalMoney));
-  // }, []);
+
   return (
     <>
       <div className={styles.wrapper}>

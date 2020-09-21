@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import SkeletonLoader from 'tiny-skeleton-loader-react';
 import TransactionsHistoryIncome from '../../components/TransactionHistoryIncome';
 import { StyledHeader } from '../../styled-components/StyledHeader.js';
-import styles from './Income.module.scss';
-import { motion } from 'framer-motion';
+import styles from './IncomeList.module.scss';
+import { AnimateSharedLayout, motion } from 'framer-motion';
 
 const Index = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -29,7 +29,7 @@ const Index = () => {
     <>
       <SkeletonLoader
         width={'20%'}
-        style={{ margin: 'auto', marginTop: '10rem' }}
+        style={{ margin: 'auto', marginTop: '7rem' }}
       />
       <SkeletonLoader
         width={'20%'}
@@ -45,25 +45,32 @@ const Index = () => {
       />
     </>
   ) : (
-    <>
+    <div className={styles.container}>
       <StyledHeader>
-        <h2 className={styles.header}>{storeName}</h2>
-        <span>
-          <Link to={'/'} style={{ textDecoration: 'none' }}>
-            HOME
+        <div className={styles.arrowAndCatname}>
+          <Link to={'/'} style={{ textDecoration: 'none', color: '#333333' }}>
+            <i className="fas fa-arrow-left" />
           </Link>
-        </span>
+          <h2 className={styles.header}>{storeName}</h2>
+        </div>
+        <p className={styles.editCategory}>Edit category</p>
       </StyledHeader>
       {thisCategoryList.length ? (
-        <motion.ul>
-          {thisCategoryList.map(cat => (
-            <TransactionsHistoryIncome id={cat._id} key={cat._id} />
-          ))}
-        </motion.ul>
+        <AnimateSharedLayout>
+          <motion.ul layout>
+            {thisCategoryList.map(cat => (
+              <TransactionsHistoryIncome id={cat._id} key={cat._id} />
+            ))}
+          </motion.ul>
+        </AnimateSharedLayout>
       ) : (
-        <h3>История добавлений в хранилище пуста</h3>
+        <div>
+          <p className={styles.emptyWarning}>
+            История добавлений в хранилище {storeName} пуста
+          </p>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

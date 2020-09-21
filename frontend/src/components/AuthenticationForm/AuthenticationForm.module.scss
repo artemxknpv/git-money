@@ -1,20 +1,22 @@
-.inputField{
+@import './src/styles/variables';
+
+.inputField {
   display: flex;
   flex-direction: column;
-  margin: 64px 4% 0;
+  margin: 64px 1rem 0;
 }
 
 .inp {
   width: 100%;
   height: 42px;
-  margin:32px 0 0;
+  margin: 32px 0 0;
   border-width: 0 0 1px;
-  font-family: Inter, sans-serif;
+  font-family: $regular-font;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 29px;
-  color: #6DC4C4;
+  color: #6dc4c4;
   border-color: #e3e3e3;
   background-color: #fcfcfc;
 }
@@ -22,8 +24,7 @@
 .inp:focus {
   outline-width: 0;
   border-width: 0 0 1px;
-  border-color: #6DC4C4;
-
+  border-color: #6dc4c4;
 }
 .inp::placeholder {
   color: #e3e3e3;
@@ -33,7 +34,7 @@
 
 .btn {
   width: 100%;
-  background: #6DC4C4;
+  background: $green-color;
   border-radius: 5px;
   border: 0;
   border-color: none;
@@ -43,9 +44,12 @@
   font-size: 15px;
   line-height: 18px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 32px 0 0;
   height: 56px;
+}
+.btn:focus {
+  outline: 0 !important;
 }
 
 .afterbutton {
@@ -53,7 +57,11 @@
   align-items: center;
   flex-direction: column;
   margin: 32px 0 0;
-  width: 100%
+  width: 100%;
+}
+
+.afterbutton:focus {
+  outline: 0 !important;
 }
 
 .registrationLink {
@@ -63,19 +71,19 @@
   text-decoration: none;
   font-size: 16px;
   line-height: 26px;
-  color: #2D9CDB;
+  color: #2d9cdb;
 }
 
-.forget{
+.forget {
   font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 26px;
-  color: #2D9CDB;
+  color: #2d9cdb;
 }
 
-.label{
+.label {
   color: #e3e3e3;
   position: relative;
   pointer-events: none;
@@ -90,8 +98,7 @@
 }
 
 .inp:focus ~ .label,
-.inp:not([value=""])~ .label
-{
-  top: -70px;
 
+.inp:not([value='']) ~ .label {
+  top: -70px;
 }
