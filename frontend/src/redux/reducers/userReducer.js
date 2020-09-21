@@ -44,6 +44,16 @@ export default (store = initState, { type, payload, error }) => {
         login: user.log,
         totalMoney: user.totalMoney,
       };
+    case actionTypes.SET_TOTAL_MONEY:
+      return {
+        ...store,
+        totalMoney: payload.totalMoney,
+      };
+    case actionTypes.ADD_TOTAL_MONEY:
+      return {
+        ...store,
+        totalMoney: store.totalMoney + payload.addedMoney,
+      };
     case actionTypes.LOGOUT_SUCCESS:
       return initState;
     default:

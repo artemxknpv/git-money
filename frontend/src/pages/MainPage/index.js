@@ -14,17 +14,15 @@ import openModalTransferMoney from '../../redux/actions/modalWindow/openModalWin
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const MainPage = () => {
+  const dispatch = useDispatch();
   const isModal = useSelector(state => state.isModal.isOpened);
   const isModalCategory = useSelector(state => state.isCategoryModal.isOpened);
-
   const isModalTransfer = useSelector(
     state => state.isTransferMoneyModal.isOpened
   );
-
   const isModalHistoryTransaction = useSelector(
     state => state.isTransactionHistoryModal.isOpened
   );
-  const dispatch = useDispatch();
   const categories = useSelector(state => state.categories);
   const userId = useSelector(state => state.user._id);
 
