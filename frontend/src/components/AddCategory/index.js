@@ -6,16 +6,18 @@ import modalWindowCategoryOpened from '../../redux/actions/modalWindow/openModal
 const AddCategory = ({ value }) => {
   const dispatch = useDispatch();
   return (
-    <div className={styles.card}>
-      <div
-        className={styles.image}
-        onClick={() => {
-          dispatch(modalWindowCategoryOpened(value));
-        }}
-      >
-        +
+    <div>
+      <div className={styles.card}>
+        <div
+          className={styles.image}
+          onClick={() => {
+            dispatch(modalWindowCategoryOpened(value));
+          }}
+        >
+          +
+        </div>
+        <p className={styles.categorySubheader}>Создать категорию</p>
       </div>
-      <p className={styles.categorySubheader}>Создать категорию</p>
     </div>
   );
 };

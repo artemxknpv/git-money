@@ -12,60 +12,53 @@ const Income = () => {
   );
   return (
     <>
-      {/* <div className={styles.wrapper}> */}
-      <h4
-        style={{
-          marginLeft: '16px',
-          fontWeight: '900',
-          fontSize: '1.5rem',
-          color: '#333',
-        }}
-      >
-        Доходы
-      </h4>
-      <Droppable droppableId={uuidv4()} direction="horizontal">
-        {(provided, snapshot) => {
-          return (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className={styles.container}
-            >
-              {incomes &&
-                incomes.map((income, index) => {
-                  return (
-                    <div>
-                      <Draggable
-                        key={income.id}
-                        draggableId={income.id}
-                        index={index}
-                      >
-                        {(provided, spanshot) => {
-                          return (
-                            <div
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              ref={provided.innerRef}
-                            >
-                              <Category
-                                value={income.value}
-                                id={income.id}
-                                key={income.id}
-                              />
-                            </div>
-                          );
-                        }}
-                      </Draggable>
-                    </div>
-                  );
-                })}
-              {provided.placeholder}
-              <AddCategory value="store" />
-            </div>
-          );
-        }}
-      </Droppable>
-      {/* </div> */}
+      <div className={styles.wrapper}>
+        <h4 className={styles.categoryHeader}>Доходы</h4>
+        <Droppable droppableId={uuidv4()} direction="horizontal">
+          {(provided, snapshot) => {
+            return (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                className={styles.container}
+              >
+                {incomes &&
+                  incomes.map((income, index) => {
+                    return (
+                      <div>
+                        <Draggable
+                          key={income.id}
+                          draggableId={income.id}
+                          index={index}
+                          style={{ overflow: 'visible' }}
+                        >
+                          {(provided, spanshot) => {
+                            return (
+                              <div
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                ref={provided.innerRef}
+                                // className={styles.container}
+                              >
+                                <Category
+                                  value={income.value}
+                                  id={income.id}
+                                  key={income.id}
+                                />
+                              </div>
+                            );
+                          }}
+                        </Draggable>
+                      </div>
+                    );
+                  })}
+                {provided.placeholder}
+                <AddCategory value="store" />
+              </div>
+            );
+          }}
+        </Droppable>
+      </div>
     </>
   );
 };

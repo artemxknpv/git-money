@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
-import ItemType from '../../';
 
 import { useDispatch, useSelector } from 'react-redux';
 import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
 import openModalWindow from '../../redux/actions/modalWindow/openModalWindowAddMoney.js';
+import openModalWindowTransactionHistoryExpenses from '../../redux/actions/modalWindow/openModalWindowTransactionHistory';
 import styles from './Category.module.scss';
 
 const Category = ({ value, id }) => {
@@ -20,12 +19,16 @@ const Category = ({ value, id }) => {
       <div
         className={styles.image}
         onClick={
-          value === 'store' ? () => dispatch(openModalWindow(id)) : () => {}
+          value === 'store'
+            ? () => dispatch(openModalWindow(id))
+            : () => {
+                dispatch(openModalWindowTransactionHistoryExpenses(id));
+              }
         }
       >
         <WalletFilledIcon />
       </div>
-      <p className={styles.categorySubheader} style={{ fontWeight: '500' }}>
+      <p className={styles.categorySubheader} style={{ fontWeight: '700' }}>
         {category.name}
       </p>
       <p className={styles.categorySubheader}>{category.currentNumber} $</p>

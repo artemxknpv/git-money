@@ -53,22 +53,26 @@ const AuthenticationForm = ({ mode }) => {
         onSubmit={event => loginHandler(event)}
         className={styles.inputField}
       >
+        <div>
         <input
           type="text"
-          placeholder="Логин"
           name="login"
           value={login}
           onChange={changeHandler}
           className={styles.inp}
         />
+        <span className={styles.label}>Логин</span>
+        </div>
+        <div>
         <input
           type={showPassword ? 'text' : 'password'}
           onChange={changeHandler}
           value={password}
           name="password"
-          placeholder="Пароль"
           className={styles.inp}
         />
+        <span className={styles.label}>Пароль</span>
+        </div>
         <button type="submit" className={styles.btn}>
           Войти
         </button>
@@ -102,36 +106,43 @@ const AuthenticationForm = ({ mode }) => {
         />
         <input
           type="text"
-          placeholder="Логин"
           value={login}
           name="login"
           onChange={changeHandler}
           className={styles.inp}
         />
+        <span className={styles.label}>Логин</span>
+        </div>
+        <div>
         <input
           type="email"
           name="email"
-          placeholder="Адрес эл. почты"
           value={email}
           onChange={changeHandler}
           className={styles.inp}
         />
+        <span className={styles.label}>Адрес эл. почты</span>
+        </div>
+        <div>
         <input
           type={showPassword ? 'text' : 'password'}
           onChange={changeHandler}
           value={password}
           name="password"
-          placeholder="Пароль"
           className={styles.inp}
         />
+        <span className={styles.label}>Пароль</span>
+        </div>
+        <div>
         <input
           type={showPassword ? 'text' : 'password'}
           onChange={changeHandler}
           value={repPassword}
           name="repPassword"
-          placeholder="Повторите пароль"
           className={styles.inp}
         />
+        <span className={styles.label}>Повторите пароль</span>
+        </div>
         <button className={styles.btn}>Зарегистрироваться</button>
       </form>
       <div className={styles.afterbutton}>

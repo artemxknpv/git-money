@@ -4,10 +4,12 @@ export default (store = [], action) => {
   switch (action.type) {
     case actionTypes.SET_TRANSACTIONS:
       return action.payload.transactions;
-    // case actionTypes.ADD_MONEY_SUCCESS:
-    // TODO
-    // case actionTypes.ADD_MONEY_FAILURE:
-    // TODO
+    case actionTypes.ADD_TRANSACTION:
+      return [...store, action.payload.transaction];
+    case actionTypes.DELETE_TRANSACTION_SUCCESS:
+      return store.filter(
+        transaction => transaction._id !== action.payload.idTransaction
+      );
     default:
       return store;
   }

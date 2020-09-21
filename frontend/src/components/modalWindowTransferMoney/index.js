@@ -27,8 +27,8 @@ const ModalWindowAddMoney = ({ show }) => {
       <section className={styles.modalMain}>
         <h3 className={styles.modalHeader}>Перевести сумму</h3>
         <p className={styles.modalSubheader}>
-          Указанная сумма будет вычтена их хранилища {nameFrom} в раздел
-          расходов {nameTo}
+          Указанная сумма будет вычтена из хранилища {nameFrom} и перенесена в
+          раздел расходов {nameTo}
         </p>
         <input
           type="text"
