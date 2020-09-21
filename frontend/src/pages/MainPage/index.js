@@ -7,6 +7,7 @@ import ModalWindowAddMoney from '../../components/ModalWindowAddMoney';
 import ModalWindowAddCategory from '../../components/ModalWindowAddCategory';
 import ModalWindowTransferMoney from '../../components/modalWindowTransferMoney';
 import ModalWindowTransactionHistoryExpenses from '../../components/TransactionsHistory/index';
+import Navbar from  '../../components/Navbar'
 
 import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStarted';
 import openModalTransferMoney from '../../redux/actions/modalWindow/openModalWindowTransferMoney';
@@ -30,6 +31,7 @@ const MainPage = () => {
 
   return (
     <div>
+      <Navbar/>
       <ModalWindowAddMoney show={isModal} />
       <ModalWindowAddCategory show={isModalCategory} />
       <ModalWindowTransferMoney show={isModalTransfer} />
@@ -53,12 +55,11 @@ const MainPage = () => {
         }}
       >
         <Income />
-        {/*<hr*/}
-        {/*  style={{ marginRight: '16px', marginLeft: '16px', opacity: '20%' }}*/}
-        {/*/>*/}
+
         <Expenses />
       </DragDropContext>
-      {/* </DragDropContext> */}
+
+
     </div>
   );
 };
