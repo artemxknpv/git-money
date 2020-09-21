@@ -1,4 +1,10 @@
-* {
+body {
+  background-color: #fcfcfc;
   font-family: 'Inter', sans-serif;
-  background-color: #FCFCFC;
+  //-ms-overflow-style: none;  /* IE and Edge */
+  //scrollbar-width: none;  /* Firefox */
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
