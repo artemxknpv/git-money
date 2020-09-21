@@ -44,24 +44,30 @@ route.patch("/:id", bodyParser.json(), async (req, res) => {
 
 // send the full info about the user
 route.get("/:id", async (req, res) => {
-  console.log("Work");
   const userId = req.params.id;
-  let user = await modelUser.findById(userId);
-  let userUpd = {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    mail: user.mail,
-    login: user.login,
-    totalMoney: user.totalMoney,
-    categories: user.categories,
-    transactions: user.transactions,
-  };
+  let userUpd;
+  console.log(userId);
+  try {
+    let user = await modelUser.findById(userId);
+    console.log(user);
+    userUpd = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      mail: user.mail,
+      login: user.login,
+      totalMoney: user.totalMoney,
+      categories: user.categories,
+      transactions: user.transactions,
+    };
+    res.json(userUpd);
+  } catch (err) {
+    console.log("ошибка баз данных", err);
+  }
   console.log(userUpd);
-  res.json(userUpd);
 });
 
 // add money to store or transfer money from store to expenditure cat
-route.put("/:id/:cat", bodyParser.json(), async (req, res) => {
+route.put("/:id/:cat", async (req, res) => {
   const { amount } = req.body;
   const userId = req.params.id;
   const putId = req.params.cat;
@@ -69,10 +75,31 @@ route.put("/:id/:cat", bodyParser.json(), async (req, res) => {
   if (!!req.body.from) {
     const from = req.body.from;
     await user.spendMoney(putId, from, amount);
-    return res.end();
+    const lastTransaction = user.transactions[user.transactions.length - 1];
+    return res.json(lastTransaction);
   } else {
     await user.gainMoney(putId, amount);
-    return res.end();
+    const lastTransaction = user.transactions[user.transactions.length - 1];
+    return res.json(lastTransaction);
+  }
+});
+
+// delete the transaction, and add money to the proper parts of the programm
+route.delete("/:id/:cat", async (req, res) => {
+  console.log("HELLO");
+  const userId = req.params.id;
+  const idTransaction = req.params.cat;
+  const user = await modelUser.findById(userId);
+  const transactionArray = await user.findTheTransaction(idTransaction);
+  const transaction = transactionArray[0];
+  const typeTransaction = transaction.value;
+  if (typeTransaction === "loss") {
+    await user.deleteTheTransaction(transaction.id);
+    await user.addMoneyStore(transaction.from, transaction.amount);
+    await user.subtractMoneyExpenditure(transaction.to, transaction.amount);
+    res.end();
+  } else {
+    res.status(401).end();
   }
 });
 

@@ -6,6 +6,8 @@ import Income from '../../components/Income';
 import ModalWindowAddMoney from '../../components/ModalWindowAddMoney';
 import ModalWindowAddCategory from '../../components/ModalWindowAddCategory';
 import ModalWindowTransferMoney from '../../components/modalWindowTransferMoney';
+import ModalWindowTransactionHistoryExpenses from '../../components/TransactionsHistory/index';
+import Navbar from  '../../components/Navbar'
 
 import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStarted';
 import openModalTransferMoney from '../../redux/actions/modalWindow/openModalWindowTransferMoney';
@@ -13,39 +15,30 @@ import openModalTransferMoney from '../../redux/actions/modalWindow/openModalWin
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const MainPage = () => {
+  const dispatch = useDispatch();
   const isModal = useSelector(state => state.isModal.isOpened);
   const isModalCategory = useSelector(state => state.isCategoryModal.isOpened);
-
   const isModalTransfer = useSelector(
     state => state.isTransferMoneyModal.isOpened
   );
-  const dispatch = useDispatch();
+  const isModalHistoryTransaction = useSelector(
+    state => state.isTransactionHistoryModal.isOpened
+  );
   const categories = useSelector(state => state.categories);
   const userId = useSelector(state => state.user._id);
-  // useEffect(() => {
-  //   dispatch(setUserInfoStarted(userId));
-  // }, [dispatch, userId]);
-
-  // const dispatch = useDispatch();
-  // const userId = useSelector(state => state.user._id);
-  // useEffect(() => {
-  //   dispatch(setUserInfoStarted(userId));
-  // }, [dispatch, userId]);
 
   return (
     <div>
-      {/* <DragDropContext onDropEnd={result => console.log(result)}> */}
+      <Navbar/>
       <ModalWindowAddMoney show={isModal} />
       <ModalWindowAddCategory show={isModalCategory} />
       <ModalWindowTransferMoney show={isModalTransfer} />
+      <ModalWindowTransactionHistoryExpenses show={isModalHistoryTransaction} />
       <Header title={'Управление'} />
       <DragDropContext
         onDragEnd={result => {
           const storeId = result.draggableId;
           const expenseId = result.destination.droppableId;
-          // console.log(result);
-          // console.log('draggableId', storeId);
-          // console.log('droppableId', expenseId);
           let catStore = categories.filter(
             element => element.id === storeId
           )[0];
@@ -55,17 +48,16 @@ const MainPage = () => {
           if (catExp && catStore) {
             dispatch(openModalTransferMoney(expenseId, storeId));
           } else {
-            console.log('FAIL');
+            console.log('Fail');
           }
         }}
       >
         <Income />
-        <hr
-          style={{ marginRight: '16px', marginLeft: '16px', opacity: '20%' }}
-        />
+
         <Expenses />
       </DragDropContext>
-      {/* </DragDropContext> */}
+
+
     </div>
   );
 };

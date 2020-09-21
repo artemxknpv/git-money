@@ -88,6 +88,63 @@ userSchema.methods.createNewStore = function (name) {
   return this.save();
 };
 
+userSchema.methods.findTheTransaction = function (idTransaction) {
+  const transaction = this.transactions.filter(transaction => {
+    return String(transaction._id) === idTransaction;
+  });
+  return transaction;
+};
+
+userSchema.methods.deleteTheTransaction = async function (id) {
+  console.log("id", id);
+  // const a = await this.model("User").find({ "transactions.id": id });
+  await this.model("User").updateOne(
+    { "transactions.id": id },
+    { $pull: { transactions: { id: id } } }
+  );
+};
+
+userSchema.methods.deleteCategory = async function (id) {
+  await this.model("User").update(
+    {},
+    {
+      $pull: { categories: { _id: id } },
+    }
+  );
+  return this.save();
+};
+
+userSchema.methods.addMoneyStore = async function (idStore, amount) {
+  await this.model("User").updateOne(
+    {
+      "categories.id": idStore,
+    },
+    {
+      $inc: {
+        "categories.$.currentNumber": amount,
+      },
+    }
+  );
+  return this.save();
+};
+
+userSchema.methods.subtractMoneyExpenditure = async function (
+  idTransaction,
+  amount
+) {
+  await this.model("User").updateOne(
+    {
+      "categories.id": idTransaction,
+    },
+    {
+      $inc: {
+        "categories.$.currentNumber": -amount,
+      },
+    }
+  );
+  return this.save();
+};
+
 userSchema.methods.createNewExpenditure = function (name) {
   this.categories.push({
     value: "expenditure",
@@ -95,16 +152,6 @@ userSchema.methods.createNewExpenditure = function (name) {
     currentNumber: 0,
     id: uuidv4(),
   });
-  return this.save();
-};
-
-userSchema.methods.deleteCategory = async function (id) {
-  await this.model("User").update(
-    {},
-    {
-      $pull: { categories: { id: id } },
-    }
-  );
   return this.save();
 };
 
@@ -134,6 +181,7 @@ userSchema.methods.gainMoney = async function (idStore, amount) {
     to: idStore,
     amount: amount,
     id: uuidv4(),
+    time: Date.now(),
   });
   return this.save();
 };
@@ -162,9 +210,10 @@ userSchema.methods.spendMoney = async function (toId, fromId, amount) {
   await this.transactions.push({
     value: "loss",
     to: toId,
-    from: toId,
+    from: fromId,
     amount: amount,
     id: uuidv4(),
+    time: Date.now(),
   });
   return this.save();
 };

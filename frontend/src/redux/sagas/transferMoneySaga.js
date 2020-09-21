@@ -1,21 +1,32 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { TRANSFER_MONEY_STORE_STARTED } from '../action-types';
 import transferMoneyStoreSuccess from '../actions/transferMoney/transferMoneySuccess';
+import addTransaction from '../actions/addTransaction/addTransaction';
+import addTotalMoney from '../actions/TotalMoney/addTotalMoney';
 
 const transferMoneyStoreFetch = async ({ userId, idTo, idFrom, amount }) => {
-  await fetch(`${userId}/${idTo}`, {
+  const response = await fetch(`${userId}/${idTo}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ from: idFrom, amount: amount }),
   });
+  const responseJSON = response.json();
+  return responseJSON;
 };
 
 function* transferMoneyStoreWorker(action) {
   const { userId, idTo, idFrom, amount } = action.payload;
   try {
-    yield call(transferMoneyStoreFetch, { userId, idTo, idFrom, amount });
+    const response = yield call(transferMoneyStoreFetch, {
+      userId,
+      idTo,
+      idFrom,
+      amount,
+    });
+    yield put(addTransaction(response));
+    yield put(addTotalMoney(-amount));
   } catch (err) {
     console.log('transfer error', err);
   }

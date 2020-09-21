@@ -1,58 +1,54 @@
 .inputField{
   display: flex;
   flex-direction: column;
-  margin: 64px 4% 0px;
+  margin: 64px 4% 0;
 }
 
-.inp{
+.inp {
   width: 100%;
   height: 42px;
-  margin:32px 0px 0px;
+  margin:32px 0 0;
   border-width: 0 0 1px;
-  border-color: #F2F2F2;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 29px;
-
-
-  color: #F2F2F2;
+  color: #6DC4C4;
+  border-color: #e3e3e3;
+  background-color: #fcfcfc;
 }
 
 .inp:focus {
   outline-width: 0;
-  color: #6DC4C4;
   border-width: 0 0 1px;
   border-color: #6DC4C4;
 
 }
-::placeholder {
-  color: #F2F2F2;
+.inp::placeholder {
+  color: #e3e3e3;
+  padding: 0;
+  margin: 0;
 }
 
 .btn {
   width: 100%;
-
   background: #6DC4C4;
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 5px;
   border: 0;
   border-color: none;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 18px;
   text-align: center;
-
   color: #FFFFFF;
-
   margin: 32px 0 0;
-  width: 100%;
   height: 56px;
 }
 
-.afterbutton{
+.afterbutton {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -61,7 +57,17 @@
 }
 
 .registrationLink {
-  font-family: Inter;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 26px;
+  color: #2D9CDB;
+}
+
+.forget{
+  font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -69,11 +75,23 @@
   color: #2D9CDB;
 }
 
-.forget{
-  font-family: Inter;
+.label{
+  color: #e3e3e3;
+  position: relative;
+  pointer-events: none;
+  top: -35px;
+  transition: 0.2s ease all;
+  background: none;
+  color: #e3e3e3;
+  font-family: Inter, sans-serif;
   font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 26px;
-  color: #2D9CDB;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.inp:focus ~ .label,
+.inp:not([value=""])~ .label
+{
+  top: -70px;
+
 }
