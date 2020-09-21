@@ -1,3 +1,6 @@
+*{
+  overscroll-behavior: none;
+}
 .container {
   width: 80%;
   box-shadow: 0 2px 13px rgba(51, 51, 51, 0.08);
@@ -9,12 +12,8 @@
   font-weight: bold;
   font-size: 42px;
   line-height: 51px;
-  margin: 36px 24px 0;
+  margin: 1.5rem 2rem 0;
 }
-//
-//.modalHeader {
-//}
-//
 
 .modalSubheader {
   font-family: Inter, sans-serif;
@@ -23,7 +22,7 @@
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
-  margin: 16px 24px 0;
+  margin: 1rem 2rem 0;
 }
 
 .input {
@@ -31,13 +30,13 @@
   height: 37px;
   margin: 66px 16px auto;
   border-width: 0 0 1px;
-  border-color: #f2f2f2;
+  border-color: #e3e3e3;
   font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 29px;
-  color: #f2f2f2;
+  color: #6DC4C4;
 }
 
 .input:focus {
@@ -47,16 +46,15 @@
   border-color: #6dc4c4;
 }
 
-
-::placeholder {
-  color: #F2F2F2;
-  padding-left: 5%;
+.input::placeholder {
+  color: #e3e3e3;
+  margin: 0;
+  padding: 0;
 }
-
 
 .addButton {
   width: 100%;
-  background: #6DC4C4;
+  background: #6dc4c4;
   border-radius: 0 0 10px 10px;
   border: 0;
   border-color: none;
@@ -66,10 +64,11 @@
   font-size: 15px;
   line-height: 18px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 66px 0 0;
   height: 50px;
 }
+
 .modal {
   position: absolute;
   z-index: 21243243;
@@ -78,11 +77,11 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
 }
 
-  .modalMain {
-    position: absolute;
+
+.modalMain {
+    position: fixed;
     background: white;
     width: 80%;
     height: auto;
@@ -90,8 +89,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
+    z-index: 1;
   }
-
 
 .displayBlock {
   display: block;
@@ -99,4 +98,23 @@
 
 .displayNone {
   display: none;
+}
+
+.backdrop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  margin: 0;
+  z-index: 1;
+}
+
+.historyButton {
+  background: none;
+  border: none;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  color: #6dc4c4;
 }
