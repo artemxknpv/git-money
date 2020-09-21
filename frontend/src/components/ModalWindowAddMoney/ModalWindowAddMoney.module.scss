@@ -90,6 +90,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
+    z-index: 1;
   }
 
 
@@ -99,4 +100,15 @@
 
 .displayNone {
   display: none;
+}
+
+.backdrop{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  margin: 0;
+  z-index: 1;
 }
