@@ -5,11 +5,11 @@ import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
 import openModalWindow from '../../redux/actions/modalWindow/openModalWindowAddMoney.js';
 import openModalWindowTransactionHistoryExpenses from '../../redux/actions/modalWindow/openModalWindowTransactionHistory';
 import styles from './Category.module.scss';
-
+import { useHistory } from 'react-router-dom';
 const Category = ({ value, id }) => {
   const [add, setAdd] = useState('');
   const userId = useSelector(state => state.user._id);
-
+  const history = useHistory();
   const dispatch = useDispatch();
   const category = useSelector(state =>
     state.categories.filter(category => category.id === id)
@@ -25,6 +25,7 @@ const Category = ({ value, id }) => {
                 dispatch(openModalWindowTransactionHistoryExpenses(id));
               }
         }
+        onDoubleClick={() => history.push(`/income/${id}`)}
       >
         <WalletFilledIcon />
       </div>

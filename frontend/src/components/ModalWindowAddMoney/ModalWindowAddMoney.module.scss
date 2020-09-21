@@ -14,10 +14,6 @@
   line-height: 51px;
   margin: 36px 24px 0;
 }
-//
-//.modalHeader {
-//}
-//
 
 .modalSubheader {
   font-family: Inter, sans-serif;
@@ -51,9 +47,10 @@
 }
 
 
-::placeholder {
+.input::placeholder {
   color: #F2F2F2;
-  padding-left: 5%;
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -74,8 +71,7 @@
   height: 50px;
 }
 
-
-  .modalMain {
+.modalMain {
     position: fixed;
     background: white;
     width: 80%;
