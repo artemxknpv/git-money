@@ -94,12 +94,9 @@ const ModalWindowAddMoney = ({ show }) => {
             </button>
           </motion.div>
         </>
-
         : <></>
-
       }
     </AnimatePresence>
-
 );
 };
 
