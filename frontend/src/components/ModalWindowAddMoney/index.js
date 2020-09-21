@@ -24,8 +24,6 @@ const modal = {
     scale: 1,
     opacity: 1,
     transition: { delay: 0.2, duration: 0.3 }
-
-
   },
 }
 
@@ -39,9 +37,6 @@ const ModalWindowAddMoney = ({ show }) => {
   );
   console.log(thisCategoryList);
   const dispatch = useDispatch();
-  // const showHideClassName = show
-  //   ? `${styles.modal} ${styles.displayBlock}`
-  //   : `${styles.modal} ${styles.displayNone}`;
   return (
     <AnimatePresence exitBeforeEnter>
       {show ?
