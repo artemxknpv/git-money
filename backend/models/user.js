@@ -88,13 +88,20 @@ userSchema.methods.createNewStore = function (name) {
   return this.save();
 };
 
-userSchema.methods.createNewExpenditure = function (name) {
-  this.categories.push({
-    value: "expenditure",
-    name: name,
-    currentNumber: 0,
-    id: uuidv4(),
+userSchema.methods.findTheTransaction = async function (idTransaction) {
+  const transaction = await this.transactions.filter(transaction => {
+    return String(transaction._id) === idTransaction;
   });
+  return transaction;
+};
+
+userSchema.methods.deleteTheTransaction = async function (id) {
+  await this.model("User").updateOne(
+    { transactions: { id: id } },
+    {
+      $pull: { transactions: { id: id } },
+    }
+  );
   return this.save();
 };
 
@@ -102,9 +109,50 @@ userSchema.methods.deleteCategory = async function (id) {
   await this.model("User").update(
     {},
     {
-      $pull: { categories: { id: id } },
+      $pull: { categories: { _id: id } },
     }
   );
+  return this.save();
+};
+
+userSchema.methods.addMoneyStore = async function (idStore, amount) {
+  await this.model("User").update(
+    {
+      "categories.id": idStore,
+    },
+    {
+      $inc: {
+        "categories.$.currentNumber": amount,
+      },
+    }
+  );
+  return this.save();
+};
+
+userSchema.methods.subtractMoneyExpenditure = async function (
+  idTransaction,
+  amount
+) {
+  await this.model("User").update(
+    {
+      "categories.id": idTransaction,
+    },
+    {
+      $inc: {
+        "categories.$.currentNumber": -amount,
+      },
+    }
+  );
+  return this.save();
+};
+
+userSchema.methods.createNewExpenditure = function (name) {
+  this.categories.push({
+    value: "expenditure",
+    name: name,
+    currentNumber: 0,
+    id: uuidv4(),
+  });
   return this.save();
 };
 

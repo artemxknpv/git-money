@@ -17,6 +17,9 @@ function TransactionsHistoryExpense({ id }) {
       })[0]
     );
   }, [transaction]);
+  function handleClick() {
+    console.log('>>>>>');
+  }
 
   return (
     <span>
@@ -26,6 +29,7 @@ function TransactionsHistoryExpense({ id }) {
         </h2>
         <h2 style={{ margin: '20px' }}> From {nameFrom && nameFrom.name} </h2>
         <h2 style={{ margin: '20px' }}>At time: {prettyTime && prettyTime}</h2>
+        <button onClick={handleClick}>Удалить</button>
       </div>
     </span>
   );
