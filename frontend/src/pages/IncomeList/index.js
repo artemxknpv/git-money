@@ -9,7 +9,7 @@ import styles from './Income.module.scss';
 import { motion } from 'framer-motion';
 
 const Index = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
