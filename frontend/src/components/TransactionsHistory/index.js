@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowTransactionHistory';
 import TransactionHistoryExpenses from '../TransactionHistoryExpenses';
 import styles from './TransactionsHistory.module.scss';
@@ -33,6 +34,7 @@ const ModalWindowTransactionHistory = ({ show }) => {
           История ваших расходов в категории: <br />
           {currentCategory && currentCategory.name}
         </h5>
+        {/*<Link to={`expense/${id}`}>хуй</Link>*/}
         {transactionsToThisExpense.length ? (
           transactionsToThisExpense.map(element => {
             return <TransactionHistoryExpenses id={element._id} />;
