@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import randomColor from 'randomcolor';
 import { useSelector } from 'react-redux';
 import { Pie } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
@@ -6,6 +7,7 @@ import { Bar } from 'react-chartjs-2';
 const Chart = () => {
   const [chartDataPie, setChartDataPie] = useState({});
   const [stackData, setStackData] = useState({});
+  const [stackDataInnerOut, setstackDataInnerOut] = useState({});
   const expenditures = useSelector(state =>
     state.categories.filter(category => category.value === 'expenditure')
   );
@@ -61,12 +63,28 @@ const Chart = () => {
   });
   console.log('Stacked Object inside out', stackedObjectInsideOut);
   console.log(Object.keys(stackedObject).map(element => element));
+  const optionsStacked = {
+    scales: {
+      yAxes: [
+        {
+          stacked: true,
+        },
+      ],
+      xAxes: [
+        {
+          stacked: true,
+        },
+      ],
+    },
+  };
+
   const StackData = () => {
     setStackData({
       labels: Object.keys(stackedObject).map(element => element),
       datasets: Object.keys(stackedObjectInsideOut).map(expenditureName => {
         return {
           label: expenditureName,
+          // backgroundColor: randomColor(),
           data: Object.keys(stackedObjectInsideOut[expenditureName]).map(
             storeName => {
               return stackedObjectInsideOut[expenditureName][storeName];
@@ -105,16 +123,64 @@ const Chart = () => {
 
   return (
     <>
-      <div>
-        <h3>The pie Chart</h3>
-        <div style={{ width: '800px', height: '800px' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+        }}
+      >
+        <h3 style={{ marginBottom: '30px' }}>The pie Chart</h3>
+        <div
+          style={{
+            width: '800px',
+            height: '800px',
+          }}
+        >
           <Pie data={chartDataPie} />
         </div>
       </div>
-      <div>
-        <h3>The stacked Chart</h3>
-        <div style={{ width: '800px', height: '800px' }}>
-          <Bar data={stackData} />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+        }}
+      >
+        <h3 style={{ marginBottom: '30px' }}>
+          Отображение того, сколько вы переводили из каждого хранилища в каждую
+          затрату по хранилищам
+        </h3>
+        <div
+          style={{
+            width: '800px',
+            height: '800px',
+          }}
+        >
+          <Bar data={stackData} options={optionsStacked} />
+        </div>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+        }}
+      >
+        <h3 style={{ marginBottom: '30px' }}>
+          Отображение того, сколько вы переводили в каждую категорию из каждого
+          хранилища по категориям
+        </h3>
+        <div
+          style={{
+            width: '800px',
+            height: '800px',
+          }}
+        >
+          <Bar data={stackData} options={optionsStacked} />
         </div>
       </div>
     </>
