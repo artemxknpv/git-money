@@ -1,4 +1,4 @@
-@import "src/styles/variables";
+@import 'src/styles/variables';
 
 .wrapper {
   display: flex;
@@ -7,23 +7,29 @@
   flex-wrap: wrap;
   padding: 2rem 1rem;
   border-radius: 5px;
-  margin: 0.5rem 1.5rem 1rem;
+  margin: 2rem 1.5rem 1rem;
 }
 
 .openedWrapper {
   display: flex;
+  margin: 2rem 1.5rem 1rem;
   justify-content: space-between;
   align-items: center;
-  margin-right: 1.5rem;
-  margin-left: 1.5rem;
   flex-wrap: wrap;
   padding: 2rem 1rem;
   border-radius: 5px;
-  margin-top: 0.5rem;
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
 }
 
-
+.deleteButton,
+.deleteButton:focus {
+  background: none;
+  outline: 0;
+  border: none;
+  color: #eb5757;
+  font-family: 'TT Medium', sans-serif;
+  cursor: pointer;
+}
 
 .additionalContent {
   margin-top: 10px;
@@ -40,12 +46,24 @@
   font-family: $bold-font;
 }
 
+.deleteButton,
+.deleteButton:focus {
+  background: none;
+  outline: 0;
+  border: none;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: #eb5757;
+  font-family: 'TT Medium', sans-serif;
+  cursor: pointer;
+}
+
 .time {
   max-width: 200px;
   color: #333333;
   font-size: 0.8rem;
   flex-basis: 30%;
-  white-space: nowrap;
+  white-space: wrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
