@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import differenceInHours from 'date-fns/differenceInHours';
@@ -9,7 +9,6 @@ import TransactionHistoryExpenses from '../components/TransactionHistoryExpenses
 
 const ExpenseList = () => {
   const { cat } = useParams();
-  const dispatch = useDispatch();
   const transactions = useSelector(state => state.transactions);
   const currentCategory = useSelector(state => {
     return state.categories.filter(category => {
@@ -39,7 +38,7 @@ const ExpenseList = () => {
     };
   });
   const objectTime = {};
-  transactionsToThisExpense.map(transaction => {
+  transactionsToThisExpense.forEach(transaction => {
     const currentStringTime = transaction.stringTime;
     if (objectTime[currentStringTime]) {
       objectTime[currentStringTime].push(transaction);
