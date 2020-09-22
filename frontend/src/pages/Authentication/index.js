@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import styles from './Authenticationpage.module.scss';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import Particles from "../../components/Particles";
 
 const Authentication = ({ mode }) => {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
@@ -11,7 +12,10 @@ const Authentication = ({ mode }) => {
   return isAuthenticated ? (
     <Redirect to={'/'} />
   ) : (
+    <>
+    <Particles />
     <div className={styles.container}>
+
       <Header
         title={mode === 'registration' ? 'Регистрация' : 'Войти в систему'}
       />
@@ -21,6 +25,7 @@ const Authentication = ({ mode }) => {
       </p>
       <AuthenticationForm mode={mode} />
     </div>
+      </>
   );
 };
 
