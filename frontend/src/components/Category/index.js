@@ -9,9 +9,9 @@ import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const Category = ({ value, id }) => {
+  const history = useHistory();
   const [add, setAdd] = useState('');
   const userId = useSelector(state => state.user._id);
-  const history = useHistory();
   const dispatch = useDispatch();
   const category = useSelector(state =>
     state.categories.filter(category => category.id === id)
@@ -30,6 +30,7 @@ const Category = ({ value, id }) => {
             ? () => dispatch(openModalWindow(id))
             : () => {
                 dispatch(openModalWindowTransactionHistoryExpenses(id));
+                history.push(`/expense/${id}`);
               }
         }
       >

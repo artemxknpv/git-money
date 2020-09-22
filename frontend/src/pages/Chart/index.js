@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import randomColor from 'randomcolor';
+import ColorScheme from 'color-scheme';
 import { useSelector } from 'react-redux';
+import _ from 'lodash';
 import { Pie } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
 
 const Chart = () => {
   const [chartDataPie, setChartDataPie] = useState({});
   const [stackData, setStackData] = useState({});
-  const [stackDataInnerOut, setstackDataInnerOut] = useState({});
+  const [stackDataInsideOut, setstackDataInsideOut] = useState({});
+  const dynamicColors = function () {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  };
   const expenditures = useSelector(state =>
     state.categories.filter(category => category.value === 'expenditure')
   );
@@ -54,6 +61,16 @@ const Chart = () => {
       });
     });
   });
+  let scm = new ColorScheme();
+  scm
+    .from_hue(21)
+    .scheme('contrast')
+    .distance(0.1)
+    .add_complement(false)
+    .variation('pastel')
+    .web_safe(false);
+  const colors = _.shuffle(scm.colors());
+  console.log(colors);
   console.log('Stacked Object', stackedObject);
   Object.keys(stackedObject).map(storeName => {
     Object.keys(stackedObject[storeName]).map(expenditureName => {
@@ -80,37 +97,50 @@ const Chart = () => {
 
   const StackData = () => {
     setStackData({
-      labels: Object.keys(stackedObject).map(element => element),
-      datasets: Object.keys(stackedObjectInsideOut).map(expenditureName => {
+      labels: Object.keys(stackedObjectInsideOut).map(element => element),
+      datasets: Object.keys(stackedObject).map((expenditureName, index) => {
         return {
           label: expenditureName,
-          // backgroundColor: randomColor(),
-          data: Object.keys(stackedObjectInsideOut[expenditureName]).map(
-            storeName => {
-              return stackedObjectInsideOut[expenditureName][storeName];
+          backgroundColor: '#' + colors[index],
+          data: Object.keys(stackedObject[expenditureName]).map(storeName => {
+            return stackedObject[expenditureName][storeName];
+          }),
+        };
+      }),
+    });
+  };
+
+  const StackDataInsideOut = () => {
+    setstackDataInsideOut({
+      labels: Object.keys(stackedObject).map(element => element),
+      datasets: Object.keys(stackedObjectInsideOut).map((storeName, index) => {
+        return {
+          label: storeName,
+          backgroundColor: '#' + colors[index],
+          data: Object.keys(stackedObjectInsideOut[storeName]).map(
+            expenditureName => {
+              return stackedObjectInsideOut[storeName][expenditureName];
             }
           ),
         };
       }),
     });
   };
+
   const chartPie = () => {
     const names = expenditures.map(expenditure => expenditure.name);
     const values = expenditures.map(expenditure => expenditure.currentNumber);
+    const index = expenditures.length;
     setChartDataPie({
       labels: names,
       datasets: [
         {
           label: 'expenditures',
           data: values,
-          backgroundColor: [
-            `rgba(255, 99, 132, 1)`,
-            `rgba(54, 162, 235, 1)`,
-            `rgba(255, 206, 86, 1)`,
-            `rgba(75, 192, 192, 1)`,
-            `rgba(153, 102, 255, 1)`,
-          ],
-          borderWidth: 4,
+          backgroundColor: new Array(index)
+            .fill()
+            .map(color => dynamicColors()),
+          borderWidth: 0.5,
         },
       ],
     });
@@ -119,6 +149,7 @@ const Chart = () => {
   useEffect(() => {
     chartPie();
     StackData();
+    StackDataInsideOut();
   }, []);
 
   return (
@@ -150,8 +181,8 @@ const Chart = () => {
         }}
       >
         <h3 style={{ marginBottom: '30px' }}>
-          Отображение того, сколько вы переводили из каждого хранилища в каждую
-          затрату по хранилищам
+          Отображение того, сколько вы переводили в каждую категорию из каждого
+          хранилища по категориям
         </h3>
         <div
           style={{
@@ -171,8 +202,8 @@ const Chart = () => {
         }}
       >
         <h3 style={{ marginBottom: '30px' }}>
-          Отображение того, сколько вы переводили в каждую категорию из каждого
-          хранилища по категориям
+          Отображение того, сколько вы переводили из каждого хранилища в каждую
+          затрату по хранилищам
         </h3>
         <div
           style={{
@@ -180,7 +211,7 @@ const Chart = () => {
             height: '800px',
           }}
         >
-          <Bar data={stackData} options={optionsStacked} />
+          <Bar data={stackDataInsideOut} options={optionsStacked} />
         </div>
       </div>
     </>

@@ -6,7 +6,7 @@ export default (
 ) => {
   switch (type) {
     case actionTypes.MODAL_TRANSACTION_HISTORY_OPENED:
-      return { isOpened: true, idExpense: payload.idExpense };
+      return { isOpened: false, idExpense: payload.idExpense };
     case actionTypes.MODAL_TRANSACTION_HISTORY_CLOSED:
       return { isOpened: false, idExpense: '' };
     default:
