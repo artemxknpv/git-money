@@ -59,8 +59,6 @@ function TransactionsHistoryExpense({ id }) {
           Потрачено из <strong>{nameFrom && nameFrom.name}</strong>
         </p>
         <p className={styles.time}>{prettyTime && prettyTime}</p>
-        {/*<h2 style={{ margin: '20px' }}> From {nameFrom && nameFrom.name} </h2>*/}
-        {/*<h2 style={{ margin: '20px' }}>At time: {prettyTime && prettyTime}</h2>*/}
         <AnimatePresence>
           {isOpen && (
             <motion.p

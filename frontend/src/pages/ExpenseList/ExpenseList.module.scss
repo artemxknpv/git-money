@@ -34,3 +34,15 @@
   margin-left: 1rem;
   margin-right: 1rem;
 }
+
+.deleteButton,
+.deleteButton:focus {
+  background: none;
+  outline: 0;
+  border: none;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: #eb5757;
+  font-family: 'TT Medium', sans-serif;
+  cursor: pointer;
+}

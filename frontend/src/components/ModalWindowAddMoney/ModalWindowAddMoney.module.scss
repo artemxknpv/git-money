@@ -115,11 +115,13 @@
   z-index: 1;
 }
 
-.historyButton {
+.historyButton, .historyButton:focus {
+  outline: 0;
   background: none;
   border: none;
   margin-left: 2rem;
   margin-top: 2rem;
   font-family: $bold-font;
+  cursor: pointer;
   color: $green-color;
 }

@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import differenceInHours from 'date-fns/differenceInHours';
 import formatDistance from 'date-fns/formatDistance';
 import SkeletonLoader from 'tiny-skeleton-loader-react';
+import deleteCategoryStarted from '../../redux/actions/deleteCategory/deleteCategoryStarted.js';
 import { StyledHeader } from '../../styled-components/StyledHeader.js';
 import styles from './ExpenseList.module.scss';
 import TransactionHistoryExpenses from '../../components/TransactionHistoryExpenses';
+import { useDispatch } from 'react-redux';
 
 const ExpenseList = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -47,6 +51,7 @@ const ExpenseList = () => {
           : formatDistance(Date.now(), new Date(transaction.time)) + ' ago',
     };
   });
+  const userId = useSelector(state => state.user._id);
   const objectTime = {};
   transactionsToThisExpense.forEach(transaction => {
     const currentStringTime = transaction.stringTime;
@@ -56,6 +61,11 @@ const ExpenseList = () => {
       objectTime[currentStringTime] = [transaction];
     }
   });
+
+  function handleClick() {
+    dispatch(deleteCategoryStarted(userId, cat));
+    history.push('/');
+  }
 
   return isLoading ? (
     <>
@@ -85,7 +95,7 @@ const ExpenseList = () => {
           </Link>
           <h2 className={styles.header}>{currentCategory.name}</h2>
         </div>
-        <p className={styles.editCategory}>Edit category</p>
+        <span className={styles.editCategory}>Edit category</span>
       </StyledHeader>
       <section>
         {transactionsToThisExpense.length ? (
