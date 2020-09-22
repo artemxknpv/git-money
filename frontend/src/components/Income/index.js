@@ -34,7 +34,7 @@ const Income = () => {
                 {incomes &&
                   incomes.map((income, index) => {
                     return (
-                      <div>
+                      <div key={index}>
                         <Draggable
                           key={income.id}
                           draggableId={income.id}

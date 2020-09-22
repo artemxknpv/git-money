@@ -8,6 +8,12 @@
   margin-left: 1rem;
 }
 
+.timePoint {
+  font-family: "TT Bold", sans-serif;
+  color: #333;
+  margin-left: 1.5rem;
+}
+
 .arrowAndCatname {
   display: flex;
   align-items: center;
@@ -27,4 +33,16 @@
   font-family: $regular-font;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.deleteButton,
+.deleteButton:focus {
+  background: none;
+  outline: 0;
+  border: none;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: #eb5757;
+  font-family: 'TT Medium', sans-serif;
+  cursor: pointer;
 }

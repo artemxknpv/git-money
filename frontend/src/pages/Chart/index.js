@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ColorScheme from 'color-scheme';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
-import { Pie } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
 const Chart = () => {
   const [chartDataPie, setChartDataPie] = useState({});
@@ -151,7 +151,7 @@ const Chart = () => {
     StackData();
     StackDataInsideOut();
   }, []);
-
+  console.log(expenditures);
   return (
     <>
       <div
