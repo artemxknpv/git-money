@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import BagOfGoods from '../../img/BagOfGoods.jsx';
 import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
 import openModalWindow from '../../redux/actions/modalWindow/openModalWindowAddMoney.js';
 import openModalWindowTransactionHistoryExpenses from '../../redux/actions/modalWindow/openModalWindowTransactionHistory';
@@ -17,7 +18,11 @@ const Category = ({ value, id }) => {
   )[0];
 
   return (
-    <motion.div className={styles.card} whileHover={{ scale: 1.1 }}>
+    <motion.div
+      className={styles.card}
+      whileTap={{ scale: 0.8 }}
+      whileHover={{ scale: 1.1 }}
+    >
       <div
         className={styles.image}
         onClick={
@@ -27,14 +32,13 @@ const Category = ({ value, id }) => {
                 dispatch(openModalWindowTransactionHistoryExpenses(id));
               }
         }
-        onDoubleClick={() => history.push(`/income/${id}`)}
       >
-        <WalletFilledIcon />
+        {value === 'store' ? <WalletFilledIcon /> : <BagOfGoods />}
       </div>
       <p className={styles.categorySubheader} style={{ fontWeight: '700' }}>
         {category.name}
       </p>
-      <p className={styles.categorySum}>{category.currentNumber} $</p>
+      <p className={styles.categorySum}>{category.currentNumber}$</p>
     </motion.div>
   );
 };

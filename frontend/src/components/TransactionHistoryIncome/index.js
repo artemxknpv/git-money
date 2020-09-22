@@ -45,6 +45,7 @@ function TransactionsHistoryIncome({ id }) {
               className={styles.additionalContent}
             >
               Ты пидор
+              {/*TODO*/}
             </motion.p>
           )}
         </AnimatePresence>
