@@ -6,6 +6,7 @@ import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
 import openModalWindow from '../../redux/actions/modalWindow/openModalWindowAddMoney.js';
 import openModalWindowTransactionHistoryExpenses from '../../redux/actions/modalWindow/openModalWindowTransactionHistory';
 import styles from './Category.module.scss';
+import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const Category = ({ value, id }) => {
