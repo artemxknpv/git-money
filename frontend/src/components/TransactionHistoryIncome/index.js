@@ -1,22 +1,31 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import deleteCategoryStarted from '../../redux/actions/deleteCategory/deleteCategoryStarted.js';
+import deleteTransactionStarted from '../../redux/actions/deleteTransaction/deleteTransactionStarted.js';
 import styles from './TransactionHistoryIncome.module.scss';
+import { useHistory } from 'react-router-dom';
 
 function TransactionsHistoryIncome({ id }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-
+  const dispatch = useDispatch();
+  const history = useHistory();
   const transactions = useSelector(state => state.transactions);
+
   const transaction = transactions.filter(
     transaction => transaction._id === id
   )[0];
   const [prettyTime, setPrettyTime] = useState('');
+  const userId = useSelector(state => state.user._id);
 
   useEffect(() => {
     setPrettyTime(new Date(transaction.time).toLocaleString());
   }, [transaction]);
-
+  function handleClick() {
+    dispatch(deleteTransactionStarted(userId, id));
+    history.push('/');
+  }
   const targetCategory = { name: 'Name Here' };
 
   return (
@@ -31,7 +40,7 @@ function TransactionsHistoryIncome({ id }) {
         transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
       >
         <p className={styles.amount}>${transaction && transaction.amount}</p>
-        <p className={styles.time}>At time: {prettyTime && prettyTime}</p>
+        <p className={styles.time}>{prettyTime && prettyTime}</p>
         {targetCategory && (
           <p className={styles.targetCategory}>{targetCategory.name}</p>
         )}
@@ -44,7 +53,7 @@ function TransactionsHistoryIncome({ id }) {
               exit={{ opacity: 0 }}
               className={styles.additionalContent}
             >
-              Ты пидор
+              <p>Ты пидор</p>
               {/*TODO*/}
             </motion.p>
           )}

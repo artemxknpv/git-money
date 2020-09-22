@@ -60,7 +60,7 @@ const ModalWindowAddMoney = ({ show }) => {
                 }}
                 className={styles.historyButton}
               >
-                История транзакций
+                Дополнительно
               </button>
             </Link>
             <h3 className={styles.modalHeader}>Добавить сумму</h3>
