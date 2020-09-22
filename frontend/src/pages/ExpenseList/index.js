@@ -29,6 +29,7 @@ const ExpenseList = () => {
       return category.id === cat;
     })[0];
   });
+  const currentBalance = currentCategory.currentNumber;
   let transactionsToThisExpense = transactions.filter(transaction => {
     return transaction.to === cat;
   });
@@ -97,6 +98,7 @@ const ExpenseList = () => {
         </div>
         <span className={styles.editCategory}>Edit category</span>
       </StyledHeader>
+      <h2>Amount Spended ${currentBalance}</h2>
       <section>
         {transactionsToThisExpense.length ? (
           Object.keys(objectTime).map(key => {

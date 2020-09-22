@@ -35,6 +35,8 @@ const Index = () => {
   const thisCategoryList = listTransactions.filter(
     transaction => transaction.to === cat
   );
+  const currentBalance = categories.filter(category => category.id === cat)[0]
+    .currentNumber;
   const thisCategoryListTransactions = listTransactions.filter(transaction => {
     return transaction.from === cat;
   });
@@ -90,6 +92,7 @@ const Index = () => {
         </div>
         <p className={styles.editCategory}>Edit category</p>
       </StyledHeader>
+      <h2>Current balance: ${currentBalance}</h2>
       {megaArray.length ? (
         Object.keys(objectTime).map(key => {
           return (
