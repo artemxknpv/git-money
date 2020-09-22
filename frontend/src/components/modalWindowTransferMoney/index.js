@@ -39,9 +39,9 @@ const ModalWindowAddMoney = ({ show }) => {
     nameTo = categories.filter(category => category.id === idTo)[0].name || '';
   }
   const dispatch = useDispatch();
-  const showHideClassName = show
-    ? `${styles.modal} ${styles.displayBlock}`
-    : `${styles.modal} ${styles.displayNone}`;
+  // const showHideClassName = show
+  //   ? `${styles.modal} ${styles.displayBlock}`
+  //   : `${styles.modal} ${styles.displayNone}`;
   return (
     <AnimatePresence exitBeforeEnter>
       {show ? (

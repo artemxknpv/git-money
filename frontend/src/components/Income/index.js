@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Category from '../Category';
 import AddCategory from '../AddCategory';
 import styles from './Income.module.scss';
-import { Droppable, Draggable, DragDropContext } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import setTotalMoney from '../../redux/actions/TotalMoney/setTotalMoney';
 
@@ -17,7 +17,7 @@ const Income = () => {
       return acc + store.currentNumber;
     }, 0);
     dispatch(setTotalMoney(totalMoney));
-  }, []);
+  }, [dispatch, incomes]);
 
   return (
     <>
