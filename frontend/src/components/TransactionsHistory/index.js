@@ -27,10 +27,6 @@ const modal = {
 
 const ModalWindowTransactionHistory = ({ show }) => {
   const dispatch = useDispatch();
-  // const [sum, setSum] = useState('');
-  // const [currentName, setCurrentname] = useState(null);
-  // const userId = useSelector(state => state.user._id);
-  // const transactions = useSelector(state => state.transactions);
   const currentIdExpense = useSelector(
     state => state.isTransactionHistoryModal.idExpense
   );
@@ -39,9 +35,6 @@ const ModalWindowTransactionHistory = ({ show }) => {
       return category.id === currentIdExpense;
     })[0];
   });
-  // const transactionsToThisExpense = transactions.filter(transaction => {
-  //   return transaction.to === currentIdExpense;
-  // });
 
   return (
     <AnimatePresence exitBeforeEnter>
