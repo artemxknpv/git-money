@@ -1,3 +1,5 @@
+@import './src/styles/variables';
+
 * {
   overscroll-behavior: none;
 }
@@ -7,16 +9,17 @@
   border-radius: 2px;
 }
 .modalHeader {
-  color: #333333;
+  color: $black-color;
   font-style: normal;
   font-weight: bold;
   font-size: 42px;
   line-height: 51px;
   margin: 1.5rem 2rem 0;
+  font-family: $bold-font;
 }
 
 .modalSubheader {
-  font-family: Inter, sans-serif;
+  font-family: $regular-font;
   color: #333333;
   font-style: normal;
   font-weight: normal;
@@ -32,7 +35,7 @@
   margin: 3rem 2rem auto;
   border-width: 0 0 1px;
   border-color: #e3e3e3;
-  font-family: Inter, sans-serif;
+  font-family: $regular-font;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -59,7 +62,7 @@
   border-radius: 0 0 10px 10px;
   border: 0;
   border-color: none;
-  font-family: Inter, serif;
+  font-family: $regular-font;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -117,5 +120,6 @@
   border: none;
   margin-left: 2rem;
   margin-top: 2rem;
-  color: #6dc4c4;
+  font-family: $bold-font;
+  color: $green-color;
 }

@@ -3,29 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowTransferMoney';
 import styles from './ModalWindowTransferMoney.module.scss';
 import transferMoneyStarted from '../../redux/actions/transferMoney/transferMoneyStarted';
-import closeModalWindowAddCategory from "../../redux/actions/modalWindow/closeModalWindowAddCategory";
-import addCategoryStarted from "../../redux/actions/addCategory/addCategoryStarted";
-import {motion, AnimatePresence} from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion';
 
 const backdrop = {
-  visible: {opacity: 1},
-  hidden: {opacity: 0},
-}
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+};
 const modal = {
   hidden: {
-    x: "-50%",
-    y: "-50%",
+    x: '-50%',
+    y: '-50%',
     scale: 0.1,
-    opacity: 0
+    opacity: 0,
   },
   visible: {
     x: '-50%',
-    y: "-50%",
+    y: '-50%',
     scale: 1,
     opacity: 1,
-    transition: { delay: 0.2, duration: 0.3 }
+    transition: { delay: 0.2, duration: 0.3 },
   },
-}
+};
 
 const ModalWindowAddMoney = ({ show }) => {
   const [sum, setSum] = useState('');
@@ -46,24 +44,25 @@ const ModalWindowAddMoney = ({ show }) => {
     : `${styles.modal} ${styles.displayNone}`;
   return (
     <AnimatePresence exitBeforeEnter>
-      {show ?
+      {show ? (
         <>
-          <motion.div className={styles.backdrop}
-                      onClick={() => dispatch(closeModalWindow())}
-                      variants={backdrop}
-                      initial='hidden'
-                      animate='visible'
-          >
-          </motion.div>
-          <motion.div className={styles.modalMain}
-                      variants={modal}
-                      initial='hidden'
-                      animate='visible'
+          <motion.div
+            className={styles.backdrop}
+            onClick={() => dispatch(closeModalWindow())}
+            variants={backdrop}
+            initial="hidden"
+            animate="visible"
+          ></motion.div>
+          <motion.div
+            className={styles.modalMain}
+            variants={modal}
+            initial="hidden"
+            animate="visible"
           >
             <h3 className={styles.modalHeader}>Перевести сумму</h3>
             <p className={styles.modalSubheader}>
-              Указанная сумма будет вычтена из хранилища {nameFrom} и перенесена в
-              раздел расходов {nameTo}
+              Указанная сумма будет вычтена из хранилища {nameFrom} и перенесена
+              в раздел расходов {nameTo}
             </p>
             <input
               type="text"
@@ -76,7 +75,9 @@ const ModalWindowAddMoney = ({ show }) => {
             <button
               className={styles.addButton}
               onClick={() => {
-                dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
+                dispatch(
+                  transferMoneyStarted(userId, idTo, idFrom, Number(sum))
+                );
                 setSum('');
                 dispatch(closeModalWindow());
               }}
@@ -85,12 +86,11 @@ const ModalWindowAddMoney = ({ show }) => {
             </button>
           </motion.div>
         </>
-        : <></>
-      }
+      ) : (
+        <></>
+      )}
     </AnimatePresence>
-
   );
 };
 
 export default ModalWindowAddMoney;
-
