@@ -7,7 +7,7 @@ import bodyParser from "body-parser";
 const router = express.Router();
 
 router.post("/registration", bodyParser.json(), async (req, res) => {
-  const { firstName, lastName, mail, login, password } = req.body;
+  const { firstName, lastName, mail, login, password, repPassword } = req.body;
   let errors = [];
   // Check that al filds required
   if (!firstName || !lastName || !mail || !login || !password) {
@@ -20,7 +20,12 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
   if (errors.length > 0) {
     // we can send user inputs
     res.status(401).json(errors);
-  } else {
+  }
+  if(repPassword !== password){
+    errors.push({ message: "Пароли не совпадают" });
+    return res.status(401).json(errors);
+  }
+  else {
     //validation passed
     const userMail = await modelUser.findOne({ mail });
     const userLogin = await modelUser.findOne({ login });
@@ -35,6 +40,7 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
         // we can send user inputs
         return res.status(401).json(errors);
       }
+
     } else {
       const saltRounds = Number(process.env.SALT_ROUNDS ?? 3);
       const hashedPassword = await bcrypt.hash(password, saltRounds);
