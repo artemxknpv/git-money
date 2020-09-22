@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import differenceInHours from 'date-fns/differenceInHours';
 import formatDistance from 'date-fns/formatDistance';
 import SkeletonLoader from 'tiny-skeleton-loader-react';
-
+import { StyledHeader } from '../../styled-components/StyledHeader.js';
+import styles from './ExpenseList.module.scss';
 import TransactionHistoryExpenses from '../../components/TransactionHistoryExpenses';
 
 const ExpenseList = () => {
@@ -76,28 +77,39 @@ const ExpenseList = () => {
       />
     </>
   ) : (
-    <div>
-      <h3>
-        <Link to={'/'}>HOME</Link>
-      </h3>
+    <div className={styles.container}>
+      <StyledHeader>
+        <div className={styles.arrowAndCatname}>
+          <Link to={'/'} style={{ textDecoration: 'none', color: '#333333' }}>
+            <i className="fas fa-arrow-left" />
+          </Link>
+          <h2 className={styles.header}>{currentCategory.name}</h2>
+        </div>
+        <p className={styles.editCategory}>Edit category</p>
+      </StyledHeader>
       <section>
-        <h5>
-          История ваших расходов в категории: <br />
-          {currentCategory && currentCategory.name}
-        </h5>
         {transactionsToThisExpense.length ? (
           Object.keys(objectTime).map(key => {
             return (
               <div>
-                <h2 style={{ color: 'red' }}>{key}</h2>
+                <h2 className={styles.timePoint}>{key}</h2>
                 {objectTime[key].map(transaction => {
-                  return <TransactionHistoryExpenses id={transaction._id} />;
+                  return (
+                    <TransactionHistoryExpenses
+                      id={transaction._id}
+                      key={transaction._id}
+                    />
+                  );
                 })}
               </div>
             );
           })
         ) : (
-          <h2>История ваших покупок в данной категории пуста</h2>
+          <div>
+            <p className={styles.emptyWarning}>
+              История добавлений в хранилище {currentCategory.name} пуста
+            </p>
+          </div>
         )}
       </section>
     </div>
