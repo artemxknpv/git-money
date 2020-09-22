@@ -46,7 +46,6 @@ const AuthenticationForm = ({ mode }) => {
 
   return mode === 'login' ? (
     <div>
-      {isError && <p>{errorText}</p>}
       {/*TODO*/}
       <form
         onSubmit={event => loginHandler(event)}
@@ -86,11 +85,20 @@ const AuthenticationForm = ({ mode }) => {
         </Link>
         <p className={styles.forget}>Забыли пароль?</p>
       </div>
+      {isError && (
+        <div className={styles.errorContainer}>
+          <p className={styles.errorMessage}>{errorText}</p>
+        </div>
+      )}
     </div>
   ) : mode === 'registration' ? (
     <div>
+      {isError && (
+        <div className={styles.errorContainer}>
+          <p className={styles.errorMessage}>{errorText}</p>
+        </div>
+      )}
       <form onSubmit={registerHandler} className={styles.inputField}>
-        {isError && errorText}
         <div>
           <input
             type="text"

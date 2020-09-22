@@ -17,6 +17,7 @@
   color: white;
   font-family: 'TT Bold', sans-serif;
   font-size: 40px;
+  text-decoration: none;
 }
 
 .buttonNav {
@@ -35,4 +36,12 @@
   background: transparent;
 }
 
-
+.exitButton, .exitButton:focus {
+  margin-bottom: 1rem;
+  display: block;
+  background: none;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
