@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { motion, useCycle } from 'framer-motion';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styles from './navbar.module.scss';
 import logoutStarted from '../../redux/actions/authentication/logoutStarted.js';
 
@@ -72,13 +73,27 @@ const Example = () => {
       <motion.div
         variants={{
           closed: { opacity: 0 },
-          open: { opacity: 1 },
+          open: { opacity: 1, transition: { delay: 0.5 } },
         }}
         className={styles.wrapper}
       >
-        <button type="button" onClick={() => dispatch(logoutStarted())}>
-          <h2 className={styles.menuPoint}>Пидорас</h2>
-        </button>
+        <motion.button
+          whileHover={{ scale: 1.2 }}
+          type="button"
+          className={styles.exitButton}
+        >
+          <Link to={'/chart'} className={styles.menuPoint}>
+            Графики
+          </Link>
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.2 }}
+          type="button"
+          className={styles.exitButton}
+          onClick={() => dispatch(logoutStarted())}
+        >
+          <h2 className={styles.menuPoint}>Выйти</h2>
+        </motion.button>
       </motion.div>
     </motion.nav>
   );

@@ -18,7 +18,7 @@ const Income = () => {
     }, 0);
     dispatch(setTotalMoney(totalMoney));
   }, []);
-  console.log(1);
+
   return (
     <>
       <div className={styles.wrapper}>
