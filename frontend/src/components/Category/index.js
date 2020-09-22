@@ -8,9 +8,11 @@ import styles from './Category.module.scss';
 import { motion } from 'framer-motion';
 
 const Category = ({ value, id }) => {
-  // const [add, setAdd] = useState('');
-  // const userId = useSelector(state => state.user._id);
-  // const history = useHistory();
+
+  const history = useHistory();
+  const [add, setAdd] = useState('');
+  const userId = useSelector(state => state.user._id);
+
   const dispatch = useDispatch();
   const category = useSelector(state =>
     state.categories.filter(category => category.id === id)
@@ -29,6 +31,7 @@ const Category = ({ value, id }) => {
             ? () => dispatch(openModalWindow(id))
             : () => {
                 dispatch(openModalWindowTransactionHistoryExpenses(id));
+                history.push(`/expense/${id}`);
               }
         }
       >
