@@ -5,8 +5,9 @@ import addMoneyCategory from '../actions/addMoney/addMoneySuccess';
 import addTotalMoney from '../actions/TotalMoney/addTotalMoney';
 
 const deleteTransactionFetch = async ({ userId, idTransaction }) => {
-  console.log(userId, idTransaction);
-  const response = await fetch(`${userId}/${idTransaction}`, {
+  console.log('>>>>', idTransaction);
+  console.log('>>>>', userId);
+  await fetch(`/${userId}/${idTransaction}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -17,9 +18,8 @@ const deleteTransactionFetch = async ({ userId, idTransaction }) => {
 
 function* transferMoneyStoreWorker(action) {
   const { userId, idTransaction, idStore, idExpense, amount } = action.payload;
-  console.log(userId, idTransaction, idStore, idExpense, amount);
   try {
-    const response = yield call(deleteTransactionFetch, {
+    yield call(deleteTransactionFetch, {
       userId,
       idTransaction,
     });

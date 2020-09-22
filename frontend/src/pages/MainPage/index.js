@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Expenses from '../../components/Expenses';
 import Header from '../../components/Header';
@@ -7,12 +7,10 @@ import ModalWindowAddMoney from '../../components/ModalWindowAddMoney';
 import ModalWindowAddCategory from '../../components/ModalWindowAddCategory';
 import ModalWindowTransferMoney from '../../components/modalWindowTransferMoney';
 import ModalWindowTransactionHistoryExpenses from '../../components/TransactionsHistory/index';
-import Navbar from  '../../components/Navbar'
-
-import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStarted';
+import Navbar from '../../components/Navbar';
 import openModalTransferMoney from '../../redux/actions/modalWindow/openModalWindowTransferMoney';
-
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import styles from './MainPage.module.scss';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -25,11 +23,10 @@ const MainPage = () => {
     state => state.isTransactionHistoryModal.isOpened
   );
   const categories = useSelector(state => state.categories);
-  const userId = useSelector(state => state.user._id);
 
   return (
-    <div>
-      <Navbar/>
+    <div className={styles.batya}>
+      <Navbar />
       <ModalWindowAddMoney show={isModal} />
       <ModalWindowAddCategory show={isModalCategory} />
       <ModalWindowTransferMoney show={isModalTransfer} />
@@ -53,11 +50,8 @@ const MainPage = () => {
         }}
       >
         <Income />
-
         <Expenses />
       </DragDropContext>
-
-
     </div>
   );
 };

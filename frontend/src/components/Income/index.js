@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Category from '../Category';
 import AddCategory from '../AddCategory';
 import styles from './Income.module.scss';
-import { Droppable, Draggable, DragDropContext } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import setTotalMoney from '../../redux/actions/TotalMoney/setTotalMoney';
 
@@ -16,16 +16,9 @@ const Income = () => {
     const totalMoney = incomes.reduce((acc, store) => {
       return acc + store.currentNumber;
     }, 0);
-    console.log(totalMoney);
     dispatch(setTotalMoney(totalMoney));
   }, []);
-  // useEffect(() => {
-  //   const totalMoney = incomes.reduce((acc, store) => {
-  //     return acc + store.currentNumber;
-  //   }, 0);
-  //   console.log(totalMoney);
-  //   dispatch(setTotalMoney(totalMoney));
-  // }, []);
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -41,7 +34,7 @@ const Income = () => {
                 {incomes &&
                   incomes.map((income, index) => {
                     return (
-                      <div>
+                      <div key={index}>
                         <Draggable
                           key={income.id}
                           draggableId={income.id}

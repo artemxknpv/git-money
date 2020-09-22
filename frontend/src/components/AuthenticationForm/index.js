@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import errorReset from '../../redux/actions/authentication/errorReset.js';
 import loginStarted from '../../redux/actions/authentication/loginStarted.js';
 import registrationStarted from '../../redux/actions/authentication/registrationStarted.js';
-
+import { motion } from 'framer-motion';
 import styles from './AuthenticationForm.module.scss';
 
 const AuthenticationForm = ({ mode }) => {
@@ -25,10 +25,9 @@ const AuthenticationForm = ({ mode }) => {
 
   useEffect(() => {
     dispatch(errorReset());
-  }, []);
+  }, [dispatch]);
 
   const changeHandler = ({ target: { name, value } }) => {
-    console.log(name, value);
     setInput({
       ...input,
       [name]: value,
@@ -42,13 +41,12 @@ const AuthenticationForm = ({ mode }) => {
 
   const registerHandler = event => {
     event.preventDefault();
-    console.log(email, login, password);
     dispatch(registrationStarted(firstName, lastName, email, login, password));
   };
 
   return mode === 'login' ? (
     <div>
-      {isError && <p>{errorText}</p>}
+      {/*TODO*/}
       <form
         onSubmit={event => loginHandler(event)}
         className={styles.inputField}
@@ -73,9 +71,13 @@ const AuthenticationForm = ({ mode }) => {
           />
           <span className={styles.label}>Пароль</span>
         </div>
-        <button type="submit" className={styles.btn}>
+        <motion.button
+          type="submit"
+          className={styles.btn}
+          whileTap={{ scale: 0.95 }}
+        >
           Войти
-        </button>
+        </motion.button>
       </form>
       <div className={styles.afterbutton}>
         <Link to={'/registration'} className={styles.registrationLink}>
@@ -83,11 +85,20 @@ const AuthenticationForm = ({ mode }) => {
         </Link>
         <p className={styles.forget}>Забыли пароль?</p>
       </div>
+      {isError && (
+        <div className={styles.errorContainer}>
+          <p className={styles.errorMessage}>{errorText}</p>
+        </div>
+      )}
     </div>
   ) : mode === 'registration' ? (
     <div>
+      {isError && (
+        <div className={styles.errorContainer}>
+          <p className={styles.errorMessage}>{errorText}</p>
+        </div>
+      )}
       <form onSubmit={registerHandler} className={styles.inputField}>
-        {isError && errorText}
         <div>
           <input
             type="text"
@@ -148,7 +159,9 @@ const AuthenticationForm = ({ mode }) => {
           />
           <span className={styles.label}>Повторите пароль</span>
         </div>
-        <button className={styles.btn}>Зарегистрироваться</button>
+        <motion.button className={styles.btn} whileTap={{ scale: 0.95 }}>
+          Зарегистрироваться
+        </motion.button>
       </form>
       <div className={styles.afterbutton}>
         <Link to={'/login'} className={styles.registrationLink}>

@@ -68,6 +68,7 @@
   margin: 66px 0 0;
   height: 50px;
 }
+
 .modal {
   position: absolute;
   z-index: 21243243;
@@ -79,17 +80,6 @@
   border-radius: 10px;
 }
 
-.modalMain {
-  position: absolute;
-  background: white;
-  width: 80%;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-}
-
 .displayBlock {
   display: block;
 }
@@ -98,19 +88,19 @@
   display: none;
 }
 
-.backdrop{
+.backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   margin: 0;
   z-index: 1;
 }
 
 .modalMain {
+  max-width: 600px;
   position: fixed;
   background: white;
   width: 80%;
