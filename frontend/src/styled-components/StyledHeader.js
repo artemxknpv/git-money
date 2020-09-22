@@ -9,4 +9,7 @@ export const StyledHeader = styled(motion.div)`
   margin-right: 1.5rem;
   margin-top: 64px;
   color: #333;
+  font-family: 'Formular', sans-serif;
+  margin-bottom: 1.5rem;
+  max-width: 1000px;
 `;

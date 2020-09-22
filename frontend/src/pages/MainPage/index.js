@@ -11,7 +11,7 @@ import Navbar from  '../../components/Navbar'
 
 import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStarted';
 import openModalTransferMoney from '../../redux/actions/modalWindow/openModalWindowTransferMoney';
-
+import styles from './MainPage.module.scss';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const MainPage = () => {
@@ -28,7 +28,7 @@ const MainPage = () => {
   const userId = useSelector(state => state.user._id);
 
   return (
-    <div>
+    <div className={styles.batya}>
       <Navbar/>
       <ModalWindowAddMoney show={isModal} />
       <ModalWindowAddCategory show={isModalCategory} />
@@ -53,11 +53,8 @@ const MainPage = () => {
         }}
       >
         <Income />
-
         <Expenses />
       </DragDropContext>
-
-
     </div>
   );
 };

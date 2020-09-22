@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
 import openModalWindow from '../../redux/actions/modalWindow/openModalWindowAddMoney.js';
 import openModalWindowTransactionHistoryExpenses from '../../redux/actions/modalWindow/openModalWindowTransactionHistory';
 import styles from './Category.module.scss';
 import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
 const Category = ({ value, id }) => {
   const [add, setAdd] = useState('');
   const userId = useSelector(state => state.user._id);
@@ -14,8 +15,9 @@ const Category = ({ value, id }) => {
   const category = useSelector(state =>
     state.categories.filter(category => category.id === id)
   )[0];
+
   return (
-    <div className={styles.card}>
+    <motion.div className={styles.card} whileHover={{ scale: 1.1 }}>
       <div
         className={styles.image}
         onClick={
@@ -32,8 +34,8 @@ const Category = ({ value, id }) => {
       <p className={styles.categorySubheader} style={{ fontWeight: '700' }}>
         {category.name}
       </p>
-      <p className={styles.categorySubheader}>{category.currentNumber} $</p>
-    </div>
+      <p className={styles.categorySum}>{category.currentNumber} $</p>
+    </motion.div>
   );
 };
 
