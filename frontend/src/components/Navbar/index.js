@@ -10,7 +10,8 @@ const sidebar = {
       stiffness: 20,
       restDelta: 2
     },
-    backgroundColor: "red"
+    backgroundColor: "red",
+    position: 'fixed',
   }),
   closed: {
     clipPath: "circle(30px at 85vw 70px)",
@@ -20,7 +21,8 @@ const sidebar = {
       stiffness: 400,
       damping: 40
     },
-    backgroundColor: '#fcfcfc'
+    backgroundColor: '#fcfcfc',
+    position: 'absolute'
   },
 };
 
