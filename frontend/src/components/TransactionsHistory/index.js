@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowTransactionHistory';
-import TransactionHistoryExpenses from '../TransactionHistoryExpenses';
 import styles from './TransactionsHistory.module.scss';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -28,10 +27,10 @@ const modal = {
 
 const ModalWindowTransactionHistory = ({ show }) => {
   const dispatch = useDispatch();
-  const [sum, setSum] = useState('');
-  const [currentName, setCurrentname] = useState(null);
-  const userId = useSelector(state => state.user._id);
-  const transactions = useSelector(state => state.transactions);
+  // const [sum, setSum] = useState('');
+  // const [currentName, setCurrentname] = useState(null);
+  // const userId = useSelector(state => state.user._id);
+  // const transactions = useSelector(state => state.transactions);
   const currentIdExpense = useSelector(
     state => state.isTransactionHistoryModal.idExpense
   );
@@ -40,9 +39,9 @@ const ModalWindowTransactionHistory = ({ show }) => {
       return category.id === currentIdExpense;
     })[0];
   });
-  const transactionsToThisExpense = transactions.filter(transaction => {
-    return transaction.to === currentIdExpense;
-  });
+  // const transactionsToThisExpense = transactions.filter(transaction => {
+  //   return transaction.to === currentIdExpense;
+  // });
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -61,17 +60,17 @@ const ModalWindowTransactionHistory = ({ show }) => {
             initial="hidden"
             animate="visible"
           >
-        <h5 className={styles.modalHeader}>
-          История ваших расходов в категории: <br />
-          {currentCategory && currentCategory.name}
-        </h5>
-        <button
-          onClick={() => {
-            dispatch(closeModalWindow());
-          }}
-        >
-          <Link to={`expense/${currentIdExpense}`}>Что тебе надо?</Link>
-        </button>
+            <h5 className={styles.modalHeader}>
+              История ваших расходов в категории: <br />
+              {currentCategory && currentCategory.name}
+            </h5>
+            <button
+              onClick={() => {
+                dispatch(closeModalWindow());
+              }}
+            >
+              <Link to={`expense/${currentIdExpense}`}>Что тебе надо?</Link>
+            </button>
           </motion.div>
         </>
       ) : (

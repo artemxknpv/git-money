@@ -31,7 +31,7 @@ const Chart = () => {
 
   useEffect(() => {
     chart();
-  }, [expenditures]);
+  }, []);
   console.log(expenditures);
   return (
     <div>
