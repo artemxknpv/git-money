@@ -13,8 +13,14 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
   if (!firstName || !lastName || !mail || !login || !password) {
     errors.push({ message: "Заполните все поля" });
   }
-  // Check password length
+  if (mail < 3) {
+    errors.push({ message: "Email должен быть в виде example@example.com" });
+  }
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(mail)) {
+    errors.push({ message: "Email должен быть в виде example@example.com" });
+  }
   if (password.length < 8) {
+    // Check password length
     errors.push({ message: "Пароль должен быть больше 8 символов" });
   }
   if (errors.length > 0) {

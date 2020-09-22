@@ -131,7 +131,7 @@ const AuthenticationForm = ({ mode }) => {
         </div>
         <div>
           <input
-            type="email"
+            // type="email"
             name="email"
             value={email}
             onChange={changeHandler}
