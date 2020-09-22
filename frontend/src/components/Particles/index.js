@@ -20,11 +20,10 @@ const Particlesdiv = () => {
       line_linked: {
       shadow: {
       enable: true,
-      color: '#6dc4c4',
       blur: 1,
     },
+        color: '#6dc4c4',
         distance: 200,
-        opacity: 0.24,
         width: 1,
     }
     }
