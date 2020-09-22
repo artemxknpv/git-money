@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Pie } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
 const Chart = () => {
   const [chartDataPie, setChartDataPie] = useState({});
@@ -102,7 +102,7 @@ const Chart = () => {
     chartPie();
     StackData();
   }, []);
-
+  console.log(expenditures);
   return (
     <>
       <div>
