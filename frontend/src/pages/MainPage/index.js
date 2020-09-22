@@ -7,6 +7,9 @@ import ModalWindowAddMoney from '../../components/ModalWindowAddMoney';
 import ModalWindowAddCategory from '../../components/ModalWindowAddCategory';
 import ModalWindowTransferMoney from '../../components/modalWindowTransferMoney';
 import ModalWindowTransactionHistoryExpenses from '../../components/TransactionsHistory/index';
+import Navbar from  '../../components/Navbar'
+
+import setUserInfoStarted from '../../redux/actions/setUserInfo/setUserInfoStarted';
 import openModalTransferMoney from '../../redux/actions/modalWindow/openModalWindowTransferMoney';
 import styles from './MainPage.module.scss';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -26,6 +29,7 @@ const MainPage = () => {
 
   return (
     <div className={styles.batya}>
+      <Navbar/>
       <ModalWindowAddMoney show={isModal} />
       <ModalWindowAddCategory show={isModalCategory} />
       <ModalWindowTransferMoney show={isModalTransfer} />
