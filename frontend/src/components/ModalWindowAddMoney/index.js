@@ -30,10 +30,10 @@ const ModalWindowAddMoney = ({ show }) => {
   const [sum, setSum] = useState('');
   const userId = useSelector(state => state.user._id);
   const id = useSelector(state => state.isModal.id);
-  const listTransactions = useSelector(state => state.transactions);
-  const thisCategoryList = listTransactions.filter(
-    transaction => transaction.to === id
-  );
+  // const listTransactions = useSelector(state => state.transactions);
+  // const thisCategoryList = listTransactions.filter(
+  //   transaction => transaction.to === id
+  // );
   // console.log(thisCategoryList);
   const dispatch = useDispatch();
   return (

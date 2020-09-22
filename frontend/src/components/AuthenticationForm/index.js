@@ -25,7 +25,7 @@ const AuthenticationForm = ({ mode }) => {
 
   useEffect(() => {
     dispatch(errorReset());
-  }, []);
+  }, [dispatch]);
 
   const changeHandler = ({ target: { name, value } }) => {
     setInput({

@@ -19,7 +19,7 @@ function TransactionsHistoryExpense({ id }) {
         return category.id === transaction.from;
       })[0]
     );
-  }, [transaction]);
+  }, [transaction, store]);
   function handleClick() {
     dispatch(
       deleteTransactionStarted(
