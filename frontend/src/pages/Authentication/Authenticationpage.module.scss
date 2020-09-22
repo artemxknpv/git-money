@@ -9,7 +9,7 @@
   font-size: 30px;
   line-height: 36px;
   color: #333333;
-  margin: 64px 4% 0
+  margin: 64px 4% 0;
 }
 
 .headerDesc{
@@ -21,3 +21,10 @@
   //color: #BDBDBD;
   margin-top: 16px;
 }
+
+.tsparticles-canvas-el{
+  position: fixed;
+  z-index: -100;
+}
+
+
