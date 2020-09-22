@@ -7,11 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import expenses from '../../img/expenses';
 import incomes from '../../img/incomes';
 
-// import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney';
-// import TransactionHistoryIncome from '../TransactionHistoryIncome';
-// import { Link } from 'react-router-dom';
-// import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
-
 const backdrop = {
   visible: { opacity: 1 },
   hidden: { opacity: 0 },
@@ -38,8 +33,9 @@ function ModalWindowAddCategory({ show }) {
   const userId = useSelector(state => state.user._id);
   const type = useSelector(state => state.isCategoryModal.type);
   const dispatch = useDispatch();
+  const [chosenIcon, setChosenIcon] = useState(-1);
 
-  console.log(type);
+  console.log(chosenIcon);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -71,12 +67,39 @@ function ModalWindowAddCategory({ show }) {
               onChange={event => setName(event.target.value)}
               className={styles.input}
             />
+            <p className={styles.modalSubheader} style={{ flexBasis: '100%' }}>
+              Выберите иконку:
+            </p>
             <div className={styles.iconRow}>
               {type === 'store'
-                ? incomes.map(icon => <div>{icon}</div>)
-                : expenses.map(icon => <div>{icon}</div>)}
+                ? incomes.map((icon, index) => (
+                    <motion.button
+                      onClick={() => setChosenIcon(index + 13)}
+                      whileTap={{ scale: 1.05 }}
+                      className={
+                        index === chosenIcon
+                          ? styles.chosenIcon
+                          : styles.iconOption
+                      }
+                    >
+                      {icon}
+                    </motion.button>
+                  ))
+                : expenses.map((icon, index) => (
+                    <motion.button
+                      whileTap={{ scale: 1.05 }}
+                      onClick={() => setChosenIcon(index)}
+                      className={
+                        index === chosenIcon
+                          ? styles.chosenIcon
+                          : styles.iconOption
+                      }
+                    >
+                      {icon}
+                    </motion.button>
+                  ))}
             </div>
-            <p className={styles.modalSubheader}>{error}</p>
+            {error && <p className={styles.modalSubheader}>{error}</p>}
             <button
               className={styles.addButton}
               onClick={() => {
