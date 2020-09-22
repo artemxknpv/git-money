@@ -4,7 +4,7 @@ import styles from "./navbar.module.scss"
 
 const sidebar = {
   open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
+    clipPath: `circle(${height * 2 + 200}px at 87vw 58px)`,
     transition: {
       type: "spring",
       stiffness: 20,
@@ -13,15 +13,15 @@ const sidebar = {
     backgroundColor: "red"
   }),
   closed: {
-    clipPath: "circle(30px at 40px 40px)",
+    clipPath: "circle(30px at 85vw 70px)",
     transition: {
       delay: 0.2,
       type: "spring",
       stiffness: 400,
       damping: 40
     },
-    backgroundColor: "red"
-  }
+    backgroundColor: '#fcfcfc'
+  },
 };
 
 const Path = (props) => (
@@ -45,7 +45,7 @@ const Path = (props) => (
           <Path
             variants={{
               closed: { d: "M 3 2.5 L 20 2.5" },
-              open: { d: "M 3 16.5 L 17 2.5" }
+              open: { d: "M 3 16.5 L 17 2.5" },
             }}
           />
           <Path

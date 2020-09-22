@@ -4,6 +4,27 @@ import { Link } from 'react-router-dom';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowTransactionHistory';
 import TransactionHistoryExpenses from '../TransactionHistoryExpenses';
 import styles from './TransactionsHistory.module.scss';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const backdrop = {
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+};
+const modal = {
+  hidden: {
+    x: '-50%',
+    y: '-50%',
+    scale: 0.1,
+    opacity: 0,
+  },
+  visible: {
+    x: '-50%',
+    y: '-50%',
+    scale: 1,
+    opacity: 1,
+    transition: { delay: 0.2, duration: 0.3 },
+  },
+};
 
 const ModalWindowTransactionHistory = ({ show }) => {
   const dispatch = useDispatch();
@@ -22,13 +43,24 @@ const ModalWindowTransactionHistory = ({ show }) => {
   const transactionsToThisExpense = transactions.filter(transaction => {
     return transaction.to === currentIdExpense;
   });
-  const showHideClassName = show
-    ? `${styles.modal} ${styles.displayBlock}`
-    : `${styles.modal} ${styles.displayNone}`;
+
   return (
-    <div className={`${showHideClassName}`}>
-      <button onClick={() => dispatch(closeModalWindow())}>x</button>
-      <section className={styles.modalMain}>
+    <AnimatePresence exitBeforeEnter>
+      {show ? (
+        <>
+          <motion.div
+            className={styles.backdrop}
+            onClick={() => dispatch(closeModalWindow())}
+            variants={backdrop}
+            initial="hidden"
+            animate="visible"
+          />
+          <motion.div
+            className={styles.modalMain}
+            variants={modal}
+            initial="hidden"
+            animate="visible"
+          >
         <h5 className={styles.modalHeader}>
           История ваших расходов в категории: <br />
           {currentCategory && currentCategory.name}
@@ -40,8 +72,12 @@ const ModalWindowTransactionHistory = ({ show }) => {
         >
           <Link to={`expense/${currentIdExpense}`}>Что тебе надо?</Link>
         </button>
-      </section>
-    </div>
+          </motion.div>
+        </>
+      ) : (
+        <></>
+      )}
+    </AnimatePresence>
   );
 };
 
