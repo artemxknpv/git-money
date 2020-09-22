@@ -26,6 +26,7 @@ const Expenses = () => {
                         value={expense.value}
                         key={expense.id}
                         id={expense.id}
+                        iconId={expense.iconId}
                       />
                     </div>
                   );

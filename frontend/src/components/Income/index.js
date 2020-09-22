@@ -53,6 +53,7 @@ const Income = () => {
                                   value={income.value}
                                   id={income.id}
                                   key={income.id}
+                                  iconId={income.iconId}
                                 />
                               </div>
                             );

@@ -33,9 +33,7 @@ function ModalWindowAddCategory({ show }) {
   const userId = useSelector(state => state.user._id);
   const type = useSelector(state => state.isCategoryModal.type);
   const dispatch = useDispatch();
-  const [chosenIcon, setChosenIcon] = useState(-1);
-
-  console.log(chosenIcon);
+  const [chosenIcon, setChosenIcon] = useState(0);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -44,6 +42,7 @@ function ModalWindowAddCategory({ show }) {
           <motion.div
             className={styles.backdrop}
             onClick={() => {
+              setName('');
               dispatch(closeModalWindowAddCategory());
               setError('');
             }}
@@ -74,7 +73,7 @@ function ModalWindowAddCategory({ show }) {
               {type === 'store'
                 ? incomes.map((icon, index) => (
                     <motion.button
-                      onClick={() => setChosenIcon(index + 13)}
+                      onClick={() => setChosenIcon(index + 14)}
                       whileTap={{ scale: 1.05 }}
                       className={
                         index === chosenIcon
@@ -104,7 +103,7 @@ function ModalWindowAddCategory({ show }) {
               className={styles.addButton}
               onClick={() => {
                 if (name !== '') {
-                  dispatch(addCategoryStarted(userId, name, type));
+                  dispatch(addCategoryStarted(userId, name, type, chosenIcon));
                   dispatch(closeModalWindowAddCategory());
                 } else {
                   setError('Поле ввода не может быть пустым');

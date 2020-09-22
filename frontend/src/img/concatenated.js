@@ -1,4 +1,4 @@
-import * as expenses from './expenses';
-import * as incomes from './incomes';
+import expenses from './expenses';
+import incomes from './incomes';
 
 export default [...expenses, ...incomes];
