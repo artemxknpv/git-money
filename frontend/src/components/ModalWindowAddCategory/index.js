@@ -31,6 +31,7 @@ const modal = {
 
 function ModalWindowAddCategory({ show }) {
   const [name, setName] = useState('');
+  const [error, setError] = useState('');
   const userId = useSelector(state => state.user._id);
   const type = useSelector(state => state.isCategoryModal.type);
   const dispatch = useDispatch();
@@ -40,7 +41,10 @@ function ModalWindowAddCategory({ show }) {
         <>
           <motion.div
             className={styles.backdrop}
-            onClick={() => dispatch(closeModalWindowAddCategory())}
+            onClick={() => {
+              dispatch(closeModalWindowAddCategory());
+              setError('');
+            }}
             variants={backdrop}
             initial="hidden"
             animate="visible"
@@ -61,11 +65,16 @@ function ModalWindowAddCategory({ show }) {
               onChange={event => setName(event.target.value)}
               className={styles.input}
             />
+            <p className={styles.modalSubheader}>{error}</p>
             <button
               className={styles.addButton}
               onClick={() => {
-                dispatch(addCategoryStarted(userId, name, type));
-                dispatch(closeModalWindowAddCategory());
+                if (name !== '') {
+                  dispatch(addCategoryStarted(userId, name, type));
+                  dispatch(closeModalWindowAddCategory());
+                } else {
+                  setError('Поле ввода не может быть пустым');
+                }
               }}
             >
               Добавить

@@ -16,9 +16,9 @@ const Expenses = () => {
       <h4 className={styles.categoryHeader}>Расходы</h4>
       <div className={styles.container}>
         {expenditures &&
-          expenditures.map(expense => {
+          expenditures.map((expense, index) => {
             return (
-              <Droppable droppableId={expense.id}>
+              <Droppable key={index} droppableId={expense.id}>
                 {(provided, snapshot) => {
                   return (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
