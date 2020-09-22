@@ -19,7 +19,14 @@ function TransactionsHistoryExpense({ id }) {
         return category.id === transaction.from;
       })[0]
     );
-  }, [transaction, store]);
+  }, []);
+  console.log(
+    userId,
+    transaction._id,
+    transaction.from,
+    transaction.to,
+    transaction.amount
+  );
   function handleClick() {
     dispatch(
       deleteTransactionStarted(
