@@ -21,38 +21,8 @@ $red-color: #eb5757;
   src: url('./fonts/TT Norms Pro Regular.otf') format('opentype');
 }
 
-@font-face {
-  font-family: 'TT Norms Pro Bold';
-  src: url('./fonts/TT Norms Pro Bold.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'TT Norms Pro Bold';
-  src: url('./fonts/TT Norms Pro Bold.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'TT Norms Pro Bold';
-  src: url('./fonts/TT Norms Pro Bold.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'TT Norms Pro Bold';
-  src: url('./fonts/TT Norms Pro Bold.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'TT Norms Pro Bold';
-  src: url('./fonts/TT Norms Pro Bold.otf') format('opentype');
-}
-
-
-  //src: url('./fonts/TT Norms Pro ExtraLight.otf') format('opentype');
-  //src: url('./fonts/TT Norms Pro Light.otf') format('opentype');
-  //src: url('./fonts/TT Norms Pro Thin.otf') format('opentype');
-//}
 
 $bold-font: 'TT Bold';
 $black-font: 'TT Black';
 $regular-font: 'TT Regular';
-
+$medium-font: 'TT Medium';

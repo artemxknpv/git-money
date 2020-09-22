@@ -1,6 +1,10 @@
+@import 'src/styles/variables';
+* {
+  font-family: $regular-font;
+}
 .header {
   font-size: 1.5rem;
-  font-family: 'Formular', sans-serif;
+  font-family: $bold-font;
   margin-left: 1rem;
 }
 
@@ -20,7 +24,7 @@
 }
 
 .emptyWarning {
-  font-family: 'TT Regular', sans-serif;
+  font-family: $regular-font;
   margin-left: 1rem;
   margin-right: 1rem;
 }
