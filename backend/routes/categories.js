@@ -10,13 +10,13 @@ const route = express.Router();
 route.put("/:id", async (req, res) => {
   const id = req.params.id;
   const user = await modelUser.findById(id);
-  const { type, name } = req.body;
+  const { type, name, iconId } = req.body;
   if (type === "expenditure") {
-    const userUpdate = await user.createNewExpenditure(name);
+    const userUpdate = await user.createNewExpenditure(name, iconId);
     const addition = userUpdate.categories[userUpdate.categories.length - 1];
     return res.json(addition);
   } else if (type === "store") {
-    const userUpdate = await user.createNewStore(name);
+    const userUpdate = await user.createNewStore(name, iconId);
     const addition = userUpdate.categories[userUpdate.categories.length - 1];
     return res.json(addition);
   } else {

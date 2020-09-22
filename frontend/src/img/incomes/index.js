@@ -6,6 +6,7 @@ import Business from './Business.js';
 import Gift from './Gift.js';
 import Salary from './Salary.js';
 import Health from './Health.js';
+import WalletFilledIcon from './WalletFilledIcon.jsx';
 
 export default [
   <MoneyBox />,
@@ -14,4 +15,5 @@ export default [
   <Salary />,
   <Health />,
   <Business />,
+  <WalletFilledIcon />,
 ];
