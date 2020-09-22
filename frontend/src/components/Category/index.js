@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import BagOfGoods from '../../img/BagOfGoods.jsx';
 import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
