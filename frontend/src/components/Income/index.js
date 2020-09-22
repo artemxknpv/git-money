@@ -17,8 +17,8 @@ const Income = () => {
       return acc + store.currentNumber;
     }, 0);
     dispatch(setTotalMoney(totalMoney));
-  }, [dispatch, incomes]);
-
+  }, []);
+  console.log(1);
   return (
     <>
       <div className={styles.wrapper}>
