@@ -4,6 +4,9 @@ import styles from './ModalWindowAddCategory.module.scss';
 import closeModalWindowAddCategory from '../../redux/actions/modalWindow/closeModalWindowAddCategory';
 import addCategoryStarted from '../../redux/actions/addCategory/addCategoryStarted';
 import { motion, AnimatePresence } from 'framer-motion';
+import expenses from '../../img/expenses';
+import incomes from '../../img/incomes';
+
 // import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney';
 // import TransactionHistoryIncome from '../TransactionHistoryIncome';
 // import { Link } from 'react-router-dom';
@@ -35,6 +38,9 @@ function ModalWindowAddCategory({ show }) {
   const userId = useSelector(state => state.user._id);
   const type = useSelector(state => state.isCategoryModal.type);
   const dispatch = useDispatch();
+
+  console.log(type);
+
   return (
     <AnimatePresence exitBeforeEnter>
       {show ? (
@@ -48,7 +54,7 @@ function ModalWindowAddCategory({ show }) {
             variants={backdrop}
             initial="hidden"
             animate="visible"
-          ></motion.div>
+          />
           <motion.div
             className={styles.modalMain}
             variants={modal}
@@ -65,6 +71,11 @@ function ModalWindowAddCategory({ show }) {
               onChange={event => setName(event.target.value)}
               className={styles.input}
             />
+            <div className={styles.iconRow}>
+              {type === 'store'
+                ? incomes.map(icon => <div>{icon}</div>)
+                : expenses.map(icon => <div>{icon}</div>)}
+            </div>
             <p className={styles.modalSubheader}>{error}</p>
             <button
               className={styles.addButton}

@@ -14,7 +14,6 @@ const addCategoryFetch = async ({ userId, name, value }) => {
 function* addCategoryWorker(action) {
   const { userId, name, value } = action.payload;
   const response = yield call(addCategoryFetch, { userId, name, value });
-  console.log(response);
   yield put(addCategorySuccess(response));
 }
 
