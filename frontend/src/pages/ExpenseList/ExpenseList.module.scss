@@ -1,0 +1,30 @@
+@import 'src/styles/variables';
+* {
+  font-family: $regular-font;
+}
+.header {
+  font-size: 1.5rem;
+  font-family: $bold-font;
+  margin-left: 1rem;
+}
+
+.arrowAndCatname {
+  display: flex;
+  align-items: center;
+}
+
+.editCategory {
+  color: #0870c4;
+  font-size: 0.8rem;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.emptyWarning {
+  font-family: $regular-font;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}

@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import differenceInHours from 'date-fns/differenceInHours';
 import formatDistance from 'date-fns/formatDistance';
+import SkeletonLoader from 'tiny-skeleton-loader-react';
 
-import TransactionHistoryExpenses from '../components/TransactionHistoryExpenses';
+import TransactionHistoryExpenses from '../../components/TransactionHistoryExpenses';
 
 const ExpenseList = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
   const { cat } = useParams();
   const transactions = useSelector(state => state.transactions);
   const currentCategory = useSelector(state => {
@@ -46,8 +55,27 @@ const ExpenseList = () => {
       objectTime[currentStringTime] = [transaction];
     }
   });
-  console.log(objectTime);
-  return (
+
+  return isLoading ? (
+    <>
+      <SkeletonLoader
+        width={'20%'}
+        style={{ margin: 'auto', marginTop: '7rem' }}
+      />
+      <SkeletonLoader
+        width={'20%'}
+        style={{ margin: 'auto', marginTop: '1rem' }}
+      />
+      <SkeletonLoader
+        width={'20%'}
+        style={{ margin: 'auto', marginTop: '1rem' }}
+      />
+      <SkeletonLoader
+        width={'20%'}
+        style={{ margin: 'auto', marginTop: '1rem' }}
+      />
+    </>
+  ) : (
     <div>
       <h3>
         <Link to={'/'}>HOME</Link>

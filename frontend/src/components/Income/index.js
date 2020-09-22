@@ -17,7 +17,7 @@ const Income = () => {
       return acc + store.currentNumber;
     }, 0);
     dispatch(setTotalMoney(totalMoney));
-  }, [dispatch, incomes]);
+  }, []);
 
   return (
     <>

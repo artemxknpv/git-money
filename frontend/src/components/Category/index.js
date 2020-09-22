@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import BagOfGoods from '../../img/BagOfGoods.jsx';
 import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
@@ -8,7 +9,6 @@ import styles from './Category.module.scss';
 import { motion } from 'framer-motion';
 
 const Category = ({ value, id }) => {
-
   const history = useHistory();
   const [add, setAdd] = useState('');
   const userId = useSelector(state => state.user._id);
