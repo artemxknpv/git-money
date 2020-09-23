@@ -1,5 +1,4 @@
 @import 'src/styles/variables';
-
 * {
   font-family: $regular-font;
 }
@@ -7,6 +6,19 @@
   font-size: 1.5rem;
   font-family: $bold-font;
   margin-left: 1rem;
+}
+
+.totalSpentText {
+  color: #333333;
+  font-size: 1.2rem;
+  font-family: 'TT Medium', sans-serif;
+  margin: 1.5rem;
+}
+
+.timePoint {
+  font-family: 'TT Bold', sans-serif;
+  color: #333;
+  margin-left: 1.5rem;
 }
 
 .arrowAndCatname {
@@ -28,16 +40,17 @@
   font-family: $regular-font;
   margin-left: 1rem;
   margin-right: 1rem;
-}
-.timePoint {
-  font-family: 'TT Bold', sans-serif;
-  margin-left: 1.5rem;
-  color: #333333;
+  color: #666666;
 }
 
-.totalSpentText {
-  color: #333333;
+.deleteButton,
+.deleteButton:focus {
+  background: none;
+  outline: 0;
+  border: none;
+  margin-top: 0.5rem;
   font-size: 1.2rem;
+  color: #eb5757;
   font-family: 'TT Medium', sans-serif;
-  margin: 1.5rem;
+  cursor: pointer;
 }
