@@ -14,14 +14,17 @@ import modalWindowCrudCategoryOpened from '../../redux/actions/modalWindow/openM
 import ModalWindowCrudCategory from './crudIncomeListModal';
 
 const Index = () => {
-  const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
+//   const dispatch = useDispatch();
+//   const [isLoading, setIsLoading] = useState(true);
+
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setIsLoading(false);
+//     }, 1000);
+//   }, []);
+// =======
+
   function sortTime(elementA, elementB) {
     if (elementA.time < elementB.time) {
       return 1;
@@ -65,26 +68,7 @@ const Index = () => {
     }
   });
 
-  return isLoading ? (
-    <>
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '7rem' }}
-      />
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-    </>
-  ) : (
+  return (
     <div className={styles.container}>
       <ModalWindowCrudCategory show={showCrudModal} />
       <StyledHeader>

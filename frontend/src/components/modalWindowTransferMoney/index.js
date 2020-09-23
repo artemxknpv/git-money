@@ -28,7 +28,7 @@ const modal = {
 
 const ModalWindowAddMoney = ({ show }) => {
   const [sum, setSum] = useState('');
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
   const userId = useSelector(state => state.user._id);
   let nameFrom = '';
   let currentNumberFrom = 0;
@@ -49,14 +49,14 @@ const ModalWindowAddMoney = ({ show }) => {
   //   : `${styles.modal} ${styles.displayNone}`;
 
   const handleTransferMoney = () => {
-    if (currentNumberFrom - Number(sum) > 0) {
-      dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
-      setSum('');
-      setError('');
-      dispatch(closeModalWindow());
-    } else {
-      setError('Недостаточно средств для перевода');
-    }
+    // if (currentNumberFrom - Number(sum) > 0) {
+    dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
+    setSum('');
+    // setError('');
+    dispatch(closeModalWindow());
+    // } else {
+    //   setError('Недостаточно средств для перевода');
+    // }
   };
 
   return (
@@ -67,7 +67,7 @@ const ModalWindowAddMoney = ({ show }) => {
             className={styles.backdrop}
             onClick={() => {
               dispatch(closeModalWindow());
-              setError('');
+              // setError('');
               setSum('');
             }}
             variants={backdrop}
@@ -93,7 +93,7 @@ const ModalWindowAddMoney = ({ show }) => {
               onChange={event => setSum(event.target.value)}
               className={styles.input}
             />
-            {error && <p className={styles.modalSubheader}>{error}</p>}
+            {/* {error && <p className={styles.modalSubheader}>{error}</p>} */}
             <button
               className={styles.addButton}
               onClick={() => {

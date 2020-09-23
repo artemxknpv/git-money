@@ -14,13 +14,6 @@ import { useDispatch } from 'react-redux';
 const ExpenseList = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
 
   const { cat } = useParams();
   const transactions = useSelector(state => state.transactions);
@@ -68,26 +61,7 @@ const ExpenseList = () => {
     history.push('/');
   }
 
-  return isLoading ? (
-    <>
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '7rem' }}
-      />
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-    </>
-  ) : (
+  return (
     <div className={styles.container}>
       <StyledHeader>
         <div className={styles.arrowAndCatname}>
@@ -98,7 +72,7 @@ const ExpenseList = () => {
         </div>
         <span className={styles.editCategory}>Edit category</span>
       </StyledHeader>
-      <h2>Amount Spended ${currentBalance}</h2>
+      <h2>Amount Spent ${currentBalance}</h2>
       <section>
         {transactionsToThisExpense.length ? (
           Object.keys(objectTime).map(key => {
