@@ -10,8 +10,13 @@ const route = express.Router();
 route.put("/:id", async (req, res) => {
   const id = req.params.id;
   const user = await modelUser.findById(id);
-  const { type, name, iconId, limit } = req.body;
+  const { type, name, iconId } = req.body;
+  let { limit } = req.body;
   if (type === "expenditure") {
+    if (limit !== undefined) {
+      Number(limit);
+    }
+    console.log(limit, name);
     const userUpdate = await user.createNewExpenditure(name, iconId, limit);
     const addition = userUpdate.categories[userUpdate.categories.length - 1];
     return res.json(addition);
