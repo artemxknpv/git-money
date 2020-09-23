@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import _ from 'lodash';
 import { Bar } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
+import Fade from 'react-reveal/Fade.js';
 
 const Chart = () => {
   const [chartDataPie, setChartDataPie] = useState({});
@@ -151,9 +152,8 @@ const Chart = () => {
     StackData();
     StackDataInsideOut();
   }, []);
-  console.log(expenditures);
   return (
-    <>
+    <Fade bottom cascade>
       <div
         style={{
           display: 'flex',
@@ -214,7 +214,7 @@ const Chart = () => {
           <Bar data={stackDataInsideOut} options={optionsStacked} />
         </div>
       </div>
-    </>
+    </Fade>
   );
 };
 

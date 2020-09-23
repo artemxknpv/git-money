@@ -38,17 +38,16 @@ function TransactionsHistoryExpense({ id }) {
   }
 
   return (
-    <motion.li layout style={{ listStyle: 'none' }} onClick={toggleOpen}>
+    <motion.li style={{ listStyle: 'none' }} onClick={toggleOpen}>
       <motion.div
-        layout
         className={isOpen ? styles.openedWrapper : styles.wrapper}
         whileHover={{
           scale: 1.1,
-          boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
+          // boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
         }}
-        transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
+        // transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
       >
-        <p className={styles.amount}>${transaction && transaction.amount}</p>
+        <p className={styles.amount}>-${transaction && transaction.amount}</p>
         <p className={styles.targetCategory}>
           Потрачено в <strong>{nameTo && nameTo.name}</strong>
         </p>
@@ -58,7 +57,7 @@ function TransactionsHistoryExpense({ id }) {
         <AnimatePresence>
           {isOpen && (
             <motion.p
-              transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
+              // transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
