@@ -11,12 +11,15 @@ import { StyledHeader } from '../../styled-components/StyledHeader.js';
 import styles from './ExpenseList.module.scss';
 import TransactionHistoryExpenses from '../../components/TransactionHistoryExpenses';
 import { useDispatch } from 'react-redux';
+import modalWindowCrudCategoryOpened from '../../redux/actions/modalWindow/openModalWindowCrudCategory';
+import ModalWindowCrudCategory from './crudExpenseListModal';
 
 const ExpenseList = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const { cat } = useParams();
+  const showCrudModal = useSelector(state => state.isCrudModalWindow.isOpened);
   const transactions = useSelector(state => state.transactions);
   const currentCategory = useSelector(state => {
     return state.categories.filter(category => {
@@ -59,6 +62,7 @@ const ExpenseList = () => {
 
   return (
     <Fade bottom cascade>
+      <ModalWindowCrudCategory show={showCrudModal} />
       <div className={styles.container}>
         <StyledHeader>
           <div className={styles.arrowAndCatname}>
@@ -75,6 +79,32 @@ const ExpenseList = () => {
           </p>
           <span className={styles.editCategory}>Edit category</span>
         </StyledHeader>
+        <button
+          onClick={() => {
+            dispatch(modalWindowCrudCategoryOpened('expense', 'editIcon', cat));
+          }}
+          className={styles.editCategory}
+        >
+          Edit icon
+        </button>
+        <button
+          onClick={() => {
+            dispatch(modalWindowCrudCategoryOpened('expense', 'editName', cat));
+          }}
+          className={styles.editCategory}
+        >
+          Edit name
+        </button>
+        <button
+          onClick={() => {
+            dispatch(
+              modalWindowCrudCategoryOpened('expense', 'hideCategory', cat)
+            );
+          }}
+          className={styles.editCategory}
+        >
+          Delete category
+        </button>
 
         <section>
           {transactionsToThisExpense.length ? (
