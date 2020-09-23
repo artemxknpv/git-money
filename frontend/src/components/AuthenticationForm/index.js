@@ -6,11 +6,16 @@ import loginStarted from '../../redux/actions/authentication/loginStarted.js';
 import registrationStarted from '../../redux/actions/authentication/registrationStarted.js';
 import { motion } from 'framer-motion';
 import styles from './AuthenticationForm.module.scss';
+import modalWindowForgotPasswordAction from "../../redux/actions/modalWindow/openModalWindowForgotPassword";
+import ModalWindowForgotPassword from '../modalWindowForgotPassword'
+
 
 const AuthenticationForm = ({ mode }) => {
   const isError = useSelector(state => state.user.error);
   const errorText = useSelector(state => state.user.errorText);
   const dispatch = useDispatch();
+  const isOpen = useSelector(state => state.isForgotPasswordModal.isOpened)
+
 
   const [input, setInput] = useState({
     firstName: '',
@@ -47,6 +52,7 @@ const AuthenticationForm = ({ mode }) => {
   return mode === 'login' ? (
     <div>
       {/*TODO*/}
+    <ModalWindowForgotPassword show={isOpen}/>
       <form
         onSubmit={event => loginHandler(event)}
         className={styles.inputField}
@@ -83,7 +89,14 @@ const AuthenticationForm = ({ mode }) => {
         <Link to={'/registration'} className={styles.registrationLink}>
           У меня ещё нет аккаунта
         </Link>
-        <p className={styles.forget}>Забыли пароль?</p>
+        <button className={styles.forget}
+        onClick={() => {
+          dispatch(modalWindowForgotPasswordAction())
+        }
+        }
+        >
+          Забыли пароль?
+        </button>
       </div>
       {isError && (
         <div className={styles.errorContainer}>
@@ -167,7 +180,6 @@ const AuthenticationForm = ({ mode }) => {
         <Link to={'/login'} className={styles.registrationLink}>
           У уже есть аккаунт
         </Link>
-        <p className={styles.forget}>Забыли пароль?</p>
       </div>
     </div>
   ) : (
