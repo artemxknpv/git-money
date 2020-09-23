@@ -67,14 +67,14 @@ userSchema.static("createDefaultUser", async function (
     categories: [],
     transactions: [],
   });
-  await newUser.createNewStore("bank", 15);
-  await newUser.createNewStore("cash", 20);
-  await newUser.createNewStore("deadend", 14);
-  await newUser.createNewExpenditure("rent", 13);
-  await newUser.createNewExpenditure("gas", 4);
-  await newUser.createNewExpenditure("food", 1);
-  await newUser.createNewExpenditure("online subscription", 12);
-  await newUser.createNewExpenditure("free time", 0);
+  await newUser.createNewStore("Банк", 15);
+  await newUser.createNewStore("Наличные", 20);
+  await newUser.createNewStore("Копилка", 14);
+  await newUser.createNewExpenditure("Аренда", 13);
+  await newUser.createNewExpenditure("Топливо", 3);
+  await newUser.createNewExpenditure("Еда", 1);
+  await newUser.createNewExpenditure("Онлайн-подписки", 12);
+  await newUser.createNewExpenditure("Свободное время", 0);
   await newUser.save();
   return newUser;
 });
