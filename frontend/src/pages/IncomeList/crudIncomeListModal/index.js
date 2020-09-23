@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import expenses from '../../../img/expenses';
 import incomes from '../../../img/incomes';
 import editNameAction from '../../../redux/actions/crud/editNameCategory';
+import editIconAction from '../../../redux/actions/crud/editIconCategory';
 const backdrop = {
   visible: { opacity: 1 },
   hidden: { opacity: 0 },
@@ -111,7 +112,13 @@ function ModalWindowCrudCategory({ show }) {
                     </motion.button>
                   ))}
                 </div>
-                <button className={styles.addButton} onClick={() => {}}>
+                <button
+                  className={styles.addButton}
+                  onClick={() => {
+                    dispatch(editIconAction(userId, id, chosenIcon));
+                    dispatch(modalCrudOperationsClosed());
+                  }}
+                >
                   Изменить
                 </button>
               </>
