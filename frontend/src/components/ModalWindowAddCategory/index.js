@@ -29,6 +29,7 @@ const modal = {
 
 function ModalWindowAddCategory({ show }) {
   const [name, setName] = useState('');
+  const [limit, setLimit] = useState(null);
   const [error, setError] = useState('');
   const userId = useSelector(state => state.user._id);
   const type = useSelector(state => state.isCategoryModal.type);
@@ -66,6 +67,19 @@ function ModalWindowAddCategory({ show }) {
               onChange={event => setName(event.target.value)}
               className={styles.input}
             />
+            {type === 'expenditure' && (
+              <>
+                <p className={styles.modalSubheader}>Введите лимит категории</p>
+                <input
+                  type="text"
+                  id="limit"
+                  placeholder={'10000'}
+                  value={limit}
+                  onChange={event => setLimit(event.target.value)}
+                  className={styles.input}
+                />
+              </>
+            )}
             <p className={styles.modalSubheader} style={{ flexBasis: '100%' }}>
               Выберите иконку:
             </p>

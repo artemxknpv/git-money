@@ -25,7 +25,7 @@ const AuthenticationForm = ({ mode }) => {
 
   useEffect(() => {
     dispatch(errorReset());
-  }, [dispatch]);
+  }, [dispatch, isError]);
 
   useEffect(() => {
     setIsLoading(false);

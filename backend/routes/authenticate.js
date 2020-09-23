@@ -65,11 +65,12 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { login, password } = req.body;
+  console.log(">>>>>", !login, password);
   let user;
-  if (!login || !password) {
-    res.status(401).json([{ message: "Заполните все поля" }]);
-  }
   try {
+    if (!login || !password) {
+      return res.status(401).json([{ message: "Заполните все поля" }]);
+    }
     user = await modelUser
       .findOne({
         login,
@@ -87,8 +88,9 @@ router.post("/login", async (req, res) => {
     req.session.user = { userId: user.id, login: user.login };
   } catch (err) {
     console.log("Ошибка логинизации:", err);
+    return res.status(401).json([{ message: "Заполните все поля" }]);
   }
-  res.status(200).json({ id: user.id });
+  return res.status(200).json({ id: user.id });
 });
 
 // router.post(
