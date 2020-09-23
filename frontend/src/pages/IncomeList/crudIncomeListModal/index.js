@@ -35,6 +35,7 @@ function ModalWindowCrudCategory({ show }) {
   const type = modalConfiguration.type;
   const subtype = modalConfiguration.subtype;
   const id = modalConfiguration.id;
+  const idStoreTo = modalConfiguration.idStoreTo;
   const [error, setError] = useState('');
   const [name, setName] = useState('');
   const [currentId, setCurrentId] = useState('');
@@ -44,6 +45,18 @@ function ModalWindowCrudCategory({ show }) {
       return category.value === 'store';
     })
   );
+  let nameOfTheCategoryTo = '';
+  nameOfTheCategoryTo = useSelector(state =>
+    state.categories.filter(category => {
+      return category.id === idStoreTo;
+    })
+  );
+  const nameOfTheCurrentCategory = useSelector(state =>
+    state.categories.filter(category => {
+      return category.id === id;
+    })
+  );
+
   console.log(listOfStoreCategories);
   return (
     <AnimatePresence exitBeforeEnter>
@@ -166,7 +179,7 @@ function ModalWindowCrudCategory({ show }) {
                 </p>
                 <div className={styles.iconRow}>
                   {listOfStoreCategories.map(category => {
-                    return (
+                    return category.id !== id ? (
                       <motion.button
                         className={styles.iconOption}
                         onClick={() => {
@@ -188,6 +201,8 @@ function ModalWindowCrudCategory({ show }) {
                           <div> {category.currentNumber}</div>
                         </div>
                       </motion.button>
+                    ) : (
+                      <></>
                     );
                   })}
                 </div>
@@ -205,15 +220,32 @@ function ModalWindowCrudCategory({ show }) {
             )}
             {type === 'store' && subtype == 'transferInProgress' ? (
               <>
-                <h3 className={styles.modalHeader}>Ты опять выебал игру</h3>
+                <h3 className={styles.modalHeader}>
+                  Выберете сумму для перевода
+                </h3>
                 <p
                   className={styles.modalSubheader}
                   style={{ flexBasis: '100%' }}
                 >
-                  Я красава
+                  Из {nameOfTheCurrentCategory[0].name} В{' '}
+                  {nameOfTheCategoryTo[0].name}
                 </p>
-                <button className={styles.addButton} onClick={() => {}}>
-                  Удалить
+                <input
+                  type="text"
+                  id="name"
+                  placeholder={'Сумма'}
+                  value={name}
+                  onChange={event => setName(event.target.value)}
+                  className={styles.input}
+                />
+                <button
+                  className={styles.addButton}
+                  onClick={() => {
+                    // dispatch(editNameAction(userId, id, name));
+                    dispatch(modalCrudOperationsClosed());
+                  }}
+                >
+                  Перевести
                 </button>
               </>
             ) : (
