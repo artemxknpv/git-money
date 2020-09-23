@@ -96,7 +96,7 @@ const Index = () => {
         </div>
         <button
           onClick={() => {
-            dispatch(modalWindowCrudCategoryOpened('store', 'editIcon'));
+            dispatch(modalWindowCrudCategoryOpened('store', 'editIcon', cat));
           }}
           className={styles.editCategory}
         >
@@ -104,7 +104,7 @@ const Index = () => {
         </button>
         <button
           onClick={() => {
-            dispatch(modalWindowCrudCategoryOpened('store', 'editName'));
+            dispatch(modalWindowCrudCategoryOpened('store', 'editName', cat));
           }}
           className={styles.editCategory}
         >
@@ -112,7 +112,9 @@ const Index = () => {
         </button>
         <button
           onClick={() => {
-            dispatch(modalWindowCrudCategoryOpened('store', 'hideCategory'));
+            dispatch(
+              modalWindowCrudCategoryOpened('store', 'hideCategory', cat)
+            );
           }}
           className={styles.editCategory}
         >

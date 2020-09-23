@@ -5,6 +5,7 @@ import modalCrudOperationsClosed from '../../../redux/actions/modalWindow/closeM
 import { motion, AnimatePresence } from 'framer-motion';
 import expenses from '../../../img/expenses';
 import incomes from '../../../img/incomes';
+import editNameAction from '../../../redux/actions/crud/editNameCategory';
 const backdrop = {
   visible: { opacity: 1 },
   hidden: { opacity: 0 },
@@ -26,25 +27,14 @@ const modal = {
 };
 function ModalWindowCrudCategory({ show }) {
   const dispatch = useDispatch();
+  const userId = useSelector(state => state.user._id);
   const modalConfiguration = useSelector(state => state.isCrudModalWindow);
   const type = modalConfiguration.type;
   const subtype = modalConfiguration.subtype;
+  const id = modalConfiguration.id;
+  const [error, setError] = useState('');
+  const [name, setName] = useState('');
   const [chosenIcon, setChosenIcon] = useState(0);
-  // return (show ? (
-  //   <>
-  //     <p>{type}</p>
-  //     <p>{subtype}</p>
-  //     <button
-  //       onClick={() => {
-  //         dispatch(modalCrudOperationsClosed());
-  //       }}
-  //     >
-  //       Закрыть
-  //     </button>
-  //   </>
-  // ) : (
-  //     <></>
-  //   ));
   return (
     <AnimatePresence exitBeforeEnter>
       {show ? (
@@ -52,9 +42,9 @@ function ModalWindowCrudCategory({ show }) {
           <motion.div
             className={styles.backdrop}
             onClick={() => {
-              // setName('');
+              setName('');
               dispatch(modalCrudOperationsClosed());
-              // setError('');
+              setError('');
             }}
             variants={backdrop}
             initial="hidden"
@@ -78,11 +68,16 @@ function ModalWindowCrudCategory({ show }) {
                   type="text"
                   id="name"
                   placeholder={'Название'}
-                  // value={name}
-                  // onChange={event => setName(event.target.value)}
+                  value={name}
+                  onChange={event => setName(event.target.value)}
                   className={styles.input}
                 />
-                <button className={styles.addButton} onClick={() => {}}>
+                <button
+                  className={styles.addButton}
+                  onClick={() => {
+                    dispatch(editNameAction(userId, id, name));
+                  }}
+                >
                   Изменить
                 </button>
               </>
@@ -103,7 +98,7 @@ function ModalWindowCrudCategory({ show }) {
                 <div className={styles.iconRow}>
                   {incomes.map((icon, index) => (
                     <motion.button
-                      // onClick={() => setChosenIcon(index + 14)}
+                      onClick={() => setChosenIcon(index + 14)}
                       whileTap={{ scale: 1.05 }}
                       className={
                         index === chosenIcon

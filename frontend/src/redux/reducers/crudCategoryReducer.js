@@ -1,5 +1,5 @@
 import * as actionTypes from '../action-types.js';
-const initState = { isOpened: false, type: '', subtype: '' };
+const initState = { isOpened: false, type: '', subtype: '', id: '' };
 export default (state = initState, { type, payload }) => {
   switch (type) {
     case actionTypes.MODAL_CRUD_CATEGORY_OPENED:
@@ -8,6 +8,7 @@ export default (state = initState, { type, payload }) => {
         isOpened: true,
         type: payload.type,
         subtype: payload.subtype,
+        id: payload.id,
       };
     case actionTypes.MODAL_CRUD_CATEGORY_CLOSED:
       return initState;

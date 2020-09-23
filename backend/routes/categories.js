@@ -33,7 +33,7 @@ route.delete("/:id", async (req, res) => {
   res.end();
 });
 
-// update the name of the category
+// update the name of the category ??
 route.patch("/:id", bodyParser.json(), async (req, res) => {
   const { id, name } = req.body;
   const userId = req.params.id;
@@ -105,6 +105,10 @@ route.delete("/:id/:cat", async (req, res) => {
   } else {
     res.status(401).end();
   }
+});
+
+route.patch("/:id/:cat", async (req, res) => {
+  console.log("SUCC");
 });
 
 export default route;
