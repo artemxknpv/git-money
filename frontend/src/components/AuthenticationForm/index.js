@@ -25,7 +25,7 @@ const AuthenticationForm = ({ mode }) => {
 
   useEffect(() => {
     dispatch(errorReset());
-  }, [dispatch, isError]);
+  }, [dispatch]);
 
   useEffect(() => {
     setIsLoading(false);
@@ -40,12 +40,14 @@ const AuthenticationForm = ({ mode }) => {
 
   const loginHandler = event => {
     event.preventDefault();
+    dispatch(errorReset());
     dispatch(loginStarted(login, password));
     setIsLoading(true);
   };
 
   const registerHandler = event => {
     event.preventDefault();
+    dispatch(errorReset());
     dispatch(
       registrationStarted(
         firstName,

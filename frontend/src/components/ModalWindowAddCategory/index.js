@@ -117,7 +117,9 @@ function ModalWindowAddCategory({ show }) {
               className={styles.addButton}
               onClick={() => {
                 if (name !== '') {
-                  dispatch(addCategoryStarted(userId, name, type, chosenIcon));
+                  dispatch(
+                    addCategoryStarted(userId, name, type, chosenIcon, limit)
+                  );
                   dispatch(closeModalWindowAddCategory());
                 } else {
                   setError('Поле ввода не может быть пустым');
