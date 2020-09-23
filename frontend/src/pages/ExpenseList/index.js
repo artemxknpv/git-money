@@ -105,7 +105,19 @@ const ExpenseList = () => {
         >
           Delete category
         </button>
-
+        {currentCategory.limit && (
+          <button className={styles.editCategory}>Edit limit</button>
+        )}
+        <div>
+          {currentCategory.limit > currentCategory.currentNumber && (
+            <p>Лимит Превышен!!!</p>
+          )}
+          {currentCategory.limit && (
+            <p>
+              Лимит:{currentCategory.currentNumber}/{currentCategory.limit}
+            </p>
+          )}
+        </div>
         <section>
           {transactionsToThisExpense.length ? (
             Object.keys(objectTime).map(key => {
