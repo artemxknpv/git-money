@@ -21,24 +21,19 @@ function TransactionsHistoryIncome({ id }) {
   useEffect(() => {
     setPrettyTime(new Date(transaction.time).toLocaleString());
   }, [transaction]);
-
-  const targetCategory = { name: 'Name Here' };
-
   return (
     <motion.li style={{ listStyle: 'none' }} onClick={toggleOpen}>
       <motion.div
         className={isOpen ? styles.openedWrapper : styles.wrapper}
         whileHover={{
           scale: 1.1,
-          boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
+          // boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
         }}
-        transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
+        // transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
       >
         <p className={styles.amount}>${transaction && transaction.amount}</p>
         <p className={styles.time}>{prettyTime && prettyTime}</p>
-        {targetCategory && (
-          <p className={styles.targetCategory}>{targetCategory.name}</p>
-        )}
+
         <AnimatePresence>
           {isOpen && (
             <motion.p

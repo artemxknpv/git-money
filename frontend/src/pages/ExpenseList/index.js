@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Fade from 'react-reveal/Fade.js';
 import { useParams, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import differenceInHours from 'date-fns/differenceInHours';
@@ -56,49 +57,52 @@ const ExpenseList = () => {
     }
   });
 
-  function handleClick() {
-    dispatch(deleteCategoryStarted(userId, cat));
-    history.push('/');
-  }
-
   return (
-    <div className={styles.container}>
-      <StyledHeader>
-        <div className={styles.arrowAndCatname}>
-          <Link to={'/'} style={{ textDecoration: 'none', color: '#333333' }}>
-            <i className="fas fa-arrow-left" />
-          </Link>
-          <h2 className={styles.header}>{currentCategory.name}</h2>
-        </div>
-        <span className={styles.editCategory}>Edit category</span>
-      </StyledHeader>
-      <h2>Amount Spent ${currentBalance}</h2>
-      <section>
-        {transactionsToThisExpense.length ? (
-          Object.keys(objectTime).map(key => {
-            return (
-              <div>
-                <h2 className={styles.timePoint}>{key}</h2>
-                {objectTime[key].map(transaction => {
-                  return (
-                    <TransactionHistoryExpenses
-                      id={transaction._id}
-                      key={transaction._id}
-                    />
-                  );
-                })}
-              </div>
-            );
-          })
-        ) : (
-          <div>
-            <p className={styles.emptyWarning}>
-              История добавлений в хранилище {currentCategory.name} пуста
-            </p>
+    <Fade bottom cascade>
+      <div className={styles.container}>
+        <StyledHeader>
+          <div className={styles.arrowAndCatname}>
+            <Link to={'/'} style={{ textDecoration: 'none', color: '#333333' }}>
+              <i className="fas fa-arrow-left" />
+            </Link>
+            <h2 className={styles.header}>{currentCategory.name}</h2>
           </div>
-        )}
-      </section>
-    </div>
+          <p className={styles.totalSpentText}>
+            <span role="img" aria-label="moneybag">
+              💰
+            </span>
+            Потрачено за всё время: ${currentBalance}
+          </p>
+          <span className={styles.editCategory}>Edit category</span>
+        </StyledHeader>
+
+        <section>
+          {transactionsToThisExpense.length ? (
+            Object.keys(objectTime).map(key => {
+              return (
+                <div>
+                  <h2 className={styles.timePoint}>{key}</h2>
+                  {objectTime[key].map(transaction => {
+                    return (
+                      <TransactionHistoryExpenses
+                        id={transaction._id}
+                        key={transaction._id}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })
+          ) : (
+            <div>
+              <p className={styles.emptyWarning}>
+                История трат в категории {currentCategory.name} пуста
+              </p>
+            </div>
+          )}
+        </section>
+      </div>
+    </Fade>
   );
 };
 

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Fade from 'react-reveal/Fade';
 import { useDispatch, useSelector } from 'react-redux';
-import SkeletonLoader from 'tiny-skeleton-loader-react';
 import Expenses from '../../components/Expenses';
+import Greetings from '../../components/Greetings';
 import Header from '../../components/Header';
 import Income from '../../components/Income';
-import InlineLoading from '../../components/InlineLoading';
 import LoadingPage from '../../components/LoadingPage';
 import ModalWindowAddMoney from '../../components/ModalWindowAddMoney';
 import ModalWindowAddCategory from '../../components/ModalWindowAddCategory';
@@ -22,6 +22,7 @@ const MainPage = () => {
   const isModalTransfer = useSelector(
     state => state.isTransferMoneyModal.isOpened
   );
+  const userName = useSelector(state => state.user.firstName);
   const isModalHistoryTransaction = useSelector(
     state => state.isTransactionHistoryModal.isOpened
   );
@@ -31,38 +32,41 @@ const MainPage = () => {
   return !isLoaded ? (
     <LoadingPage loading={true} />
   ) : (
-    <div className={styles.batya}>
-      <>
-        <Navbar />
-        <ModalWindowAddMoney show={isModal} />
-        <ModalWindowAddCategory show={isModalCategory} />
-        <ModalWindowTransferMoney show={isModalTransfer} />
-        <ModalWindowTransactionHistoryExpenses
-          show={isModalHistoryTransaction}
-        />
-        <Header title={'Управление'} />
-        <DragDropContext
-          onDragEnd={result => {
-            const storeId = result.draggableId;
-            const expenseId = result.destination.droppableId;
-            let catStore = categories.filter(
-              element => element.id === storeId
-            )[0];
-            let catExp = categories.filter(
-              element => element.id === expenseId
-            )[0];
-            if (catExp && catStore) {
-              dispatch(openModalTransferMoney(expenseId, storeId));
-            } else {
-              console.log('Fail');
-            }
-          }}
-        >
-          <Income />
-          <Expenses />
-        </DragDropContext>
-      </>
-    </div>
+    <Fade bottom>
+      <div className={styles.batya}>
+        <>
+          {/*<Greetings name={userName} />*/}
+          <Navbar />
+          <ModalWindowAddMoney show={isModal} />
+          <ModalWindowAddCategory show={isModalCategory} />
+          <ModalWindowTransferMoney show={isModalTransfer} />
+          <ModalWindowTransactionHistoryExpenses
+            show={isModalHistoryTransaction}
+          />
+          <Header title={'Управление'} />
+          <DragDropContext
+            onDragEnd={result => {
+              const storeId = result.draggableId;
+              const expenseId = result.destination.droppableId;
+              let catStore = categories.filter(
+                element => element.id === storeId
+              )[0];
+              let catExp = categories.filter(
+                element => element.id === expenseId
+              )[0];
+              if (catExp && catStore) {
+                dispatch(openModalTransferMoney(expenseId, storeId));
+              } else {
+                console.log('Fail');
+              }
+            }}
+          >
+            <Income />
+            <Expenses />
+          </DragDropContext>
+        </>
+      </div>
+    </Fade>
   );
 };
 

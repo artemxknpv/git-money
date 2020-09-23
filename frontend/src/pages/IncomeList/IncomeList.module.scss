@@ -1,4 +1,5 @@
 @import 'src/styles/variables';
+
 * {
   font-family: $regular-font;
 }
@@ -27,4 +28,16 @@
   font-family: $regular-font;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+.timePoint {
+  font-family: 'TT Bold', sans-serif;
+  margin-left: 1.5rem;
+  color: #333333;
+}
+
+.totalSpentText {
+  color: #333333;
+  font-size: 1.2rem;
+  font-family: 'TT Medium', sans-serif;
+  margin: 1.5rem;
 }
