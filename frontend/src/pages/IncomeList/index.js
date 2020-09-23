@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import differenceInHours from 'date-fns/differenceInHours';
@@ -10,8 +10,21 @@ import { StyledHeader } from '../../styled-components/StyledHeader.js';
 import styles from './IncomeList.module.scss';
 import { AnimateSharedLayout, motion } from 'framer-motion';
 import TransactionsHistoryExpensesForIncome from '../../components/TransansactionHistoryForIncome';
+import modalWindowCrudCategoryOpened from '../../redux/actions/modalWindow/openModalWindowCrudCategory';
+import ModalWindowCrudCategory from './crudIncomeListModal';
 
 const Index = () => {
+
+//   const dispatch = useDispatch();
+//   const [isLoading, setIsLoading] = useState(true);
+
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setIsLoading(false);
+//     }, 1000);
+//   }, []);
+// =======
+
   function sortTime(elementA, elementB) {
     if (elementA.time < elementB.time) {
       return 1;
@@ -24,6 +37,7 @@ const Index = () => {
   const { cat } = useParams();
   const listTransactions = useSelector(state => state.transactions);
   const categories = useSelector(state => state.categories);
+  const showCrudModal = useSelector(state => state.isCrudModalWindow.isOpened);
   const storeName = categories.filter(category => category.id === cat)[0].name;
   const thisCategoryList = listTransactions.filter(
     transaction => transaction.to === cat
@@ -53,10 +67,10 @@ const Index = () => {
       objectTime[currentStringTime] = [transaction];
     }
   });
-  console.log(objectTime);
 
   return (
     <div className={styles.container}>
+      <ModalWindowCrudCategory show={showCrudModal} />
       <StyledHeader>
         <div className={styles.arrowAndCatname}>
           <Link to={'/'} style={{ textDecoration: 'none', color: '#333333' }}>
@@ -64,7 +78,32 @@ const Index = () => {
           </Link>
           <h2 className={styles.header}>{storeName}</h2>
         </div>
-        <p className={styles.editCategory}>Edit category</p>
+        <button
+          onClick={() => {
+            dispatch(modalWindowCrudCategoryOpened('store', 'editIcon', cat));
+          }}
+          className={styles.editCategory}
+        >
+          Edit icon
+        </button>
+        <button
+          onClick={() => {
+            dispatch(modalWindowCrudCategoryOpened('store', 'editName', cat));
+          }}
+          className={styles.editCategory}
+        >
+          Edit name
+        </button>
+        <button
+          onClick={() => {
+            dispatch(
+              modalWindowCrudCategoryOpened('store', 'hideCategory', cat)
+            );
+          }}
+          className={styles.editCategory}
+        >
+          Delete category
+        </button>
       </StyledHeader>
       <h2>Current balance: ${currentBalance}</h2>
       {megaArray.length ? (

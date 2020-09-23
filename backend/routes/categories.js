@@ -38,7 +38,7 @@ route.delete("/:id", async (req, res) => {
   res.end();
 });
 
-// update the name of the category
+// update the name of the category ??
 route.patch("/:id", bodyParser.json(), async (req, res) => {
   const { id, name } = req.body;
   const userId = req.params.id;
@@ -106,6 +106,20 @@ route.delete("/:id/:cat", async (req, res) => {
   } else {
     res.status(401).end();
   }
+});
+
+route.patch("/:id/:cat", async (req, res) => {
+  const { newValue, whatToEdit } = req.body;
+  const userId = req.params.id;
+  const idCategory = req.params.cat;
+  const user = await modelUser.findById(userId);
+  if (whatToEdit === "name") {
+    user.updateCategory(idCategory, newValue);
+  }
+  if (whatToEdit === "icon") {
+    user.updateCategoryIcon(idCategory, newValue);
+  }
+  res.end();
 });
 
 export default route;

@@ -33,6 +33,18 @@ export default (state = [], action) => {
       );
     case actionTypes.LOGOUT_SUCCESS:
       return [];
+    case actionTypes.CRUD_ICON_SUCCESS:
+      return state.map(category => {
+        return category.id === action.payload.id
+          ? { ...category, iconId: action.payload.newValue }
+          : category;
+      });
+    case actionTypes.CRUD_NAME_SUCCESS:
+      return state.map(category => {
+        return category.id === action.payload.id
+          ? { ...category, name: action.payload.newValue }
+          : category;
+      });
     default:
       return state;
     // TODO
