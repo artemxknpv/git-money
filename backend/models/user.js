@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema({
       },
       name: String,
       currentNumber: Number,
+      limit: Number,
       iconId: Number,
       id: String,
     },
@@ -147,13 +148,14 @@ userSchema.methods.subtractMoneyExpenditure = async function (
   return this.save();
 };
 
-userSchema.methods.createNewExpenditure = function (name, iconId) {
+userSchema.methods.createNewExpenditure = function (name, iconId, limit) {
   this.categories.push({
     value: "expenditure",
     name: name,
     iconId,
     currentNumber: 0,
     id: uuidv4(),
+    limit: limit,
   });
   return this.save();
 };

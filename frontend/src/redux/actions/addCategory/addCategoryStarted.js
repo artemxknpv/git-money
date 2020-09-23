@@ -7,6 +7,6 @@ export default (userId, name, value, iconId, limit = null) => ({
     name,
     value,
     iconId,
-    limit,
+    limit: limit === null ? null : limit,
   },
 });

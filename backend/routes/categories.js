@@ -10,9 +10,9 @@ const route = express.Router();
 route.put("/:id", async (req, res) => {
   const id = req.params.id;
   const user = await modelUser.findById(id);
-  const { type, name, iconId } = req.body;
+  const { type, name, iconId, limit } = req.body;
   if (type === "expenditure") {
-    const userUpdate = await user.createNewExpenditure(name, iconId);
+    const userUpdate = await user.createNewExpenditure(name, iconId, limit);
     const addition = userUpdate.categories[userUpdate.categories.length - 1];
     return res.json(addition);
   } else if (type === "store") {
