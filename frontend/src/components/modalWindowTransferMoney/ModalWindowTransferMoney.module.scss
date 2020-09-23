@@ -25,7 +25,7 @@
 }
 
 .input {
-  width: 90%;
+  width: 80%;
   height: 37px;
   margin: 66px 16px auto;
   border-width: 0 0 1px;
@@ -77,18 +77,18 @@
   background: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
 }
-
-.modalMain {
-  max-width: 600px;
-  position: absolute;
-  background: white;
-  width: 80%;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-}
+//
+//.modalMain {
+//  max-width: 600px;
+//  position: absolute;
+//  background: white;
+//  width: 80%;
+//  height: auto;
+//  top: 50%;
+//  left: 50%;
+//  transform: translate(-50%, -50%);
+//  border-radius: 10px;
+//}
 
 .modalMain {
   position: fixed;
@@ -111,7 +111,7 @@
   display: none;
 }
 
-.backdrop{
+.backdrop {
   position: fixed;
   top: 0;
   left: 0;
