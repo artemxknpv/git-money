@@ -8,8 +8,15 @@
   margin-left: 1rem;
 }
 
+.totalSpentText {
+  color: #333333;
+  font-size: 1.2rem;
+  font-family: 'TT Medium', sans-serif;
+  margin: 1.5rem;
+}
+
 .timePoint {
-  font-family: "TT Bold", sans-serif;
+  font-family: 'TT Bold', sans-serif;
   color: #333;
   margin-left: 1.5rem;
 }
@@ -33,6 +40,7 @@
   font-family: $regular-font;
   margin-left: 1rem;
   margin-right: 1rem;
+  color: #666666;
 }
 
 .deleteButton,

@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema({
       },
       name: String,
       currentNumber: Number,
+      limit: Number,
       iconId: Number,
       id: String,
     },
@@ -67,9 +68,9 @@ userSchema.static("createDefaultUser", async function (
     categories: [],
     transactions: [],
   });
-  await newUser.createNewStore("Банк", 15);
-  await newUser.createNewStore("Наличные", 20);
-  await newUser.createNewStore("Копилка", 14);
+  await newUser.createNewStore("Банк", 1);
+  await newUser.createNewStore("Наличные", 6);
+  await newUser.createNewStore("Копилка", 0);
   await newUser.createNewExpenditure("Аренда", 13);
   await newUser.createNewExpenditure("Топливо", 3);
   await newUser.createNewExpenditure("Еда", 1);
@@ -147,13 +148,14 @@ userSchema.methods.subtractMoneyExpenditure = async function (
   return this.save();
 };
 
-userSchema.methods.createNewExpenditure = function (name, iconId) {
+userSchema.methods.createNewExpenditure = function (name, iconId, limit) {
   this.categories.push({
     value: "expenditure",
     name: name,
     iconId,
     currentNumber: 0,
     id: uuidv4(),
+    limit: limit,
   });
   return this.save();
 };
@@ -163,6 +165,16 @@ userSchema.methods.updateCategory = async function (id, newName) {
     { "categories.id": id },
     {
       $set: { "categories.$.name": newName },
+    }
+  );
+  return this.save();
+};
+
+userSchema.methods.updateCategoryIcon = async function (id, newIconId) {
+  await this.model("User").update(
+    { "categories.id": id },
+    {
+      $set: { "categories.$.iconId": newIconId },
     }
   );
   return this.save();

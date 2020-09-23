@@ -37,7 +37,7 @@
 .inp:focus {
   outline-width: 0;
   border-width: 0 0 1px;
-  border-color: #6dc4c4;
+  border-color: $green-color;
 }
 .inp::placeholder {
   color: #e3e3e3;
@@ -49,11 +49,8 @@
   width: 100%;
   background: $green-color;
   border-radius: 5px;
-  border: 0;
-  border-color: none;
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-weight: normal;
+  border: 0 none;
+  font-family: 'TT Medium', sans-serif;
   font-size: 15px;
   line-height: 18px;
   text-align: center;
@@ -63,6 +60,11 @@
 }
 .btn:focus {
   outline: 0 !important;
+}
+
+.disabledBtn {
+  @extend .btn;
+  background-color: #e3e3e3;
 }
 
 .afterbutton {

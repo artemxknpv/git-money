@@ -10,6 +10,8 @@ import deleteTransactionSaga from './deleteTransactionSaga';
 import logoutSaga from './logoutSaga.js';
 import deleteIncomeSaga from './deleteIncomeSaga';
 import sendNewPasswordSaga from "./sendNewPasswordSaga";
+import editCategory from './editNameCategorySaga';
+
 
 export default function* () {
   yield all([
@@ -24,5 +26,6 @@ export default function* () {
     logoutSaga(),
     deleteIncomeSaga(),
     sendNewPasswordSaga()
+    editCategory(),
   ]);
 }

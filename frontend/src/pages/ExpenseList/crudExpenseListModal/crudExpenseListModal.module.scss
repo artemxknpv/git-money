@@ -63,18 +63,15 @@
   border-radius: 0 0 10px 10px;
   border: 0;
   border-color: none;
-  font-family: 'TT Medium';
+  font-family: Inter, serif;
+  font-style: normal;
+  font-weight: normal;
   font-size: 15px;
   line-height: 18px;
   text-align: center;
   color: #ffffff;
   margin: 1rem 0 0;
   height: 50px;
-}
-
-.addButton:focus {
-  @extend .addButton;
-  outline: 0;
 }
 
 .modal {
@@ -108,7 +105,7 @@
 }
 
 .iconOption {
-  padding: .5rem;
+  padding: 0.5rem;
   margin: 1rem;
   background: none;
   border: 2px solid white;
@@ -122,6 +119,10 @@
 
 .iconOption:first-child {
   margin-left: 1.5rem;
+}
+
+.iconOption:last-child {
+  margin-right: 1.5rem;
 }
 
 .modalMain {
