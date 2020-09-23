@@ -100,7 +100,7 @@ function ModalWindowCrudCategory({ show }) {
                 <div className={styles.iconRow}>
                   {incomes.map((icon, index) => (
                     <motion.button
-                      onClick={() => setChosenIcon(index + 14)}
+                      onClick={() => setChosenIcon(index)}
                       whileTap={{ scale: 1.05 }}
                       className={
                         index === chosenIcon

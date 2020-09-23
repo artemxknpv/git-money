@@ -14,16 +14,15 @@ import modalWindowCrudCategoryOpened from '../../redux/actions/modalWindow/openM
 import ModalWindowCrudCategory from './crudIncomeListModal';
 
 const Index = () => {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
-//   const dispatch = useDispatch();
-//   const [isLoading, setIsLoading] = useState(true);
-
-//   useEffect(() => {
-//     setTimeout(() => {
-//       setIsLoading(false);
-//     }, 1000);
-//   }, []);
-// =======
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 1000);
+  // }, []);
+  // =======
 
   function sortTime(elementA, elementB) {
     if (elementA.time < elementB.time) {
