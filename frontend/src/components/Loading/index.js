@@ -1,29 +1,15 @@
 import React from 'react';
-import SkeletonLoader from 'tiny-skeleton-loader-react';
-import styles from './Loading.module.scss';
-
-const Loading = () => {
+import { HashLoader } from 'react-spinners';
+import { css } from '@emotion/core';
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: #6dc4c4;
+`;
+const InlineLoading = ({ loading }) => {
   return (
-    <div className={styles.container}>
-      <p className={styles.loaderText}>Подгружаем данные...</p>
-      <SkeletonLoader
-        width={'30%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-      <SkeletonLoader
-        width={'30%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-      <SkeletonLoader
-        width={'30%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-      <SkeletonLoader
-        width={'30%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-    </div>
+    <HashLoader css={override} size={30} color={'#ffffff'} loading={loading} />
   );
 };
 
-export default Loading;
+export default InlineLoading;

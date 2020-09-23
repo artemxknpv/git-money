@@ -1,5 +1,4 @@
 import express from "express";
-import passport from "passport";
 import bcrypt from "bcrypt";
 import { modelUser } from "../models/user.js";
 import bodyParser from "body-parser";
@@ -90,15 +89,6 @@ router.post("/login", async (req, res) => {
   }
   res.status(200).json({ id: user.id });
 });
-
-// router.post(
-//   "/login",
-//   passport.authenticate("local", {
-//     successRedirect: "/",
-//     failureRedirect: "/login",
-//     failureFlash: false,
-//   })
-// );
 
 router.get("/logout", (req, res, next) => {
   req.session.destroy(err => {

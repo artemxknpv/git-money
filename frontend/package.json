@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3001",
   "secure": false,
   "dependencies": {
+    "@emotion/core": "^10.0.35",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -26,6 +27,7 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-spinners": "^0.9.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.1.3",

@@ -4,7 +4,7 @@ import SkeletonLoader from 'tiny-skeleton-loader-react';
 import Expenses from '../../components/Expenses';
 import Header from '../../components/Header';
 import Income from '../../components/Income';
-import Loading from '../../components/Loading';
+import InlineLoading from '../../components/Loading';
 import ModalWindowAddMoney from '../../components/ModalWindowAddMoney';
 import ModalWindowAddCategory from '../../components/ModalWindowAddCategory';
 import ModalWindowTransferMoney from '../../components/modalWindowTransferMoney';
@@ -30,7 +30,7 @@ const MainPage = () => {
   return (
     <div className={styles.batya}>
       {!isLoaded ? (
-        <Loading />
+        <InlineLoading loading={true} />
       ) : (
         <>
           <Navbar />
