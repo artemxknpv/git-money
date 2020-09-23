@@ -168,6 +168,16 @@ userSchema.methods.updateCategory = async function (id, newName) {
   return this.save();
 };
 
+userSchema.methods.updateCategoryIcon = async function (id, newIconId) {
+  await this.model("User").update(
+    { "categories.id": id },
+    {
+      $set: { "categories.$.iconId": newIconId },
+    }
+  );
+  return this.save();
+};
+
 userSchema.methods.gainMoney = async function (idStore, amount) {
   await this.model("User").update(
     {

@@ -108,7 +108,17 @@ route.delete("/:id/:cat", async (req, res) => {
 });
 
 route.patch("/:id/:cat", async (req, res) => {
-  console.log("SUCC");
+  const { newValue, whatToEdit } = req.body;
+  const userId = req.params.id;
+  const idCategory = req.params.cat;
+  const user = await modelUser.findById(userId);
+  if (whatToEdit === "name") {
+    user.updateCategory(idCategory, newValue);
+  }
+  if (whatToEdit === "icon") {
+    user.updateCategoryIcon(idCategory, newValue);
+  }
+  res.end();
 });
 
 export default route;

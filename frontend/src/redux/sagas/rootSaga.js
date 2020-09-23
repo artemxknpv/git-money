@@ -9,7 +9,7 @@ import registrationWatcher from './registrationSaga.js';
 import deleteTransactionSaga from './deleteTransactionSaga';
 import logoutSaga from './logoutSaga.js';
 import deleteIncomeSaga from './deleteIncomeSaga';
-import editCategory from './editCategorySaga';
+import editCategory from './editNameCategorySaga';
 
 export default function* () {
   yield all([

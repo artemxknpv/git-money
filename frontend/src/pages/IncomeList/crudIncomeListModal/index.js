@@ -76,6 +76,7 @@ function ModalWindowCrudCategory({ show }) {
                   className={styles.addButton}
                   onClick={() => {
                     dispatch(editNameAction(userId, id, name));
+                    dispatch(modalCrudOperationsClosed());
                   }}
                 >
                   Изменить
