@@ -25,11 +25,11 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
   }
   if (repPassword !== password) {
     errors.push({ message: "Пароли не совпадают" });
-    return res.status(401).json(errors);
+    // return res.status(401).json(errors);
   }
   if (errors.length > 0) {
     // we can send user inputs
-    res.status(401).json(errors);
+    return res.status(401).json(errors);
   } else {
     //validation passed
     const userMail = await modelUser.findOne({ mail });
