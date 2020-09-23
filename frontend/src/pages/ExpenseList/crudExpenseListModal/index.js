@@ -4,7 +4,6 @@ import styles from './crudExpenseListModal.module.scss';
 import modalCrudOperationsClosed from '../../../redux/actions/modalWindow/closeModalWindowCrudCategory';
 import { motion, AnimatePresence } from 'framer-motion';
 import expenses from '../../../img/expenses';
-import incomes from '../../../img/incomes';
 import editNameAction from '../../../redux/actions/crud/editNameCategory';
 import editIconAction from '../../../redux/actions/crud/editIconCategory';
 const backdrop = {
@@ -132,8 +131,8 @@ function ModalWindowCrudCategory({ show }) {
                   className={styles.modalSubheader}
                   style={{ flexBasis: '100%' }}
                 >
-                  Данное действие нельзя будет вернуть назад, пожалуйста
-                  подумайте еще раз перед тем, как нажать на кнопку удалить
+                  Это действие нельзя отменить. Если вы точно хотите удалить
+                  хранилище - нажмите кнопку "Удалить" ниже
                 </p>
                 <button className={styles.addButton} onClick={() => {}}>
                   Удалить

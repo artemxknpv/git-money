@@ -134,8 +134,8 @@ function ModalWindowCrudCategory({ show }) {
                   className={styles.modalSubheader}
                   style={{ flexBasis: '100%' }}
                 >
-                  Данное действие нельзя будет вернуть назад, пожалуйста
-                  подумайте еще раз перед тем, как нажать на кнопку удалить
+                  Это действие нельзя отменить. Если вы точно хотите удалить
+                  хранилище - нажмите кнопку "Удалить" ниже
                 </p>
                 <button className={styles.addButton} onClick={() => {}}>
                   Удалить

@@ -34,37 +34,34 @@ const MainPage = () => {
   ) : (
     <Fade bottom>
       <div className={styles.batya}>
-        <>
-          {/*<Greetings name={userName} />*/}
-          <Navbar />
-          <ModalWindowAddMoney show={isModal} />
-          <ModalWindowAddCategory show={isModalCategory} />
-          <ModalWindowTransferMoney show={isModalTransfer} />
-          <ModalWindowTransactionHistoryExpenses
-            show={isModalHistoryTransaction}
-          />
-          <Header title={'Управление'} />
-          <DragDropContext
-            onDragEnd={result => {
-              const storeId = result.draggableId;
-              const expenseId = result.destination.droppableId;
-              let catStore = categories.filter(
-                element => element.id === storeId
-              )[0];
-              let catExp = categories.filter(
-                element => element.id === expenseId
-              )[0];
-              if (catExp && catStore) {
-                dispatch(openModalTransferMoney(expenseId, storeId));
-              } else {
-                console.log('Fail');
-              }
-            }}
-          >
-            <Income />
-            <Expenses />
-          </DragDropContext>
-        </>
+        <Navbar />
+        <ModalWindowAddMoney show={isModal} />
+        <ModalWindowAddCategory show={isModalCategory} />
+        <ModalWindowTransferMoney show={isModalTransfer} />
+        <ModalWindowTransactionHistoryExpenses
+          show={isModalHistoryTransaction}
+        />
+        <Header title={'Управление'} />
+        <DragDropContext
+          onDragEnd={result => {
+            const storeId = result.draggableId;
+            const expenseId = result.destination.droppableId;
+            let catStore = categories.filter(
+              element => element.id === storeId
+            )[0];
+            let catExp = categories.filter(
+              element => element.id === expenseId
+            )[0];
+            if (catExp && catStore) {
+              dispatch(openModalTransferMoney(expenseId, storeId));
+            } else {
+              console.log('Fail');
+            }
+          }}
+        >
+          <Income />
+          <Expenses />
+        </DragDropContext>
       </div>
     </Fade>
   );

@@ -107,30 +107,26 @@ const Index = () => {
         {megaArray.length ? (
           Object.keys(objectTime).map(key => {
             return (
-              <div>
+              <div className={styles.timeBlock}>
                 <h2 className={styles.timePoint}>{key}</h2>
                 {objectTime[key].map(transaction => {
                   if (transaction.value === 'loss') {
                     return (
-                      <AnimateSharedLayout>
-                        <motion.ul layout>
-                          <TransactionsHistoryExpensesForIncome
-                            id={transaction._id}
-                            key={transaction._id}
-                          />
-                        </motion.ul>
-                      </AnimateSharedLayout>
+                      <motion.ul>
+                        <TransactionsHistoryExpensesForIncome
+                          id={transaction._id}
+                          key={transaction._id}
+                        />
+                      </motion.ul>
                     );
                   } else if (transaction.value === 'gain') {
                     return (
-                      <AnimateSharedLayout>
-                        <motion.ul layout>
-                          <TransactionsHistoryIncome
-                            id={transaction._id}
-                            key={transaction._id}
-                          />
-                        </motion.ul>
-                      </AnimateSharedLayout>
+                      <motion.ul>
+                        <TransactionsHistoryIncome
+                          id={transaction._id}
+                          key={transaction._id}
+                        />
+                      </motion.ul>
                     );
                   }
                 })}

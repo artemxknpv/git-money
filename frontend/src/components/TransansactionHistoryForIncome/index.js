@@ -54,22 +54,21 @@ function TransactionsHistoryExpense({ id }) {
         <p className={styles.time}>{prettyTime && prettyTime}</p>
         {/*<h2 style={{ margin: '20px' }}> From {nameFrom && nameFrom.name} </h2>*/}
         {/*<h2 style={{ margin: '20px' }}>At time: {prettyTime && prettyTime}</h2>*/}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.p
-              // transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className={styles.additionalContent}
-            >
-              <button className={styles.deleteButton} onClick={handleClick}>
-                Удалить
-              </button>
-              {/*TODO*/}
-            </motion.p>
-          )}
-        </AnimatePresence>
+        {/*<AnimatePresence>*/}
+        {isOpen && (
+          <motion.p
+            // transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={styles.additionalContent}
+          >
+            <button className={styles.deleteButton} onClick={handleClick}>
+              Удалить
+            </button>
+          </motion.p>
+        )}
+        {/*</AnimatePresence>*/}
       </motion.div>
     </motion.li>
   );
