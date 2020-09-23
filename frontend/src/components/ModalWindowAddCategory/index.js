@@ -122,10 +122,3 @@ function ModalWindowAddCategory({ show }) {
 }
 
 export default ModalWindowAddCategory;
-
-// <div className={`${showHideClassName}`}>
-//   <button onClick={() => dispatch(closeModalWindowAddCategory())}>x</button>
-//   <section className={styles.modalMain}>
-//
-//   </section>
-// </div>
