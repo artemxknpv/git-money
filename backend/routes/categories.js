@@ -10,8 +10,13 @@ const route = express.Router();
 route.put("/:id", async (req, res) => {
   const id = req.params.id;
   const user = await modelUser.findById(id);
-  const { type, name, iconId, limit } = req.body;
+  const { type, name, iconId } = req.body;
+  let { limit } = req.body;
   if (type === "expenditure") {
+    if (limit !== undefined) {
+      Number(limit);
+    }
+    console.log(limit, name);
     const userUpdate = await user.createNewExpenditure(name, iconId, limit);
     const addition = userUpdate.categories[userUpdate.categories.length - 1];
     return res.json(addition);
@@ -33,7 +38,7 @@ route.delete("/:id", async (req, res) => {
   res.end();
 });
 
-// update the name of the category
+// update the name of the category ??
 route.patch("/:id", bodyParser.json(), async (req, res) => {
   const { id, name } = req.body;
   const userId = req.params.id;
@@ -101,6 +106,20 @@ route.delete("/:id/:cat", async (req, res) => {
   } else {
     res.status(401).end();
   }
+});
+
+route.patch("/:id/:cat", async (req, res) => {
+  const { newValue, whatToEdit } = req.body;
+  const userId = req.params.id;
+  const idCategory = req.params.cat;
+  const user = await modelUser.findById(userId);
+  if (whatToEdit === "name") {
+    user.updateCategory(idCategory, newValue);
+  }
+  if (whatToEdit === "icon") {
+    user.updateCategoryIcon(idCategory, newValue);
+  }
+  res.end();
 });
 
 export default route;

@@ -29,7 +29,7 @@ const modal = {
 
 function ModalWindowAddCategory({ show }) {
   const [name, setName] = useState('');
-  const [limit, setLimit] = useState(null);
+  const [limit, setLimit] = useState(undefined);
   const [error, setError] = useState('');
   const userId = useSelector(state => state.user._id);
   const type = useSelector(state => state.isCategoryModal.type);
@@ -74,7 +74,7 @@ function ModalWindowAddCategory({ show }) {
                   type="text"
                   id="limit"
                   placeholder={'10000'}
-                  value={limit}
+                  value={limit === Infinity ? '' : limit}
                   onChange={event => setLimit(event.target.value)}
                   className={styles.input}
                 />
@@ -118,13 +118,7 @@ function ModalWindowAddCategory({ show }) {
               onClick={() => {
                 if (name !== '') {
                   dispatch(
-                    addCategoryStarted(
-                      userId,
-                      name,
-                      type,
-                      chosenIcon,
-                      Number(limit)
-                    )
+                    addCategoryStarted(userId, name, type, chosenIcon, limit)
                   );
                   dispatch(closeModalWindowAddCategory());
                 } else {
@@ -144,10 +138,3 @@ function ModalWindowAddCategory({ show }) {
 }
 
 export default ModalWindowAddCategory;
-
-// <div className={`${showHideClassName}`}>
-//   <button onClick={() => dispatch(closeModalWindowAddCategory())}>x</button>
-//   <section className={styles.modalMain}>
-//
-//   </section>
-// </div>
