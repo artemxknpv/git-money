@@ -12,13 +12,6 @@ import { AnimateSharedLayout, motion } from 'framer-motion';
 import TransactionsHistoryExpensesForIncome from '../../components/TransansactionHistoryForIncome';
 
 const Index = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
   function sortTime(elementA, elementB) {
     if (elementA.time < elementB.time) {
       return 1;
@@ -62,26 +55,7 @@ const Index = () => {
   });
   console.log(objectTime);
 
-  return isLoading ? (
-    <>
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '7rem' }}
-      />
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-      <SkeletonLoader
-        width={'20%'}
-        style={{ margin: 'auto', marginTop: '1rem' }}
-      />
-    </>
-  ) : (
+  return (
     <div className={styles.container}>
       <StyledHeader>
         <div className={styles.arrowAndCatname}>

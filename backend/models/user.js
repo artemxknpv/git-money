@@ -67,9 +67,9 @@ userSchema.static("createDefaultUser", async function (
     categories: [],
     transactions: [],
   });
-  await newUser.createNewStore("Банк", 15);
-  await newUser.createNewStore("Наличные", 20);
-  await newUser.createNewStore("Копилка", 14);
+  await newUser.createNewStore("Банк", 1);
+  await newUser.createNewStore("Наличные", 6);
+  await newUser.createNewStore("Копилка", 0);
   await newUser.createNewExpenditure("Аренда", 13);
   await newUser.createNewExpenditure("Топливо", 3);
   await newUser.createNewExpenditure("Еда", 1);

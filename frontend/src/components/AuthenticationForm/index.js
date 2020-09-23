@@ -11,7 +11,7 @@ const AuthenticationForm = ({ mode }) => {
   const isError = useSelector(state => state.user.error);
   const errorText = useSelector(state => state.user.errorText);
   const dispatch = useDispatch();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState({
     firstName: '',
     lastName: '',
@@ -27,6 +27,10 @@ const AuthenticationForm = ({ mode }) => {
     dispatch(errorReset());
   }, [dispatch]);
 
+  useEffect(() => {
+    setIsLoading(false);
+  }, [isError]);
+
   const changeHandler = ({ target: { name, value } }) => {
     setInput({
       ...input,
@@ -37,11 +41,22 @@ const AuthenticationForm = ({ mode }) => {
   const loginHandler = event => {
     event.preventDefault();
     dispatch(loginStarted(login, password));
+    setIsLoading(true);
   };
 
   const registerHandler = event => {
     event.preventDefault();
-    dispatch(registrationStarted(firstName, lastName, email, login, password, repPassword));
+    dispatch(
+      registrationStarted(
+        firstName,
+        lastName,
+        email,
+        login,
+        password,
+        repPassword
+      )
+    );
+    setIsLoading(true);
   };
 
   return mode === 'login' ? (
@@ -75,8 +90,9 @@ const AuthenticationForm = ({ mode }) => {
           type="submit"
           className={styles.btn}
           whileTap={{ scale: 0.95 }}
+          disabled={isLoading}
         >
-          Войти
+          {isLoading ? 'Проверяем...' : 'Войти'}
         </motion.button>
       </form>
       <div className={styles.afterbutton}>
@@ -159,8 +175,12 @@ const AuthenticationForm = ({ mode }) => {
           />
           <span className={styles.label}>Повторите пароль</span>
         </div>
-        <motion.button className={styles.btn} whileTap={{ scale: 0.95 }}>
-          Зарегистрироваться
+        <motion.button
+          disabled={isLoading}
+          className={styles.btn}
+          whileTap={{ scale: 0.95 }}
+        >
+          {isLoading ? 'Регистрируем...' : 'Зарегистрироваться'}
         </motion.button>
       </form>
       <div className={styles.afterbutton}>
