@@ -24,13 +24,6 @@ function TransactionsHistoryExpense({ id }) {
       })[0]
     );
   }, []);
-  console.log(
-    userId,
-    transaction._id,
-    transaction.from,
-    transaction.to,
-    transaction.amount
-  );
   function handleClick() {
     dispatch(
       deleteTransactionStarted(

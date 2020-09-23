@@ -8,6 +8,7 @@ import transferMoneySaga from './transferMoneySaga';
 import registrationWatcher from './registrationSaga.js';
 import deleteTransactionSaga from './deleteTransactionSaga';
 import logoutSaga from './logoutSaga.js';
+import deleteIncomeSaga from './deleteIncomeSaga';
 
 export default function* () {
   yield all([
@@ -20,5 +21,6 @@ export default function* () {
     transferMoneySaga(),
     deleteTransactionSaga(),
     logoutSaga(),
+    deleteIncomeSaga(),
   ]);
 }

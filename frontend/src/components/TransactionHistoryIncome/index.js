@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './TransactionHistoryIncome.module.scss';
 import { useHistory } from 'react-router-dom';
+import deleteIncomeStarted from '../../redux/actions/deleteTransaction/deleteTransactionIncomeStarted';
 
 function TransactionsHistoryIncome({ id }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +48,23 @@ function TransactionsHistoryIncome({ id }) {
               exit={{ opacity: 0 }}
               className={styles.additionalContent}
             >
+              <button
+                onClick={() => {
+                  dispatch(
+                    deleteIncomeStarted(
+                      userId,
+                      transaction._id,
+                      transaction.to,
+                      transaction.amount
+                    )
+                  );
+                }}
+              >
+                Артем задизайни
+              </button>
+
               <p>PLACEHOLDER</p>
+
               {/*TODO*/}
             </motion.p>
           )}

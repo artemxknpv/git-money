@@ -98,6 +98,10 @@ route.delete("/:id/:cat", async (req, res) => {
     await user.addMoneyStore(transaction.from, transaction.amount);
     await user.subtractMoneyExpenditure(transaction.to, transaction.amount);
     res.end();
+  } else if (typeTransaction === "gain") {
+    await user.deleteTheTransaction(transaction.id);
+    await user.subtractMoneyExpenditure(transaction.to, transaction.amount);
+    res.end();
   } else {
     res.status(401).end();
   }
