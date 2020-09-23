@@ -1,6 +1,8 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { CRUD_NAME_STARTED } from '../action-types';
 import { CRUD_ICON_STARTED } from '../action-types';
+import editCategoryName from '../actions/crud/editNameCategorySuccess';
+import editCategoryIcon from '../actions/crud/editIconCategorySuccess';
 
 const editNameFetch = async ({ userId, id, newValue }) => {
   const response = await fetch(`/${userId}/${id}`, {
@@ -30,6 +32,7 @@ function* editCategoryNameWorker(action) {
     id,
     newValue,
   });
+  yield put(editCategoryName(id, newValue));
 }
 
 function* editCategoryIconWorker(action) {
@@ -39,6 +42,7 @@ function* editCategoryIconWorker(action) {
     id,
     newValue,
   });
+  yield put(editCategoryIcon(id, newValue));
 }
 
 export default function* editCategoryWatcher() {
