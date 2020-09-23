@@ -5,12 +5,8 @@ import setCategories from '../actions/setUserInfo/setUserCategories';
 import setTransactions from '../actions/setUserInfo/setUserTransacrions';
 
 const setUserInfofetch = async ({ userId }) => {
-  console.log('userId>>>>>>>', userId);
   const response = await fetch(`/${userId}`);
-  console.log('response>>>>>>>', response);
   const responseJSON = await response.json();
-  console.log('responseJSON>>>>>>>', responseJSON);
-
   return responseJSON;
 };
 
@@ -32,11 +28,9 @@ function* setUserInfoWorker(action) {
   } catch (e) {
     console.log('set user info error', e);
   }
-  console.log(user);
-
-  yield put(setUserInfoSuccess(user));
   yield put(setCategories(categories));
   yield put(setTransactions(transactions));
+  yield put(setUserInfoSuccess(user));
 }
 
 function* setUserInfoWatcher() {

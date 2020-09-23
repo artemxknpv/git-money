@@ -37,7 +37,7 @@ const Category = ({ value, id, iconId }) => {
               }
         }
       >
-        {value === 'store' ? incomes[iconId - 14] : expenses[iconId]}
+        {value === 'store' ? incomes[iconId] : expenses[iconId]}
       </div>
       <p className={styles.categorySubheader} style={{ fontWeight: '700' }}>
         {category.name}

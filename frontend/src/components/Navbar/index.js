@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { motion, useCycle } from 'framer-motion';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Loading from '../Loading';
 import styles from './navbar.module.scss';
 import logoutStarted from '../../redux/actions/authentication/logoutStarted.js';
 
@@ -42,8 +43,11 @@ const Path = props => (
 const Example = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const dispatch = useDispatch();
+  const isLoaded = useSelector(state => state.user.loaded);
 
-  return (
+  return !isLoaded ? (
+    <Loading />
+  ) : (
     <motion.nav initial={false} animate={isOpen ? 'open' : 'closed'}>
       <motion.div className={styles.background} variants={sidebar} />
       <button onClick={toggleOpen} className={styles.buttonNav}>
