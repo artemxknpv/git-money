@@ -8,6 +8,7 @@ import incomes from '../../../img/incomes';
 import editNameAction from '../../../redux/actions/crud/editNameCategory';
 import editIconAction from '../../../redux/actions/crud/editIconCategory';
 import { MoveDirection } from 'react-particles-js';
+import modalWindowCrudCategoryOpened from '../../../redux/actions/modalWindow/openModalWindowCrudCategory';
 const backdrop = {
   visible: { opacity: 1 },
   hidden: { opacity: 0 },
@@ -36,6 +37,7 @@ function ModalWindowCrudCategory({ show }) {
   const id = modalConfiguration.id;
   const [error, setError] = useState('');
   const [name, setName] = useState('');
+  const [currentId, setCurrentId] = useState('');
   const [chosenIcon, setChosenIcon] = useState(0);
   const listOfStoreCategories = useSelector(state =>
     state.categories.filter(category => {
@@ -168,7 +170,14 @@ function ModalWindowCrudCategory({ show }) {
                       <motion.button
                         className={styles.iconOption}
                         onClick={() => {
-                          console.log(category.id);
+                          dispatch(
+                            modalWindowCrudCategoryOpened(
+                              'store',
+                              'transferInProgress',
+                              id,
+                              category.id
+                            )
+                          );
                         }}
                       >
                         <div
@@ -189,6 +198,22 @@ function ModalWindowCrudCategory({ show }) {
                   }}
                 >
                   Выбрать
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
+            {type === 'store' && subtype == 'transferInProgress' ? (
+              <>
+                <h3 className={styles.modalHeader}>Ты опять выебал игру</h3>
+                <p
+                  className={styles.modalSubheader}
+                  style={{ flexBasis: '100%' }}
+                >
+                  Я красава
+                </p>
+                <button className={styles.addButton} onClick={() => {}}>
+                  Удалить
                 </button>
               </>
             ) : (
