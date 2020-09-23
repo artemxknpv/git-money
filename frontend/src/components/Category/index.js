@@ -43,6 +43,7 @@ const Category = ({ value, id, iconId }) => {
         {category.name}
       </p>
       <p className={styles.categorySum}>{category.currentNumber}$</p>
+      {category.limit < category.currentNumber && 'Превышен лимит'}
     </motion.div>
   );
 };

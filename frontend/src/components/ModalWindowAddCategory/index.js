@@ -118,7 +118,13 @@ function ModalWindowAddCategory({ show }) {
               onClick={() => {
                 if (name !== '') {
                   dispatch(
-                    addCategoryStarted(userId, name, type, chosenIcon, limit)
+                    addCategoryStarted(
+                      userId,
+                      name,
+                      type,
+                      chosenIcon,
+                      Number(limit)
+                    )
                   );
                   dispatch(closeModalWindowAddCategory());
                 } else {
