@@ -89,7 +89,7 @@ const AuthenticationForm = ({ mode }) => {
         <Link to={'/registration'} className={styles.registrationLink}>
           У меня ещё нет аккаунта
         </Link>
-        <button className={styles.forget}
+        <button className={styles.forgot}
         onClick={() => {
           dispatch(modalWindowForgotPasswordAction())
         }

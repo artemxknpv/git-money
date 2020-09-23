@@ -57,7 +57,9 @@ const ModalWindowForgotPassword = ({ show }) => {
             <p className={styles.modalSubheader}>
               Введите ваш e-mail адрес
             </p>
-            {isInvalid ? <p>Что то пошло не так</p> : <></>}
+            {isInvalid ? <div className={styles.errorContainer}>
+              <p className={styles.errorMessage}>Что то пошло не так</p>
+            </div> : <></>}
             <input
               type="text"
               id="sum"

@@ -87,14 +87,6 @@
   color: #2d9cdb;
 }
 
-.forget {
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 26px;
-  color: #2d9cdb;
-}
 
 .label {
   color: #e3e3e3;
@@ -112,4 +104,20 @@
 .inp:focus ~ .label,
 .inp:not([value='']) ~ .label {
   top: -70px;
+}
+
+.forgot{
+  margin: 24px 0 32px;
+  border: none;
+  background: none;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+  color: #2d9cdb;
+
+}
+.forgot:focus {
+  outline: 0;
 }
