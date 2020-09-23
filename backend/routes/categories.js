@@ -46,10 +46,8 @@ route.patch("/:id", bodyParser.json(), async (req, res) => {
 route.get("/:id", async (req, res) => {
   const userId = req.params.id;
   let userUpd;
-  console.log(userId);
   try {
     let user = await modelUser.findById(userId);
-    console.log(user);
     userUpd = {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -63,7 +61,6 @@ route.get("/:id", async (req, res) => {
   } catch (err) {
     console.log("ошибка баз данных", err);
   }
-  console.log(userUpd);
 });
 
 // add money to store or transfer money from store to expenditure cat
@@ -86,7 +83,6 @@ route.put("/:id/:cat", async (req, res) => {
 
 // delete the transaction, and add money to the proper parts of the programm
 route.delete("/:id/:cat", async (req, res) => {
-  console.log("HELLO");
   const userId = req.params.id;
   const idTransaction = req.params.cat;
   const user = await modelUser.findById(userId);
