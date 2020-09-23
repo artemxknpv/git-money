@@ -23,15 +23,14 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
     // Check password length
     errors.push({ message: "Пароль должен быть больше 8 символов" });
   }
-  if (errors.length > 0) {
-    // we can send user inputs
-    res.status(401).json(errors);
-  }
-  if(repPassword !== password){
+  if (repPassword !== password) {
     errors.push({ message: "Пароли не совпадают" });
     return res.status(401).json(errors);
   }
-  else {
+  if (errors.length > 0) {
+    // we can send user inputs
+    res.status(401).json(errors);
+  } else {
     //validation passed
     const userMail = await modelUser.findOne({ mail });
     const userLogin = await modelUser.findOne({ login });
@@ -42,11 +41,12 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
         return res.status(401).json(errors);
       }
       if (userLogin) {
-        errors.push({ message: "Пользователь с таким логином уже существует" });
+        errors.push({
+          message: "Пользователь с таким логином уже существует",
+        });
         // we can send user inputs
         return res.status(401).json(errors);
       }
-
     } else {
       const saltRounds = Number(process.env.SALT_ROUNDS ?? 3);
       const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -66,6 +66,9 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
 router.post("/login", async (req, res) => {
   const { login, password } = req.body;
   let user;
+  if (!login || !password) {
+    res.status(401).json([{ message: "Заполните все поля" }]);
+  }
   try {
     user = await modelUser
       .findOne({
