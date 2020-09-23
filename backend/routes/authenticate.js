@@ -2,6 +2,11 @@ import express from "express";
 import bcrypt from "bcrypt";
 import { modelUser } from "../models/user.js";
 import bodyParser from "body-parser";
+import nodemailer from 'nodemailer'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 
 const router = express.Router();
 
@@ -102,4 +107,65 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
+router.patch('/forgotpassword', async (req,res) =>{
+  const {email} = req.body
+
+  try{
+    const user = await modelUser
+      .findOne({
+        mail: email
+      })
+      .exec();
+    if (!user) {
+      return res
+        .status(401)
+        .json([{ message: "Что-то пошло не так" }]);
+    } else {
+      //password generation
+        const length = 8;
+          const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+          let retVal = "";
+        for (let i = 0, n = charset.length; i < length; i++) {
+          retVal += charset.charAt(Math.floor(Math.random() * n));
+        }
+
+      //nodemailer
+      let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+          user: `${process.env.EMAIL}`,
+          pass: `${process.env.EMAIL_PASSWORD}`
+        }
+      });
+      let send = {
+        from: 'GITmoney',
+        to: email,
+        subject: 'Новый пароль',
+        text: retVal,
+      }
+      transporter.sendMail(send, async function (error, info) {
+        if (error) {
+          return res
+            .status(401)
+            .json([{ message: "Что-то пошло не так" }]);
+        }
+        else {
+          console.log('email sent ' + info.response);
+          const saltRounds = Number(process.env.SALT_ROUNDS ?? 3);
+          const hashedPassword = await bcrypt.hash(retVal, saltRounds);
+          user.password = hashedPassword;
+            user.markModified();
+          await user.save()
+          return res.send("Done")
+        }
+      })
+
+
+    }
+  } catch (err){
+    return res.send('hello')
+  }
+})
 export default router;

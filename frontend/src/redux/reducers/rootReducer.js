@@ -6,7 +6,10 @@ import transactionsReducer from './transactionsReducer';
 import modalWindowCategoryReducer from './modalWindowCategoryReducer';
 import modalWindowTransferMoneyReducer from './modalWindowTransferMoneyReducer';
 import modalWindowTransactionHistoryReducer from './transactionHistoryModalReducer';
+import modalWindowForgotPasswordReducer from "./modalWindowForgotPasswordReducer";
+import newPasswordReducer from "./newPasswordReducer";
 import modalWindowCrudCategory from './crudCategoryReducer';
+
 
 export default combineReducers({
   user: userReducer,
@@ -16,5 +19,8 @@ export default combineReducers({
   isCategoryModal: modalWindowCategoryReducer,
   isTransferMoneyModal: modalWindowTransferMoneyReducer,
   isTransactionHistoryModal: modalWindowTransactionHistoryReducer,
+  isForgotPasswordModal: modalWindowForgotPasswordReducer,
+  isNewPasswordSended: newPasswordReducer,
   isCrudModalWindow: modalWindowCrudCategory,
+
 });
