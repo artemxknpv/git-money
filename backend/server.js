@@ -58,9 +58,9 @@ app.put("/", async (req, res) => {
   res.end();
 });
 
-app.use(categoryRouter);
-app.use("/auth", authenticateRouter);
 
+app.use("/auth", authenticateRouter);
+app.use(categoryRouter);
 app.use((err, req, res, next) => {
   console.log(">>>>", err);
 });
