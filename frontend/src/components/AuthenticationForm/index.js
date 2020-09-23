@@ -41,7 +41,7 @@ const AuthenticationForm = ({ mode }) => {
 
   const registerHandler = event => {
     event.preventDefault();
-    dispatch(registrationStarted(firstName, lastName, email, login, password));
+    dispatch(registrationStarted(firstName, lastName, email, login, password, repPassword));
   };
 
   return mode === 'login' ? (
@@ -131,7 +131,7 @@ const AuthenticationForm = ({ mode }) => {
         </div>
         <div>
           <input
-            type="email"
+            // type="email"
             name="email"
             value={email}
             onChange={changeHandler}

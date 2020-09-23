@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import BagOfGoods from '../../img/BagOfGoods.jsx';
-import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
+import BagOfGoods from '../../img/expenses/BagOfGoods.jsx';
+import WalletFilledIcon from '../../img/incomes/WalletFilledIcon.jsx';
 import openModalWindow from '../../redux/actions/modalWindow/openModalWindowAddMoney.js';
 import openModalWindowTransactionHistoryExpenses from '../../redux/actions/modalWindow/openModalWindowTransactionHistory';
 import styles from './Category.module.scss';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import expenses from '../../img/expenses';
+import incomes from '../../img/incomes';
 
-const Category = ({ value, id }) => {
+console.log(expenses, incomes);
+const Category = ({ value, id, iconId }) => {
+  console.log(value, id, iconId);
   const history = useHistory();
   const [add, setAdd] = useState('');
   const userId = useSelector(state => state.user._id);
-
   const dispatch = useDispatch();
   const category = useSelector(state =>
     state.categories.filter(category => category.id === id)
   )[0];
-
   return (
     <motion.div
       className={styles.card}
@@ -35,7 +37,7 @@ const Category = ({ value, id }) => {
               }
         }
       >
-        {value === 'store' ? <WalletFilledIcon /> : <BagOfGoods />}
+        {value === 'store' ? incomes[iconId - 14] : expenses[iconId]}
       </div>
       <p className={styles.categorySubheader} style={{ fontWeight: '700' }}>
         {category.name}

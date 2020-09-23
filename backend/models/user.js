@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema({
       },
       name: String,
       currentNumber: Number,
+      iconId: Number,
       id: String,
     },
   ],
@@ -66,22 +67,23 @@ userSchema.static("createDefaultUser", async function (
     categories: [],
     transactions: [],
   });
-  await newUser.createNewStore("bank");
-  await newUser.createNewStore("cash");
-  await newUser.createNewStore("deadend");
-  await newUser.createNewExpenditure("rent");
-  await newUser.createNewExpenditure("gas");
-  await newUser.createNewExpenditure("food");
-  await newUser.createNewExpenditure("online subscription");
-  await newUser.createNewExpenditure("free time");
+  await newUser.createNewStore("Банк", 15);
+  await newUser.createNewStore("Наличные", 20);
+  await newUser.createNewStore("Копилка", 14);
+  await newUser.createNewExpenditure("Аренда", 13);
+  await newUser.createNewExpenditure("Топливо", 3);
+  await newUser.createNewExpenditure("Еда", 1);
+  await newUser.createNewExpenditure("Онлайн-подписки", 12);
+  await newUser.createNewExpenditure("Свободное время", 0);
   await newUser.save();
   return newUser;
 });
 
-userSchema.methods.createNewStore = function (name) {
+userSchema.methods.createNewStore = function (name, iconId) {
   this.categories.push({
     value: "store",
     name: name,
+    iconId,
     currentNumber: 0,
     id: uuidv4(),
   });
@@ -145,10 +147,11 @@ userSchema.methods.subtractMoneyExpenditure = async function (
   return this.save();
 };
 
-userSchema.methods.createNewExpenditure = function (name) {
+userSchema.methods.createNewExpenditure = function (name, iconId) {
   this.categories.push({
     value: "expenditure",
     name: name,
+    iconId,
     currentNumber: 0,
     id: uuidv4(),
   });

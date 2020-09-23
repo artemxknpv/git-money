@@ -1,8 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import deleteCategoryStarted from '../../redux/actions/deleteCategory/deleteCategoryStarted.js';
-import deleteTransactionStarted from '../../redux/actions/deleteTransaction/deleteTransactionStarted.js';
 import styles from './TransactionHistoryIncome.module.scss';
 import { useHistory } from 'react-router-dom';
 import deleteIncomeStarted from '../../redux/actions/deleteTransaction/deleteTransactionIncomeStarted';
@@ -23,16 +21,12 @@ function TransactionsHistoryIncome({ id }) {
   useEffect(() => {
     setPrettyTime(new Date(transaction.time).toLocaleString());
   }, [transaction]);
-  function handleClick() {
-    dispatch(deleteTransactionStarted(userId, id));
-    history.push('/');
-  }
+
   const targetCategory = { name: 'Name Here' };
 
   return (
-    <motion.li layout style={{ listStyle: 'none' }} onClick={toggleOpen}>
+    <motion.li style={{ listStyle: 'none' }} onClick={toggleOpen}>
       <motion.div
-        layout
         className={isOpen ? styles.openedWrapper : styles.wrapper}
         whileHover={{
           scale: 1.1,
@@ -68,6 +62,9 @@ function TransactionsHistoryIncome({ id }) {
               >
                 Артем задизайни
               </button>
+
+              <p>PLACEHOLDER</p>
+
               {/*TODO*/}
             </motion.p>
           )}

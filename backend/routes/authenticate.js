@@ -7,15 +7,25 @@ import bodyParser from "body-parser";
 const router = express.Router();
 
 router.post("/registration", bodyParser.json(), async (req, res) => {
-  const { firstName, lastName, mail, login, password } = req.body;
+  const { firstName, lastName, mail, login, password, repPassword } = req.body;
   let errors = [];
   // Check that al filds required
   if (!firstName || !lastName || !mail || !login || !password) {
     errors.push({ message: "Заполните все поля" });
   }
-  // Check password length
+  if (mail < 3) {
+    errors.push({ message: "Email должен быть в виде example@example.com" });
+  }
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(mail)) {
+    errors.push({ message: "Email должен быть в виде example@example.com" });
+  }
   if (password.length < 8) {
+    // Check password length
     errors.push({ message: "Пароль должен быть больше 8 символов" });
+  }
+  if (repPassword !== password) {
+    errors.push({ message: "Пароли не совпадают" });
+    return res.status(401).json(errors);
   }
   if (errors.length > 0) {
     // we can send user inputs
@@ -31,7 +41,9 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
         return res.status(401).json(errors);
       }
       if (userLogin) {
-        errors.push({ message: "Пользователь с таким логином уже существует" });
+        errors.push({
+          message: "Пользователь с таким логином уже существует",
+        });
         // we can send user inputs
         return res.status(401).json(errors);
       }
@@ -54,6 +66,9 @@ router.post("/registration", bodyParser.json(), async (req, res) => {
 router.post("/login", async (req, res) => {
   const { login, password } = req.body;
   let user;
+  if (!login || !password) {
+    res.status(401).json([{ message: "Заполните все поля" }]);
+  }
   try {
     user = await modelUser
       .findOne({
