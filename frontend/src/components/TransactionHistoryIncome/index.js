@@ -34,36 +34,31 @@ function TransactionsHistoryIncome({ id }) {
         <p className={styles.amount}>${transaction && transaction.amount}</p>
         <p className={styles.time}>{prettyTime && prettyTime}</p>
 
-        <AnimatePresence>
-          {isOpen && (
-            <motion.p
-              transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className={styles.additionalContent}
+        {isOpen && (
+          <motion.p
+            // transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={styles.additionalContent}
+          >
+            <button
+              className={styles.deleteButton}
+              onClick={() => {
+                dispatch(
+                  deleteIncomeStarted(
+                    userId,
+                    transaction._id,
+                    transaction.to,
+                    transaction.amount
+                  )
+                );
+              }}
             >
-              <button
-                onClick={() => {
-                  dispatch(
-                    deleteIncomeStarted(
-                      userId,
-                      transaction._id,
-                      transaction.to,
-                      transaction.amount
-                    )
-                  );
-                }}
-              >
-                Артем задизайни
-              </button>
-
-              <p>PLACEHOLDER</p>
-
-              {/*TODO*/}
-            </motion.p>
-          )}
-        </AnimatePresence>
+              Удалить
+            </button>
+          </motion.p>
+        )}
       </motion.div>
     </motion.li>
   );

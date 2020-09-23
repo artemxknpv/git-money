@@ -24,7 +24,6 @@
 }
 
 
-
 .additionalContent {
   margin-top: 10px;
   flex-basis: 100%;
@@ -40,11 +39,24 @@
   font-family: $bold-font;
 }
 
+
+.deleteButton,
+.deleteButton:focus {
+  background: none;
+  outline: 0;
+  border: none;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: #eb5757;
+  font-family: 'TT Medium', sans-serif;
+  cursor: pointer;
+}
+
+
 .time {
   max-width: 200px;
   color: #333333;
   font-size: 0.8rem;
-  flex-basis: 30%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
