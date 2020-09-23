@@ -10,6 +10,14 @@ export default (state = initState, { type, payload }) => {
         subtype: payload.subtype,
         id: payload.id,
       };
+    case actionTypes.MODAL_TRANSFER_STORE:
+      return {
+        ...state,
+        isOpened: true,
+        type: payload.type,
+        subtype: payload.subtype,
+        id: payload.id,
+      };
     case actionTypes.MODAL_CRUD_CATEGORY_CLOSED:
       return initState;
     case actionTypes.LOGOUT_SUCCESS:

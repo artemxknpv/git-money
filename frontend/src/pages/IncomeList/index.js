@@ -96,6 +96,16 @@ const Index = () => {
           <button
             onClick={() => {
               dispatch(
+                modalWindowCrudCategoryOpened('store', 'transferStarted', cat)
+              );
+            }}
+            className={styles.editCategory}
+          >
+            Transfer
+          </button>
+          <button
+            onClick={() => {
+              dispatch(
                 modalWindowCrudCategoryOpened('store', 'hideCategory', cat)
               );
             }}
