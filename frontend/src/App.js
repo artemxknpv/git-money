@@ -31,9 +31,9 @@ function App() {
         <Route exact path="/registration">
           <Authentication mode={'registration'} />
         </Route>
-        <Route exact path="/chart">
+        <PrivateRoute exact path="/chart">
           <Chart />
-        </Route>
+        </PrivateRoute>
         <Route path="/">
           <Redirect to={'/login'} />
         </Route>
