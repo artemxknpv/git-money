@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Fade from 'react-reveal/Fade.js';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import differenceInHours from 'date-fns/differenceInHours';
@@ -15,14 +16,6 @@ import ModalWindowCrudCategory from './crudIncomeListModal';
 
 const Index = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 1000);
-  // }, []);
-  // =======
 
   function sortTime(elementA, elementB) {
     if (elementA.time < elementB.time) {
@@ -68,90 +61,91 @@ const Index = () => {
   });
 
   return (
-    <div className={styles.container}>
-      <ModalWindowCrudCategory show={showCrudModal} />
-      <StyledHeader>
-        <div className={styles.arrowAndCatname}>
-          <Link to={'/'} style={{ textDecoration: 'none', color: '#333333' }}>
-            <i className="fas fa-arrow-left" />
-          </Link>
-          <h2 className={styles.header}>{storeName}</h2>
-        </div>
-        <button
-          onClick={() => {
-            dispatch(modalWindowCrudCategoryOpened('store', 'editIcon', cat));
-          }}
-          className={styles.editCategory}
-        >
-          Edit icon
-        </button>
-        <button
-          onClick={() => {
-            dispatch(modalWindowCrudCategoryOpened('store', 'editName', cat));
-          }}
-          className={styles.editCategory}
-        >
-          Edit name
-        </button>
-        <button
-          onClick={() => {
-            dispatch(
-              modalWindowCrudCategoryOpened('store', 'hideCategory', cat)
-            );
-          }}
-          className={styles.editCategory}
-        >
-          Delete category
-        </button>
-      </StyledHeader>
-      <h2>Current balance: ${currentBalance}</h2>
-      {megaArray.length ? (
-        Object.keys(objectTime).map(key => {
-          return (
-            <div>
-              <h2 className={styles.timePoint}>{key}</h2>
-              {objectTime[key].map(transaction => {
-                // return (
-                //   <TransactionHistoryExpenses
-                //   id={transaction._id}
-                //   key={transaction._id}
-                //   />
-                //   );
-                if (transaction.value === 'loss') {
-                  return (
-                    <AnimateSharedLayout>
-                      <motion.ul layout>
-                        <TransactionsHistoryExpensesForIncome
-                          id={transaction._id}
-                          key={transaction._id}
-                        />
-                      </motion.ul>
-                    </AnimateSharedLayout>
-                  );
-                } else if (transaction.value === 'gain') {
-                  return (
-                    <AnimateSharedLayout>
-                      <motion.ul layout>
-                        <TransactionsHistoryIncome
-                          id={transaction._id}
-                          key={transaction._id}
-                        />
-                      </motion.ul>
-                    </AnimateSharedLayout>
-                  );
-                }
-              })}
-            </div>
-          );
-        })
-      ) : (
-        <div>
-          <p className={styles.emptyWarning}>
-            История добавлений в хранилище {storeName} пуста
+    <Fade bottom cascade>
+      <div className={styles.container}>
+        <ModalWindowCrudCategory show={showCrudModal} />
+        <StyledHeader>
+          <div className={styles.arrowAndCatname}>
+            <Link to={'/'} style={{ textDecoration: 'none', color: '#333333' }}>
+              <i className="fas fa-arrow-left" />
+            </Link>
+            <h2 className={styles.header}>{storeName}</h2>
+          </div>
+          <p className={styles.totalSpentText}>
+            <span role="img" aria-label="moneybag">
+              💰
+            </span>
+            Текущий баланс: ${currentBalance}
           </p>
-        </div>
-      )}
-    </div>
+          <button
+            onClick={() => {
+              dispatch(modalWindowCrudCategoryOpened('store', 'editIcon', cat));
+            }}
+            className={styles.editCategory}
+          >
+            Edit icon
+          </button>
+          <button
+            onClick={() => {
+              dispatch(modalWindowCrudCategoryOpened('store', 'editName', cat));
+            }}
+            className={styles.editCategory}
+          >
+            Edit name
+          </button>
+          <button
+            onClick={() => {
+              dispatch(
+                modalWindowCrudCategoryOpened('store', 'hideCategory', cat)
+              );
+            }}
+            className={styles.editCategory}
+          >
+            Delete category
+          </button>
+        </StyledHeader>
+        {megaArray.length ? (
+          Object.keys(objectTime).map(key => {
+            return (
+              <div>
+                <h2 className={styles.timePoint}>{key}</h2>
+                {objectTime[key].map(transaction => {
+                  if (transaction.value === 'loss') {
+                    return (
+                      <AnimateSharedLayout>
+                        <motion.ul layout>
+                          <TransactionsHistoryExpensesForIncome
+                            id={transaction._id}
+                            key={transaction._id}
+                          />
+                        </motion.ul>
+                      </AnimateSharedLayout>
+                    );
+                  } else if (transaction.value === 'gain') {
+                    return (
+                      <AnimateSharedLayout>
+                        <motion.ul layout>
+                          <TransactionsHistoryIncome
+                            id={transaction._id}
+                            key={transaction._id}
+                          />
+                        </motion.ul>
+                      </AnimateSharedLayout>
+                    );
+                  }
+                })}
+              </div>
+            );
+          })
+        ) : (
+          <div>
+            <p className={styles.emptyWarning}>
+              История операций в категории {storeName} пуста
+            </p>
+          </div>
+        )}
+      </div>
+    </Fade>
   );
 };
 
