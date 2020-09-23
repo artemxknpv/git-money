@@ -116,6 +116,7 @@ router.patch('/forgotpassword', async (req,res) =>{
         mail: email
       })
       .exec();
+    console.log(user)
     if (!user) {
       return res
         .status(401)
@@ -158,6 +159,7 @@ router.patch('/forgotpassword', async (req,res) =>{
           user.password = hashedPassword;
             user.markModified();
           await user.save()
+          console.log(user)
           return res.send("Done")
         }
       })

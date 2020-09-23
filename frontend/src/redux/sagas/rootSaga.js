@@ -25,7 +25,7 @@ export default function* () {
     deleteTransactionSaga(),
     logoutSaga(),
     deleteIncomeSaga(),
-    sendNewPasswordSaga()
+    sendNewPasswordSaga(),
     editCategory(),
   ]);
 }
