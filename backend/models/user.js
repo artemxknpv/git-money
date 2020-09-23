@@ -49,6 +49,16 @@ const userSchema = mongoose.Schema({
       time: Number,
     },
   ],
+  transfers: [
+    {
+      value: String,
+      from: String,
+      to: String,
+      amount: Number,
+      id: String,
+      time: Number,
+    },
+  ],
 });
 
 userSchema.static("createDefaultUser", async function (
@@ -67,6 +77,7 @@ userSchema.static("createDefaultUser", async function (
     totalMoney: 0,
     categories: [],
     transactions: [],
+    transfers: [],
   });
   await newUser.createNewStore("Банк", 1);
   await newUser.createNewStore("Наличные", 6);
@@ -128,6 +139,41 @@ userSchema.methods.addMoneyStore = async function (idStore, amount) {
       },
     }
   );
+  return this.save();
+};
+
+userSchema.methods.transferMoneyStores = async function (
+  idStoreTo,
+  idStoreFrom,
+  amount
+) {
+  await this.model("User").update(
+    {
+      "categories.id": idStoreTo,
+    },
+    {
+      $inc: {
+        "categories.$.currentNumber": amount,
+      },
+    }
+  );
+  await this.model("User").update(
+    {
+      "categories.id": idStoreFrom,
+    },
+    {
+      $inc: {
+        "categories.$.currentNumber": -amount,
+      },
+    }
+  );
+  await this.transfers.push({
+    to: idStoreTo,
+    from: idStoreFrom,
+    amount: amount,
+    id: uuidv4(),
+    time: Date.now(),
+  });
   return this.save();
 };
 

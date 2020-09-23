@@ -3,6 +3,7 @@ import { modelUser } from "../models/user.js";
 
 // I am using the body parser simply for the purpose of testing with POSTMAN
 import bodyParser from "body-parser";
+import router from "./authenticate.js";
 
 const route = express.Router();
 
@@ -84,6 +85,16 @@ route.put("/:id/:cat", async (req, res) => {
     const lastTransaction = user.transactions[user.transactions.length - 1];
     return res.json(lastTransaction);
   }
+});
+
+router.post("/:id/:cat", async (req, res) => {
+  const { amount, idStoreFrom } = req.body;
+  const userId = req.params.id;
+  const idStoreTo = req.params.cat;
+  const user = await modelUser.findById(userId);
+  await user.transaferMoneyStores(idStoreTo, idStoreFrom, amount);
+  const lastTransaction = user.transfers[user.transfers.length - 1];
+  return res.json(lastTransaction);
 });
 
 // delete the transaction, and add money to the proper parts of the programm
