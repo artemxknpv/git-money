@@ -2,7 +2,8 @@ import * as React from 'react';
 import { motion, useCycle } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import InlineLoading from '../Loading';
+import InlineLoading from '../InlineLoading';
+import LoadingPage from '../LoadingPage';
 import styles from './navbar.module.scss';
 import logoutStarted from '../../redux/actions/authentication/logoutStarted.js';
 
@@ -46,7 +47,7 @@ const Example = () => {
   const isLoaded = useSelector(state => state.user.loaded);
 
   return !isLoaded ? (
-    <InlineLoading />
+    <LoadingPage loading={true} />
   ) : (
     <motion.nav initial={false} animate={isOpen ? 'open' : 'closed'}>
       <motion.div className={styles.background} variants={sidebar} />

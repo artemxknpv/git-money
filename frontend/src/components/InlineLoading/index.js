@@ -6,6 +6,7 @@ const override = css`
   margin: 0 auto;
   border-color: #6dc4c4;
 `;
+
 const InlineLoading = ({ loading }) => {
   return (
     <HashLoader css={override} size={30} color={'#ffffff'} loading={loading} />

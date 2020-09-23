@@ -37,7 +37,7 @@
 .inp:focus {
   outline-width: 0;
   border-width: 0 0 1px;
-  border-color: #6dc4c4;
+  border-color: $green-color;
 }
 .inp::placeholder {
   color: #e3e3e3;

@@ -5,7 +5,7 @@ import errorReset from '../../redux/actions/authentication/errorReset.js';
 import loginStarted from '../../redux/actions/authentication/loginStarted.js';
 import registrationStarted from '../../redux/actions/authentication/registrationStarted.js';
 import { motion } from 'framer-motion';
-import InlineLoading from '../Loading';
+import InlineLoading from '../InlineLoading';
 import styles from './AuthenticationForm.module.scss';
 
 const AuthenticationForm = ({ mode }) => {
@@ -180,10 +180,14 @@ const AuthenticationForm = ({ mode }) => {
         </div>
         <motion.button
           disabled={isLoading}
-          className={styles.btn}
+          className={isLoading ? styles.disabledBtn : styles.btn}
           whileTap={{ scale: 0.95 }}
         >
-          {isLoading ? 'Регистрируем...' : 'Зарегистрироваться'}
+          {isLoading ? (
+            <i>{<InlineLoading loading={true} />}</i>
+          ) : (
+            'Зарегистрироваться'
+          )}
         </motion.button>
       </form>
       <div className={styles.afterbutton}>
@@ -194,7 +198,7 @@ const AuthenticationForm = ({ mode }) => {
       </div>
     </div>
   ) : (
-    <>лох</>
+    <></>
   );
 };
 
