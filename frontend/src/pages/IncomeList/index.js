@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import Fade from 'react-reveal/Fade.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -70,22 +68,6 @@ const Index = () => {
   });
 
   return (
-// <<<<<<< loaders
-//     <Fade bottom cascade>
-//       <div className={styles.container}>
-//         <StyledHeader>
-//           <div className={styles.arrowAndCatname}>
-//             <Link to={'/'} style={{ textDecoration: 'none', color: '#333333' }}>
-//               <i className="fas fa-arrow-left" />
-//             </Link>
-//             <h2 className={styles.header}>{storeName}</h2>
-//           </div>
-//           <p className={styles.totalSpentText}>
-//             <span role="img" aria-label="moneybag">
-//               💰
-//             </span>
-//             Текущий баланс: ${currentBalance}
-// =======
     <div className={styles.container}>
       <ModalWindowCrudCategory show={showCrudModal} />
       <StyledHeader>
@@ -166,52 +148,10 @@ const Index = () => {
         <div>
           <p className={styles.emptyWarning}>
             История добавлений в хранилище {storeName} пуста
-// >>>>>>> develop
           </p>
-          <p className={styles.editCategory}>Edit category</p>
-        </StyledHeader>
-        {megaArray.length ? (
-          Object.keys(objectTime).map(key => {
-            return (
-              <div>
-                <h2 className={styles.timePoint}>{key}</h2>
-                {objectTime[key].map(transaction => {
-                  if (transaction.value === 'loss') {
-                    return (
-                      <AnimateSharedLayout>
-                        <motion.ul>
-                          <TransactionsHistoryExpensesForIncome
-                            id={transaction._id}
-                            key={transaction._id}
-                          />
-                        </motion.ul>
-                      </AnimateSharedLayout>
-                    );
-                  } else if (transaction.value === 'gain') {
-                    return (
-                      <AnimateSharedLayout>
-                        <motion.ul>
-                          <TransactionsHistoryIncome
-                            id={transaction._id}
-                            key={transaction._id}
-                          />
-                        </motion.ul>
-                      </AnimateSharedLayout>
-                    );
-                  }
-                })}
-              </div>
-            );
-          })
-        ) : (
-          <div>
-            <p className={styles.emptyWarning}>
-              История добавлений в хранилище {storeName} пуста
-            </p>
-          </div>
-        )}
-      </div>
-    </Fade>
+        </div>
+      )}
+    </div>
   );
 };
 
