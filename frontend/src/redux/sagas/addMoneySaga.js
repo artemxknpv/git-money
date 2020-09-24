@@ -13,6 +13,8 @@ const addMoneyStoreFetch = async ({ userId, id, amount }) => {
     body: JSON.stringify({ amount }),
   });
   const responseJSON = await response.json();
+  console.log(response);
+  console.log(responseJSON);
   return responseJSON;
 };
 
@@ -20,12 +22,16 @@ function* addMoneyStoreWorker(action) {
   const { userId, id, amount } = action.payload;
   try {
     const transaction = yield call(addMoneyStoreFetch, { userId, id, amount });
-    yield put(addTransaction(transaction));
-    yield put(addTotalMoney(amount));
+    if (transaction.message !== null) {
+      console.log(transaction.message);
+    } else {
+      yield put(addTransaction(transaction));
+      yield put(addTotalMoney(amount));
+      yield put(addMoneyStoreSuccess(id, amount));
+    }
   } catch (err) {
     console.log('add money error', err);
   }
-  yield put(addMoneyStoreSuccess(id, amount));
 }
 
 export default function* addMoneyStoreWatcher() {
