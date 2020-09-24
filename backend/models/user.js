@@ -31,6 +31,8 @@ const userSchema = mongoose.Schema({
       },
       name: String,
       currentNumber: Number,
+      limit: Number,
+      iconId: Number,
       id: String,
     },
   ],
@@ -40,6 +42,16 @@ const userSchema = mongoose.Schema({
         type: String,
         enum: ["gain", "loss"],
       },
+      from: String,
+      to: String,
+      amount: Number,
+      id: String,
+      time: Number,
+    },
+  ],
+  transfers: [
+    {
+      value: String,
       from: String,
       to: String,
       amount: Number,
@@ -65,23 +77,25 @@ userSchema.static("createDefaultUser", async function (
     totalMoney: 0,
     categories: [],
     transactions: [],
+    transfers: [],
   });
-  await newUser.createNewStore("bank");
-  await newUser.createNewStore("cash");
-  await newUser.createNewStore("deadend");
-  await newUser.createNewExpenditure("rent");
-  await newUser.createNewExpenditure("gas");
-  await newUser.createNewExpenditure("food");
-  await newUser.createNewExpenditure("online subscription");
-  await newUser.createNewExpenditure("free time");
+  await newUser.createNewStore("Банк", 1);
+  await newUser.createNewStore("Наличные", 6);
+  await newUser.createNewStore("Копилка", 0);
+  await newUser.createNewExpenditure("Аренда", 13);
+  await newUser.createNewExpenditure("Топливо", 3);
+  await newUser.createNewExpenditure("Еда", 1);
+  await newUser.createNewExpenditure("Онлайн-подписки", 12);
+  await newUser.createNewExpenditure("Свободное время", 0);
   await newUser.save();
   return newUser;
 });
 
-userSchema.methods.createNewStore = function (name) {
+userSchema.methods.createNewStore = function (name, iconId) {
   this.categories.push({
     value: "store",
     name: name,
+    iconId,
     currentNumber: 0,
     id: uuidv4(),
   });
@@ -128,6 +142,41 @@ userSchema.methods.addMoneyStore = async function (idStore, amount) {
   return this.save();
 };
 
+userSchema.methods.transferMoneyStores = async function (
+  idStoreTo,
+  idStoreFrom,
+  amount
+) {
+  await this.model("User").update(
+    {
+      "categories.id": idStoreTo,
+    },
+    {
+      $inc: {
+        "categories.$.currentNumber": amount,
+      },
+    }
+  );
+  await this.model("User").update(
+    {
+      "categories.id": idStoreFrom,
+    },
+    {
+      $inc: {
+        "categories.$.currentNumber": -amount,
+      },
+    }
+  );
+  await this.transfers.push({
+    to: idStoreTo,
+    from: idStoreFrom,
+    amount: amount,
+    id: uuidv4(),
+    time: Date.now(),
+  });
+  return this.save();
+};
+
 userSchema.methods.subtractMoneyExpenditure = async function (
   idTransaction,
   amount
@@ -145,12 +194,14 @@ userSchema.methods.subtractMoneyExpenditure = async function (
   return this.save();
 };
 
-userSchema.methods.createNewExpenditure = function (name) {
+userSchema.methods.createNewExpenditure = function (name, iconId, limit) {
   this.categories.push({
     value: "expenditure",
     name: name,
+    iconId,
     currentNumber: 0,
     id: uuidv4(),
+    limit: limit,
   });
   return this.save();
 };
@@ -160,6 +211,16 @@ userSchema.methods.updateCategory = async function (id, newName) {
     { "categories.id": id },
     {
       $set: { "categories.$.name": newName },
+    }
+  );
+  return this.save();
+};
+
+userSchema.methods.updateCategoryIcon = async function (id, newIconId) {
+  await this.model("User").update(
+    { "categories.id": id },
+    {
+      $set: { "categories.$.iconId": newIconId },
     }
   );
   return this.save();

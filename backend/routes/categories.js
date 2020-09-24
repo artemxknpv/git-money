@@ -3,6 +3,7 @@ import { modelUser } from "../models/user.js";
 
 // I am using the body parser simply for the purpose of testing with POSTMAN
 import bodyParser from "body-parser";
+import router from "./authenticate.js";
 
 const route = express.Router();
 
@@ -10,13 +11,18 @@ const route = express.Router();
 route.put("/:id", async (req, res) => {
   const id = req.params.id;
   const user = await modelUser.findById(id);
-  const { type, name } = req.body;
+  const { type, name, iconId } = req.body;
+  let { limit } = req.body;
   if (type === "expenditure") {
-    const userUpdate = await user.createNewExpenditure(name);
+    if (limit !== undefined) {
+      Number(limit);
+    }
+    console.log(limit, name);
+    const userUpdate = await user.createNewExpenditure(name, iconId, limit);
     const addition = userUpdate.categories[userUpdate.categories.length - 1];
     return res.json(addition);
   } else if (type === "store") {
-    const userUpdate = await user.createNewStore(name);
+    const userUpdate = await user.createNewStore(name, iconId);
     const addition = userUpdate.categories[userUpdate.categories.length - 1];
     return res.json(addition);
   } else {
@@ -33,7 +39,7 @@ route.delete("/:id", async (req, res) => {
   res.end();
 });
 
-// update the name of the category
+// update the name of the category ??
 route.patch("/:id", bodyParser.json(), async (req, res) => {
   const { id, name } = req.body;
   const userId = req.params.id;
@@ -46,10 +52,8 @@ route.patch("/:id", bodyParser.json(), async (req, res) => {
 route.get("/:id", async (req, res) => {
   const userId = req.params.id;
   let userUpd;
-  console.log(userId);
   try {
     let user = await modelUser.findById(userId);
-    console.log(user);
     userUpd = {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -58,12 +62,12 @@ route.get("/:id", async (req, res) => {
       totalMoney: user.totalMoney,
       categories: user.categories,
       transactions: user.transactions,
+      transfers: user.transfers,
     };
     res.json(userUpd);
   } catch (err) {
     console.log("ошибка баз данных", err);
   }
-  console.log(userUpd);
 });
 
 // add money to store or transfer money from store to expenditure cat
@@ -84,9 +88,19 @@ route.put("/:id/:cat", async (req, res) => {
   }
 });
 
+route.post("/transfer/:id/:cat", async (req, res) => {
+  console.log("privet");
+  const { amount, idStoreFrom } = req.body;
+  const userId = req.params.id;
+  const idStoreTo = req.params.cat;
+  const user = await modelUser.findById(userId);
+  await user.transferMoneyStores(idStoreTo, idStoreFrom, amount);
+  const lastTransfer = user.transfers[user.transfers.length - 1];
+  return res.json(lastTransfer);
+});
+
 // delete the transaction, and add money to the proper parts of the programm
 route.delete("/:id/:cat", async (req, res) => {
-  console.log("HELLO");
   const userId = req.params.id;
   const idTransaction = req.params.cat;
   const user = await modelUser.findById(userId);
@@ -98,9 +112,27 @@ route.delete("/:id/:cat", async (req, res) => {
     await user.addMoneyStore(transaction.from, transaction.amount);
     await user.subtractMoneyExpenditure(transaction.to, transaction.amount);
     res.end();
+  } else if (typeTransaction === "gain") {
+    await user.deleteTheTransaction(transaction.id);
+    await user.subtractMoneyExpenditure(transaction.to, transaction.amount);
+    res.end();
   } else {
     res.status(401).end();
   }
+});
+
+route.patch("/:id/:cat", async (req, res) => {
+  const { newValue, whatToEdit } = req.body;
+  const userId = req.params.id;
+  const idCategory = req.params.cat;
+  const user = await modelUser.findById(userId);
+  if (whatToEdit === "name") {
+    user.updateCategory(idCategory, newValue);
+  }
+  if (whatToEdit === "icon") {
+    user.updateCategoryIcon(idCategory, newValue);
+  }
+  res.end();
 });
 
 export default route;

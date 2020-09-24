@@ -5,11 +5,7 @@ export const StyledHeader = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-  margin-top: 64px;
   color: #333;
-  font-family: 'Formular', sans-serif;
-  margin-bottom: 1.5rem;
+  margin: 1rem 1.5rem 1.5rem;
   max-width: 1000px;
 `;

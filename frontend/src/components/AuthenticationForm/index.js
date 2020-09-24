@@ -5,13 +5,18 @@ import errorReset from '../../redux/actions/authentication/errorReset.js';
 import loginStarted from '../../redux/actions/authentication/loginStarted.js';
 import registrationStarted from '../../redux/actions/authentication/registrationStarted.js';
 import { motion } from 'framer-motion';
+import InlineLoading from '../InlineLoading';
 import styles from './AuthenticationForm.module.scss';
+import modalWindowForgotPasswordAction from "../../redux/actions/modalWindow/openModalWindowForgotPassword";
+import ModalWindowForgotPassword from '../modalWindowForgotPassword'
+
 
 const AuthenticationForm = ({ mode }) => {
   const isError = useSelector(state => state.user.error);
   const errorText = useSelector(state => state.user.errorText);
   const dispatch = useDispatch();
-
+  const isOpen = useSelector(state => state.isForgotPasswordModal.isOpened)
+  const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState({
     firstName: '',
     lastName: '',
@@ -27,6 +32,10 @@ const AuthenticationForm = ({ mode }) => {
     dispatch(errorReset());
   }, [dispatch]);
 
+  useEffect(() => {
+    setIsLoading(false);
+  }, [isError]);
+
   const changeHandler = ({ target: { name, value } }) => {
     setInput({
       ...input,
@@ -36,18 +45,31 @@ const AuthenticationForm = ({ mode }) => {
 
   const loginHandler = event => {
     event.preventDefault();
+    dispatch(errorReset());
     dispatch(loginStarted(login, password));
+    setIsLoading(true);
   };
 
   const registerHandler = event => {
     event.preventDefault();
-    dispatch(registrationStarted(firstName, lastName, email, login, password));
+    dispatch(errorReset());
+    dispatch(
+      registrationStarted(
+        firstName,
+        lastName,
+        email,
+        login,
+        password,
+        repPassword
+      )
+    );
+    setIsLoading(true);
   };
 
   return mode === 'login' ? (
     <div>
-      {isError && <p>{errorText}</p>}
       {/*TODO*/}
+    <ModalWindowForgotPassword show={isOpen}/>
       <form
         onSubmit={event => loginHandler(event)}
         className={styles.inputField}
@@ -74,23 +96,40 @@ const AuthenticationForm = ({ mode }) => {
         </div>
         <motion.button
           type="submit"
-          className={styles.btn}
+          className={!isLoading ? styles.btn : styles.disabledBtn}
           whileTap={{ scale: 0.95 }}
+          disabled={isLoading}
         >
-          Войти
+          {isLoading ? <i>{<InlineLoading loading={true} />}</i> : 'Войти'}
         </motion.button>
       </form>
       <div className={styles.afterbutton}>
         <Link to={'/registration'} className={styles.registrationLink}>
           У меня ещё нет аккаунта
         </Link>
-        <p className={styles.forget}>Забыли пароль?</p>
+        <button className={styles.forgot}
+        onClick={() => {
+          dispatch(modalWindowForgotPasswordAction())
+        }
+        }
+        >
+          Забыли пароль?
+        </button>
       </div>
+      {isError && (
+        <div className={styles.errorContainer}>
+          <p className={styles.errorMessage}>{errorText}</p>
+        </div>
+      )}
     </div>
   ) : mode === 'registration' ? (
     <div>
+      {isError && (
+        <div className={styles.errorContainer}>
+          <p className={styles.errorMessage}>{errorText}</p>
+        </div>
+      )}
       <form onSubmit={registerHandler} className={styles.inputField}>
-        {isError && errorText}
         <div>
           <input
             type="text"
@@ -123,7 +162,7 @@ const AuthenticationForm = ({ mode }) => {
         </div>
         <div>
           <input
-            type="email"
+            // type="email"
             name="email"
             value={email}
             onChange={changeHandler}
@@ -151,19 +190,26 @@ const AuthenticationForm = ({ mode }) => {
           />
           <span className={styles.label}>Повторите пароль</span>
         </div>
-        <motion.button className={styles.btn} whileTap={{ scale: 0.95 }}>
-          Зарегистрироваться
+        <motion.button
+          disabled={isLoading}
+          className={isLoading ? styles.disabledBtn : styles.btn}
+          whileTap={{ scale: 0.95 }}
+        >
+          {isLoading ? (
+            <i>{<InlineLoading loading={true} />}</i>
+          ) : (
+            'Зарегистрироваться'
+          )}
         </motion.button>
       </form>
       <div className={styles.afterbutton}>
         <Link to={'/login'} className={styles.registrationLink}>
           У уже есть аккаунт
         </Link>
-        <p className={styles.forget}>Забыли пароль?</p>
       </div>
     </div>
   ) : (
-    <>лох</>
+    <></>
   );
 };
 

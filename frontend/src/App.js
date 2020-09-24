@@ -4,7 +4,12 @@ import PrivateRoute from './components/PrivateRoute';
 import Authentication from './pages/Authentication';
 import Index from './pages/IncomeList';
 import MainPage from './pages/MainPage/index';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import Chart from './pages/Chart/index.js';
 
 function App() {
@@ -26,12 +31,12 @@ function App() {
         <Route exact path="/registration">
           <Authentication mode={'registration'} />
         </Route>
-        <Route exact path="/chart">
+        <PrivateRoute exact path="/chart">
           <Chart />
+        </PrivateRoute>
+        <Route path="/">
+          <Redirect to={'/login'} />
         </Route>
-        <div>
-          <MainPage />
-        </div>
       </Switch>
     </Router>
   );

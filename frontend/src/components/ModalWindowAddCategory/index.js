@@ -4,10 +4,8 @@ import styles from './ModalWindowAddCategory.module.scss';
 import closeModalWindowAddCategory from '../../redux/actions/modalWindow/closeModalWindowAddCategory';
 import addCategoryStarted from '../../redux/actions/addCategory/addCategoryStarted';
 import { motion, AnimatePresence } from 'framer-motion';
-// import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney';
-// import TransactionHistoryIncome from '../TransactionHistoryIncome';
-// import { Link } from 'react-router-dom';
-// import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
+import expenses from '../../img/expenses';
+import incomes from '../../img/incomes';
 
 const backdrop = {
   visible: { opacity: 1 },
@@ -31,20 +29,28 @@ const modal = {
 
 function ModalWindowAddCategory({ show }) {
   const [name, setName] = useState('');
+  const [limit, setLimit] = useState(undefined);
+  const [error, setError] = useState('');
   const userId = useSelector(state => state.user._id);
   const type = useSelector(state => state.isCategoryModal.type);
   const dispatch = useDispatch();
+  const [chosenIcon, setChosenIcon] = useState(0);
+
   return (
     <AnimatePresence exitBeforeEnter>
       {show ? (
         <>
           <motion.div
             className={styles.backdrop}
-            onClick={() => dispatch(closeModalWindowAddCategory())}
+            onClick={() => {
+              setName('');
+              dispatch(closeModalWindowAddCategory());
+              setError('');
+            }}
             variants={backdrop}
             initial="hidden"
             animate="visible"
-          ></motion.div>
+          />
           <motion.div
             className={styles.modalMain}
             variants={modal}
@@ -61,11 +67,63 @@ function ModalWindowAddCategory({ show }) {
               onChange={event => setName(event.target.value)}
               className={styles.input}
             />
+            {type === 'expenditure' && (
+              <>
+                <p className={styles.modalSubheader}>Введите лимит категории</p>
+                <input
+                  type="text"
+                  id="limit"
+                  placeholder={'10000'}
+                  value={limit === Infinity ? '' : limit}
+                  onChange={event => setLimit(event.target.value)}
+                  className={styles.input}
+                />
+              </>
+            )}
+            <p className={styles.modalSubheader} style={{ flexBasis: '100%' }}>
+              Выберите иконку:
+            </p>
+            <div className={styles.iconRow}>
+              {type === 'store'
+                ? incomes.map((icon, index) => (
+                    <motion.button
+                      onClick={() => setChosenIcon(index)}
+                      whileTap={{ scale: 1.05 }}
+                      className={
+                        index === chosenIcon
+                          ? styles.chosenIcon
+                          : styles.iconOption
+                      }
+                    >
+                      {icon}
+                    </motion.button>
+                  ))
+                : expenses.map((icon, index) => (
+                    <motion.button
+                      whileTap={{ scale: 1.05 }}
+                      onClick={() => setChosenIcon(index)}
+                      className={
+                        index === chosenIcon
+                          ? styles.chosenIcon
+                          : styles.iconOption
+                      }
+                    >
+                      {icon}
+                    </motion.button>
+                  ))}
+            </div>
+            {error && <p className={styles.modalSubheader}>{error}</p>}
             <button
               className={styles.addButton}
               onClick={() => {
-                dispatch(addCategoryStarted(userId, name, type));
-                dispatch(closeModalWindowAddCategory());
+                if (name !== '') {
+                  dispatch(
+                    addCategoryStarted(userId, name, type, chosenIcon, limit)
+                  );
+                  dispatch(closeModalWindowAddCategory());
+                } else {
+                  setError('Поле ввода не может быть пустым');
+                }
               }}
             >
               Добавить
@@ -80,10 +138,3 @@ function ModalWindowAddCategory({ show }) {
 }
 
 export default ModalWindowAddCategory;
-
-// <div className={`${showHideClassName}`}>
-//   <button onClick={() => dispatch(closeModalWindowAddCategory())}>x</button>
-//   <section className={styles.modalMain}>
-//
-//   </section>
-// </div>

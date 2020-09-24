@@ -6,6 +6,19 @@
   margin: 64px 1rem 0;
 }
 
+.errorContainer {
+  background-color: rgba(235, 87, 87, 0.7);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 2rem;
+  margin-left: 1rem;
+}
+
+.errorMessage {
+  font-family: 'TT Medium', sans-serif;
+}
+
 .inp {
   width: 100%;
   height: 42px;
@@ -18,13 +31,13 @@
   line-height: 29px;
   color: #6dc4c4;
   border-color: #e3e3e3;
-  background-color: #fcfcfc;
+  background: none;
 }
 
 .inp:focus {
   outline-width: 0;
   border-width: 0 0 1px;
-  border-color: #6dc4c4;
+  border-color: $green-color;
 }
 .inp::placeholder {
   color: #e3e3e3;
@@ -36,11 +49,8 @@
   width: 100%;
   background: $green-color;
   border-radius: 5px;
-  border: 0;
-  border-color: none;
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-weight: normal;
+  border: 0 none;
+  font-family: 'TT Medium', sans-serif;
   font-size: 15px;
   line-height: 18px;
   text-align: center;
@@ -50,6 +60,11 @@
 }
 .btn:focus {
   outline: 0 !important;
+}
+
+.disabledBtn {
+  @extend .btn;
+  background-color: #e3e3e3;
 }
 
 .afterbutton {
@@ -74,14 +89,6 @@
   color: #2d9cdb;
 }
 
-.forget {
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 26px;
-  color: #2d9cdb;
-}
 
 .label {
   color: #e3e3e3;
@@ -90,15 +97,29 @@
   top: -35px;
   transition: 0.2s ease all;
   background: none;
-  color: #e3e3e3;
-  font-family: Inter, sans-serif;
+  font-family: 'TT Regular', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
 }
 
 .inp:focus ~ .label,
-
 .inp:not([value='']) ~ .label {
   top: -70px;
+}
+
+.forgot{
+  margin: 24px 0 32px;
+  border: none;
+  background: none;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+  color: #2d9cdb;
+
+}
+.forgot:focus {
+  outline: 0;
 }

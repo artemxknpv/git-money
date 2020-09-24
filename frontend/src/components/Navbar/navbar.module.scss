@@ -7,6 +7,20 @@
   background: #fff;
 }
 
+.wrapper {
+  position: fixed;
+  text-align: center;
+  margin: auto;
+}
+
+.menuPoint {
+  color: white;
+  font-family: 'TT Bold', sans-serif;
+  font-size: 40px;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
 .buttonNav {
   outline: none;
   border: none;
@@ -23,4 +37,12 @@
   background: transparent;
 }
 
-
+.exitButton, .exitButton:focus {
+  margin-bottom: 1rem;
+  display: block;
+  background: none;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}

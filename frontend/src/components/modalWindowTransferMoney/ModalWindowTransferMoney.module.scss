@@ -25,7 +25,7 @@
 }
 
 .input {
-  width: 90%;
+  width: 80%;
   height: 37px;
   margin: 66px 16px auto;
   border-width: 0 0 1px;
@@ -67,6 +67,11 @@
   height: 50px;
 }
 
+.addButton:focus {
+  @extend .addButton;
+  outline: 0;
+}
+
 .modal {
   position: absolute;
   z-index: 21243243;
@@ -74,6 +79,7 @@
   left: 0;
   width: 100%;
   height: 100%;
+  max-width: 600px;
   background: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
 }
@@ -111,7 +117,7 @@
   display: none;
 }
 
-.backdrop{
+.backdrop {
   position: fixed;
   top: 0;
   left: 0;

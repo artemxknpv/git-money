@@ -5,7 +5,7 @@ import addMoneyCategory from '../actions/addMoney/addMoneySuccess';
 import addTotalMoney from '../actions/TotalMoney/addTotalMoney';
 
 const deleteTransactionFetch = async ({ userId, idTransaction }) => {
-  await fetch(`${userId}/${idTransaction}`, {
+  await fetch(`/${userId}/${idTransaction}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

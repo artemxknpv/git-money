@@ -1,0 +1,61 @@
+@import 'src/styles/variables';
+* {
+  font-family: $regular-font;
+}
+.header {
+  font-size: 1.5rem;
+  font-family: $bold-font;
+  margin-left: 1rem;
+}
+
+.totalSpentText {
+  color: #333333;
+  font-size: 1.2rem;
+  font-family: 'TT Medium', sans-serif;
+  margin: 1.5rem;
+}
+
+.timePoint {
+  font-family: 'TT Bold', sans-serif;
+  color: #333;
+  margin-left: 1.5rem;
+}
+
+.arrowAndCatname {
+  display: flex;
+  align-items: center;
+  flex-basis: 20%;
+}
+
+
+.editCategory {
+  color: #0870c4;
+  font-size: 0.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.emptyWarning {
+  font-family: $regular-font;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: #666666;
+}
+
+.deleteButton,
+.deleteButton:focus {
+  background: none;
+  outline: 0;
+  border: none;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: #eb5757;
+  font-family: 'TT Medium', sans-serif;
+  cursor: pointer;
+}

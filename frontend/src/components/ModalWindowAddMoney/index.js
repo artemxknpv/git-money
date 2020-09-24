@@ -42,7 +42,10 @@ const ModalWindowAddMoney = ({ show }) => {
         <>
           <motion.div
             className={styles.backdrop}
-            onClick={() => dispatch(closeModalWindow())}
+            onClick={() => {
+              setSum('');
+              dispatch(closeModalWindow());
+            }}
             variants={backdrop}
             initial="hidden"
             animate="visible"
@@ -56,11 +59,12 @@ const ModalWindowAddMoney = ({ show }) => {
             <Link to={`/income/${id}`}>
               <button
                 onClick={() => {
+                  setSum('');
                   dispatch(closeModalWindow());
                 }}
                 className={styles.historyButton}
               >
-                История транзакций
+                Дополнительно
               </button>
             </Link>
             <h3 className={styles.modalHeader}>Добавить сумму</h3>

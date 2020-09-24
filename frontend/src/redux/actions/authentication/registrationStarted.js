@@ -1,6 +1,6 @@
 import { REGISTRATION_STARTED } from '../../action-types.js';
 
-export default (firstName, lastName, email, login, password) => ({
+export default (firstName, lastName, email, login, password , repPassword) => ({
   type: REGISTRATION_STARTED,
   payload: {
     firstName,
@@ -8,5 +8,6 @@ export default (firstName, lastName, email, login, password) => ({
     email,
     login,
     password,
+    repPassword,
   },
 });
