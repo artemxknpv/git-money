@@ -148,7 +148,7 @@ function ModalWindowCrudCategory({ show }) {
             ) : (
               <></>
             )}
-            {type === 'store' && subtype == 'hideCategory' ? (
+            {type === 'store' && subtype === 'hideCategory' ? (
               <>
                 <h3 className={styles.modalHeader}>
                   Удалить категорию хранилища
@@ -167,7 +167,7 @@ function ModalWindowCrudCategory({ show }) {
             ) : (
               <></>
             )}
-            {type === 'store' && subtype == 'transferStarted' ? (
+            {type === 'store' && subtype === 'transferStarted' ? (
               <>
                 <h3 className={styles.modalHeader}>
                   Выберете категорию для перевода
@@ -219,7 +219,7 @@ function ModalWindowCrudCategory({ show }) {
             ) : (
               <></>
             )}
-            {type === 'store' && subtype == 'transferInProgress' ? (
+            {type === 'store' && subtype === 'transferInProgress' ? (
               <>
                 <h3 className={styles.modalHeader}>
                   Выберете сумму для перевода
