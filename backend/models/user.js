@@ -109,12 +109,25 @@ userSchema.methods.findTheTransaction = function (idTransaction) {
   return transaction;
 };
 
+userSchema.methods.findTheTransfer = function (idTransfer) {
+  const transfer = this.transfers.filter(transfer => {
+    return String(transfer._id) === idTransfer;
+  });
+  return transfer;
+};
+
 userSchema.methods.deleteTheTransaction = async function (id) {
-  console.log("id", id);
   // const a = await this.model("User").find({ "transactions.id": id });
   await this.model("User").updateOne(
     { "transactions.id": id },
     { $pull: { transactions: { id: id } } }
+  );
+};
+
+userSchema.methods.deleteTheTransfer = async function (id) {
+  await this.model("User").updateOne(
+    { "transfers.id": id },
+    { $pull: { transfers: { id: id } } }
   );
 };
 

@@ -104,6 +104,20 @@ route.post("/transfer/:id/:cat", async (req, res) => {
   return res.json(lastTransfer);
 });
 
+route.delete("/transfer/:id/:transfer", async (req, res) => {
+  const userId = req.params.id;
+  const idTransfer = req.params.transfer;
+  console.log(idTransfer);
+  const user = await modelUser.findById(userId);
+  const transferArray = await user.findTheTransfer(idTransfer);
+  console.log(transferArray);
+  const transfer = transferArray[0];
+  await user.deleteTheTransfer(transfer.id);
+  await user.addMoneyStore(transfer.from, transfer.amount);
+  await user.addMoneyStore(transfer.to, -transfer.amount);
+  res.end();
+});
+
 // delete the transaction, and add money to the proper parts of the programm
 route.delete("/:id/:cat", async (req, res) => {
   const userId = req.params.id;
