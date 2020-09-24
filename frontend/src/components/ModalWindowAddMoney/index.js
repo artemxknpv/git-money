@@ -72,7 +72,7 @@ const ModalWindowAddMoney = ({ show }) => {
               Указанная сумма будет добавлена к этой категории
             </p>
             <input
-              type="text"
+              type="number"
               id="sum"
               placeholder={'1000'}
               value={sum}

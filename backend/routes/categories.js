@@ -90,12 +90,13 @@ route.put("/:id/:cat", async (req, res) => {
 
 route.post("/transfer/:id/:cat", async (req, res) => {
   console.log("privet");
-  const { amount, idStoreFrom } = req.body;
+  const { amount, from } = req.body;
   const userId = req.params.id;
   const idStoreTo = req.params.cat;
   const user = await modelUser.findById(userId);
-  await user.transferMoneyStores(idStoreTo, idStoreFrom, amount);
+  await user.transferMoneyStores(idStoreTo, from, amount);
   const lastTransfer = user.transfers[user.transfers.length - 1];
+  console.log(lastTransfer);
   return res.json(lastTransfer);
 });
 

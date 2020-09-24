@@ -77,8 +77,8 @@ const Example = () => {
       </button>
       <motion.div
         variants={{
-          closed: { opacity: 0 },
-          open: { opacity: 1, transition: { delay: 0.5 } },
+          closed: { opacity: 0, display: 'none',},
+          open: { opacity: 1, transition: { delay: 0.5 }, display: 'block'},
         }}
         className={styles.wrapper}
       >
