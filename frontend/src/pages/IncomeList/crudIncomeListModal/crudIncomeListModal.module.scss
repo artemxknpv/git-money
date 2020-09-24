@@ -70,6 +70,11 @@
   height: 50px;
 }
 
+.addButton:focus {
+  @extend .addButton;
+  outline: 0;
+}
+
 .modal {
   position: absolute;
   z-index: 21243243;
@@ -132,4 +137,10 @@
   transform: translate(-50%, -50%);
   border-radius: 10px;
   z-index: 1;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -73,6 +73,10 @@ route.get("/:id", async (req, res) => {
 // add money to store or transfer money from store to expenditure cat
 route.put("/:id/:cat", async (req, res) => {
   const { amount } = req.body;
+  console.log(amount);
+  if (amount === null) {
+    return res.status(401).json({ message: "Вы должны ввести число" });
+  }
   const userId = req.params.id;
   const putId = req.params.cat;
   const user = await modelUser.findById(userId);

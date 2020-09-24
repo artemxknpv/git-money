@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import loadingFinished from '../../redux/actions/loadingHandlers/loadingFinished.js';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney.js';
+import InlineLoading from '../InlineLoading';
 import styles from './ModalWindowAddMoney.module.scss';
 import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,15 +29,19 @@ const modal = {
 };
 
 const ModalWindowAddMoney = ({ show }) => {
+  const isLoading = useSelector(state => state.isLoading);
   const [sum, setSum] = useState('');
+  const [error, setError] = useState('');
   const userId = useSelector(state => state.user._id);
   const id = useSelector(state => state.isModal.id);
-  // const listTransactions = useSelector(state => state.transactions);
-  // const thisCategoryList = listTransactions.filter(
-  //   transaction => transaction.to === id
-  // );
-  // console.log(thisCategoryList);
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (!isLoading) {
+      dispatch(closeModalWindow());
+      setSum('');
+    }
+  }, [isLoading]);
+
   return (
     <AnimatePresence exitBeforeEnter>
       {show ? (
@@ -44,6 +50,7 @@ const ModalWindowAddMoney = ({ show }) => {
             className={styles.backdrop}
             onClick={() => {
               setSum('');
+              dispatch(loadingFinished());
               dispatch(closeModalWindow());
             }}
             variants={backdrop}
@@ -60,6 +67,7 @@ const ModalWindowAddMoney = ({ show }) => {
               <button
                 onClick={() => {
                   setSum('');
+                  setError('');
                   dispatch(closeModalWindow());
                 }}
                 className={styles.historyButton}
@@ -72,21 +80,31 @@ const ModalWindowAddMoney = ({ show }) => {
               Указанная сумма будет добавлена к этой категории
             </p>
             <input
-              type="text"
+              type="number"
               id="sum"
               placeholder={'1000'}
               value={sum}
               onChange={event => setSum(event.target.value)}
               className={styles.input}
             />
+            {error && <p className={styles.modalSubheader}>{error}</p>}
             <button
-              className={styles.addButton}
+              className={!isLoading ? styles.addButton : styles.loadingButton}
               onClick={() => {
-                dispatch(addMoneyStarted(userId, id, Number(sum)));
-                dispatch(closeModalWindow());
+                if (sum > 0) {
+                  dispatch(addMoneyStarted(userId, id, Number(sum)));
+                } else {
+                  setError('Вы не можете добавить 0$');
+                }
               }}
             >
-              Добавить
+              {!isLoading ? (
+                'Добавить'
+              ) : (
+                <i>
+                  <InlineLoading loading={true} />
+                </i>
+              )}
             </button>
           </motion.div>
         </>

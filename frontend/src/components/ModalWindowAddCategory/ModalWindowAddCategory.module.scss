@@ -22,7 +22,7 @@
 }
 
 .modalSubheader {
-  font-family: Inter, sans-serif;
+  font-family: 'TT Regular', sans-serif;
   color: #333333;
   font-style: normal;
   font-weight: normal;
@@ -37,7 +37,7 @@
   margin: 1rem 1.5rem 2rem;
   border-width: 0 0 1px;
   border-color: #f2f2f2;
-  font-family: Inter, sans-serif;
+  font-family: 'TT Regular', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -61,9 +61,8 @@
   width: 100%;
   background: #6dc4c4;
   border-radius: 0 0 10px 10px;
-  border: 0;
-  border-color: none;
-  font-family: 'TT Medium';
+  border: 0 none;
+  font-family: 'TT Medium', sans-serif;
   font-size: 15px;
   line-height: 18px;
   text-align: center;
@@ -75,6 +74,12 @@
 .addButton:focus {
   @extend .addButton;
   outline: 0;
+}
+
+
+.loadingButton {
+  @extend .addButton;
+  background: #e0e0e0;
 }
 
 .modal {

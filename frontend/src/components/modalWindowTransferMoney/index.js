@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import loadingFinished from '../../redux/actions/loadingHandlers/loadingFinished.js';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowTransferMoney';
+import InlineLoading from '../InlineLoading';
 import styles from './ModalWindowTransferMoney.module.scss';
 import transferMoneyStarted from '../../redux/actions/transferMoney/transferMoneyStarted';
 import { motion, AnimatePresence } from 'framer-motion';
-import { set } from 'date-fns';
 
 const backdrop = {
   visible: { opacity: 1 },
@@ -27,8 +28,11 @@ const modal = {
 };
 
 const ModalWindowAddMoney = ({ show }) => {
+  const isLoading = useSelector(state => state.isLoading);
+
   const [sum, setSum] = useState('');
-  // const [error, setError] = useState('');
+
+  const [error, setError] = useState('');
   const userId = useSelector(state => state.user._id);
   let nameFrom = '';
   let currentNumberFrom = 0;
@@ -36,6 +40,13 @@ const ModalWindowAddMoney = ({ show }) => {
   const categories = useSelector(state => state.categories);
   const idTo = useSelector(state => state.isTransferMoneyModal.idTo);
   const idFrom = useSelector(state => state.isTransferMoneyModal.idFrom);
+
+  useEffect(() => {
+    if (!isLoading) {
+      dispatch(closeModalWindow());
+      setSum('');
+    }
+  }, [isLoading]);
 
   if (idTo && idFrom) {
     nameFrom = categories.filter(category => category.id === idFrom)[0].name;
@@ -49,14 +60,11 @@ const ModalWindowAddMoney = ({ show }) => {
   //   : `${styles.modal} ${styles.displayNone}`;
 
   const handleTransferMoney = () => {
-    // if (currentNumberFrom - Number(sum) > 0) {
-    dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
-    setSum('');
-    // setError('');
-    dispatch(closeModalWindow());
-    // } else {
-    //   setError('Недостаточно средств для перевода');
-    // }
+    if (sum > 0) {
+       dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
+    } else {
+      setError('Вы не можете перевести 0$');
+    }
   };
 
   return (
@@ -67,13 +75,14 @@ const ModalWindowAddMoney = ({ show }) => {
             className={styles.backdrop}
             onClick={() => {
               dispatch(closeModalWindow());
-              // setError('');
+              dispatch(loadingFinished());
+              setError('');
               setSum('');
             }}
             variants={backdrop}
             initial="hidden"
             animate="visible"
-          ></motion.div>
+          />
           <motion.div
             className={styles.modalMain}
             variants={modal}
@@ -86,21 +95,25 @@ const ModalWindowAddMoney = ({ show }) => {
               в раздел расходов {nameTo}
             </p>
             <input
-              type="text"
+              type="number"
               id="sum"
               placeholder={'1000'}
               value={sum}
               onChange={event => setSum(event.target.value)}
               className={styles.input}
             />
-            {/* {error && <p className={styles.modalSubheader}>{error}</p>} */}
+            {error && <p className={styles.modalSubheader}>{error}</p>}
             <button
-              className={styles.addButton}
-              onClick={() => {
-                handleTransferMoney();
-              }}
+              className={!isLoading ? styles.addButton : styles.loadingButton}
+              onClick={handleTransferMoney}
             >
-              Добавить
+              {!isLoading ? (
+                'Добавить'
+              ) : (
+                <i>
+                  <InlineLoading />
+                </i>
+              )}
             </button>
           </motion.div>
         </>
