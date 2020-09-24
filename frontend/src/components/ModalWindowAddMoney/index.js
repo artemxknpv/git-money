@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import loadingFinished from '../../redux/actions/loadingHandlers/loadingFinished.js';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney.js';
 import InlineLoading from '../InlineLoading';
 import styles from './ModalWindowAddMoney.module.scss';
@@ -48,6 +49,7 @@ const ModalWindowAddMoney = ({ show }) => {
             className={styles.backdrop}
             onClick={() => {
               setSum('');
+              dispatch(loadingFinished());
               dispatch(closeModalWindow());
             }}
             variants={backdrop}
