@@ -49,7 +49,7 @@ route.patch("/:id", bodyParser.json(), async (req, res) => {
 });
 
 // send the full info about the user
-route.get("/:id", async (req, res) => {
+route.get("userapi/:id", async (req, res) => {
   const userId = req.params.id;
   let userUpd;
   try {
