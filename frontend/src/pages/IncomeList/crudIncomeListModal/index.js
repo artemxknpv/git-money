@@ -4,6 +4,7 @@ import styles from './crudIncomeListModal.module.scss';
 import modalCrudOperationsClosed from '../../../redux/actions/modalWindow/closeModalWindowCrudCategory';
 import { motion, AnimatePresence } from 'framer-motion';
 import expenses from '../../../img/expenses';
+import transferBStoresStarted from '../../../redux/actions/transferBetweenStores/transferBStoresStarted';
 import incomes from '../../../img/incomes';
 import editNameAction from '../../../redux/actions/crud/editNameCategory';
 import editIconAction from '../../../redux/actions/crud/editIconCategory';
@@ -241,7 +242,14 @@ function ModalWindowCrudCategory({ show }) {
                 <button
                   className={styles.addButton}
                   onClick={() => {
-                    // dispatch(editNameAction(userId, id, name));
+                    dispatch(
+                      transferBStoresStarted(
+                        userId,
+                        nameOfTheCategoryTo[0].id,
+                        nameOfTheCurrentCategory[0].id,
+                        Number(name)
+                      )
+                    );
                     dispatch(modalCrudOperationsClosed());
                   }}
                 >

@@ -5,7 +5,7 @@ import addTransaction from '../actions/addTransaction/addTransaction';
 import addTotalMoney from '../actions/TotalMoney/addTotalMoney';
 
 const transferMoneyStoreFetch = async ({ userId, idTo, idFrom, amount }) => {
-  const response = await fetch(`${userId}/${idTo}`, {
+  const response = await fetch(`/${userId}/${idTo}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
