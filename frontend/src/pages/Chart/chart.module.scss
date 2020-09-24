@@ -1,0 +1,49 @@
+@import './src/styles/variables';
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  margin-left: 1rem;
+  margin-right: 10vw;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 6rem;
+  z-index: -1;
+}
+
+.card {
+  display: flex;
+  margin-right: 0.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+.image {
+  width: 19rem;
+  height: 25rem;
+  background-color: #fff;
+  min-height: 110px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 13px rgba(51, 51, 51, 0.08);
+  overflow: visible;
+}
+
+.categorySubheader {
+  color: $black-color;
+  font-family: $bold-font;
+  margin-top: 2rem;
+  max-width: 110px;
+  border-radius: 5px;
+  margin-bottom: 3rem;
+}
+
+.diagram {
+  margin-top: 2rem;
+}
+

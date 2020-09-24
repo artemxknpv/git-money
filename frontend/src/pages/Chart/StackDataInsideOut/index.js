@@ -3,23 +3,13 @@ import ColorScheme from 'color-scheme';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
 import { Bar } from 'react-chartjs-2';
-import { Pie } from 'react-chartjs-2';
-import Fade from 'react-reveal/Fade.js';
-import styles from './chart.module.scss'
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import SidebarForChart from "./NavbarForCategory";
-import { useHistory } from 'react-router-dom';
+import styles from "./stackdatainsideout.module.scss";
 
-const Chart = () => {
-  const [chartDataPie, setChartDataPie] = useState({});
-  const [stackData, setStackData] = useState({});
+
+const StackDataInsideOut = () => {
   const [stackDataInsideOut, setstackDataInsideOut] = useState({});
-  const dynamicColors = function () {
-    let r = Math.floor(Math.random() * 255);
-    let g = Math.floor(Math.random() * 255);
-    let b = Math.floor(Math.random() * 255);
-    return 'rgb(' + r + ',' + g + ',' + b + ')';
-  };
   const expenditures = useSelector(state =>
     state.categories.filter(category => category.value === 'expenditure')
   );
@@ -97,137 +87,72 @@ const Chart = () => {
           stacked: true,
         },
       ],
-
-    },
-    legend: {display: false},
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem) {
-          return tooltipItem.yLabel;
-        }
-      }
     },
   };
 
-  const StackData = () => {
-    setStackData({
-      labels: Object.keys(stackedObjectInsideOut).map(element => element),
-      datasets: Object.keys(stackedObject).map((expenditureName, index) => {
-        return {
-          // label: expenditureName,
-          backgroundColor: '#' + colors[index],
-          data: Object.keys(stackedObject[expenditureName]).map(storeName => {
-            return stackedObject[expenditureName][storeName];
-          }),
-
-
-        };
-      }),
-    });
-  };
 
   const StackDataInsideOut = () => {
     setstackDataInsideOut({
       labels: Object.keys(stackedObject).map(element => element),
       datasets: Object.keys(stackedObjectInsideOut).map((storeName, index) => {
         return {
-          // label: storeName,
+          label: storeName,
           backgroundColor: '#' + colors[index],
           data: Object.keys(stackedObjectInsideOut[storeName]).map(
             expenditureName => {
               return stackedObjectInsideOut[storeName][expenditureName];
             }
           ),
-
         };
       }),
     });
   };
-  let history = useHistory()
-  const chartPie = () => {
-    const names = expenditures.map(expenditure => expenditure.name);
-    const values = expenditures.map(expenditure => expenditure.currentNumber);
-    const index = expenditures.length;
-    setChartDataPie({
-      labels: names,
-      datasets: [
-        {
-          label: 'expenditures',
-          data: values,
-          backgroundColor: new Array(index)
-            .fill()
-            .map(color => dynamicColors()),
-          borderWidth: 0.5,
-        },
-
-      ],
-    });
-  };
 
   useEffect(() => {
-    chartPie();
-    StackData();
     StackDataInsideOut();
   }, []);
+  console.log(expenditures);
   return (
     <>
-      <SidebarForChart />
-      <Fade bottom cascade>
-      <motion.div className={styles.mainContainer}>
-        <div
-          className={styles.card}
-        >
-          <motion.div
-            className={styles.image}
-            whileTap={{ scale: 0.8 }}
-            whileHover={{ scale: 1.1 }}
-            onClick={()=>{
-                history.push('/chart/pie')
-            }}
-          >
-            <h3 className={styles.categorySubheader}>Диаграмма расходов</h3>
-            <Pie data={chartDataPie} />
-          </motion.div>
-        </div>
-          <div
-            className={styles.card}
-          >
-
-            <motion.div
-              className={styles.image}
-              whileTap={{ scale: 0.8 }}
-              whileHover={{ scale: 1.1 }}
-              onClick={()=>{
-                history.push('/chart/stackdata')
-              }}
-            >
-              <h3 className={styles.categorySubheader}>
-                Траты по категориям расходов
-              </h3>
-          <Bar data={stackData} options={optionsStacked} />
-        </motion.div>
-          </div>
       <div
         className={styles.card}
       >
         <motion.div
           className={styles.image}
-          whileTap={{ scale: 0.8 }}
-          whileHover={{ scale: 1.1 }}
-          onClick={()=>{
-            history.push('/chart/stackdatainsideout')
+        >
+          <Link to={'/chart'} style={{ textDecoration: 'none', color: '#333333', alignSelf: "flex-start", marginLeft: "2rem", marginTop: '2rem'}}>
+            <motion.i
+              whileTap={{ scale: 0.8 }}
+              className="fas fa-arrow-left"
+              style={{
+                left: 0
+              }}
+            />
+          </Link>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+        }}
+      >
+        <h3 style={{ marginBottom: '30px' }}>
+          Траты по категориям доходов
+        </h3>
+        <div
+          style={{
+            width: '800px',
+            height: '800px',
           }}
         >
-          <h3 className={styles.categorySubheader}>
-            Траты по категориям доходов
-          </h3>
           <Bar data={stackDataInsideOut} options={optionsStacked} />
-      </motion.div>
+        </div>
       </div>
-      </motion.div>
-    </Fade>
-      </>
+        </motion.div>
+      </div>
+    </>
   );
 };
 
-export default Chart;
+export default StackDataInsideOut;

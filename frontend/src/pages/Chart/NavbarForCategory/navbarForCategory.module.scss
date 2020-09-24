@@ -1,0 +1,54 @@
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 1;
+}
+
+.wrapper {
+  position: fixed;
+  text-align: center;
+  margin: auto;
+  z-index: 1;
+
+}
+
+.menuPoint {
+  color: white;
+  font-family: 'TT Bold', sans-serif;
+  font-size: 40px;
+  margin-left: 1rem;
+  text-decoration: none;
+  z-index: 121;
+}
+
+.buttonNav {
+  outline: none;
+  border: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: pointer;
+  position: absolute;
+  top: 58px;
+  left: 83vw;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: transparent;
+  z-index: 1;
+}
+
+.exitButton, .exitButton:focus {
+  margin-bottom: 1rem;
+  display: block;
+  background: none;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  z-index: 1;
+}
