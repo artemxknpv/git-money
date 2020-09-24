@@ -1,4 +1,5 @@
 import React from 'react';
+import PlusIcon from '../../img/PlusIcon.js';
 import styles from './AddCategory.module.scss';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
@@ -14,7 +15,7 @@ const AddCategory = ({ value }) => {
           dispatch(modalWindowCategoryOpened(value));
         }}
       >
-        +
+        <PlusIcon />
       </div>
       <p className={styles.categorySubheader}>Создать категорию</p>
     </motion.div>

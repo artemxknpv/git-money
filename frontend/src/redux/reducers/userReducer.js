@@ -1,5 +1,5 @@
 import * as actionTypes from '../action-types.js';
-const initState = { isAuthenticated: false, loaded: false };
+const initState = { isAuthenticated: false, loaded: false, isError: false };
 export default (store = initState, { type, payload, error }) => {
   switch (type) {
     case actionTypes.LOGIN_SUCCESS:
@@ -55,6 +55,13 @@ export default (store = initState, { type, payload, error }) => {
         ...store,
         totalMoney: store.totalMoney + payload.addedMoney,
       };
+    case actionTypes.ADD_MONEY_FAILURE:
+      return {
+        ...store,
+        error,
+        errorMessage: payload.message,
+      };
+
     case actionTypes.LOGOUT_STARTED:
       return { ...store, loaded: false };
     case actionTypes.LOGOUT_SUCCESS:
