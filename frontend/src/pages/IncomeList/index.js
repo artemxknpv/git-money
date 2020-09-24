@@ -13,6 +13,8 @@ import { AnimateSharedLayout, motion } from 'framer-motion';
 import TransactionsHistoryExpensesForIncome from '../../components/TransansactionHistoryForIncome';
 import modalWindowCrudCategoryOpened from '../../redux/actions/modalWindow/openModalWindowCrudCategory';
 import ModalWindowCrudCategory from './crudIncomeListModal';
+import TransferHistoryGain from './TransferBStores/transferGain';
+import TransferHistoryLoss from './TransferBStores/transferLoss';
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -32,22 +34,34 @@ const Index = () => {
   const categories = useSelector(state => state.categories);
   const showCrudModal = useSelector(state => state.isCrudModalWindow.isOpened);
   const storeName = categories.filter(category => category.id === cat)[0].name;
-  const thisCategoryList = listTransactions.filter(
+  let thisCategoryList = listTransactions.filter(
     transaction => transaction.to === cat
   );
-  const toThisCategoryTransfer = transfers.filter(transfer => {
+  let toThisCategoryTransfer = transfers.filter(transfer => {
     return transfer.to === cat;
   });
-  const fromThisCategoryTransfer = transfers.filter(transfer => {
+  toThisCategoryTransfer = toThisCategoryTransfer.map(transfer => {
+    return { ...transfer, value: 'gainTransfer' };
+  });
+  let fromThisCategoryTransfer = transfers.filter(transfer => {
     return transfer.from === cat;
   });
-  console.log(toThisCategoryTransfer, fromThisCategoryTransfer);
+  fromThisCategoryTransfer = fromThisCategoryTransfer.map(transfer => {
+    return { ...transfer, value: 'lossTransfer' };
+  });
+  console.log('loss', toThisCategoryTransfer, 'gain', fromThisCategoryTransfer);
   const currentBalance = categories.filter(category => category.id === cat)[0]
     .currentNumber;
   const thisCategoryListTransactions = listTransactions.filter(transaction => {
     return transaction.from === cat;
   });
-  let megaArray = [...thisCategoryList, ...thisCategoryListTransactions];
+  let megaArray = [
+    ...thisCategoryList,
+    ...thisCategoryListTransactions,
+    ...toThisCategoryTransfer,
+    ...fromThisCategoryTransfer,
+  ];
+  console.log(megaArray);
   megaArray = megaArray.sort(sortTime);
   megaArray = megaArray.map(transaction => {
     return {
@@ -141,6 +155,24 @@ const Index = () => {
                     return (
                       <motion.ul>
                         <TransactionsHistoryIncome
+                          id={transaction._id}
+                          key={transaction._id}
+                        />
+                      </motion.ul>
+                    );
+                  } else if (transaction.value === 'gainTransfer') {
+                    return (
+                      <motion.ul>
+                        <TransferHistoryGain
+                          id={transaction._id}
+                          key={transaction._id}
+                        />
+                      </motion.ul>
+                    );
+                  } else if (transaction.value === 'lossTransfer') {
+                    return (
+                      <motion.ul>
+                        <TransferHistoryLoss
                           id={transaction._id}
                           key={transaction._id}
                         />
