@@ -1,7 +1,7 @@
 import React from 'react';
 import Fade from 'react-reveal/Fade';
 import { useDispatch, useSelector } from 'react-redux';
-import Expenses from '../../components/Expenses';
+import Expenses from '../../components/DarkExpenses';
 import Greetings from '../../components/Greetings';
 import Header from '../../components/Header';
 import Income from '../../components/Income';
@@ -12,11 +12,10 @@ import ModalWindowTransferMoney from '../../components/modalWindowTransferMoney'
 import ModalWindowTransactionHistoryExpenses from '../../components/TransactionsHistory/index';
 import Navbar from '../../components/Navbar';
 import openModalTransferMoney from '../../redux/actions/modalWindow/openModalWindowTransferMoney';
-import styles from './MainPage.module.scss';
+import styles from './darkmainpage.module.scss';
 import { DragDropContext } from 'react-beautiful-dnd';
-import DarkMainPage from '../DarkMainPage'
-import darkThemeTrue from "../../redux/actions/darkTheme/darkThemeTrue";
 import darkThemeFalse from "../../redux/actions/darkTheme/darkThemeFalse";
+import darkThemeTrue from "../../redux/actions/darkTheme/darkThemeTrue";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -31,16 +30,14 @@ const MainPage = () => {
   );
   const categories = useSelector(state => state.categories);
   const isLoaded = useSelector(state => state.user.loaded);
-  const isDarkTheme = useSelector(state => state.isDarkTheme)
+
   return !isLoaded ? (
     <LoadingPage loading={true} />
   ) : (
-    <>
-    {isDarkTheme ? <DarkMainPage /> : (
     <Fade bottom>
       <div className={styles.batya}>
         <button
-          onClick={() => dispatch(darkThemeTrue())}
+          onClick={()=>dispatch(darkThemeTrue())}
         >dark true</button>
         <button
           onClick={()=>dispatch(darkThemeFalse())}
@@ -74,10 +71,8 @@ const MainPage = () => {
           <Expenses />
         </DragDropContext>
       </div>
-    </Fade>)
-  }
-  </>
-  )
+    </Fade>
+  );
 };
 
 export default MainPage;

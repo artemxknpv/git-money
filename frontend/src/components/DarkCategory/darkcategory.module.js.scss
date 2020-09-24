@@ -1,0 +1,60 @@
+@import './src/styles/variables';
+
+//@media (max-width: 400px) {
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+.card {
+  display: flex;
+  margin-right: 0.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 110px;
+  background-color: #fff;
+  min-height: 110px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 13px rgba(51, 51, 51, 0.08);
+  overflow: visible;
+}
+
+.categorySubheader {
+  color: $black-color;
+  font-family: $bold-font;
+  margin-top: 8px;
+  max-width: 110px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.categorySum {
+  color: $black-color;
+  font-family: $regular-font;
+  margin-top: 8px;
+  max-width: 110px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+//}
+
+@media (min-width: 601px) {
+  .card {
+    margin-right: 2rem;
+  }
+}

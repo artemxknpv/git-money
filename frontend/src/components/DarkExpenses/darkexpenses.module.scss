@@ -1,0 +1,25 @@
+@import './src/styles/variables';
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  color: #666666;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  margin-top: 1.5rem;
+  margin-right: 0.3rem;
+  color: #666666;
+}
+
+.categoryHeader {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  //margin-left: 2rem;
+  font-family: $bold-font;
+  color: white;
+}

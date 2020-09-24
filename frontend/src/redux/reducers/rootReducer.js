@@ -10,6 +10,7 @@ import modalWindowForgotPasswordReducer from './modalWindowForgotPasswordReducer
 import newPasswordReducer from './newPasswordReducer';
 import modalWindowCrudCategory from './crudCategoryReducer';
 import transfersReducer from './transfersReducer';
+import darkThemeReducer from "./darkThemeReducer";
 
 export default combineReducers({
   user: userReducer,
@@ -23,4 +24,5 @@ export default combineReducers({
   isForgotPasswordModal: modalWindowForgotPasswordReducer,
   isNewPasswordSended: newPasswordReducer,
   isCrudModalWindow: modalWindowCrudCategory,
+  isDarkTheme: darkThemeReducer,
 });
