@@ -6,5 +6,7 @@ export default (state = [], action) => {
       return action.payload.transfers;
     default:
       return state;
+    case actionTypes.ADD_TRANSFER_BETWEEN_STORES:
+      return [...state, action.payload.transfers];
   }
 };
