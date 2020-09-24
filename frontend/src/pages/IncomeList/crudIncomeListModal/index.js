@@ -101,9 +101,14 @@ function ModalWindowCrudCategory({ show }) {
                   className={styles.addButton}
                   onClick={() => {
                     if (name !== '') {
-                      dispatch(editNameAction(userId, id, name));
-                      dispatch(modalCrudOperationsClosed());
-                      setError('');
+                      if (name.length < 20) {
+                        dispatch(editNameAction(userId, id, name));
+                        dispatch(modalCrudOperationsClosed());
+                        setName('');
+                        setError('');
+                      } else {
+                        setError('Название не может быть больше 20 символов');
+                      }
                     } else {
                       setError('Название не может быть пустым');
                     }

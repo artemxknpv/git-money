@@ -130,9 +130,15 @@ function ModalWindowAddCategory({ show }) {
               className={!isLoading ? styles.addButton : styles.loadingButton}
               onClick={() => {
                 if (name !== '') {
-                  dispatch(
-                    addCategoryStarted(userId, name, type, chosenIcon, limit)
-                  );
+                  if (name.length < 20) {
+                    dispatch(
+                      addCategoryStarted(userId, name, type, chosenIcon, limit)
+                    );
+                    setError('');
+                    setName('');
+                  } else {
+                    setError('Название не может быть более 20 символов');
+                  }
                 } else {
                   setError('Поле ввода не может быть пустым');
                 }
