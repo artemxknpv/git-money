@@ -95,11 +95,17 @@ function ModalWindowCrudCategory({ show }) {
                   onChange={event => setName(event.target.value)}
                   className={styles.input}
                 />
+                {error && <p className={styles.modalSubheader}>{error}</p>}
                 <button
                   className={styles.addButton}
                   onClick={() => {
-                    dispatch(editNameAction(userId, id, name));
-                    dispatch(modalCrudOperationsClosed());
+                    if (name !== '') {
+                      dispatch(editNameAction(userId, id, name));
+                      dispatch(modalCrudOperationsClosed());
+                      setError('');
+                    } else {
+                      setError('Название не может быть пустым');
+                    }
                   }}
                 >
                   Изменить
@@ -238,18 +244,25 @@ function ModalWindowCrudCategory({ show }) {
                   onChange={event => setName(event.target.value)}
                   className={styles.input}
                 />
+                {error && <p className={styles.modalSubheader}>{error}</p>}
+
                 <button
                   className={styles.addButton}
                   onClick={() => {
-                    dispatch(
-                      transferBStoresStarted(
-                        userId,
-                        nameOfTheCategoryTo[0].id,
-                        nameOfTheCurrentCategory[0].id,
-                        Number(name)
-                      )
-                    );
-                    dispatch(modalCrudOperationsClosed());
+                    if (name > 0) {
+                      dispatch(
+                        transferBStoresStarted(
+                          userId,
+                          nameOfTheCategoryTo[0].id,
+                          nameOfTheCurrentCategory[0].id,
+                          Number(name)
+                        )
+                      );
+                      dispatch(modalCrudOperationsClosed());
+                      setError('');
+                    } else {
+                      setError('Вы не можете перевести меньше 0$');
+                    }
                   }}
                 >
                   Перевести
