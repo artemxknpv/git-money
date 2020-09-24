@@ -6,7 +6,7 @@ import setTransactions from '../actions/setUserInfo/setUserTransacrions';
 import setTransfers from '../actions/setUserInfo/setUserTransfers';
 
 const setUserInfofetch = async ({ userId }) => {
-  const response = await fetch(`/${userId}`);
+  const response = await fetch(`/userapi/${userId}`);
   const responseJSON = await response.json();
   return responseJSON;
 };
