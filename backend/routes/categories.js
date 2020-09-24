@@ -62,6 +62,7 @@ route.get("/:id", async (req, res) => {
       totalMoney: user.totalMoney,
       categories: user.categories,
       transactions: user.transactions,
+      transfers: user.transfers,
     };
     res.json(userUpd);
   } catch (err) {

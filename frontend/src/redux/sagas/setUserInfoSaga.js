@@ -3,6 +3,7 @@ import { SET_USER_INFO_STARTED } from '../action-types';
 import setUserInfoSuccess from '../actions/setUserInfo/setUserInfoSuccess';
 import setCategories from '../actions/setUserInfo/setUserCategories';
 import setTransactions from '../actions/setUserInfo/setUserTransacrions';
+import setTransfers from '../actions/setUserInfo/setUserTransfers';
 
 const setUserInfofetch = async ({ userId }) => {
   const response = await fetch(`/${userId}`);
@@ -11,7 +12,7 @@ const setUserInfofetch = async ({ userId }) => {
 };
 
 function* setUserInfoWorker(action) {
-  let user, categories, transactions;
+  let user, categories, transactions, transfers;
   try {
     const { userId } = action.payload;
     console.log(userId);
@@ -25,11 +26,13 @@ function* setUserInfoWorker(action) {
     };
     categories = userInfo.categories;
     transactions = userInfo.transactions;
+    transfers = userInfo.transfers;
   } catch (e) {
     console.log('set user info error', e);
   }
   yield put(setCategories(categories));
   yield put(setTransactions(transactions));
+  yield put(setTransfers(transfers));
   yield put(setUserInfoSuccess(user));
 }
 
