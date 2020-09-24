@@ -9,8 +9,8 @@
     "node": "14.8.0"
   },
   "scripts": {
-    "frontend": "cd frontend && yarn start",
-    "server": "cd backend && npm run dev",
+    "frontend": "cd frontend && yarn && yarn build",
+    "server": "cd backend && yarn && node server.js",
     "fullstack": "concurrently \"yarn frontend\" \"yarn server\""
   },
   "dependencies": {
