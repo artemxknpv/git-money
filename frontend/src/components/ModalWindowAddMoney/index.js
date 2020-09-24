@@ -99,13 +99,11 @@ const ModalWindowAddMoney = ({ show }) => {
               }}
             >
               {!isLoading ? (
-                <span className={styles.buttonText}>Добавить</span>
+                'Добавить'
               ) : (
-                <span className={styles.buttonText}>
-                  <i>
-                    <InlineLoading loading={true} />
-                  </i>
-                </span>
+                <i>
+                  <InlineLoading loading={true} />
+                </i>
               )}
             </button>
           </motion.div>

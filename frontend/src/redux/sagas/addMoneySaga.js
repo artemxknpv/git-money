@@ -41,6 +41,7 @@ function* addMoneyStoreWorker(action) {
   } catch (err) {
     yield put(addMoneyFailure(err));
   }
+  yield put(loadingFinished());
 }
 
 export default function* addMoneyStoreWatcher() {
