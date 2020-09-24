@@ -67,7 +67,7 @@ const ModalWindowAddMoney = ({ show }) => {
             className={styles.backdrop}
             onClick={() => {
               dispatch(closeModalWindow());
-              // setError('');
+              setError('');
               setSum('');
             }}
             variants={backdrop}
