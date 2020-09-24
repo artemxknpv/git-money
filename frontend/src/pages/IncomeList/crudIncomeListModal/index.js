@@ -7,6 +7,8 @@ import expenses from '../../../img/expenses';
 import incomes from '../../../img/incomes';
 import editNameAction from '../../../redux/actions/crud/editNameCategory';
 import editIconAction from '../../../redux/actions/crud/editIconCategory';
+import { MoveDirection } from 'react-particles-js';
+import modalWindowCrudCategoryOpened from '../../../redux/actions/modalWindow/openModalWindowCrudCategory';
 const backdrop = {
   visible: { opacity: 1 },
   hidden: { opacity: 0 },
@@ -33,9 +35,29 @@ function ModalWindowCrudCategory({ show }) {
   const type = modalConfiguration.type;
   const subtype = modalConfiguration.subtype;
   const id = modalConfiguration.id;
+  const idStoreTo = modalConfiguration.idStoreTo;
   const [error, setError] = useState('');
   const [name, setName] = useState('');
+  const [currentId, setCurrentId] = useState('');
   const [chosenIcon, setChosenIcon] = useState(0);
+  const listOfStoreCategories = useSelector(state =>
+    state.categories.filter(category => {
+      return category.value === 'store';
+    })
+  );
+  let nameOfTheCategoryTo = '';
+  nameOfTheCategoryTo = useSelector(state =>
+    state.categories.filter(category => {
+      return category.id === idStoreTo;
+    })
+  );
+  const nameOfTheCurrentCategory = useSelector(state =>
+    state.categories.filter(category => {
+      return category.id === id;
+    })
+  );
+
+  console.log(listOfStoreCategories);
   return (
     <AnimatePresence exitBeforeEnter>
       {show ? (
@@ -139,6 +161,91 @@ function ModalWindowCrudCategory({ show }) {
                 </p>
                 <button className={styles.addButton} onClick={() => {}}>
                   Удалить
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
+            {type === 'store' && subtype == 'transferStarted' ? (
+              <>
+                <h3 className={styles.modalHeader}>
+                  Выберете категорию для перевода
+                </h3>
+                <p
+                  className={styles.modalSubheader}
+                  style={{ flexBasis: '100%' }}
+                >
+                  Вы можете выбрать одно хранилище для перевода средств в него
+                </p>
+                <div className={styles.iconRow}>
+                  {listOfStoreCategories.map(category => {
+                    return category.id !== id ? (
+                      <motion.button
+                        className={styles.iconOption}
+                        onClick={() => {
+                          dispatch(
+                            modalWindowCrudCategoryOpened(
+                              'store',
+                              'transferInProgress',
+                              id,
+                              category.id
+                            )
+                          );
+                        }}
+                      >
+                        <div
+                          style={{ display: 'flex', flexDirection: 'column' }}
+                        >
+                          <div> {incomes[category.iconId]} </div>
+                          <div> {category.name}</div>
+                          <div> {category.currentNumber}</div>
+                        </div>
+                      </motion.button>
+                    ) : (
+                      <></>
+                    );
+                  })}
+                </div>
+                <button
+                  className={styles.addButton}
+                  onClick={() => {
+                    dispatch(modalCrudOperationsClosed());
+                  }}
+                >
+                  Выбрать
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
+            {type === 'store' && subtype == 'transferInProgress' ? (
+              <>
+                <h3 className={styles.modalHeader}>
+                  Выберете сумму для перевода
+                </h3>
+                <p
+                  className={styles.modalSubheader}
+                  style={{ flexBasis: '100%' }}
+                >
+                  Из {nameOfTheCurrentCategory[0].name} В{' '}
+                  {nameOfTheCategoryTo[0].name}
+                </p>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder={'Сумма'}
+                  value={name}
+                  onChange={event => setName(event.target.value)}
+                  className={styles.input}
+                />
+                <button
+                  className={styles.addButton}
+                  onClick={() => {
+                    // dispatch(editNameAction(userId, id, name));
+                    dispatch(modalCrudOperationsClosed());
+                  }}
+                >
+                  Перевести
                 </button>
               </>
             ) : (
