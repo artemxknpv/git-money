@@ -37,14 +37,6 @@ function TransferGain({ id }) {
           Переведено из <strong>{nameTo && nameTo.name}</strong>
         </p>
         <p className={styles.time}>{prettyTime && prettyTime}</p>
-        {isOpen && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={styles.additionalContent}
-          ></motion.p>
-        )}
       </motion.div>
     </motion.li>
   );
