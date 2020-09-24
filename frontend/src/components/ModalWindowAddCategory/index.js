@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import loadingFinished from '../../redux/actions/loadingHandlers/loadingFinished.js';
+import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney.js';
+import InlineLoading from '../InlineLoading';
 import styles from './ModalWindowAddCategory.module.scss';
 import closeModalWindowAddCategory from '../../redux/actions/modalWindow/closeModalWindowAddCategory';
 import addCategoryStarted from '../../redux/actions/addCategory/addCategoryStarted';
@@ -28,6 +31,8 @@ const modal = {
 };
 
 function ModalWindowAddCategory({ show }) {
+  const isLoading = useSelector(state => state.isLoading);
+
   const [name, setName] = useState('');
   const [limit, setLimit] = useState(undefined);
   const [error, setError] = useState('');
@@ -35,6 +40,13 @@ function ModalWindowAddCategory({ show }) {
   const type = useSelector(state => state.isCategoryModal.type);
   const dispatch = useDispatch();
   const [chosenIcon, setChosenIcon] = useState(0);
+
+  useEffect(() => {
+    if (!isLoading) {
+      dispatch(closeModalWindowAddCategory());
+      setName('');
+    }
+  }, [isLoading]);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -46,6 +58,7 @@ function ModalWindowAddCategory({ show }) {
               setName('');
               dispatch(closeModalWindowAddCategory());
               setError('');
+              dispatch(loadingFinished());
             }}
             variants={backdrop}
             initial="hidden"
@@ -114,19 +127,24 @@ function ModalWindowAddCategory({ show }) {
             </div>
             {error && <p className={styles.modalSubheader}>{error}</p>}
             <button
-              className={styles.addButton}
+              className={!isLoading ? styles.addButton : styles.loadingButton}
               onClick={() => {
                 if (name !== '') {
                   dispatch(
                     addCategoryStarted(userId, name, type, chosenIcon, limit)
                   );
-                  dispatch(closeModalWindowAddCategory());
                 } else {
                   setError('Поле ввода не может быть пустым');
                 }
               }}
             >
-              Добавить
+              {!isLoading ? (
+                'Добавить'
+              ) : (
+                <i>
+                  <InlineLoading loading={true} />
+                </i>
+              )}
             </button>
           </motion.div>
         </>
