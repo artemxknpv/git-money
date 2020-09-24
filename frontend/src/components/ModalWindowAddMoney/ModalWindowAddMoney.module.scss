@@ -43,6 +43,10 @@
   color: #6dc4c4;
 }
 
+.buttonText {
+  height: 10rem;
+}
+
 .input:focus {
   outline-width: 0;
   color: #6dc4c4;
@@ -60,17 +64,22 @@
   width: 100%;
   background: #6dc4c4;
   border-radius: 0 0 10px 10px;
-  border: 0;
-  border-color: none;
-  font-family: $regular-font;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 18px;
+  border: 0 none;
+  font-family: $medium-font;
   text-align: center;
   color: #ffffff;
-  margin: 66px 0 0;
-  height: 50px;
+  margin: 3rem 0 0;
+  height: 3rem;
+}
+
+.addButton:focus {
+  @extend .addButton;
+  outline: 0;
+}
+
+.loadingButton {
+  @extend .addButton;
+  background: #e0e0e0;
 }
 
 .modal {

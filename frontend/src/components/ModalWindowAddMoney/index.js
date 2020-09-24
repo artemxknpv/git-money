@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import closeModalWindow from '../../redux/actions/modalWindow/closeModalWindowAddMoney.js';
+import InlineLoading from '../InlineLoading';
 import styles from './ModalWindowAddMoney.module.scss';
 import addMoneyStarted from '../../redux/actions/addMoney/addMoneyStarted';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,15 +28,18 @@ const modal = {
 };
 
 const ModalWindowAddMoney = ({ show }) => {
+  const isLoading = useSelector(state => state.isLoading);
   const [sum, setSum] = useState('');
   const userId = useSelector(state => state.user._id);
   const id = useSelector(state => state.isModal.id);
-  // const listTransactions = useSelector(state => state.transactions);
-  // const thisCategoryList = listTransactions.filter(
-  //   transaction => transaction.to === id
-  // );
-  // console.log(thisCategoryList);
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (!isLoading) {
+      dispatch(closeModalWindow());
+      setSum('');
+    }
+  }, [isLoading]);
+
   return (
     <AnimatePresence exitBeforeEnter>
       {show ? (
@@ -80,13 +84,20 @@ const ModalWindowAddMoney = ({ show }) => {
               className={styles.input}
             />
             <button
-              className={styles.addButton}
+              className={!isLoading ? styles.addButton : styles.loadingButton}
               onClick={() => {
                 dispatch(addMoneyStarted(userId, id, Number(sum)));
-                dispatch(closeModalWindow());
               }}
             >
-              Добавить
+              {!isLoading ? (
+                <span className={styles.buttonText}>Добавить</span>
+              ) : (
+                <span className={styles.buttonText}>
+                  <i>
+                    <InlineLoading loading={true} />
+                  </i>
+                </span>
+              )}
             </button>
           </motion.div>
         </>
