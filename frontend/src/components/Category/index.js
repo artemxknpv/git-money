@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import BagOfGoods from '../../img/expenses/BagOfGoods.jsx';
-import WalletFilledIcon from '../../img/incomes/WalletFilledIcon.jsx';
 import openModalWindow from '../../redux/actions/modalWindow/openModalWindowAddMoney.js';
 import openModalWindowTransactionHistoryExpenses from '../../redux/actions/modalWindow/openModalWindowTransactionHistory';
 import styles from './Category.module.scss';

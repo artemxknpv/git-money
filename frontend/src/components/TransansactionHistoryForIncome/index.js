@@ -47,11 +47,17 @@ function TransactionsHistoryExpense({ id }) {
         }}
         // transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
       >
-        <p className={styles.amount}>-${transaction && transaction.amount}</p>
-        <p className={styles.targetCategory}>
-          Потрачено в <strong>{nameTo && nameTo.name}</strong>
-        </p>
-        <p className={styles.time}>{prettyTime && prettyTime}</p>
+        <div className={styles.listItem}>
+          <p className={styles.amount}>-${transaction && transaction.amount}</p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.targetCategory}>
+            Потрачено в <strong>{nameTo && nameTo.name}</strong>
+          </p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.time}>{prettyTime && prettyTime}</p>
+        </div>
         {/*<h2 style={{ margin: '20px' }}> From {nameFrom && nameFrom.name} </h2>*/}
         {/*<h2 style={{ margin: '20px' }}>At time: {prettyTime && prettyTime}</h2>*/}
         {/*<AnimatePresence>*/}

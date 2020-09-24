@@ -33,11 +33,17 @@ function TransferGain({ id }) {
           scale: 1.1,
         }}
       >
+
+         <div className={styles.listItem}>
         <p className={styles.gain}>+${transfer && transfer.amount}</p>
+            </div>
+        <div className={styles.listItem}>
         <p className={styles.targetCategory}>
           Переведено из <strong>{nameTo && nameTo.name}</strong>
-        </p>
-        <p className={styles.time}>{prettyTime && prettyTime}</p>
+        </p></div>
+            <div className={styles.listItem}>
+
+        <p className={styles.time}>{prettyTime && prettyTime}</p></div>
         {isOpen && (
           <motion.p
             initial={{ opacity: 0 }}

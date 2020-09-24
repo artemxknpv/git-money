@@ -31,8 +31,15 @@ function TransactionsHistoryIncome({ id }) {
         }}
         // transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
       >
-        <p className={styles.amount}>${transaction && transaction.amount}</p>
-        <p className={styles.time}>{prettyTime && prettyTime}</p>
+        <div className={styles.listItem}>
+          <p className={styles.amount}>${transaction && transaction.amount}</p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.targetCategory}>Добавлено извне</p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.time}>{prettyTime && prettyTime}</p>{' '}
+        </div>
 
         {isOpen && (
           <motion.p
