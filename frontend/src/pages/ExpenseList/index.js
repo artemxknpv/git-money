@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Fade from 'react-reveal/Fade.js';
@@ -5,7 +6,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import differenceInHours from 'date-fns/differenceInHours';
 import formatDistance from 'date-fns/formatDistance';
-import SkeletonLoader from 'tiny-skeleton-loader-react';
 import deleteCategoryStarted from '../../redux/actions/deleteCategory/deleteCategoryStarted.js';
 import { StyledHeader } from '../../styled-components/StyledHeader.js';
 import styles from './ExpenseList.module.scss';
@@ -77,37 +77,46 @@ const ExpenseList = () => {
             </span>
             Потрачено за всё время: ${currentBalance}
           </p>
-          <span className={styles.editCategory}>Edit category</span>
+          <motion.button
+            onClick={() => {
+              dispatch(
+                modalWindowCrudCategoryOpened('expense', 'editIcon', cat)
+              );
+            }}
+            whileHover={{ scale: 1.1 }}
+            className={styles.editCategory}
+          >
+            Edit icon
+          </motion.button>
+          <motion.button
+            onClick={() => {
+              dispatch(
+                modalWindowCrudCategoryOpened('expense', 'editName', cat)
+              );
+            }}
+            whileHover={{ scale: 1.1 }}
+            className={styles.editCategory}
+          >
+            Edit name
+          </motion.button>
+          <motion.button
+            onClick={() => {
+              dispatch(
+                modalWindowCrudCategoryOpened('expense', 'hideCategory', cat)
+              );
+            }}
+            whileHover={{ scale: 1.1 }}
+            className={styles.editCategory}
+          >
+            Delete category
+          </motion.button>
+          {currentCategory.limit && (
+            <motion.button className={styles.editCategory}>
+              Edit limit
+            </motion.button>
+          )}
         </StyledHeader>
-        <button
-          onClick={() => {
-            dispatch(modalWindowCrudCategoryOpened('expense', 'editIcon', cat));
-          }}
-          className={styles.editCategory}
-        >
-          Edit icon
-        </button>
-        <button
-          onClick={() => {
-            dispatch(modalWindowCrudCategoryOpened('expense', 'editName', cat));
-          }}
-          className={styles.editCategory}
-        >
-          Edit name
-        </button>
-        <button
-          onClick={() => {
-            dispatch(
-              modalWindowCrudCategoryOpened('expense', 'hideCategory', cat)
-            );
-          }}
-          className={styles.editCategory}
-        >
-          Delete category
-        </button>
-        {currentCategory.limit && (
-          <button className={styles.editCategory}>Edit limit</button>
-        )}
+
         <div>
           {currentCategory.limit > currentCategory.currentNumber && (
             <p>Лимит Превышен!!!</p>

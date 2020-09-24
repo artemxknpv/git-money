@@ -5,11 +5,10 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import differenceInHours from 'date-fns/differenceInHours';
 import formatDistance from 'date-fns/formatDistance';
-import SkeletonLoader from 'tiny-skeleton-loader-react';
 import TransactionsHistoryIncome from '../../components/TransactionHistoryIncome';
 import { StyledHeader } from '../../styled-components/StyledHeader.js';
 import styles from './IncomeList.module.scss';
-import { AnimateSharedLayout, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import TransactionsHistoryExpensesForIncome from '../../components/TransansactionHistoryForIncome';
 import modalWindowCrudCategoryOpened from '../../redux/actions/modalWindow/openModalWindowCrudCategory';
 import ModalWindowCrudCategory from './crudIncomeListModal';
@@ -67,7 +66,10 @@ const Index = () => {
         <StyledHeader>
           <div className={styles.arrowAndCatname}>
             <Link to={'/'} style={{ textDecoration: 'none', color: '#333333' }}>
-              <i className="fas fa-arrow-left" />
+              <motion.i
+                whileTap={{ scale: 0.8 }}
+                className="fas fa-arrow-left"
+              />
             </Link>
             <h2 className={styles.header}>{storeName}</h2>
           </div>
@@ -77,42 +79,46 @@ const Index = () => {
             </span>
             Текущий баланс: ${currentBalance}
           </p>
-          <button
+          <motion.button
             onClick={() => {
               dispatch(modalWindowCrudCategoryOpened('store', 'editIcon', cat));
             }}
+            whileHover={{ scale: 1.1 }}
             className={styles.editCategory}
           >
             Edit icon
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => {
               dispatch(modalWindowCrudCategoryOpened('store', 'editName', cat));
             }}
+            whileHover={{ scale: 1.1 }}
             className={styles.editCategory}
           >
             Edit name
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => {
               dispatch(
                 modalWindowCrudCategoryOpened('store', 'transferStarted', cat)
               );
             }}
+            whileHover={{ scale: 1.1 }}
             className={styles.editCategory}
           >
             Transfer
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => {
               dispatch(
                 modalWindowCrudCategoryOpened('store', 'hideCategory', cat)
               );
             }}
+            whileHover={{ scale: 1.1 }}
             className={styles.editCategory}
           >
             Delete category
-          </button>
+          </motion.button>
         </StyledHeader>
         {megaArray.length ? (
           Object.keys(objectTime).map(key => {
