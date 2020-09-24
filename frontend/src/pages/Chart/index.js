@@ -170,7 +170,7 @@ const Chart = () => {
     StackDataInsideOut();
   }, []);
   return (
-    <>
+    <div className={styles.batya}>
       <SidebarForChart />
       <Fade bottom cascade>
       <motion.div className={styles.mainContainer}>
@@ -226,7 +226,7 @@ const Chart = () => {
       </div>
       </motion.div>
     </Fade>
-      </>
+      </div>
   );
 };
 
