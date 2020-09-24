@@ -1,7 +1,10 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { ADD_MONEY_STORE_STARTED } from '../action-types.js';
+import addMoneyFailure from '../actions/addMoney/addMoneyFailure.js';
 import addMoneyStoreSuccess from '../actions/addMoney/addMoneySuccess';
 import addTransaction from '../actions/addTransaction/addTransaction';
+import loadingFinished from '../actions/loadingHandlers/loadingFinished.js';
+import loadingStarted from '../actions/loadingHandlers/loadingStarted.js';
 import addTotalMoney from '../actions/TotalMoney/addTotalMoney.js';
 
 const addMoneyStoreFetch = async ({ userId, id, amount }) => {
@@ -19,6 +22,7 @@ const addMoneyStoreFetch = async ({ userId, id, amount }) => {
 };
 
 function* addMoneyStoreWorker(action) {
+  yield put(loadingStarted());
   const { userId, id, amount } = action.payload;
   try {
     const transaction = yield call(addMoneyStoreFetch, { userId, id, amount });
@@ -30,8 +34,9 @@ function* addMoneyStoreWorker(action) {
       yield put(addMoneyStoreSuccess(id, amount));
     }
   } catch (err) {
-    console.log('add money error', err);
+    yield put(addMoneyFailure(err));
   }
+
 }
 
 export default function* addMoneyStoreWatcher() {
