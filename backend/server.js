@@ -67,14 +67,14 @@ app.use("/auth", authenticateRouter);
 app.use(categoryRouter);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve('../../frontend/build/index.html'))
+  res.sendFile(path.resolve("../../frontend/build/index.html"));
 });
 
 app.use((err, req, res, next) => {
   console.log(">>>>", err);
 });
 
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
   console.log(`The server is app and listening on port ${port}`);
