@@ -35,12 +35,6 @@ const ModalWindowAddMoney = ({ show }) => {
   const userId = useSelector(state => state.user._id);
   const id = useSelector(state => state.isModal.id);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!isLoading) {
-      dispatch(closeModalWindow());
-      setSum('');
-    }
-  }, [isLoading]);
 
   return (
     <AnimatePresence exitBeforeEnter>

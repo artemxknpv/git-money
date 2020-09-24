@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import InlineLoading from '../../../components/InlineLoading';
+import loadingFinished from '../../../redux/actions/loadingHandlers/loadingFinished.js';
+import closeModalWindow from '../../../redux/actions/modalWindow/closeModalWindowAddMoney.js';
 import styles from './crudExpenseListModal.module.scss';
 import modalCrudOperationsClosed from '../../../redux/actions/modalWindow/closeModalWindowCrudCategory';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -26,6 +29,7 @@ const modal = {
   },
 };
 function ModalWindowCrudCategory({ show }) {
+  const isLoading = useSelector(state => state.isLoading);
   const dispatch = useDispatch();
   const userId = useSelector(state => state.user._id);
   const modalConfiguration = useSelector(state => state.isCrudModalWindow);
@@ -35,6 +39,14 @@ function ModalWindowCrudCategory({ show }) {
   const [error, setError] = useState('');
   const [name, setName] = useState('');
   const [chosenIcon, setChosenIcon] = useState(0);
+
+  useEffect(() => {
+    if (!isLoading && !error) {
+      dispatch(modalCrudOperationsClosed());
+    }
+    dispatch(loadingFinished());
+  }, [isLoading]);
+
   return (
     <AnimatePresence exitBeforeEnter>
       {show ? (
@@ -89,7 +101,13 @@ function ModalWindowCrudCategory({ show }) {
                     }
                   }}
                 >
-                  Изменить
+                  {!isLoading ? (
+                    'Изменить'
+                  ) : (
+                    <i>
+                      <InlineLoading loading={true} />
+                    </i>
+                  )}
                 </button>
               </>
             ) : (
@@ -125,10 +143,16 @@ function ModalWindowCrudCategory({ show }) {
                   className={styles.addButton}
                   onClick={() => {
                     dispatch(editIconAction(userId, id, chosenIcon));
-                    dispatch(modalCrudOperationsClosed());
+                    // dispatch(modalCrudOperationsClosed());
                   }}
                 >
-                  Изменить
+                  {!isLoading ? (
+                    'Изменить'
+                  ) : (
+                    <i>
+                      <InlineLoading loading={true} />
+                    </i>
+                  )}
                 </button>
               </>
             ) : (
