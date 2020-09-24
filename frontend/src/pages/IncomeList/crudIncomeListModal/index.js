@@ -250,7 +250,7 @@ function ModalWindowCrudCategory({ show }) {
                 <button
                   className={styles.addButton}
                   onClick={() => {
-                    if (name !== '') {
+                    if (name > 0) {
                       dispatch(
                         transferBStoresStarted(
                           userId,
@@ -262,7 +262,7 @@ function ModalWindowCrudCategory({ show }) {
                       dispatch(modalCrudOperationsClosed());
                       setError('');
                     } else {
-                      setError('Вы не можете перевести 0$');
+                      setError('Вы не можете перевести меньше 0$');
                     }
                   }}
                 >
