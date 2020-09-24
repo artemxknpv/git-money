@@ -72,11 +72,21 @@ function ModalWindowCrudCategory({ show }) {
                   onChange={event => setName(event.target.value)}
                   className={styles.input}
                 />
+                {error && <p className={styles.modalSubheader}>{error}</p>}
                 <button
                   className={styles.addButton}
                   onClick={() => {
-                    dispatch(editNameAction(userId, id, name));
-                    dispatch(modalCrudOperationsClosed());
+                    if (name !== '') {
+                      if (name.length < 20) {
+                        dispatch(editNameAction(userId, id, name));
+                        dispatch(modalCrudOperationsClosed());
+                        setError('');
+                      } else {
+                        setError('Название не может быть больше 20 символов');
+                      }
+                    } else {
+                      setError('Название не может быть пустым');
+                    }
                   }}
                 >
                   Изменить
