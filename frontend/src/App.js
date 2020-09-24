@@ -11,6 +11,9 @@ import {
   Switch,
 } from 'react-router-dom';
 import Chart from './pages/Chart/index.js';
+import ChartPie from './pages/Chart/ChartPie'
+import StackDataInsideOut from "./pages/Chart/StackDataInsideOut";
+import StackData from "./pages/Chart/StackData";
 
 function App() {
   return (
@@ -33,6 +36,15 @@ function App() {
         </Route>
         <PrivateRoute exact path="/chart">
           <Chart />
+        </PrivateRoute>
+        <PrivateRoute exact path="/chart/pie">
+          <ChartPie />
+        </PrivateRoute>
+        <PrivateRoute exact path="/chart/stackdatainsideout">
+          <StackDataInsideOut />
+        </PrivateRoute>
+        <PrivateRoute exact path="/chart/stackdata">
+          <StackData />
         </PrivateRoute>
         <Route path="/">
           <Redirect to={'/login'} />

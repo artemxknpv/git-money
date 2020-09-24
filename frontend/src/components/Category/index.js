@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import openModalWindow from '../../redux/actions/modalWindow/openModalWindowAddMoney.js';
 import openModalWindowTransactionHistoryExpenses from '../../redux/actions/modalWindow/openModalWindowTransactionHistory';
-import styles from './Category.module.scss';
+import styles from './category.module.scss';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import expenses from '../../img/expenses';
