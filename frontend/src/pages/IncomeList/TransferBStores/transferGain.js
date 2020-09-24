@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './transfer.module.scss';
+import deleteTransferStarted from '../../../redux/actions/deleteTransfer/deleteTransferStarted';
 
 function TransferGain({ id }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,6 +38,32 @@ function TransferGain({ id }) {
           Переведено из <strong>{nameTo && nameTo.name}</strong>
         </p>
         <p className={styles.time}>{prettyTime && prettyTime}</p>
+        {isOpen && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={styles.additionalContent}
+          >
+            {' '}
+            <button
+              className={styles.deleteButton}
+              onClick={() => {
+                dispatch(
+                  deleteTransferStarted(
+                    userId,
+                    transfer._id,
+                    transfer.to,
+                    transfer.from,
+                    transfer.amount
+                  )
+                );
+              }}
+            >
+              Удалить
+            </button>
+          </motion.p>
+        )}
       </motion.div>
     </motion.li>
   );
