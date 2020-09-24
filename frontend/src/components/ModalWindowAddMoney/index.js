@@ -31,6 +31,7 @@ const modal = {
 const ModalWindowAddMoney = ({ show }) => {
   const isLoading = useSelector(state => state.isLoading);
   const [sum, setSum] = useState('');
+  const [error, setError] = useState('');
   const userId = useSelector(state => state.user._id);
   const id = useSelector(state => state.isModal.id);
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ const ModalWindowAddMoney = ({ show }) => {
               <button
                 onClick={() => {
                   setSum('');
+                  setError('');
                   dispatch(closeModalWindow());
                 }}
                 className={styles.historyButton}
@@ -85,10 +87,15 @@ const ModalWindowAddMoney = ({ show }) => {
               onChange={event => setSum(event.target.value)}
               className={styles.input}
             />
+            {error && <p className={styles.modalSubheader}>{error}</p>}
             <button
               className={!isLoading ? styles.addButton : styles.loadingButton}
               onClick={() => {
-                dispatch(addMoneyStarted(userId, id, Number(sum)));
+                if (sum > 0) {
+                  dispatch(addMoneyStarted(userId, id, Number(sum)));
+                } else {
+                  setError('Вы не можете добавить 0$');
+                }
               }}
             >
               {!isLoading ? (

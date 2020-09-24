@@ -80,7 +80,7 @@ function ModalWindowAddCategory({ show }) {
               onChange={event => setName(event.target.value)}
               className={styles.input}
             />
-            {type === 'expenditure' && (
+            {/* {type === 'expenditure' && (
               <>
                 <p className={styles.modalSubheader}>Введите лимит категории</p>
                 <input
@@ -92,7 +92,7 @@ function ModalWindowAddCategory({ show }) {
                   className={styles.input}
                 />
               </>
-            )}
+            )} */}
             <p className={styles.modalSubheader} style={{ flexBasis: '100%' }}>
               Выберите иконку:
             </p>

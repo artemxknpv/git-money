@@ -31,6 +31,8 @@ const ModalWindowAddMoney = ({ show }) => {
   const isLoading = useSelector(state => state.isLoading);
 
   const [sum, setSum] = useState('');
+
+  const [error, setError] = useState('');
   const userId = useSelector(state => state.user._id);
   let nameFrom = '';
   let currentNumberFrom = 0;
@@ -58,13 +60,11 @@ const ModalWindowAddMoney = ({ show }) => {
   //   : `${styles.modal} ${styles.displayNone}`;
 
   const handleTransferMoney = () => {
-    // if (currentNumberFrom - Number(sum) > 0) {
-    dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
-
-    // setError('');
-    // } else {
-    //   setError('Недостаточно средств для перевода');
-    // }
+    if (sum > 0) {
+       dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
+    } else {
+      setError('Вы не можете перевести 0$');
+    }
   };
 
   return (
@@ -76,6 +76,7 @@ const ModalWindowAddMoney = ({ show }) => {
             onClick={() => {
               dispatch(closeModalWindow());
               dispatch(loadingFinished());
+              setError('');
               setSum('');
             }}
             variants={backdrop}
@@ -101,7 +102,7 @@ const ModalWindowAddMoney = ({ show }) => {
               onChange={event => setSum(event.target.value)}
               className={styles.input}
             />
-            {/* {error && <p className={styles.modalSubheader}>{error}</p>} */}
+            {error && <p className={styles.modalSubheader}>{error}</p>}
             <button
               className={!isLoading ? styles.addButton : styles.loadingButton}
               onClick={handleTransferMoney}
