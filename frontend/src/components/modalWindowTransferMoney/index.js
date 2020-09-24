@@ -86,7 +86,7 @@ const ModalWindowAddMoney = ({ show }) => {
               в раздел расходов {nameTo}
             </p>
             <input
-              type="text"
+              type="number"
               id="sum"
               placeholder={'1000'}
               value={sum}

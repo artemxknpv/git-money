@@ -231,7 +231,7 @@ function ModalWindowCrudCategory({ show }) {
                   {nameOfTheCategoryTo[0].name}
                 </p>
                 <input
-                  type="text"
+                  type="number"
                   id="name"
                   placeholder={'Сумма'}
                   value={name}
