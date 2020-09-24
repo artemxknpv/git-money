@@ -1,6 +1,7 @@
 import express from "express";
 import session from "express-session";
 import fileStore from "session-file-store";
+
 import mongoose from "mongoose";
 import { modelUser } from "./models/user.js";
 // import passport from "passport";
@@ -57,7 +58,6 @@ app.put("/", async (req, res) => {
   await modelUser.createDefaultUser();
   res.end();
 });
-
 
 app.use("/auth", authenticateRouter);
 app.use(categoryRouter);

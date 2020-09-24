@@ -5,6 +5,9 @@
   "repository": "git@github.com:artemxknpv/expense_tracker.git",
   "author": "ArtemK <brtoaster@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "14.8.0"
+  },
   "scripts": {
     "frontend": "cd frontend && yarn start",
     "server": "cd backend && npm run dev",
