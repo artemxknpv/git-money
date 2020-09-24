@@ -10,11 +10,8 @@ import { motion } from 'framer-motion';
 import expenses from '../../img/expenses';
 import incomes from '../../img/incomes';
 
-console.log(expenses, incomes);
 const Category = ({ value, id, iconId }) => {
-  console.log(value, id, iconId);
   const history = useHistory();
-  const [add, setAdd] = useState('');
   const userId = useSelector(state => state.user._id);
   const dispatch = useDispatch();
   const category = useSelector(state =>
