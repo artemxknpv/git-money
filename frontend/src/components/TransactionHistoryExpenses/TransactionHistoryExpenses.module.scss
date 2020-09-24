@@ -2,24 +2,30 @@
 
 .wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   padding: 2rem 1rem;
   border-radius: 5px;
-  margin: 2rem 1.5rem 1rem;
+  margin: 0.5rem 1.5rem 1rem;
 }
 
+
 .openedWrapper {
-  display: flex;
-  margin: 2rem 1.5rem 1rem;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 2rem 1rem;
-  border-radius: 5px;
+  @extend .wrapper;
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
 }
+
+.listItem {
+  display: flex;
+  flex-basis: 33%;
+}
+
+.listItem:last-of-type {
+  display: flex;
+  justify-content: flex-end;
+}
+
 
 .deleteButton,
 .deleteButton:focus {
@@ -37,7 +43,7 @@
 }
 
 .amount {
-  max-width: 33.3%;
+  max-width: 15rem;
   color: #333333;
   white-space: nowrap;
   overflow: hidden;
@@ -59,16 +65,16 @@
 }
 
 .time {
-  max-width: 200px;
+  max-width: 15rem;
   color: #333333;
   font-size: 0.8rem;
-  flex-basis: 30%;
-  white-space: wrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .targetCategory {
+  max-width: 15rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

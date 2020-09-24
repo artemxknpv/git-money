@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './crudIncomeListModal.module.scss';
 import modalCrudOperationsClosed from '../../../redux/actions/modalWindow/closeModalWindowCrudCategory';
 import { motion, AnimatePresence } from 'framer-motion';
-import expenses from '../../../img/expenses';
 import transferBStoresStarted from '../../../redux/actions/transferBetweenStores/transferBStoresStarted';
 import incomes from '../../../img/incomes';
 import editNameAction from '../../../redux/actions/crud/editNameCategory';

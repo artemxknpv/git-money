@@ -1,28 +1,29 @@
-@import "src/styles/variables";
+@import 'src/styles/variables';
 
 .wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   padding: 2rem 1rem;
   border-radius: 5px;
   margin: 0.5rem 1.5rem 1rem;
 }
-
-.openedWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 1.5rem;
-  margin-left: 1.5rem;
-  flex-wrap: wrap;
-  padding: 2rem 1rem;
-  border-radius: 5px;
-  margin-top: 0.5rem;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+.listItem {
+  flex-basis: 33%;
+  //display: flex;
 }
 
+.listItem:last-of-type {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.openedWrapper {
+  @extend .wrapper;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+}
 
 .additionalContent {
   margin-top: 10px;
@@ -39,7 +40,6 @@
   font-family: $bold-font;
 }
 
-
 .deleteButton,
 .deleteButton:focus {
   background: none;
@@ -51,7 +51,6 @@
   font-family: 'TT Medium', sans-serif;
   cursor: pointer;
 }
-
 
 .time {
   max-width: 200px;

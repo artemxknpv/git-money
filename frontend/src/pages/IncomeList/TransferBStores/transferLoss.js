@@ -32,18 +32,24 @@ function TransferLoss({ id }) {
           scale: 1.1,
         }}
       >
-        <p className={styles.loss}>-${transfer && transfer.amount}</p>
-        <p className={styles.targetCategory}>
-          Переведено в <strong>{nameTo && nameTo.name}</strong>
-        </p>
-        <p className={styles.time}>{prettyTime && prettyTime}</p>
+        <div className={styles.listItem}>
+          <p className={styles.loss}>-${transfer && transfer.amount}</p>{' '}
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.targetCategory}>
+            Переведено в <strong>{nameTo && nameTo.name}</strong>
+          </p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.time}>{prettyTime && prettyTime}</p>
+        </div>
         {isOpen && (
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className={styles.additionalContent}
-          ></motion.p>
+          />
         )}
       </motion.div>
     </motion.li>

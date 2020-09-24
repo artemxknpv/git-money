@@ -2,7 +2,7 @@
 
 .wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   padding: 2rem 1rem;
@@ -21,7 +21,7 @@
 }
 
 .gain {
-  color: green;
+  color: #2dca05;
   max-width: 33.3%;
   white-space: nowrap;
   overflow: hidden;
@@ -53,7 +53,7 @@
 }
 
 .time {
-  max-width: 200px;
+  max-width: 33.3%;
   color: #333333;
   font-size: 0.8rem;
   white-space: nowrap;
@@ -62,7 +62,19 @@
 }
 
 .targetCategory {
+  max-width: 15rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+.listItem {
+  justify-content: flex-start;
+  flex-basis: 33%;
+}
+.listItem:last-of-type {
+  display: flex;
+  justify-content: flex-end;
+}
+
