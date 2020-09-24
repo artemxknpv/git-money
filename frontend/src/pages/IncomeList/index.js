@@ -28,12 +28,20 @@ const Index = () => {
   }
   const { cat } = useParams();
   const listTransactions = useSelector(state => state.transactions);
+  const transfers = useSelector(state => state.transfers);
   const categories = useSelector(state => state.categories);
   const showCrudModal = useSelector(state => state.isCrudModalWindow.isOpened);
   const storeName = categories.filter(category => category.id === cat)[0].name;
   const thisCategoryList = listTransactions.filter(
     transaction => transaction.to === cat
   );
+  const toThisCategoryTransfer = transfers.filter(transfer => {
+    return transfer.to === cat;
+  });
+  const fromThisCategoryTransfer = transfers.filter(transfer => {
+    return transfer.from === cat;
+  });
+  console.log(toThisCategoryTransfer, fromThisCategoryTransfer);
   const currentBalance = categories.filter(category => category.id === cat)[0]
     .currentNumber;
   const thisCategoryListTransactions = listTransactions.filter(transaction => {
