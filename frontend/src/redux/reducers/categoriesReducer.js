@@ -31,6 +31,21 @@ export default (state = [], action) => {
             }
           : category
       );
+    case actionTypes.TRANSFER_B_STORES_SUCCESS:
+      return state.map(category =>
+        category.id === action.payload.idFrom
+          ? {
+              ...category,
+              currentNumber: category.currentNumber - action.payload.amount,
+            }
+          : category.id === action.payload.idTo
+          ? {
+              ...category,
+              currentNumber: category.currentNumber + action.payload.amount,
+            }
+          : category
+      );
+
     case actionTypes.LOGOUT_SUCCESS:
       return [];
     case actionTypes.CRUD_ICON_SUCCESS:

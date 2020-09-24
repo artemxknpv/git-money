@@ -62,6 +62,7 @@ route.get("/:id", async (req, res) => {
       totalMoney: user.totalMoney,
       categories: user.categories,
       transactions: user.transactions,
+      transfers: user.transfers,
     };
     res.json(userUpd);
   } catch (err) {
@@ -87,14 +88,15 @@ route.put("/:id/:cat", async (req, res) => {
   }
 });
 
-router.post("/:id/:cat", async (req, res) => {
+route.post("/transfer/:id/:cat", async (req, res) => {
+  console.log("privet");
   const { amount, idStoreFrom } = req.body;
   const userId = req.params.id;
   const idStoreTo = req.params.cat;
   const user = await modelUser.findById(userId);
-  await user.transaferMoneyStores(idStoreTo, idStoreFrom, amount);
-  const lastTransaction = user.transfers[user.transfers.length - 1];
-  return res.json(lastTransaction);
+  await user.transferMoneyStores(idStoreTo, idStoreFrom, amount);
+  const lastTransfer = user.transfers[user.transfers.length - 1];
+  return res.json(lastTransfer);
 });
 
 // delete the transaction, and add money to the proper parts of the programm

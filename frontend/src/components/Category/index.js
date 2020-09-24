@@ -12,7 +12,6 @@ import incomes from '../../img/incomes';
 
 console.log(expenses, incomes);
 const Category = ({ value, id, iconId }) => {
-  console.log(value, id, iconId);
   const history = useHistory();
   const [add, setAdd] = useState('');
   const userId = useSelector(state => state.user._id);
