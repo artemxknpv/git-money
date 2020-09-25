@@ -22,7 +22,7 @@
 
 .gain {
   color: #2dca05;
-  max-width: 33.3%;
+  max-width: 20rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -32,7 +32,7 @@
 
 .loss {
   color: #eb5757;
-  max-width: 33.3%;
+  max-width: 20rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -53,7 +53,7 @@
 }
 
 .time {
-  max-width: 33.3%;
+  max-width: 200px;
   color: #333333;
   font-size: 0.8rem;
   white-space: nowrap;
@@ -68,13 +68,17 @@
   text-overflow: ellipsis;
 }
 
-
 .listItem {
   justify-content: flex-start;
   flex-basis: 33%;
 }
 .listItem:last-of-type {
   display: flex;
+  flex-basis: 25%;
   justify-content: flex-end;
 }
 
+.listItem:first-of-type {
+  display: flex;
+  flex-basis: 40%;
+}

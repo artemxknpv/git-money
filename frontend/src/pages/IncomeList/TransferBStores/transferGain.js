@@ -33,17 +33,20 @@ function TransferGain({ id }) {
           scale: 1.1,
         }}
       >
-
-         <div className={styles.listItem}>
-        <p className={styles.gain}>+${transfer && transfer.amount}</p>
-            </div>
         <div className={styles.listItem}>
-        <p className={styles.targetCategory}>
-          Переведено из <strong>{nameTo && nameTo.name}</strong>
-        </p></div>
-            <div className={styles.listItem}>
-
-        <p className={styles.time}>{prettyTime && prettyTime}</p></div>
+          <p className={styles.gain}>+${transfer && transfer.amount}</p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.targetCategory}>
+            Переведено из{' '}
+            <strong style={{ color: '#eb5757' }}>
+              {nameTo && nameTo.name}
+            </strong>
+          </p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.time}>{prettyTime && prettyTime}</p>
+        </div>
         {isOpen && (
           <motion.p
             initial={{ opacity: 0 }}
@@ -51,7 +54,6 @@ function TransferGain({ id }) {
             exit={{ opacity: 0 }}
             className={styles.additionalContent}
           >
-            {' '}
             <button
               className={styles.deleteButton}
               onClick={() => {

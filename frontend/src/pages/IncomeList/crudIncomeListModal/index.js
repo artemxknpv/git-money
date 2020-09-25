@@ -81,9 +81,7 @@ function ModalWindowCrudCategory({ show }) {
           >
             {type === 'store' && subtype === 'editName' ? (
               <>
-                <h3 className={styles.modalHeader}>
-                  Изменить название хранилища
-                </h3>
+                <h3 className={styles.modalHeader}>Изменить название</h3>
                 <p className={styles.modalSubheader}>
                   Введите новое название хранилища
                 </p>
@@ -158,35 +156,17 @@ function ModalWindowCrudCategory({ show }) {
             ) : (
               <></>
             )}
-            {type === 'store' && subtype === 'hideCategory' ? (
+
+            {type === 'store' && subtype == 'transferStarted' ? (
               <>
                 <h3 className={styles.modalHeader}>
-                  Удалить категорию хранилища
+                  Перевод средств в другую категорию
                 </h3>
                 <p
                   className={styles.modalSubheader}
                   style={{ flexBasis: '100%' }}
                 >
-                  Это действие нельзя отменить. Если вы точно хотите удалить
-                  хранилище - нажмите кнопку "Удалить" ниже
-                </p>
-                <button className={styles.addButton} onClick={() => {}}>
-                  Удалить
-                </button>
-              </>
-            ) : (
-              <></>
-            )}
-            {type === 'store' && subtype === 'transferStarted' ? (
-              <>
-                <h3 className={styles.modalHeader}>
-                  Выберете категорию для перевода
-                </h3>
-                <p
-                  className={styles.modalSubheader}
-                  style={{ flexBasis: '100%' }}
-                >
-                  Вы можете выбрать одно хранилище для перевода средств в него
+                  Выберите, куда перевести средства
                 </p>
                 <div className={styles.iconRow}>
                   {listOfStoreCategories.map(category => {
@@ -208,7 +188,9 @@ function ModalWindowCrudCategory({ show }) {
                           style={{ display: 'flex', flexDirection: 'column' }}
                         >
                           <div> {incomes[category.iconId]} </div>
-                          <div> {category.name}</div>
+                          <div>
+                            <strong> {category.name}</strong>
+                          </div>
                           <div> {category.currentNumber}</div>
                         </div>
                       </motion.button>
@@ -231,20 +213,18 @@ function ModalWindowCrudCategory({ show }) {
             )}
             {type === 'store' && subtype === 'transferInProgress' ? (
               <>
-                <h3 className={styles.modalHeader}>
-                  Выберете сумму для перевода
-                </h3>
+                <h3 className={styles.modalHeader}>Укажите сумму перевода</h3>
                 <p
                   className={styles.modalSubheader}
                   style={{ flexBasis: '100%' }}
                 >
-                  Из {nameOfTheCurrentCategory[0].name} В{' '}
+                  Из {nameOfTheCurrentCategory[0].name} в{' '}
                   {nameOfTheCategoryTo[0].name}
                 </p>
                 <input
                   type="number"
                   id="name"
-                  placeholder={'Сумма'}
+                  placeholder={'3000'}
                   value={name}
                   onChange={event => setName(event.target.value)}
                   className={styles.input}

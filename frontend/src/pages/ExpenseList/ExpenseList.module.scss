@@ -27,10 +27,9 @@
 
 .arrowAndCatname {
   display: flex;
-  align-items: center;
   flex-basis: 20%;
+  align-items: center;
 }
-
 
 .editCategory {
   color: #0870c4;
@@ -38,6 +37,11 @@
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.editCategory:focus {
+  @extend .editCategory;
+  outline: 0;
 }
 
 .container {
@@ -62,4 +66,8 @@
   color: #eb5757;
   font-family: 'TT Medium', sans-serif;
   cursor: pointer;
+}
+
+.timeBlock {
+  margin-bottom: 2rem;
 }

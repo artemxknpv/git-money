@@ -5,9 +5,9 @@ import _ from 'lodash';
 import { Bar } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
 import Fade from 'react-reveal/Fade.js';
-import styles from './chart.module.scss'
-import { motion } from "framer-motion";
-import SidebarForChart from "./NavbarForCategory";
+import styles from './chart.module.scss';
+import { motion } from 'framer-motion';
+import SidebarForChart from './NavbarForCategory';
 import { useHistory } from 'react-router-dom';
 
 const Chart = () => {
@@ -75,37 +75,34 @@ const Chart = () => {
     .variation('pastel')
     .web_safe(false);
   const colors = _.shuffle(scm.colors());
-  console.log(colors);
-  console.log('Stacked Object', stackedObject);
   Object.keys(stackedObject).map(storeName => {
     Object.keys(stackedObject[storeName]).map(expenditureName => {
       stackedObjectInsideOut[expenditureName][storeName] =
         stackedObject[storeName][expenditureName];
     });
   });
-  console.log('Stacked Object inside out', stackedObjectInsideOut);
-  console.log(Object.keys(stackedObject).map(element => element));
   const optionsStacked = {
     scales: {
       yAxes: [
         {
           stacked: true,
+          display: false,
         },
       ],
       xAxes: [
         {
           stacked: true,
+          display: false,
         },
       ],
-
     },
-    legend: {display: false},
+    legend: { display: false },
     tooltips: {
       callbacks: {
-        label: function(tooltipItem) {
+        label: function (tooltipItem) {
           return tooltipItem.yLabel;
-        }
-      }
+        },
+      },
     },
   };
 
@@ -119,8 +116,6 @@ const Chart = () => {
           data: Object.keys(stackedObject[expenditureName]).map(storeName => {
             return stackedObject[expenditureName][storeName];
           }),
-
-
         };
       }),
     });
@@ -138,18 +133,16 @@ const Chart = () => {
               return stackedObjectInsideOut[storeName][expenditureName];
             }
           ),
-
         };
       }),
     });
   };
-  let history = useHistory()
+  let history = useHistory();
   const chartPie = () => {
     const names = expenditures.map(expenditure => expenditure.name);
     const values = expenditures.map(expenditure => expenditure.currentNumber);
     const index = expenditures.length;
     setChartDataPie({
-      labels: names,
       datasets: [
         {
           label: 'expenditures',
@@ -159,7 +152,6 @@ const Chart = () => {
             .map(color => dynamicColors()),
           borderWidth: 0.5,
         },
-
       ],
     });
   };
@@ -173,60 +165,53 @@ const Chart = () => {
     <div className={styles.batya}>
       <SidebarForChart />
       <Fade bottom cascade>
-      <motion.div className={styles.mainContainer}>
-        <div
-          className={styles.card}
-        >
-          <motion.div
-            className={styles.image}
-            whileTap={{ scale: 0.8 }}
-            whileHover={{ scale: 1.1 }}
-            onClick={()=>{
-                history.push('/chart/pie')
-            }}
-          >
-            <h3 className={styles.categorySubheader}>Диаграмма расходов</h3>
-            <Pie data={chartDataPie} />
-          </motion.div>
-        </div>
-          <div
-            className={styles.card}
-          >
-
+        <motion.div className={styles.mainContainer}>
+          <div className={styles.card}>
             <motion.div
               className={styles.image}
               whileTap={{ scale: 0.8 }}
               whileHover={{ scale: 1.1 }}
-              onClick={()=>{
-                history.push('/chart/stackdata')
+              onClick={() => {
+                history.push('/chart/pie');
+              }}
+            >
+              <h3 className={styles.categorySubheader}>Диаграмма расходов</h3>
+              <Pie data={chartDataPie} />
+            </motion.div>
+          </div>
+          <div className={styles.card}>
+            <motion.div
+              className={styles.image}
+              whileTap={{ scale: 0.8 }}
+              whileHover={{ scale: 1.1 }}
+              onClick={() => {
+                history.push('/chart/stackdata');
               }}
             >
               <h3 className={styles.categorySubheader}>
                 Траты по категориям расходов
               </h3>
-          <Bar data={stackData} options={optionsStacked} />
-        </motion.div>
+              <Bar data={stackData} options={optionsStacked} />
+            </motion.div>
           </div>
-      <div
-        className={styles.card}
-      >
-        <motion.div
-          className={styles.image}
-          whileTap={{ scale: 0.8 }}
-          whileHover={{ scale: 1.1 }}
-          onClick={()=>{
-            history.push('/chart/stackdatainsideout')
-          }}
-        >
-          <h3 className={styles.categorySubheader}>
-            Траты по категориям доходов
-          </h3>
-          <Bar data={stackDataInsideOut} options={optionsStacked} />
-      </motion.div>
-      </div>
-      </motion.div>
-    </Fade>
-      </div>
+          <div className={styles.card}>
+            <motion.div
+              className={styles.image}
+              whileTap={{ scale: 0.8 }}
+              whileHover={{ scale: 1.1 }}
+              onClick={() => {
+                history.push('/chart/stackdatainsideout');
+              }}
+            >
+              <h3 className={styles.categorySubheader}>
+                Траты по категориям доходов
+              </h3>
+              <Bar data={stackDataInsideOut} options={optionsStacked} />
+            </motion.div>
+          </div>
+        </motion.div>
+      </Fade>
+    </div>
   );
 };
 
