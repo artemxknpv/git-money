@@ -71,7 +71,7 @@ function ModalWindowAddCategory({ show }) {
             animate="visible"
           >
             <h3 className={styles.modalHeader}>Добавить категорию</h3>
-            <p className={styles.modalSubheader}>Введите название категории</p>
+            <p className={styles.modalSubheader}>Введите название категории:</p>
             <input
               type="text"
               id="name"
@@ -130,9 +130,15 @@ function ModalWindowAddCategory({ show }) {
               className={!isLoading ? styles.addButton : styles.loadingButton}
               onClick={() => {
                 if (name !== '') {
-                  dispatch(
-                    addCategoryStarted(userId, name, type, chosenIcon, limit)
-                  );
+                  if (name.length < 20) {
+                    dispatch(
+                      addCategoryStarted(userId, name, type, chosenIcon, limit)
+                    );
+                    setError('');
+                    setName('');
+                  } else {
+                    setError('Название не может быть более 20 символов');
+                  }
                 } else {
                   setError('Поле ввода не может быть пустым');
                 }
@@ -141,7 +147,7 @@ function ModalWindowAddCategory({ show }) {
               {!isLoading ? (
                 'Добавить'
               ) : (
-                <i>
+                <i style={{ marginLeft: '-1px' }}>
                   <InlineLoading loading={true} />
                 </i>
               )}

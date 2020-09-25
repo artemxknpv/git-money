@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Fade from 'react-reveal/Fade';
 import { useDispatch, useSelector } from 'react-redux';
 import Expenses from '../../components/Expenses';
-import Greetings from '../../components/Greetings';
+
 import Header from '../../components/Header';
 import Income from '../../components/Income';
 import LoadingPage from '../../components/LoadingPage';
@@ -11,6 +11,7 @@ import ModalWindowAddCategory from '../../components/ModalWindowAddCategory';
 import ModalWindowTransferMoney from '../../components/modalWindowTransferMoney';
 import ModalWindowTransactionHistoryExpenses from '../../components/TransactionsHistory/index';
 import Navbar from '../../components/Navbar';
+import loadingFinished from '../../redux/actions/loadingHandlers/loadingFinished.js';
 import openModalTransferMoney from '../../redux/actions/modalWindow/openModalWindowTransferMoney';
 import styles from './MainPage.module.scss';
 import { DragDropContext } from 'react-beautiful-dnd';
@@ -22,17 +23,20 @@ const MainPage = () => {
   const isModalTransfer = useSelector(
     state => state.isTransferMoneyModal.isOpened
   );
-  const userName = useSelector(state => state.user.firstName);
   const isModalHistoryTransaction = useSelector(
     state => state.isTransactionHistoryModal.isOpened
   );
   const categories = useSelector(state => state.categories);
   const isLoaded = useSelector(state => state.user.loaded);
 
+  useEffect(() => {
+    dispatch(loadingFinished());
+  }, []);
+
   return !isLoaded ? (
     <LoadingPage loading={true} />
   ) : (
-    <Fade bottom>
+    <Fade duration={800} bottom>
       <div className={styles.batya}>
         <Navbar />
         <ModalWindowAddMoney show={isModal} />

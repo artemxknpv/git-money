@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Fade from 'react-reveal/Fade.js';
 import { useParams } from 'react-router-dom';
@@ -48,7 +48,6 @@ const Index = () => {
   fromThisCategoryTransfer = fromThisCategoryTransfer.map(transfer => {
     return { ...transfer, value: 'lossTransfer' };
   });
-  console.log('loss', toThisCategoryTransfer, 'gain', fromThisCategoryTransfer);
   const currentBalance = categories.filter(category => category.id === cat)[0]
     .currentNumber;
   const thisCategoryListTransactions = listTransactions.filter(transaction => {
@@ -60,7 +59,6 @@ const Index = () => {
     ...toThisCategoryTransfer,
     ...fromThisCategoryTransfer,
   ];
-  console.log(megaArray);
   megaArray = megaArray.sort(sortTime);
   megaArray = megaArray.map(transaction => {
     return {
@@ -129,17 +127,6 @@ const Index = () => {
             className={styles.editCategory}
           >
             Transfer
-          </motion.button>
-          <motion.button
-            onClick={() => {
-              dispatch(
-                modalWindowCrudCategoryOpened('store', 'hideCategory', cat)
-              );
-            }}
-            whileHover={{ scale: 1.1 }}
-            className={styles.editCategory}
-          >
-            Delete category
           </motion.button>
         </StyledHeader>
         {megaArray.length ? (

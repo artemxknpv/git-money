@@ -40,6 +40,11 @@
   cursor: pointer;
 }
 
+.editCategory:focus {
+  @extend .editCategory;
+  outline: 0;
+}
+
 .container {
   max-width: 1000px;
   margin: auto;

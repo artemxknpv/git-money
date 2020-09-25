@@ -11,8 +11,8 @@
   color: #333333;
   font-style: normal;
   font-weight: bold;
-  font-size: 42px;
-  line-height: 51px;
+  font-size: 2rem;
+  line-height: 3rem;
   margin: 36px 24px 0;
 }
 
@@ -60,14 +60,14 @@
   background: #6dc4c4;
   border-radius: 0 0 10px 10px;
   border: 0 none;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 18px;
+  font-family: 'TT Medium', sans-serif;
   text-align: center;
   color: #ffffff;
   margin: 1rem 0 0;
   height: 50px;
+  cursor: pointer;
 }
 
 .addButton:focus {
@@ -111,11 +111,12 @@
   background: none;
   border: 2px solid white;
   border-radius: 5px;
+  outline: 0;
 }
 
 .chosenIcon {
   @extend .iconOption;
-  border: 2px solid #2d9cdb;
+  border: 3px solid #2d9cdb;
 }
 
 .iconOption:first-child {

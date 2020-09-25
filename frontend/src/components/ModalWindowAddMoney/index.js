@@ -35,6 +35,14 @@ const ModalWindowAddMoney = ({ show }) => {
   const userId = useSelector(state => state.user._id);
   const id = useSelector(state => state.isModal.id);
   const dispatch = useDispatch();
+  //
+  useEffect(() => {
+    if (!isLoading) {
+      dispatch(closeModalWindow());
+      setSum('');
+    }
+    // dispatch(loadingFinished());
+  }, [isLoading]);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -95,7 +103,7 @@ const ModalWindowAddMoney = ({ show }) => {
               {!isLoading ? (
                 'Добавить'
               ) : (
-                <i>
+                <i style={{ marginLeft: '-1px' }}>
                   <InlineLoading loading={true} />
                 </i>
               )}

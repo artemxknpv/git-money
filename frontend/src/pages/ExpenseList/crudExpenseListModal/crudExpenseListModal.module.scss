@@ -11,9 +11,14 @@
   color: #333333;
   font-style: normal;
   font-weight: bold;
-  font-size: 42px;
+  font-size: 2rem;
   line-height: 51px;
   margin: 36px 24px 0;
+}
+
+.errorContainer {
+  margin-left: 1.5rem;
+  color: #eb5757;
 }
 
 .iconRow {
@@ -72,6 +77,7 @@
   color: #ffffff;
   margin: 1rem 0 0;
   height: 50px;
+  cursor: pointer;
 }
 
 .addButton:focus {
@@ -113,13 +119,14 @@
   padding: 0.5rem;
   margin: 1rem;
   background: none;
-  border: 2px solid white;
+  border: 3px solid white;
   border-radius: 5px;
+  outline: 0;
 }
 
 .chosenIcon {
   @extend .iconOption;
-  border: 2px solid #2d9cdb;
+  border: 3px solid #2d9cdb;
 }
 
 .iconOption:first-child {
