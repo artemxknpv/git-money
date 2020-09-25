@@ -156,6 +156,7 @@ function ModalWindowCrudCategory({ show }) {
             ) : (
               <></>
             )}
+
             {type === 'store' && subtype == 'transferStarted' ? (
               <>
                 <h3 className={styles.modalHeader}>
@@ -210,7 +211,7 @@ function ModalWindowCrudCategory({ show }) {
             ) : (
               <></>
             )}
-            {type === 'store' && subtype == 'transferInProgress' ? (
+            {type === 'store' && subtype === 'transferInProgress' ? (
               <>
                 <h3 className={styles.modalHeader}>Укажите сумму перевода</h3>
                 <p
