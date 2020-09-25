@@ -200,7 +200,6 @@ const AuthenticationForm = ({ mode }) => {
           <span className={styles.label}>Повторите пароль</span>
         </div>
         <motion.button
-          disabled={isLoading}
           className={isLoading ? styles.disabledBtn : styles.btn}
           whileTap={{ scale: 0.95 }}
         >
