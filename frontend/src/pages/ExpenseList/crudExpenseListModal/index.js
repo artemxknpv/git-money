@@ -29,7 +29,6 @@ const modal = {
   },
 };
 function ModalWindowCrudCategory({ show }) {
-  const isLoading = useSelector(state => state.isLoading);
   const dispatch = useDispatch();
   const userId = useSelector(state => state.user._id);
   const modalConfiguration = useSelector(state => state.isCrudModalWindow);
@@ -134,13 +133,7 @@ function ModalWindowCrudCategory({ show }) {
                     dispatch(modalCrudOperationsClosed());
                   }}
                 >
-                  {!isLoading ? (
-                    'Изменить'
-                  ) : (
-                    <i>
-                      <InlineLoading loading={true} />
-                    </i>
-                  )}
+                  Изменить
                 </button>
               </>
             ) : (

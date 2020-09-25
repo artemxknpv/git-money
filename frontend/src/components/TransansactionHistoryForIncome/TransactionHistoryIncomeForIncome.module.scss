@@ -19,6 +19,12 @@
 .listItem:last-of-type {
   display: flex;
   justify-content: flex-end;
+  flex-basis: 25%;
+}
+
+.listItem:first-of-type {
+  display: flex;
+  flex-basis: 40%;
 }
 
 
@@ -34,7 +40,7 @@
 
 .amount {
   color: #eb5757;
-  max-width: 3rem;
+  max-width: 20rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

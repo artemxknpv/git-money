@@ -38,7 +38,10 @@ function TransferLoss({ id }) {
         </div>
         <div className={styles.listItem}>
           <p className={styles.targetCategory}>
-            Переведено в <strong>{nameTo && nameTo.name}</strong>
+            Переведено в{' '}
+            <strong style={{ color: '#eb5757' }}>
+              {nameTo && nameTo.name}
+            </strong>
           </p>
         </div>
         <div className={styles.listItem}>

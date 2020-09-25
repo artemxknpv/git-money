@@ -8,7 +8,6 @@ import InlineLoading from '../InlineLoading';
 import styles from './TransactionHistoryExpenses.module.scss';
 
 function TransactionsHistoryExpense({ id }) {
-  const isLoading = useSelector(state => state.isLoading);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const dispatch = useDispatch();
@@ -40,58 +39,41 @@ function TransactionsHistoryExpense({ id }) {
     );
   }
 
-  console.log(isLoading);
-
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     dispatch(modalCrudOperationsClosed());
-  //   }
-  //   dispatch(loadingFinished());
-  // }, [isLoading]);
-
   return (
     <motion.li style={{ listStyle: 'none' }} onClick={toggleOpen}>
-      {!isLoading ? (
-        <motion.div
-          className={isOpen ? styles.openedWrapper : styles.wrapper}
-          whileHover={{
-            scale: 1.1,
-            boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
-          }}
-          transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
-        >
-          <div className={styles.listItem}>
-            <p className={styles.amount}>
-              ${transaction && transaction.amount}
-            </p>
-          </div>
-          <div className={styles.listItem}>
-            <p className={styles.targetCategory}>
-              Потрачено из <strong>{nameFrom && nameFrom.name}</strong>
-            </p>
-          </div>
-          <div className={styles.listItem}>
-            <p className={styles.time}>{prettyTime && prettyTime}</p>
-          </div>
+      <motion.div
+        className={isOpen ? styles.openedWrapper : styles.wrapper}
+        whileHover={{
+          scale: 1.1,
+          boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
+        }}
+        transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
+      >
+        <div className={styles.listItem}>
+          <p className={styles.amount}>₽ {transaction && transaction.amount}</p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.targetCategory}>
+            Потрачено из <strong>{nameFrom && nameFrom.name}</strong>
+          </p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.time}>{prettyTime && prettyTime}</p>
+        </div>
 
-          {isOpen && (
-            <motion.p
-              // transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className={styles.additionalContent}
-            >
-              <button className={styles.deleteButton} onClick={handleClick}>
-                Удалить
-              </button>
-              {/*TODO*/}
-            </motion.p>
-          )}
-        </motion.div>
-      ) : (
-        <InlineLoading />
-      )}
+        {isOpen && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={styles.additionalContent}
+          >
+            <button className={styles.deleteButton} onClick={handleClick}>
+              Удалить
+            </button>
+          </motion.p>
+        )}
+      </motion.div>
     </motion.li>
   );
 }

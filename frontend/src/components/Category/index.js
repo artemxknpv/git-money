@@ -37,7 +37,7 @@ const Category = ({ value, id, iconId }) => {
       <p className={styles.categorySubheader} style={{ fontWeight: '700' }}>
         {category.name}
       </p>
-      <p className={styles.categorySum}>{category.currentNumber} ₽</p>
+      <p className={styles.categorySum}>₽ {category.currentNumber}</p>
       {category.limit < category.currentNumber && 'Превышен лимит'}
     </motion.div>
   );

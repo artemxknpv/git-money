@@ -81,9 +81,7 @@ function ModalWindowCrudCategory({ show }) {
           >
             {type === 'store' && subtype === 'editName' ? (
               <>
-                <h3 className={styles.modalHeader}>
-                  Изменить название хранилища
-                </h3>
+                <h3 className={styles.modalHeader}>Изменить название</h3>
                 <p className={styles.modalSubheader}>
                   Введите новое название хранилища
                 </p>
@@ -214,7 +212,7 @@ function ModalWindowCrudCategory({ show }) {
             )}
             {type === 'store' && subtype == 'transferInProgress' ? (
               <>
-                <h3 className={styles.modalHeader}>Укажите сумму перевода:</h3>
+                <h3 className={styles.modalHeader}>Укажите сумму перевода</h3>
                 <p
                   className={styles.modalSubheader}
                   style={{ flexBasis: '100%' }}

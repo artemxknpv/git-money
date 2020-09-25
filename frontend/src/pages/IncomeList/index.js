@@ -97,7 +97,7 @@ const Index = () => {
             <span role="img" aria-label="moneybag">
               💰
             </span>
-            Текущий баланс: ${currentBalance}
+            Текущий баланс: ₽ {currentBalance}
           </p>
           <motion.button
             onClick={() => {
@@ -106,7 +106,7 @@ const Index = () => {
             whileHover={{ scale: 1.1 }}
             className={styles.editCategory}
           >
-            Edit icon
+            Изменить иконку
           </motion.button>
           <motion.button
             onClick={() => {
@@ -115,7 +115,7 @@ const Index = () => {
             whileHover={{ scale: 1.1 }}
             className={styles.editCategory}
           >
-            Edit name
+            Изменить название
           </motion.button>
           <motion.button
             onClick={() => {
@@ -126,7 +126,7 @@ const Index = () => {
             whileHover={{ scale: 1.1 }}
             className={styles.editCategory}
           >
-            Transfer
+            Перенести деньги
           </motion.button>
         </StyledHeader>
         {megaArray.length ? (

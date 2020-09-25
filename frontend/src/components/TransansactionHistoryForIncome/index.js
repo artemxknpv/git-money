@@ -43,16 +43,17 @@ function TransactionsHistoryExpense({ id }) {
         className={isOpen ? styles.openedWrapper : styles.wrapper}
         whileHover={{
           scale: 1.1,
-          // boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
         }}
-        // transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
       >
         <div className={styles.listItem}>
           <p className={styles.amount}>-${transaction && transaction.amount}</p>
         </div>
         <div className={styles.listItem}>
           <p className={styles.targetCategory}>
-            Потрачено в <strong>{nameTo && nameTo.name}</strong>
+            Потрачено в{' '}
+            <strong style={{ color: '#6dc4c4' }}>
+              {nameTo && nameTo.name}
+            </strong>
           </p>
         </div>
         <div className={styles.listItem}>
