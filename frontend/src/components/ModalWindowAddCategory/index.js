@@ -45,6 +45,7 @@ function ModalWindowAddCategory({ show }) {
     if (!isLoading) {
       dispatch(closeModalWindowAddCategory());
       setName('');
+      setError('');
     }
   }, [isLoading]);
 
@@ -134,8 +135,6 @@ function ModalWindowAddCategory({ show }) {
                     dispatch(
                       addCategoryStarted(userId, name, type, chosenIcon, limit)
                     );
-                    setError('');
-                    setName('');
                   } else {
                     setError('Название не может быть более 20 символов');
                   }

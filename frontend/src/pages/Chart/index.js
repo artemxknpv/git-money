@@ -75,16 +75,12 @@ const Chart = () => {
     .variation('pastel')
     .web_safe(false);
   const colors = _.shuffle(scm.colors());
-  console.log(colors);
-  console.log('Stacked Object', stackedObject);
   Object.keys(stackedObject).map(storeName => {
     Object.keys(stackedObject[storeName]).map(expenditureName => {
       stackedObjectInsideOut[expenditureName][storeName] =
         stackedObject[storeName][expenditureName];
     });
   });
-  console.log('Stacked Object inside out', stackedObjectInsideOut);
-  console.log(Object.keys(stackedObject).map(element => element));
   const optionsStacked = {
     scales: {
       yAxes: [
