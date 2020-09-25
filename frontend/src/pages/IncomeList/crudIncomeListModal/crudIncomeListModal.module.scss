@@ -1,3 +1,6 @@
+@import './src/styles/variables';
+
+
 * {
   box-sizing: border-box;
 }
@@ -8,12 +11,13 @@
   border-radius: 2px;
 }
 .modalHeader {
-  color: #333333;
+  color: $black-color;
   font-style: normal;
   font-weight: bold;
   font-size: 42px;
   line-height: 51px;
-  margin: 36px 24px 0;
+  margin: 1.5rem 2rem 0;
+  font-family: $bold-font;
 }
 
 .iconRow {
@@ -22,25 +26,28 @@
 }
 
 .modalSubheader {
-  color: #333333;
+  font-family: $regular-font;
+  color: #BDBDBD;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 22px;
-  margin: 16px 24px 0;
+  margin: 1rem 2rem 0;
 }
+
 
 .input {
   width: 90%;
   height: 37px;
-  margin: 1rem 1.5rem 2rem;
-  border-width: 0 0 1px;
+  margin: 1rem 2rem 2rem;
+  border-width: 0 0 2px;
   border-color: #f2f2f2;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
+
+  font-family: 'TT Bold', sans-serif;
+  font-size: 1.5rem;
   line-height: 29px;
   color: #6dc4c4;
+  padding-bottom: .5rem;
 }
 
 .input:focus {
@@ -50,9 +57,9 @@
 }
 
 .input::placeholder {
-  color: #f2f2f2;
-  padding: 0;
+  color: #BDBDBD;
   margin: 0;
+  padding: 0;
 }
 
 .addButton {
@@ -60,14 +67,14 @@
   background: #6dc4c4;
   border-radius: 0 0 10px 10px;
   border: 0 none;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 18px;
+  font-family: 'TT Medium', sans-serif;
   text-align: center;
   color: #ffffff;
   margin: 1rem 0 0;
   height: 50px;
+  cursor: pointer;
 }
 
 .addButton:focus {
@@ -111,15 +118,16 @@
   background: none;
   border: 2px solid white;
   border-radius: 5px;
+  outline: 0;
 }
 
 .chosenIcon {
   @extend .iconOption;
-  border: 2px solid #2d9cdb;
+  border: 3px solid #2d9cdb;
 }
 
 .iconOption:first-child {
-  margin-left: 1.5rem;
+  margin-left: 2rem;
 }
 
 .iconOption:last-child {

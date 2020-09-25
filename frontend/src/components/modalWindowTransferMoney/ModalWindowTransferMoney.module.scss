@@ -11,30 +11,32 @@
   font-family: $bold-font;
   font-size: 42px;
   line-height: 51px;
-  margin: 36px 24px 0;
+  margin: 3rem 2rem 0;
 }
 
 .modalSubheader {
-  font-family: Inter, sans-serif;
-  color: #333333;
+  font-family: 'TT Regular', sans-serif;
+  color: #ababab;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-  line-height: 22px;
-  margin: 16px 24px 0;
+  width: 70%;
+  line-height: 180%;
+  margin: 16px 2rem 0;
 }
 
 .input {
   width: 80%;
   height: 37px;
-  margin: 66px 16px auto;
+  margin: 3rem 2rem auto;
   border-width: 0 0 1px;
-  border-color: #f2f2f2;
-  font-family: Inter, sans-serif;
+  border-color: #BDBDBD;
+  font-family: 'TT Bold', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 29px;
+  padding-bottom: .5rem;
   color: #6dc4c4;
 }
 
@@ -45,7 +47,7 @@
 }
 
 .input::placeholder {
-  color: #f2f2f2;
+  color: #BDBDBD;
   padding: 0;
   margin: 0;
 }
@@ -63,7 +65,7 @@
   text-align: center;
   color: #ffffff;
   margin: 66px 0 0;
-  height: 50px;
+  height: 60px;
 }
 
 .addButton:focus {
@@ -113,7 +115,6 @@
   z-index: 1;
 }
 
-
 .displayBlock {
   display: block;
 }
@@ -129,7 +130,7 @@
   width: 100vw;
   height: 100vh;
 
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   margin: 0;
   z-index: 1;
 }

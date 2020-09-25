@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Fade from 'react-reveal/Fade.js';
 import { useParams, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import differenceInHours from 'date-fns/differenceInHours';
 import formatDistance from 'date-fns/formatDistance';
-import deleteCategoryStarted from '../../redux/actions/deleteCategory/deleteCategoryStarted.js';
 import { StyledHeader } from '../../styled-components/StyledHeader.js';
 import styles from './ExpenseList.module.scss';
 import TransactionHistoryExpenses from '../../components/TransactionHistoryExpenses';
@@ -49,7 +48,6 @@ const ExpenseList = () => {
           : formatDistance(Date.now(), new Date(transaction.time)) + ' ago',
     };
   });
-  const userId = useSelector(state => state.user._id);
   const objectTime = {};
   transactionsToThisExpense.forEach(transaction => {
     const currentStringTime = transaction.stringTime;
@@ -86,7 +84,7 @@ const ExpenseList = () => {
             whileHover={{ scale: 1.1 }}
             className={styles.editCategory}
           >
-            Edit icon
+            Изменить иконку
           </motion.button>
           <motion.button
             onClick={() => {
@@ -97,36 +95,10 @@ const ExpenseList = () => {
             whileHover={{ scale: 1.1 }}
             className={styles.editCategory}
           >
-            Edit name
+            Изменить название
           </motion.button>
-          <motion.button
-            onClick={() => {
-              dispatch(
-                modalWindowCrudCategoryOpened('expense', 'hideCategory', cat)
-              );
-            }}
-            whileHover={{ scale: 1.1 }}
-            className={styles.editCategory}
-          >
-            Delete category
-          </motion.button>
-          {currentCategory.limit && (
-            <motion.button className={styles.editCategory}>
-              Edit limit
-            </motion.button>
-          )}
         </StyledHeader>
 
-        <div>
-          {currentCategory.limit > currentCategory.currentNumber && (
-            <p>Лимит Превышен!!!</p>
-          )}
-          {currentCategory.limit && (
-            <p>
-              Лимит:{currentCategory.currentNumber}/{currentCategory.limit}
-            </p>
-          )}
-        </div>
         <section>
           {transactionsToThisExpense.length ? (
             Object.keys(objectTime).map(key => {

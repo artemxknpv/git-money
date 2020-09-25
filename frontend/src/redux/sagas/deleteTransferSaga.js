@@ -2,9 +2,10 @@ import { takeEvery, put, call } from 'redux-saga/effects';
 import { DELETE_TRANSFER_STARTED } from '../action-types';
 import deleteTransferSuccess from '../actions/deleteTransfer/deleteTransferSuccess';
 import addMoneyCategory from '../actions/addMoney/addMoneySuccess';
+import loadingFinished from '../actions/loadingHandlers/loadingFinished.js';
+import loadingStarted from '../actions/loadingHandlers/loadingStarted.js';
 
 const deleteTransferFetch = async ({ userId, idTransfer }) => {
-  console.log(userId, idTransfer);
   await fetch(`/transfer/${userId}/${idTransfer}`, {
     method: 'DELETE',
     headers: {
@@ -15,6 +16,7 @@ const deleteTransferFetch = async ({ userId, idTransfer }) => {
 };
 
 function* transferMoneyStoreWorker(action) {
+  yield put(loadingStarted());
   const { userId, idTransfer, idTo, idFrom, amount } = action.payload;
   try {
     yield call(deleteTransferFetch, {
@@ -27,6 +29,7 @@ function* transferMoneyStoreWorker(action) {
   } catch (err) {
     console.log('transfer error', err);
   }
+  yield put(loadingFinished());
 }
 
 export default function* transferMoneyStoreWatcher() {

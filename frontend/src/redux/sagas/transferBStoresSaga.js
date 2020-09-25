@@ -24,7 +24,6 @@ function* transferMoneyBStoresWorker(action) {
       idFrom,
       amount,
     });
-    console.log(response);
     yield put(addTransfer(response));
   } catch (err) {
     console.log('transfer error', err);

@@ -21,9 +21,15 @@
   flex-basis: 33%;
 }
 
+.listItem:first-of-type {
+  display: flex;
+  flex-basis: 40%;
+}
+
 .listItem:last-of-type {
   display: flex;
   justify-content: flex-end;
+  flex-basis: 25%;
 }
 
 
@@ -43,7 +49,7 @@
 }
 
 .amount {
-  max-width: 15rem;
+  max-width: 20rem;
   color: #333333;
   white-space: nowrap;
   overflow: hidden;

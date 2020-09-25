@@ -11,14 +11,20 @@
 }
 .listItem {
   flex-basis: 33%;
-  //display: flex;
+  display: flex;
 }
 
 .listItem:last-of-type {
   display: flex;
+  flex-basis: 25%;
+
   justify-content: flex-end;
 }
 
+.listItem:first-of-type {
+  display: flex;
+  flex-basis: 40%;
+}
 
 .openedWrapper {
   @extend .wrapper;

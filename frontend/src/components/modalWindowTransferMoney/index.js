@@ -61,7 +61,7 @@ const ModalWindowAddMoney = ({ show }) => {
 
   const handleTransferMoney = () => {
     if (sum > 0) {
-       dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
+      dispatch(transferMoneyStarted(userId, idTo, idFrom, Number(sum)));
     } else {
       setError('Вы не можете перевести 0$');
     }
@@ -110,7 +110,7 @@ const ModalWindowAddMoney = ({ show }) => {
               {!isLoading ? (
                 'Добавить'
               ) : (
-                <i>
+                <i style={{ marginLeft: '-1px' }}>
                   <InlineLoading />
                 </i>
               )}

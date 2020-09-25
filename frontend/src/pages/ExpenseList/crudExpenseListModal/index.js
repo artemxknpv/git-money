@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import InlineLoading from '../../../components/InlineLoading';
+import loadingFinished from '../../../redux/actions/loadingHandlers/loadingFinished.js';
+import closeModalWindow from '../../../redux/actions/modalWindow/closeModalWindowAddMoney.js';
 import styles from './crudExpenseListModal.module.scss';
 import modalCrudOperationsClosed from '../../../redux/actions/modalWindow/closeModalWindowCrudCategory';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -35,6 +38,7 @@ function ModalWindowCrudCategory({ show }) {
   const [error, setError] = useState('');
   const [name, setName] = useState('');
   const [chosenIcon, setChosenIcon] = useState(0);
+
   return (
     <AnimatePresence exitBeforeEnter>
       {show ? (
@@ -58,12 +62,8 @@ function ModalWindowCrudCategory({ show }) {
           >
             {type === 'expense' && subtype === 'editName' ? (
               <>
-                <h3 className={styles.modalHeader}>
-                  Изменить название категории затрат
-                </h3>
-                <p className={styles.modalSubheader}>
-                  Введите новое название категории затрат
-                </p>
+                <h3 className={styles.modalHeader}>Изменить название</h3>
+                <p className={styles.modalSubheader}>Введите новое название</p>
                 <input
                   type="text"
                   id="name"
@@ -72,11 +72,18 @@ function ModalWindowCrudCategory({ show }) {
                   onChange={event => setName(event.target.value)}
                   className={styles.input}
                 />
-                {error && <p className={styles.modalSubheader}>{error}</p>}
+                {error && (
+                  <div className={styles.errorContainer}>
+                    <p className={styles.errorMessage}>{error}</p>
+                  </div>
+                )}
                 <button
                   className={styles.addButton}
                   onClick={() => {
                     if (name !== '') {
+                      dispatch(editNameAction(userId, id, name));
+                      setError('');
+                      setName('');
                       if (name.length < 20) {
                         dispatch(editNameAction(userId, id, name));
                         dispatch(modalCrudOperationsClosed());
@@ -97,14 +104,12 @@ function ModalWindowCrudCategory({ show }) {
             )}
             {type === 'expense' && subtype === 'editIcon' ? (
               <>
-                <h3 className={styles.modalHeader}>
-                  Изменить иконку категории затрат
-                </h3>
+                <h3 className={styles.modalHeader}>Изменить иконку</h3>
                 <p
                   className={styles.modalSubheader}
                   style={{ flexBasis: '100%' }}
                 >
-                  Выберите иконку:
+                  Выберите новую иконку:
                 </p>
                 <div className={styles.iconRow}>
                   {expenses.map((icon, index) => (
@@ -129,23 +134,6 @@ function ModalWindowCrudCategory({ show }) {
                   }}
                 >
                   Изменить
-                </button>
-              </>
-            ) : (
-              <></>
-            )}
-            {type === 'expense' && subtype == 'hideCategory' ? (
-              <>
-                <h3 className={styles.modalHeader}>Удалить категорию затрат</h3>
-                <p
-                  className={styles.modalSubheader}
-                  style={{ flexBasis: '100%' }}
-                >
-                  Это действие нельзя отменить. Если вы точно хотите удалить
-                  хранилище - нажмите кнопку "Удалить" ниже
-                </p>
-                <button className={styles.addButton} onClick={() => {}}>
-                  Удалить
                 </button>
               </>
             ) : (

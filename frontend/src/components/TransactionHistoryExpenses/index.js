@@ -2,6 +2,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import deleteTransactionStarted from '../../redux/actions/deleteTransaction/deleteTransactionStarted';
+import loadingFinished from '../../redux/actions/loadingHandlers/loadingFinished.js';
+import modalCrudOperationsClosed from '../../redux/actions/modalWindow/closeModalWindowCrudCategory.js';
+import InlineLoading from '../InlineLoading';
 import styles from './TransactionHistoryExpenses.module.scss';
 
 function TransactionsHistoryExpense({ id }) {
@@ -47,7 +50,7 @@ function TransactionsHistoryExpense({ id }) {
         transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
       >
         <div className={styles.listItem}>
-          <p className={styles.amount}>${transaction && transaction.amount}</p>
+          <p className={styles.amount}>₽ {transaction && transaction.amount}</p>
         </div>
         <div className={styles.listItem}>
           <p className={styles.targetCategory}>
@@ -60,7 +63,6 @@ function TransactionsHistoryExpense({ id }) {
 
         {isOpen && (
           <motion.p
-            // transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -69,7 +71,6 @@ function TransactionsHistoryExpense({ id }) {
             <button className={styles.deleteButton} onClick={handleClick}>
               Удалить
             </button>
-            {/*TODO*/}
           </motion.p>
         )}
       </motion.div>
