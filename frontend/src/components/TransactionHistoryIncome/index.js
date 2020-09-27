@@ -1,10 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import deleteCategoryStarted from '../../redux/actions/deleteCategory/deleteCategoryStarted.js';
-import deleteTransactionStarted from '../../redux/actions/deleteTransaction/deleteTransactionStarted.js';
 import styles from './TransactionHistoryIncome.module.scss';
 import { useHistory } from 'react-router-dom';
+import deleteIncomeStarted from '../../redux/actions/deleteTransaction/deleteTransactionIncomeStarted';
 
 function TransactionsHistoryIncome({ id }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,42 +21,51 @@ function TransactionsHistoryIncome({ id }) {
   useEffect(() => {
     setPrettyTime(new Date(transaction.time).toLocaleString());
   }, [transaction]);
-  function handleClick() {
-    dispatch(deleteTransactionStarted(userId, id));
-    history.push('/');
-  }
-  const targetCategory = { name: 'Name Here' };
-
   return (
-    <motion.li layout style={{ listStyle: 'none' }} onClick={toggleOpen}>
+    <motion.li style={{ listStyle: 'none' }} onClick={toggleOpen}>
       <motion.div
-        layout
         className={isOpen ? styles.openedWrapper : styles.wrapper}
         whileHover={{
           scale: 1.1,
-          boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
+          // boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
         }}
-        transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
+        // transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
       >
-        <p className={styles.amount}>${transaction && transaction.amount}</p>
-        <p className={styles.time}>{prettyTime && prettyTime}</p>
-        {targetCategory && (
-          <p className={styles.targetCategory}>{targetCategory.name}</p>
-        )}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.p
-              transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className={styles.additionalContent}
+        <div className={styles.listItem}>
+          <p className={styles.amount}>${transaction && transaction.amount}</p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.targetCategory}>Добавлено извне</p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.time}>{prettyTime && prettyTime}</p>{' '}
+        </div>
+
+        {isOpen && (
+          <motion.p
+            // transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={styles.additionalContent}
+          >
+            <button
+              className={styles.deleteButton}
+              onClick={() => {
+                dispatch(
+                  deleteIncomeStarted(
+                    userId,
+                    transaction._id,
+                    transaction.to,
+                    transaction.amount
+                  )
+                );
+              }}
             >
-              <p>Ты пидор</p>
-              {/*TODO*/}
-            </motion.p>
-          )}
-        </AnimatePresence>
+              Удалить
+            </button>
+          </motion.p>
+        )}
       </motion.div>
     </motion.li>
   );

@@ -1,72 +1,91 @@
+@import 'src/styles/variables';
+
+* {
+  box-sizing: border-box;
+}
+
 .container {
   width: 80%;
   box-shadow: 0 2px 13px rgba(51, 51, 51, 0.08);
   border-radius: 2px;
 }
+
 .modalHeader {
-  color: #333333;
+  color: $black-color;
   font-style: normal;
   font-weight: bold;
   font-size: 42px;
   line-height: 51px;
-  margin: 36px 24px 0;
+  margin: 2rem 2rem 0;
+  font-family: $bold-font;
 }
-//
-//.modalHeader {
-//}
-//
+
+.iconRow {
+  display: flex;
+  overflow-x: auto;
+}
 
 .modalSubheader {
-  font-family: Inter, sans-serif;
+  font-family: 'TT Regular', sans-serif;
   color: #333333;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
-  margin: 16px 24px 0;
+  margin: 1rem 2rem 0;
 }
 
 .input {
-  width: 90%;
-  height: 37px;
-  margin: 66px 16px auto;
+  max-width: 80%;
+  width: 30rem;
+  padding-bottom: 0.5rem;
+  margin: 2rem 2rem 1rem;
   border-width: 0 0 1px;
-  border-color: #f2f2f2;
-  font-family: Inter, sans-serif;
+  border-color: #BDBDBD;
+  font-family: "TT Bold", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 29px;
-  color: #f2f2f2;
+  color: #6dc4c4;
 }
 
 .input:focus {
   outline-width: 0;
-  color: #6dc4c4;
   border-width: 0 0 1px;
   border-color: #6dc4c4;
 }
 
-::placeholder {
-  color: #f2f2f2;
-  padding-left: 5%;
+.input::placeholder {
+  color: #BDBDBD;
+  padding: 0;
+  margin: 0;
 }
 
 .addButton {
   width: 100%;
   background: #6dc4c4;
   border-radius: 0 0 10px 10px;
-  border: 0;
-  border-color: none;
-  font-family: Inter, serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
+  border: 0 none;
+  font-family: 'TT Medium', sans-serif;
+  font-size: 1rem;
   line-height: 18px;
   text-align: center;
   color: #ffffff;
-  margin: 66px 0 0;
-  height: 50px;
+  margin: 1rem 0 0;
+  height: 60px;
+}
+
+.addButton:focus {
+  @extend .addButton;
+  outline: 0;
+}
+
+
+.loadingButton {
+  @extend .addButton;
+  height: 60px;
+  background: #e0e0e0;
 }
 
 .modal {
@@ -97,6 +116,24 @@
   background: rgba(0, 0, 0, 0.5);
   margin: 0;
   z-index: 1;
+}
+
+.iconOption {
+  padding: .5rem;
+  margin: 1rem;
+  background: none;
+  border: 3px solid white;
+  border-radius: 5px;
+  outline: 0;
+}
+
+.chosenIcon {
+  @extend .iconOption;
+  border: 3px solid #2d9cdb;
+}
+
+.iconOption:first-child {
+  margin-left: 2rem;
 }
 
 .modalMain {

@@ -11,26 +11,28 @@ const registrationFetch = async ({
   email,
   login,
   password,
+  repPassword,
 }) => {
   const response = await fetch('/auth/registration', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ firstName, lastName, mail: email, login, password }),
+    body: JSON.stringify({ firstName, lastName, mail: email, login, password, repPassword }),
   });
   const responseJSON = await response.json();
   return responseJSON;
 };
 
 function* registrationWorker(action) {
-  const { firstName, lastName, email, login, password } = action.payload;
+  const { firstName, lastName, email, login, password, repPassword } = action.payload;
   const response = yield call(registrationFetch, {
     firstName,
     lastName,
     email,
     login,
     password,
+    repPassword,
   });
   const id = response.id;
   console.log(typeof response);

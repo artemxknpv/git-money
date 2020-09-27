@@ -1,0 +1,35 @@
+.mainContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 6rem;
+  z-index: -1;
+}
+
+.card {
+  margin: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+.image {
+  height: 35rem;
+  width: 55rem;
+  background-color: #fff;
+  min-height: 110px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 13px rgba(51, 51, 51, 0.08);
+  overflow: visible;
+}
+
+.data{
+  width: 50rem;
+}
+.menu{
+}

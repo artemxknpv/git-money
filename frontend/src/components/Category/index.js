@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import BagOfGoods from '../../img/BagOfGoods.jsx';
-import WalletFilledIcon from '../../img/WalletFilledIcon.jsx';
 import openModalWindow from '../../redux/actions/modalWindow/openModalWindowAddMoney.js';
 import openModalWindowTransactionHistoryExpenses from '../../redux/actions/modalWindow/openModalWindowTransactionHistory';
-import styles from './Category.module.scss';
+import styles from './category.module.scss';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import expenses from '../../img/expenses';
+import incomes from '../../img/incomes';
 
-const Category = ({ value, id }) => {
+const Category = ({ value, id, iconId }) => {
   const history = useHistory();
-  const [add, setAdd] = useState('');
   const userId = useSelector(state => state.user._id);
-
   const dispatch = useDispatch();
   const category = useSelector(state =>
     state.categories.filter(category => category.id === id)
   )[0];
-
   return (
     <motion.div
       className={styles.card}
@@ -35,12 +32,13 @@ const Category = ({ value, id }) => {
               }
         }
       >
-        {value === 'store' ? <WalletFilledIcon /> : <BagOfGoods />}
+        {value === 'store' ? incomes[iconId] : expenses[iconId]}
       </div>
       <p className={styles.categorySubheader} style={{ fontWeight: '700' }}>
         {category.name}
       </p>
-      <p className={styles.categorySum}>{category.currentNumber}$</p>
+      <p className={styles.categorySum}>₽ {category.currentNumber}</p>
+      {category.limit < category.currentNumber && 'Превышен лимит'}
     </motion.div>
   );
 };

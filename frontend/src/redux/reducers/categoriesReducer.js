@@ -31,8 +31,35 @@ export default (state = [], action) => {
             }
           : category
       );
+    case actionTypes.TRANSFER_B_STORES_SUCCESS:
+      return state.map(category =>
+        category.id === action.payload.idFrom
+          ? {
+              ...category,
+              currentNumber: category.currentNumber - action.payload.amount,
+            }
+          : category.id === action.payload.idTo
+          ? {
+              ...category,
+              currentNumber: category.currentNumber + action.payload.amount,
+            }
+          : category
+      );
+
     case actionTypes.LOGOUT_SUCCESS:
       return [];
+    case actionTypes.CRUD_ICON_SUCCESS:
+      return state.map(category => {
+        return category.id === action.payload.id
+          ? { ...category, iconId: action.payload.newValue }
+          : category;
+      });
+    case actionTypes.CRUD_NAME_SUCCESS:
+      return state.map(category => {
+        return category.id === action.payload.id
+          ? { ...category, name: action.payload.newValue }
+          : category;
+      });
     default:
       return state;
     // TODO

@@ -10,6 +10,10 @@ export default (store = [], action) => {
       return store.filter(
         transaction => transaction._id !== action.payload.idTransaction
       );
+    case actionTypes.DELETE_INCOME_SUCCESS:
+      return store.filter(
+        transaction => transaction._id !== action.payload.idTransaction
+      );
     default:
       return store;
   }

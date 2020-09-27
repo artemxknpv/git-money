@@ -38,39 +38,44 @@ function TransactionsHistoryExpense({ id }) {
   }
 
   return (
-    <motion.li layout style={{ listStyle: 'none' }} onClick={toggleOpen}>
+    <motion.li style={{ listStyle: 'none' }} onClick={toggleOpen}>
       <motion.div
-        layout
         className={isOpen ? styles.openedWrapper : styles.wrapper}
         whileHover={{
           scale: 1.1,
-          boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
         }}
-        transition={{ duration: 0.3, ease: [0.17, 0.67, 0.83, 0.67] }}
       >
-        <p className={styles.amount}>${transaction && transaction.amount}</p>
-        <p className={styles.targetCategory}>
-          Потрачено в <strong>{nameTo && nameTo.name}</strong>
-        </p>
-        <p className={styles.time}>{prettyTime && prettyTime}</p>
+        <div className={styles.listItem}>
+          <p className={styles.amount}>-${transaction && transaction.amount}</p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.targetCategory}>
+            Потрачено в{' '}
+            <strong style={{ color: '#6dc4c4' }}>
+              {nameTo && nameTo.name}
+            </strong>
+          </p>
+        </div>
+        <div className={styles.listItem}>
+          <p className={styles.time}>{prettyTime && prettyTime}</p>
+        </div>
         {/*<h2 style={{ margin: '20px' }}> From {nameFrom && nameFrom.name} </h2>*/}
         {/*<h2 style={{ margin: '20px' }}>At time: {prettyTime && prettyTime}</h2>*/}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.p
-              transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className={styles.additionalContent}
-            >
-              <button className={styles.deleteButton} onClick={handleClick}>
-                Удалить
-              </button>
-              {/*TODO*/}
-            </motion.p>
-          )}
-        </AnimatePresence>
+        {/*<AnimatePresence>*/}
+        {isOpen && (
+          <motion.p
+            // transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={styles.additionalContent}
+          >
+            <button className={styles.deleteButton} onClick={handleClick}>
+              Удалить
+            </button>
+          </motion.p>
+        )}
+        {/*</AnimatePresence>*/}
       </motion.div>
     </motion.li>
   );

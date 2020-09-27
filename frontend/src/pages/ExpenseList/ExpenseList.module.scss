@@ -6,26 +6,46 @@
   font-size: 1.5rem;
   font-family: $bold-font;
   margin-left: 1rem;
+  max-width: 15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.totalSpentText {
+  color: #333333;
+  font-size: 1.2rem;
+  font-family: 'TT Medium', sans-serif;
+  margin: 1.5rem;
 }
 
 .timePoint {
-  font-family: "TT Bold", sans-serif;
+  font-family: 'TT Bold', sans-serif;
   color: #333;
   margin-left: 1.5rem;
 }
 
 .arrowAndCatname {
   display: flex;
+  flex-basis: 20%;
   align-items: center;
 }
 
 .editCategory {
   color: #0870c4;
   font-size: 0.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.editCategory:focus {
+  @extend .editCategory;
+  outline: 0;
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: auto;
 }
 
@@ -33,6 +53,7 @@
   font-family: $regular-font;
   margin-left: 1rem;
   margin-right: 1rem;
+  color: #666666;
 }
 
 .deleteButton,
@@ -45,4 +66,8 @@
   color: #eb5757;
   font-family: 'TT Medium', sans-serif;
   cursor: pointer;
+}
+
+.timeBlock {
+  margin-bottom: 2rem;
 }

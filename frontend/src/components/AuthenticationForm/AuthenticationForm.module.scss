@@ -3,16 +3,16 @@
 .inputField {
   display: flex;
   flex-direction: column;
-  margin: 64px 1rem 0;
+  margin: 32px 1rem 0;
 }
 
 .errorContainer {
-  background-color: rgba(235, 87, 87, 0.7);
+  background-color: rgba(235, 87, 87, 0.5);
   color: #fff;
   padding: 1rem;
   border-radius: 5px;
-  margin-top: 2rem;
-  margin-left: 1rem;
+  margin-bottom: 2rem;
+  //margin-left: 1rem;
 }
 
 .errorMessage {
@@ -37,24 +37,22 @@
 .inp:focus {
   outline-width: 0;
   border-width: 0 0 1px;
-  border-color: #6dc4c4;
+  border-color: $green-color;
 }
 .inp::placeholder {
-  color: #e3e3e3;
+  color: #d6d6d6;
   padding: 0;
   margin: 0;
 }
 
 .btn {
   width: 100%;
+  cursor: pointer;
   background: $green-color;
   border-radius: 5px;
-  border: 0;
-  border-color: none;
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
+  border: 0 none;
+  font-family: 'TT Medium', sans-serif;
+  font-size: 1rem;
   line-height: 18px;
   text-align: center;
   color: #ffffff;
@@ -65,11 +63,16 @@
   outline: 0 !important;
 }
 
+.disabledBtn {
+  @extend .btn;
+  background-color: #e3e3e3;
+}
+
 .afterbutton {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 32px 0 0;
+  margin: 32px 0 40px;
   width: 100%;
 }
 
@@ -78,7 +81,7 @@
 }
 
 .registrationLink {
-  font-family: Inter, sans-serif;
+  font-family: 'TT Medium', sans-serif;
   font-style: normal;
   font-weight: normal;
   text-decoration: none;
@@ -87,17 +90,8 @@
   color: #2d9cdb;
 }
 
-.forget {
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 26px;
-  color: #2d9cdb;
-}
-
 .label {
-  color: #e3e3e3;
+  color: #bfbfbf;
   position: relative;
   pointer-events: none;
   top: -35px;
@@ -112,4 +106,21 @@
 .inp:focus ~ .label,
 .inp:not([value='']) ~ .label {
   top: -70px;
+}
+
+.forgot {
+  margin: 24px 0 32px;
+  border: none;
+  background: none;
+  font-family: 'TT Medium', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+  color: #2d9cdb;
+  cursor: pointer;
+}
+
+.forgot:focus {
+  outline: 0;
 }
