@@ -41,7 +41,7 @@ app.use("/auth", authenticateRouter);
 app.use(categoryRouter);
 
 app.get("*", (req, res) => {
-  res.sendFile("../frontend/build/index.html");
+  res.sendFile(path.resolve("../frontend/build/index.html"));
 });
 
 app.use((err, req, res, next) => {
