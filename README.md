@@ -1,4 +1,4 @@
-# expense_tracker
+# Git Money
 Expense tracker project
 
 WIKI: https://www.notion.so/Engineering-Wiki-c55a1a80c87140b5ae2328716a7fe829
