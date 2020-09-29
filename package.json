@@ -6,7 +6,7 @@
   "author": "ArtemK <brtoaster@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cd frontend && yarn s&& yarn build",
+    "build": "cd frontend && yarn && yarn build",
     "start": "cd backend && npm i && npm start"
   },
   "dependencies": {
@@ -14,5 +14,8 @@
   },
   "devDependencies": {
     "prettier": "^2.1.2"
+  },
+  "engines": {
+    "node": "14"
   }
 }
