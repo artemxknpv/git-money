@@ -58,14 +58,13 @@ app.put("/", async (req, res) => {
   res.end();
 });
 
-
 app.use("/auth", authenticateRouter);
 app.use(categoryRouter);
 app.use((err, req, res, next) => {
   console.log(">>>>", err);
 });
 
-const port = 3001;
+const port = process.env.PORT ?? 3001;
 
 app.listen(port, () => {
   console.log(`The server is app and listening on port ${port}`);
